@@ -15,10 +15,8 @@ public class LoggingAspect {
 
     private static Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-
     @Before(value="execution(* com.ssafy.common..*.*(..))")
     public void logging(JoinPoint jp) {
-
         logger.debug("메소드 선언부 : {}, 전달 파라미터 : {}",
                 jp.getSignature(),
                 Arrays.toString(jp.getArgs()));
