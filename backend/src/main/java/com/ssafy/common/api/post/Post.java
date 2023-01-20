@@ -1,5 +1,7 @@
 package com.ssafy.common.api.post;
 
+import com.ssafy.common.api.category.brandcategory.Brandcategory;
+import com.ssafy.common.api.category.typecategory.Typecategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +11,12 @@ import java.sql.Timestamp;
 @Entity
 @Getter @Setter
 public class Post {
-    // 유저
 
-    //
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
+
+    // 유저
 
     @Column(name = "post_title")
     private String title;
@@ -32,12 +34,22 @@ public class Post {
     private Long status;
 
     @Column(name = "post_created")
-    private Timestamp created;  // import 가 아닐수도 있다 .
-
+    private Timestamp created;
     @Column(name = "post_updated")
     private Timestamp updated;
 
+    @Column(name = "post_size")
+    private String size;
+
     // 브랜드 카테고리
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "br_cateId")
+    private Brandcategory brandcategory;
+
 
     // 종류 카테고리
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_cateId")
+    private Typecategory typecategory;
+
 }

@@ -12,8 +12,13 @@ import java.util.List;
 public class PostRepository {
     private final EntityManager em;
 
+    // 저장
     public void save(Post post) {
         em.persist(post);
+    }
+    // 삭제
+    public void del(Post post) {
+        em.remove(post);
     }
 
     // 물건 id 로 한개의 물건 찾기
