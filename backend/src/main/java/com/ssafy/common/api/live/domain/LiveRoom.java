@@ -7,6 +7,8 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,5 +42,10 @@ public class LiveRoom {
     @NonNull
     private enum liveroom_status{
         STATUS_CLOSE,STATUS_READY ,STATUS_ONAIR
-    };
+    }
+
+
+    // 라이브 리스트 : livelist
+    @OneToMany(mappedBy = "liveRoom")
+    private List<LiveList> LiveLists = new ArrayList<>();
 }
