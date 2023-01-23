@@ -1,14 +1,14 @@
 package com.ssafy.common.api.alarm.domain;
 
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -19,4 +19,8 @@ public class SellerAlarm {
 
     @NonNull
     private Timestamp wish_created;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
 }

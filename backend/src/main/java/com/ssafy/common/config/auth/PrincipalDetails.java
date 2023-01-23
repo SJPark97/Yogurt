@@ -10,7 +10,6 @@ User오브젝트타입 => UserDetails 타입 객체
 //Security Session => Autemtication =>UserDetails 타입으로 각각 받을 수 있음
  */
 
-import com.ssafy.common.api.user.domain.Buyer;
 import com.ssafy.common.api.user.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -66,6 +65,10 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
+        //우리 사이트!! 1년동안 회원이 로그인을 안하면 !! 휴면 계정으로 하기로 함.
+        // 현재 시간 -로그인 시간 => 1년초과하면 return false;
+        //할 수 있는 메소드
+
         return false;
     }
 }

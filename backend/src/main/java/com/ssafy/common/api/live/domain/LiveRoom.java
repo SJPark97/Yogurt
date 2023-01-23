@@ -1,6 +1,6 @@
 package com.ssafy.common.api.live.domain;
 
-import com.ssafy.common.api.user.domain.Seller;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,7 +22,7 @@ public class LiveRoom {
     // 판매자 고유 번호 sellerId
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 
 
     //생성시간 liveroom_created
