@@ -1,12 +1,14 @@
 package com.ssafy.common.api.live.domain;
 
-import com.ssafy.common.api.user.domain.Seller;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,7 +24,7 @@ public class LiveRoom {
     // 판매자 고유 번호 sellerId
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 
 
     //생성시간 liveroom_created
@@ -40,5 +42,9 @@ public class LiveRoom {
     @NonNull
     private enum liveroom_status{
         STATUS_CLOSE,STATUS_READY ,STATUS_ONAIR
-    };
+    }
+
+    // 라이브 리스트 : livelist
+    @OneToMany(mappedBy = "liveRoom")
+    private List<LiveList> LiveLists = new ArrayList<>();
 }

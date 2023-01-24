@@ -2,6 +2,7 @@ package com.ssafy.common.api.post;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +16,6 @@ public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
-
-    // 유저
 
     @Column(name = "post_title")
     private String title;
@@ -52,4 +51,8 @@ public class Post {
     @JoinColumn(name = "type_cateId")
     private Typecategory typecategory;
 
+    // 유저
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id")
+    private User seller;
 }
