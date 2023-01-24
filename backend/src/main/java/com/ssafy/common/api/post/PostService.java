@@ -15,7 +15,6 @@ public class PostService {
     // 상품 등록(저장)
     public void savePost(Post post) {
         postRepository.save(post);
-
     }
     // 상품 삭제
     public void delPost(Post post){
@@ -27,15 +26,12 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    // 특정 상품 조회
+    // 특정 상품 id 조회
     public Post findOnePost (Long post_id) {
         return postRepository.findOne(post_id);
     }
 
-    // 특정 상품 이미지 조회
 
-    // 카테고리 전체 조회
 
-    // 브랜드 전체 조회
 
 }

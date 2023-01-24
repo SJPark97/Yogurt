@@ -33,7 +33,6 @@ public class PostServiceTest {
 
     @Test
     public void  상품삭제() {
-
         Post post = createpost();
         postService.savePost(post);
         System.out.println(post.getId());
@@ -44,22 +43,12 @@ public class PostServiceTest {
 
     }
 
-     // findOnePost 특정 상품 조회
-//    @Test
-//    public void 특정상품조회() {
-//        Long id = 5L;
-//        Post post = postService.findOnePost(id);
-//        System.out.println(post.getTitle());
-//    }
-
-    //findAllPost
     @Test
     public void 전체상품조회() {
         postService.findALlPost();
         System.out.println("전체 상품 조회");
         System.out.println(postService.findALlPost());
         System.out.println(postService.findALlPost().size());
-
     }
 
     private Post createpost() {
@@ -67,5 +56,5 @@ public class PostServiceTest {
         post.setTitle("제목");
         post.setContent("내용");
         return post;
-    };
+    }
 }
