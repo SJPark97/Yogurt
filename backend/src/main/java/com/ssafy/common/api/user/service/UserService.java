@@ -23,7 +23,6 @@ public class UserService {
 
 
     public void join(User user) {
-        System.out.println("user비밀번호 : " + user.getPassword());
         userRepository.save(user);
     }
 }

@@ -1,6 +1,8 @@
 package com.ssafy.common.config;
 
+import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.filter.JwtAuthenticationFilter;
+import com.ssafy.common.filter.JwtAuthorizationFilter;
 import com.ssafy.common.filter.MyFilter1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private final CorsFilter corsFilter;
+    private final UserRepository userRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()  //기본 Http 폼으로 로그인 막음
                 .httpBasic().disable()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))   //AuthenticationManager를 매개변수로 넘겨야함
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository))   //AuthenticationManager를 매개변수로 넘겨야함
                 .authorizeRequests()
                 .antMatchers("/user/seller/**").access("hasRole('ROLE_SELLER')")
                 .antMatchers("/user/buyer/**").access("hasRole('ROLE_BUYER')")

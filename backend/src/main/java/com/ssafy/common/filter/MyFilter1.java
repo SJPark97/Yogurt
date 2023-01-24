@@ -34,7 +34,6 @@ public class MyFilter1 implements Filter {
                 outPrintWriter.println("인증안됨");
             }
         }
-        System.out.println("필터1");
         chain.doFilter(req, res);
     }
 }

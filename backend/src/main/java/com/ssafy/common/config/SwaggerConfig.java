@@ -16,7 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
         @Bean
         public Docket api() {
-            System.out.println("ABC");
             //api 정보 설정
             final ApiInfo apiInfo = new ApiInfoBuilder()
                     .title("USER 관리 API")

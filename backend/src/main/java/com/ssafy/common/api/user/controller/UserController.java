@@ -1,10 +1,13 @@
 package com.ssafy.common.api.user.controller;
 
+import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
 
 @CrossOrigin("*")
 @RestController
@@ -14,14 +17,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping("home")
-    public String goHome(){
+    @GetMapping("/home")
+    public String goHome() {
         return "<h1>home</h1>";
     }
 
-//    @PostMapping("/login")
+    //    @PostMapping("/login")
 //    @ApiOperation("home으로 보내기")
 //    public ResponseEntity<?> doLogin(@RequestBody UserLoginForm userLoginForm, HttpSession session) {
 //
@@ -29,4 +31,5 @@ public class UserController {
 //        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
 //
 //    }
+
 }

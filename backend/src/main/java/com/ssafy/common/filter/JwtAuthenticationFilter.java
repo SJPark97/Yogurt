@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.ssafy.common.filter.JwtProperties.*;
+
 //스프링시큐리티에서 UsernamePasswordAuthenticationFilter가 있음
 // login 요청해서 username,password 전송하면
 // usernamePasswordAuthenticationFilter 동작을 함.
@@ -30,7 +32,6 @@ import java.util.Map;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-    private final String key = "ssafy";//인증 키
 
     //login 요청을 하면 로그인 시도를 위해 실행
     @Override
@@ -93,7 +94,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         payloads.put("userId", principalDetails.getUser().getUserId());
         payloads.put("role", principalDetails.getUser().getRole());
 
-        Long expiredTime = 1000 * 60L *30L; //토큰 유효 시간 30분
+        Long expiredTime = EXPIRATION_TIME; //토큰 유효 시간 30분
 
         Date ext =new Date(); // 토큰 만료 시간
         ext.setTime(ext.getTime() + expiredTime);
@@ -104,11 +105,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setHeader(headers) // header 설정
                 .setClaims(payloads) // claims 설정
                 .setExpiration(ext) //토큰 만료시간 설정
-                .signWith(SignatureAlgorithm.HS256,key.getBytes())  //HS256과 key로 sign
+                .signWith(SignatureAlgorithm.HS256,SECRET_KEY.getBytes())  //HS256과 key로 sign
                 .compact(); //토큰생성
 
-        response.addHeader("Authorization", "Bearer "+jwt);
-
-        super.successfulAuthentication(request, response, chain, authResult);
+        response.addHeader(HEADER_STRING, TOKEN_PREFIX+jwt);
     }
 }
