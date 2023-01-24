@@ -64,4 +64,7 @@ public class User {
     private enum status{
         ACTIVE, DELETE
     }
+
+
+
 }

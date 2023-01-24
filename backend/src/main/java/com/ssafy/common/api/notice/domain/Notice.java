@@ -1,13 +1,11 @@
 package com.ssafy.common.api.notice.domain;
 
+import com.ssafy.common.api.user.domain.Seller;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -32,4 +30,9 @@ public class Notice {
     //공지사항 생성 시간
     @NonNull
     private Timestamp notice_createtime;
+
+    // 판매자 아이디 : seller_id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 }
