@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -29,5 +26,10 @@ public class Answer {
     //답변 생성 시간
     @NonNull
     private Timestamp answer_createtime;
+
+    // qna 아이디 : qna_id
+    @OneToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "qna_id")
+    private Qna qna;
 
 }
