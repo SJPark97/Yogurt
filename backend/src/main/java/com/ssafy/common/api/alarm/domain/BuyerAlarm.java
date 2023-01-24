@@ -1,7 +1,6 @@
 package com.ssafy.common.api.alarm.domain;
 
-import com.ssafy.common.api.user.domain.Buyer;
-import com.ssafy.common.api.user.domain.Seller;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,12 +22,12 @@ public class BuyerAlarm {
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    private User buyer;
 
     // 판매자 아이디 : seller_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 
 
 

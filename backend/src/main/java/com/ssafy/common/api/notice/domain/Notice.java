@@ -1,6 +1,6 @@
 package com.ssafy.common.api.notice.domain;
 
-import com.ssafy.common.api.user.domain.Seller;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -34,5 +34,5 @@ public class Notice {
     // 판매자 아이디 : seller_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 }

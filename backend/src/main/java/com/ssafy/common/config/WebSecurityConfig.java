@@ -1,5 +1,7 @@
 package com.ssafy.common.config;
 
+import com.ssafy.common.filter.JwtAuthenticationFilter;
+import com.ssafy.common.filter.MyFilter1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
@@ -28,12 +31,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new MyFilter1(), BasicAuthenticationFilter.class);
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//session을 사용하지 않겠다 설정
                 .and()
                 .addFilter(corsFilter)  //@CrossOrigin(인증X), 시큐리티 필터에 등록인증(O)
                 .formLogin().disable()  //기본 Http 폼으로 로그인 막음
                 .httpBasic().disable()
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))   //AuthenticationManager를 매개변수로 넘겨야함
                 .authorizeRequests()
                 .antMatchers("/user/seller/**").access("hasRole('ROLE_SELLER')")
                 .antMatchers("/user/buyer/**").access("hasRole('ROLE_BUYER')")

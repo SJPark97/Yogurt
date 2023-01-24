@@ -3,7 +3,6 @@ package com.ssafy.common.config.auth;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,8 +18,9 @@ public class PrincipalDetailService implements UserDetailsService {
 
     //현재 메소드의 username은 프론트의 input name="username"의 username이므로 동일하게 세팅해야함
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        User user = userRepository.findByUserId(userId);
+        System.out.println("UserDetial이 잘 받아짐" + user.getUserId());
         if(user != null){
             return new PrincipalDetails(user);
         }

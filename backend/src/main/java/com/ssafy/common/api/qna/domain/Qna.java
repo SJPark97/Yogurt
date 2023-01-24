@@ -1,8 +1,6 @@
 package com.ssafy.common.api.qna.domain;
 
-import com.ssafy.common.api.post.Post;
-import com.ssafy.common.api.user.domain.Buyer;
-import com.ssafy.common.api.user.domain.Seller;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -36,12 +34,12 @@ public class Qna {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    private User buyer;
     // 판매자 아이디 : seller_id
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Seller seller;
+    private User seller;
 
     // 답변글과의 조인
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "qna")

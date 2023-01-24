@@ -1,7 +1,7 @@
 package com.ssafy.common.api.relation.domain;
 
 import com.ssafy.common.api.post.Post;
-import com.ssafy.common.api.user.domain.Buyer;
+import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -25,7 +25,7 @@ public class Wishlist {
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
-    private Buyer buyer;
+    private User buyer;
 
     // 상품 아이디 : post_id
     @ManyToOne(fetch = FetchType.LAZY)

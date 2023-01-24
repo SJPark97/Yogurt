@@ -11,12 +11,16 @@ User오브젝트타입 => UserDetails 타입 객체
  */
 
 import com.ssafy.common.api.user.domain.User;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Data
 public class PrincipalDetails implements UserDetails {
 
     private User user;
@@ -29,38 +33,36 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return null;
-            }
+        user.getRoleList().forEach(r->{
+            collect.add(()->r);
         });
-        return null;
+
+        return collect;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -69,6 +71,6 @@ public class PrincipalDetails implements UserDetails {
         // 현재 시간 -로그인 시간 => 1년초과하면 return false;
         //할 수 있는 메소드
 
-        return false;
+        return true;
     }
 }

@@ -44,7 +44,6 @@ public class LiveRoom {
         STATUS_CLOSE,STATUS_READY ,STATUS_ONAIR
     }
 
-
     // 라이브 리스트 : livelist
     @OneToMany(mappedBy = "liveRoom")
     private List<LiveList> LiveLists = new ArrayList<>();

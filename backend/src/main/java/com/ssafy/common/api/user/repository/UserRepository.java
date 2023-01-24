@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public User findByName(String name); // 이름으로 User 찾아오는 메소드
 
     public User findByUserId(String userId);
+
 }

@@ -1,18 +1,10 @@
 package com.ssafy.common.api.user.controller;
 
-import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.service.UserService;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.nio.charset.StandardCharsets;
 
 @CrossOrigin("*")
 @RestController
@@ -22,12 +14,19 @@ import java.nio.charset.StandardCharsets;
 public class UserController {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @PostMapping("/login")
-    @ApiOperation("home으로 보내기")
-    public ResponseEntity<?> doLogin(@RequestBody UserLoginForm userLoginForm, HttpSession session) {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+    @GetMapping("home")
+    public String goHome(){
+        return "<h1>home</h1>";
     }
+
+//    @PostMapping("/login")
+//    @ApiOperation("home으로 보내기")
+//    public ResponseEntity<?> doLogin(@RequestBody UserLoginForm userLoginForm, HttpSession session) {
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+//
+//    }
 }
