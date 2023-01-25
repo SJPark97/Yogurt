@@ -1,0 +1,51 @@
+{
+  "words": [
+    {
+      "id": 1,
+      "price": 1000,
+      "love": 340,
+      "eng": "book",
+      "kor": "책",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    },
+    {
+      "id": 3,
+      "price": 150000,
+      "love": 34349520,
+      "eng": "car",
+      "kor": "자동차는 길게길게 말줄임표 가능한가요?",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    },
+    {
+      "id": 12,
+      "price": 30000,
+      "love": 49520,
+      "eng": "apple",
+      "kor": "사과",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    }
+  ],
+  // 상품등록시
+  "Goods": [
+    {
+      "postId": 1,
+      "userId": 1,
+      "br_cateId": 1,
+      "type_cateID": 1,
+      "post_title": "어디서도 볼 수 없는 자켓",
+      "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
+      "post_created": "2023-12-31",
+      "post_status": "ACTIVE",
+      "post_updated": "2024-12-31",
+      "post_price": 23000,
+      "post_sale_price": 20700,
+      "post_size": "총장:52 하단:42"
+    }
+  ]
+}
