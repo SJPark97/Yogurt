@@ -1,6 +1,6 @@
-import logo from '../logo.svg';
 import '../App.css';
 import BackToTop from '../AppBar/BackToTop';
+import StoreList from '../Common/StoreList';
 
 function Store() {
   return (
@@ -8,13 +8,7 @@ function Store() {
       <BackToTop />
       <h1>스토어</h1>
       <h2>여기에는 상점들</h2>
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
+      <StoreList />
       <h1>아래</h1>
     </div>
   );
