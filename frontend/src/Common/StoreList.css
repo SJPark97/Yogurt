@@ -1,0 +1,50 @@
+hr {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.StoreListdiv {
+  display: flex;
+  align-items: center;
+  margin: 8px;
+}
+
+.StoreListdiv img {
+  margin: 0px 16px 0px 0px;
+  height: 64px;
+  width: 64px;
+}
+
+.StoreListdivdiv {
+  overflow: hidden;
+}
+
+.storeListdivdivdiv {
+  display: flex;
+}
+
+.store-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 4px 8px 4px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.store-love {
+  margin: 4px 0px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.store-price {
+  font-size: 12px;
+  margin: 4px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
