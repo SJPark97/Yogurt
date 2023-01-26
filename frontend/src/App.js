@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Category from './pages/Category';
-import Store from './pages/Store';
-import Alarm from './pages/Alarm';
-import Profile from './pages/Profile';
+import Home from './Main/Home/Home';
+import Category from './Main/Category';
+import Store from './Main/Store';
+import Alarm from './Main/Alarm';
+import Profile from './Main/Profile';
 import ButtonAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
 import FixedBottomNavigation from './Footer/Footer';
