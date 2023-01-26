@@ -1,6 +1,6 @@
 package com.ssafy.common.api.post.dto.response;
 
-import com.ssafy.common.api.post.Post;
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.postimage.Postimage;
 import lombok.Getter;
 import java.sql.Timestamp;
@@ -21,7 +21,7 @@ public class PostDetailResponse {
     private final Long typeCateId;
     private final List<Postimage> postImages;
 
-    public PostDetailResponse(Post post){
+    public PostDetailResponse(Post post) {
         id = post.getId();
         title = post.getTitle();
         content = post.getContent();
@@ -35,6 +35,4 @@ public class PostDetailResponse {
         typeCateId = post.getTypecategory().getId();
         postImages = post.getPostImages();
     }
-
-
 }

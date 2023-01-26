@@ -1,6 +1,6 @@
 package com.ssafy.common.api.post.dto.response;
 
-import com.ssafy.common.api.post.Post;
+import com.ssafy.common.api.post.domain.Post;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

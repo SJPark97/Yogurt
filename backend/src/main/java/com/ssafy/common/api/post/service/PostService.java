@@ -1,18 +1,19 @@
-package com.ssafy.common.api.post;
+package com.ssafy.common.api.post.service;
 
+import com.ssafy.common.api.post.PostConverter;
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
+import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
 
+import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.repository.UserRepository;
-import org.apache.tomcat.util.http.parser.Authorization;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class PostService {
@@ -46,5 +47,33 @@ public class PostService {
     public List<Post> findAll() {
         return postRepository.findAll();
     }
+
+    // 상품 수정
+
+    @Transactional
+    public PostDetailResponse updatePost(Long postId, PostUpdateRequest request, User user){
+        Post post = postRepository.findById(postId)
+                .orElseThrow();
+        if (user.getId().equals(post.getSeller().getId())) {
+            System.out.println("권한이 없습니다.");
+        }
+        post.update(request);
+        return new PostDetailResponse(post);
+    }
+
+
+    // 상품 삭제
+    @Transactional
+    public void deletePost(Long postId, User user){
+        Post post = postRepository.findById(postId)
+                .orElseThrow();
+        if (user.getId().equals(post.getSeller().getId())) {
+            System.out.println("권한이 없습니다. 유저 불일치");
+        }
+        postRepository.delete(post);
+    }
+
+
+
 }
 

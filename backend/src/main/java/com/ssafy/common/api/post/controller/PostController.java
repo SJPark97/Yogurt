@@ -1,5 +1,9 @@
-package com.ssafy.common.api.post;
+package com.ssafy.common.api.post.controller;
 
+import com.ssafy.common.api.post.ApiResponse;
+import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
+import com.ssafy.common.api.post.service.PostService;
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
 import com.ssafy.common.api.user.domain.User;
@@ -31,5 +35,18 @@ public class PostController {
     @GetMapping
     public ApiResponse<Post> getAll(){
         return ApiResponse.ok((Post) postService.findAll());
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse<PostDetailResponse> update(@PathVariable("id") Long post_id, @RequestBody PostUpdateRequest request ,@AuthenticationPrincipal User user){
+        return ApiResponse.ok(postService.updatePost(post_id,request,user));
+    }
+
+
+    // 게시글 삭제
+    @DeleteMapping("/{id}")
+    public ApiResponse<Void> delete(@PathVariable("id") Long post_id, @AuthenticationPrincipal User user){
+        postService.deletePost(post_id, user);
+        return ApiResponse.ok(null);
     }
 }

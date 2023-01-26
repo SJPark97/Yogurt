@@ -1,6 +1,6 @@
 package com.ssafy.common.api.relation.domain;
 
-import com.ssafy.common.api.post.Post;
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
 

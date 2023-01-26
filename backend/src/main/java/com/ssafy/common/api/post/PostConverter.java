@@ -1,5 +1,6 @@
 package com.ssafy.common.api.post;
 
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.user.domain.User;
 import org.springframework.stereotype.Component;

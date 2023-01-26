@@ -1,7 +1,8 @@
-package com.ssafy.common.api.post;
+package com.ssafy.common.api.post.domain;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
+import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
 import com.ssafy.common.api.post.postimage.Postimage;
 import com.ssafy.common.api.user.domain.User;
 import lombok.*;
@@ -62,5 +63,12 @@ public class Post {
     @OneToMany(mappedBy = "post_id")
     private List<Postimage> postImages = new ArrayList<>();
 
-
+    public void update(PostUpdateRequest request){
+        title = request.getTitle();
+        content = request.getContent();
+        size = request.getSize();
+        sale_price = request.getSale_price();
+        price = request.getPrice();
+        status = request.getStatus();
+    }
 }

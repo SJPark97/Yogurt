@@ -1,6 +1,6 @@
 package com.ssafy.common.api.post.postimage;
 
-import com.ssafy.common.api.post.Post;
+import com.ssafy.common.api.post.domain.Post;
 import lombok.Getter;
 import lombok.Setter;
 
