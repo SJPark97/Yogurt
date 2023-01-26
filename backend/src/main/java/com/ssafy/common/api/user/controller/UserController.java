@@ -52,14 +52,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/seller")
-    @ApiOperation(value = "판매자 검색")
-    public ResponseEntity<?> findSellers(@RequestParam String keyword){
-        try{
-            List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains("ROLE_SELLER", keyword);
-            return new ResponseEntity<>(formList, HttpStatus.OK);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
-    }
+//    @GetMapping("/seller")
+//    @ApiOperation(value = "판매자 검색")
+//    public ResponseEntity<?> findSellers(@RequestParam String keyword){
+//        try{
+//            List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains("ROLE_SELLER", keyword);
+//            return new ResponseEntity<>(formList, HttpStatus.OK);
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+//        }
+//    }
 }
