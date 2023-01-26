@@ -1,18 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CardList.css';
 
-function CardList() {
+function CardList(props) {
+  const { data } = props;
   return (
     <div className="Card">
-      <img
-        className="CardImg"
-        src="https://img.freepik.com/free-photo/wardrobe-with-clothes-on-hangers_23-2149190378.jpg?auto=format&h=200"
-        alt="#"
-      />
-      <div className="CardBrand">브랜드드드드드드드</div>
-      <div className="CardName">상품명</div>
-      <div className="CardDiscount">30%</div>
-      <div className="CardPrice">106,000원</div>
+      <Link to={`/post/${data.postId}`}>
+        <img className="CardImg" src={data.postimage_url} alt="#" />
+        <div className="CardBrand">{data.br_cateName}</div>
+        <div className="CardName">{data.post_title}</div>
+        <div className="CardDiscount">
+          {Math.floor(
+            ((data.post_price - data.post_sale_price) / data.post_price) * 100,
+          )}
+          %
+        </div>
+        <div className="CardPrice">
+          {data.post_sale_price.toLocaleString()}원
+        </div>
+      </Link>
     </div>
   );
 }

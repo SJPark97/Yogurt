@@ -2,16 +2,14 @@ import React from 'react';
 import LiveCardList from './LiveCardList';
 import './LiveCarousel.css';
 
-function LiveCarousel() {
+function LiveCarousel(props) {
+  const { card } = props;
   return (
     <div>
       <div className="Carousel">
-        <LiveCardList />
-        <LiveCardList />
-        <LiveCardList />
-        <LiveCardList />
-        <LiveCardList />
-        <LiveCardList />
+        {card.map(data => (
+          <LiveCardList data={data} />
+        ))}
       </div>
     </div>
   );

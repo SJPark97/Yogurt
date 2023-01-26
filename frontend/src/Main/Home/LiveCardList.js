@@ -1,10 +1,8 @@
 import React from 'react';
 import './LiveCardList.css';
-import dummy from '../../db/list.json';
 
-function LiveCardList() {
-  const card = dummy.Goods[0];
-  console.log(card);
+function LiveCardList(props) {
+  const { data } = props;
   return (
     <div className="LiveCard">
       <img
@@ -13,13 +11,9 @@ function LiveCardList() {
         alt="#"
       />
 
-      <img
-        className="LiveCardImg"
-        src="https://img.freepik.com/free-photo/wardrobe-with-clothes-on-hangers_23-2149190378.jpg?auto=format&h=200"
-        alt="#"
-      />
-      <div className="LiveCardStoreName">{card.post_store}</div>
-      <div className="LiveCardStoreTitle">{card.post_title}</div>
+      <img className="LiveCardImg" src={data.liveroom_thumbnail} alt="#" />
+      <div className="LiveCardStoreName">{data.liveroom_shop_name}</div>
+      <div className="LiveCardStoreTitle">{data.liveroom_title}</div>
       <div className="LiveCardStoreLive">현재 라이브 방송중</div>
     </div>
   );
