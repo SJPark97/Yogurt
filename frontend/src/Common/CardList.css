@@ -22,6 +22,7 @@
   font-weight: 1000;
   width: 96;
   text-align: left;
+  color: black;
 }
 
 .CardName {
@@ -36,6 +37,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 1; 
   -webkit-box-orient: vertical;
+  color: black;
 }
 
 .CardDiscount {
@@ -52,4 +54,5 @@
   font-size: 10px;
   font-weight: 600;
   width: 66px;
+  color: black;
 }
