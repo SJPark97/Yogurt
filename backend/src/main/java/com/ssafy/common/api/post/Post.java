@@ -2,17 +2,21 @@ package com.ssafy.common.api.post;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
+import com.ssafy.common.api.post.postimage.Postimage;
 import com.ssafy.common.api.user.domain.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
@@ -45,7 +49,6 @@ public class Post {
     @JoinColumn(name = "br_cateId")
     private Brandcategory brandcategory;
 
-
     // 종류 카테고리
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_cateId")
@@ -55,4 +58,9 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
     private User seller;
+
+    @OneToMany(mappedBy = "post_id")
+    private List<Postimage> postImages = new ArrayList<>();
+
+
 }
