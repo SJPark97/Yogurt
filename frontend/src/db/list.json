@@ -65,5 +65,59 @@
       "post_size": "총장:52 하단:42",
       "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
     }
+  ],
+
+  "Popular": [
+    {
+      "postId": 1,
+      "post_title": "집업후드",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20180323/742203/742203_1_500.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "제일 트렌디한 나이키 티셔츠",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+
+  "New": [
+    {
+      "postId": 1,
+      "post_title": "스타일리쉬 반바지",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://gi.esmplus.com/zoobaly5/2022/0415/H022.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "세련된 선글라스",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "Live": [
+    {
+      "liveroom_id": 1,
+      "liveroom_title": "시대를 강타한 샤넬 컬렉션",
+      "liveroom_shop_name": "박토어",
+      "liveroom_thumbnail": "https://img.freepik.com/premium-photo/female-autumn-clothes-on-hangers-in-white-room-close-up_176873-13271.jpg?auto=format&h=200"
+    },
+    {
+      "liveroom_id": 2,
+      "liveroom_title": "가을을 맞이하는 우리",
+      "liveroom_shop_name": "송토어",
+      "liveroom_thumbnail": "https://contents.lotteon.com/itemimage/_v134624/LO/16/75/45/94/78/_1/67/54/59/47/9/LO1675459478_1675459479_1.jpg"
+    }
   ]
 }
