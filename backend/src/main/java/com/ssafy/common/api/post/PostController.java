@@ -17,7 +17,7 @@ public class PostController {
         postService.savePost(post);
         return "성공";
     }
-
+    
 //    // 상품 수정
 //    @PutMapping("/{post_id}")
 //
