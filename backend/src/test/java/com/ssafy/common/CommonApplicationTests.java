@@ -10,5 +10,5 @@ class CommonApplicationTests {
 	void contextLoads() {
 
 	}
-
+	//주석
 }
