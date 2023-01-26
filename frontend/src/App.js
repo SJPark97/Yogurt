@@ -8,6 +8,7 @@ import ButtonAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
 import FixedBottomNavigation from './Footer/Footer';
 import GoodDetail from './GoodDetail/GoodDetail';
+import GoodRegister from './Register/GoodRegister';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/alarms" element={<Alarm />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/post/:postId" element={<GoodDetail />} />
+        <Route path="/post/join" element={<GoodRegister />} />
       </Routes>
       <footer>
         <FixedBottomNavigation />
