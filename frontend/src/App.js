@@ -7,6 +7,7 @@ import Profile from './Main/Profile';
 import ButtonAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
 import FixedBottomNavigation from './Footer/Footer';
+import GoodDetail from './GoodDetail/GoodDetail';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/stores" element={<Store />} />
         <Route path="/alarms" element={<Alarm />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/post/:postId" element={<GoodDetail />} />
       </Routes>
       <footer>
         <FixedBottomNavigation />
