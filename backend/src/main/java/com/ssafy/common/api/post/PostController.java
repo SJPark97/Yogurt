@@ -1,47 +1,35 @@
 package com.ssafy.common.api.post;
 
-import lombok.RequiredArgsConstructor;
+import com.ssafy.common.api.post.dto.request.PostInsertRequest;
+import com.ssafy.common.api.post.dto.response.PostDetailResponse;
+import com.ssafy.common.api.user.domain.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
-@RequestMapping("/post")
-@RequiredArgsConstructor
+@RequestMapping(value = "/post")
 public class PostController {
-    private final PostService postService;
+    public final PostService postService;
 
-     // 상품 생성
-    @PostMapping("/join")
-    public String savedPost(@RequestBody Post post) {
-        postService.savePost(post);
-        return "성공";
+    public PostController(PostService postService){
+        this.postService = postService;
     }
 
-//    // 상품 수정
-//    @PutMapping("/{post_id}")
-//
-//
-//    // 상품 삭제
-//    @DeleteMapping("/{post_id}")
-//
-    // 전체 목록 조회
-    @GetMapping("")
-    public List<Post> allPost(){
-        return postService.findALlPost();
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<PostDetailResponse> create(@RequestBody PostInsertRequest request, @AuthenticationPrincipal User user){
+        return ApiResponse.ok(postService.createPost(request,user));
     }
 
-//    // 단일 상품 조회
-//    @GetMapping("/{post_id}")
-//    public Post detailPost() {
-//
-//    }
+    @GetMapping("/{id}")
+    public ApiResponse<PostDetailResponse> getOne(@PathVariable("id") Long id){
+        return ApiResponse.ok(postService.findById(id));
+    }
 
-
-
-
-
-
-
-
+    @GetMapping
+    public ApiResponse<Post> getAll(){
+        return ApiResponse.ok((Post) postService.findAll());
+    }
 }

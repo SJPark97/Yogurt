@@ -12,10 +12,8 @@ User오브젝트타입 => UserDetails 타입 객체
 
 import com.ssafy.common.api.user.domain.User;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +34,6 @@ public class PrincipalDetails implements UserDetails {
         user.getRoleList().forEach(r->{
             collect.add(()->r);
         });
-
         return collect;
     }
 
