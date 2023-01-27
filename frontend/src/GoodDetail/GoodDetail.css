@@ -1,0 +1,57 @@
+img {
+  height: 360px;
+  width: 360px;
+}
+
+hr {
+  margin: 4px 8px;
+}
+
+.basic-info {
+  margin: 0px 0px 0px 8px;
+}
+
+.basic-info div,
+.basic-info span {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.detail-post-store {
+  font-size: 15px;
+  margin: 4px 0px 4px 0px;
+}
+
+.detail-br-cateId {
+  font-size: 15px;
+  margin: 4px 0px 4px 0px;
+  color: gray;
+}
+
+.detail-post-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 4px 0px 4px 0px;
+}
+
+.detail-price {
+  margin: 4px 0px 4px 0px;
+}
+
+.detail-sale-percent {
+  color: red;
+  font-weight: bold;
+}
+
+.detail-post-sale-price {
+  font-weight: bold;
+  margin: 0px 0px 0px 8px;
+}
+
+.detail-post-price {
+  text-decoration: line-through;
+  color: gray;
+  margin: 0px 0px 0px 8px;
+}
