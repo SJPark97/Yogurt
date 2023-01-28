@@ -4,40 +4,47 @@ img {
 }
 
 hr {
-  margin: 4px 8px;
+  margin: 8px;
 }
 
-.basic-info {
+.detail-basic-info,
+.detail-size-info,
+.detail-detail-info,
+.detail-store-info {
   margin: 0px 0px 0px 8px;
 }
 
-.basic-info div,
-.basic-info span {
+.detail-basic-info div,
+.detail-size-info div,
+.detail-detail-info div,
+.detail-store-info div {
   padding: 0px;
   display: flex;
   align-items: center;
   justify-content: left;
 }
 
-.detail-post-store {
-  font-size: 15px;
-  margin: 4px 0px 4px 0px;
+.detail-post-store,
+.detail-size,
+.detail-detail {
+  font-size: 14px;
+  margin: 8px 0px 0px 0px;
 }
 
 .detail-br-cateId {
   font-size: 15px;
-  margin: 4px 0px 4px 0px;
+  margin: 8px 0px 0px 0px;
   color: gray;
 }
 
 .detail-post-title {
   font-size: 20px;
   font-weight: bold;
-  margin: 4px 0px 4px 0px;
+  margin: 8px 0px 0px 0px;
 }
 
 .detail-price {
-  margin: 4px 0px 4px 0px;
+  margin: 8px 0px 0px 0px;
 }
 
 .detail-sale-percent {
@@ -54,4 +61,11 @@ hr {
   text-decoration: line-through;
   color: gray;
   margin: 0px 0px 0px 8px;
+}
+
+.detail-size-name,
+.detail-detail-name,
+.detail-store-name {
+  font-size: 16px;
+  font-weight: bold;
 }
