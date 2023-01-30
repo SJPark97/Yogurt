@@ -7,9 +7,9 @@ import dummy from '../db/SJ.json';
 function Store() {
   const store = dummy.Store;
   return (
-    <div>
+    <div className="Store">
       <BackToTop />
-      <div className="Store">
+      <div>
         {store.map(data => (
           <StoreList data={data} />
         ))}
