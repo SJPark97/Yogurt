@@ -8,9 +8,10 @@ import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Paper from '@mui/material/Paper';
+import { useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   color: #bdbdbd;
@@ -25,9 +26,23 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
 `;
 
 export default function FixedBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
+  const pageUrl = useLocation().pathname;
+
+  useEffect(() => {
+    if (pageUrl === '/') {
+      setValue(0);
+    } else if (pageUrl === '/stores') {
+      setValue(1);
+    } else if (pageUrl === '/alarms') {
+      setValue(2);
+    } else if (pageUrl === '/profile') {
+      setValue(3);
+    }
+  }, [value]);
+
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
