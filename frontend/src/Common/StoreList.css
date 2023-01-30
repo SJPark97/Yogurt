@@ -1,50 +1,58 @@
-hr {
+.StoreList {
+  display: flex;
+  margin-top: 8px
+}
+
+.StoreImg {
+  height: 72px;
+  width: 72px;
+  border-radius: 16%;
+  margin-left: 16px;
+}
+
+.StoreInfo {
+  display: flex;
+  margin-top: 8px;
+  margin-left: 16px;
+  align-items: center;
+}
+
+.StoreName {
+  font-weight: 1000;
+  font-size: 16px;
+}
+
+.StoreLikeIcon {
   margin-left: 8px;
-  margin-right: 8px;
+  width: 16px !important;
+  height: 16px !important;
+  color: red;
+  font-size: 8px;
 }
 
-.StoreListdiv {
-  display: flex;
-  align-items: center;
-  margin: 8px;
-}
-
-.StoreListdiv img {
-  margin: 0px 16px 0px 0px;
-  height: 64px;
-  width: 64px;
-}
-
-.StoreListdivdiv {
-  overflow: hidden;
-}
-
-.storeListdivdivdiv {
-  display: flex;
-}
-
-.store-name {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 4px 8px 4px 0px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-all;
-}
-
-.store-love {
-  margin: 4px 0px;
+.StoreLikes {
   font-size: 12px;
-  display: flex;
-  align-items: center;
+  margin-left: 1px;
 }
 
-.store-price {
+.StoreOneline {
+  font-weight: 400;
+  width: 208px;
+  margin-top: 4px;
+  margin-left: 16px;
   font-size: 12px;
-  margin: 4px 0px;
+  text-align: left;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  color: black;
+}
+
+.StoreHr {
+  margin: 0px;
+  margin-top: 8px;
+  margin-left: 16px;
+  width: 328px;
 }
