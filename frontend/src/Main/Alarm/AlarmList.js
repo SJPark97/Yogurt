@@ -13,7 +13,7 @@ function AlarmList(props) {
         </div>
         <CloseIcon className="AlarmCloseIcon" />
       </div>
-      <hr />
+      <hr className="AlarmHr" />
     </div>
   );
 }

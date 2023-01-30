@@ -38,8 +38,9 @@
   width: 16px;
 }
 
-hr {
-	margin-top: 8px;
-	margin-left: 16px;
-	width: 328px;
+.AlarmHr {
+  margin: 0px;
+  margin-top: 8px;
+  margin-left: 16px;
+  width: 328px;
 }
