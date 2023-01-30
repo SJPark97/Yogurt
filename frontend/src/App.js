@@ -4,7 +4,7 @@ import Category from './Main/Category';
 import Store from './Main/Store';
 import Alarm from './Main/Alarm/Alarm';
 import Profile from './Main/Profile';
-import ButtonAppBar from './AppBar/MainAppBar';
+import MainAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
 import FixedBottomNavigation from './Footer/Footer';
 import PostDetail from './PostDetail/PostDetail';
@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <ButtonAppBar />
+        <MainAppBar />
       </header>
       <Routes>
         <Route path="/" element={<Home />} />

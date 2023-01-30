@@ -21,9 +21,13 @@ const data = {
   '/wishlist': {
     name: '장바구니',
   },
+  '/post/join': {
+    name: '상품등록',
+  },
+  // 결제도 추가하기
 };
 
-export default function ButtonAppBar() {
+export default function SubAppBar() {
   const pageUrl = useLocation();
   const navigate = useNavigate();
   const pageName = data[pageUrl.pathname];
@@ -42,7 +46,7 @@ export default function ButtonAppBar() {
             <ArrowBackIosNewIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {pageName.name}
+            {pageName && pageName.name}
           </Typography>
         </Toolbar>
       </AppBar>
