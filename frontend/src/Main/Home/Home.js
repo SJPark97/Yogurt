@@ -2,7 +2,7 @@ import './Home.css';
 import BackToTop from '../../AppBar/BackToTop';
 import LiveCarousel from './LiveCarousel';
 import Carousel from '../../Common/Carousel';
-import dummy from '../../db/list.json';
+import dummy from '../../db/SJ.json';
 
 function Home() {
   const card = dummy.New;
