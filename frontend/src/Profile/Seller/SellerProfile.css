@@ -1,0 +1,24 @@
+.profileImg {
+  height: 80px;
+  width: 80px;
+}
+.profile-text {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.profile-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+  margin-top: 8px;
+}
+.profile-introduce {
+  font-weight: 500;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+}
