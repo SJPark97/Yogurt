@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
     private final UserRepository userRepository;
+    private final JwtProvider jwtProvider;
 
     /*
         스프링 시큐리티 처리 configure
@@ -37,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        JwtAuthenticationFilter authenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+        JwtAuthenticationFilter authenticationFilter = new JwtAuthenticationFilter(authenticationManager(),userRepository,jwtProvider);
         authenticationFilter.setFilterProcessesUrl("/user/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//session을 사용하지 않겠다 설정
