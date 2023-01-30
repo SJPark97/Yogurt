@@ -7,7 +7,7 @@ import Profile from './Main/Profile';
 import ButtonAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
 import FixedBottomNavigation from './Footer/Footer';
-import GoodDetail from './GoodDetail/GoodDetail';
+import PostDetail from './PostDetail/PostDetail';
 import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
 
@@ -23,7 +23,7 @@ function App() {
         <Route path="/stores" element={<Store />} />
         <Route path="/alarms" element={<Alarm />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/post/:postId" element={<GoodDetail />} />
+        <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/post/join" element={<PostRegister />} />
         <Route path="/noted/join" element={<NotedRegister />} />
       </Routes>

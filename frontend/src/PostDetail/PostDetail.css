@@ -1,4 +1,4 @@
-img {
+.detail_img {
   height: 360px;
   width: 360px;
 }
@@ -20,7 +20,8 @@ hr {
 .detail-store-info div {
   padding: 0px;
   display: flex;
-  text-align: center;
+  align-items: center;
+  text-align: left;
 }
 
 .detail-size,
