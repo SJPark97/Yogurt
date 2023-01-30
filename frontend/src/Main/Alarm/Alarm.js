@@ -6,9 +6,9 @@ import './Alarm.css';
 function Alarm() {
   const alarm = dummy.Alarm;
   return (
-    <div>
+    <div className="AlarmList">
       <BackToTop />
-      <div className="AlarmList">
+      <div>
         {alarm.map(data => (
           <AlarmList data={data} />
         ))}
