@@ -3,6 +3,9 @@ package com.ssafy.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.repository.UserRepository;
+import com.ssafy.common.api.user.service.UserService;
+import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,7 +34,8 @@ import static com.ssafy.common.filter.JwtProperties.*;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-
+    private final UserRepository userRepository;
+    private final JwtProvider jwtProvider;
     //login 요청을 하면 로그인 시도를 위해 실행
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -43,12 +47,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 5. PrincipalDetails를 세션에 담고 (만약에 안담으면 권한 관리가 안됨)
         // 6. JWT토큰을 만들어서 응답해주면 됨.
         try {
-//            BufferedReader br =request.getReader();
-//
-//            String input = null;
-//            while((input = br.readLine())!=null){
-//                System.out.println(input);
-//            }
             ObjectMapper om = new ObjectMapper();   //json Parsing 해줌
             User user = om.readValue(request.getInputStream(), User.class);
 
@@ -83,6 +81,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("successfulAuthentication 실행됨 : 인증완료");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
+        String userId = principalDetails.getUser().getUserId();
 
         Map<String, Object> headers = new HashMap<>();
 
@@ -95,20 +94,27 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         payloads.put("userId", principalDetails.getUser().getUserId());
         payloads.put("role", principalDetails.getUser().getRole());
 
-        Long expiredTime = EXPIRATION_TIME; //토큰 유효 시간 30분
+        long atExpiredTime = AT_EXPIRATION_TIME; //토큰 유효 시간 30분
+        long rtExpiredTime = RT_EXPIRATION_TIME; //토큰 유효 시간 72시간
 
-        Date ext =new Date(); // 토큰 만료 시간
-        ext.setTime(ext.getTime() + expiredTime);
+        Date atExt =new Date(); // 토큰 만료 시간
+        atExt.setTime(atExt.getTime() + atExpiredTime);
+
+        Date rtExt =new Date(); // 토큰 만료 시간
+        rtExt.setTime(rtExt.getTime() + rtExpiredTime);
+
 
         //HS256 방식으로 암호화
-        String jwt = Jwts.builder()
-                .setSubject("access-token") //토큰 용도
-                .setHeader(headers) // header 설정
-                .setClaims(payloads) // claims 설정
-                .setExpiration(ext) //토큰 만료시간 설정
-                .signWith(SignatureAlgorithm.HS256,SECRET_KEY.getBytes())  //HS256과 key로 sign
-                .compact(); //토큰생성
+        String jwt = jwtProvider.createAccessToken(principalDetails.getUser().getUserId(),principalDetails.getUser().getRole());
 
+        String rft = jwtProvider.createRefreshToken(principalDetails.getUser().getUserId(),principalDetails.getUser().getRole());
+
+        User user = userRepository.findByUserId(userId);
+        user.setRefreshToken(rft);
+        userRepository.save(user);
+
+        //리스폰스 해더에 Authorization : "", Refresh : ""로 전달
         response.addHeader(HEADER_STRING, TOKEN_PREFIX+jwt);
+        response.addHeader(RT_HEADER_STRING, TOKEN_PREFIX+rft);
     }
 }
