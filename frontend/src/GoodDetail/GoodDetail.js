@@ -12,9 +12,11 @@ function GoodDetail() {
   const salePercent = Math.floor(
     ((post.post_price - post.post_sale_price) / post.post_price) * 100,
   );
+
   return (
     <div>
       <BackToTop />
+
       <img src={post.image} alt="이미지사진" />
       <div className="detail-basic-info">
         <div className="detail-post-store">{post.post_store}</div>
