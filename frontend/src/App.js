@@ -9,6 +9,7 @@ import ButtonAppBar from './AppBar/MainAppBar';
 import FixedBottomNavigation from './Footer/Footer';
 import GoodDetail from './GoodDetail/GoodDetail';
 import PostRegister from './Register/PostRegister';
+import NotedRegister from './Register/NotedRegister';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/post/:postId" element={<GoodDetail />} />
         <Route path="/post/join" element={<PostRegister />} />
+        <Route path="/noted/join" element={<NotedRegister />} />
       </Routes>
       <footer>
         <FixedBottomNavigation />
