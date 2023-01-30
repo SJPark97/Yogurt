@@ -1,15 +1,19 @@
 import '../App.css';
 import BackToTop from '../AppBar/BackToTop';
 import StoreList from '../Common/StoreList';
+import './Store.css';
+import dummy from '../db/SJ.json';
 
 function Store() {
+  const store = dummy.Store;
   return (
     <div>
       <BackToTop />
-      <h1>스토어</h1>
-      <h2>여기에는 상점들</h2>
-      <StoreList />
-      <h1>아래</h1>
+      <div className="Store">
+        {store.map(data => (
+          <StoreList data={data} />
+        ))}
+      </div>
     </div>
   );
 }

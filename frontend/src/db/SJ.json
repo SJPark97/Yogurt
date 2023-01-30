@@ -94,5 +94,56 @@
 		"alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
 		"alarm_content": "박토어의 라이브 방송이 등록되었습니다."
 	}
+],
+
+"Store" : [
+	{
+		"Store_name": "박토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 50000000,
+		"Store_like": true,
+		"Store_id": 1,
+		"Store_oneline": "한줄 소개"
+	},
+	{
+		"Store_name": "배토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 40000000,
+		"Store_like": true,
+		"Store_id": 2,
+		"Store_oneline": "한줄 소개"
+	},
+	{
+		"Store_name": "송토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 10101010,
+		"Store_like": true,
+		"Store_id": 3,
+		"Store_oneline": "한줄 소개"
+	},
+	{
+		"Store_name": "소토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 1232,
+		"Store_like": false,
+		"Store_id": 4,
+		"Store_oneline": "한줄 소개"
+	},
+	{
+		"Store_name": "왕토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 123,
+		"Store_like": false,
+		"Store_id": 5,
+		"Store_oneline": "한줄 소개"
+	},
+	{
+		"Store_name": "최토어",
+		"Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+		"Store_likes": 12,
+		"Store_like": false,
+		"Store_id": 6,
+		"Store_oneline": "한줄 소개"
+	}
 ]
 }
