@@ -46,10 +46,8 @@ function GoodDetail() {
       <hr />
       <div className="detail-store-info">
         <div className="detail-store-name">{post.post_store}님의 다른 상품</div>
-        <div className="detail-store-post">
-          {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
-          <Carousel card={dummy.Popular} />
-        </div>
+        {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
+        <Carousel card={dummy.Popular} />
       </div>
     </div>
   );
