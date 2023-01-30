@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Main/Home/Home';
 import Category from './Main/Category';
 import Store from './Main/Store';
-import Alarm from './Main/Alarm';
+import Alarm from './Main/Alarm/Alarm';
 import Profile from './Main/Profile';
 import ButtonAppBar from './AppBar/MainAppBar';
 // import BackToTop from "./AppBar/BackToTop";
