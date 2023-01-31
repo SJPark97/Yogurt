@@ -54,42 +54,52 @@
 
   "Alarm": [
     {
+      "alarm_id": 0,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 1,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 2,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 3,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 4,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 5,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 6,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 7,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 8,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     },
     {
+      "alarm_id": 9,
       "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
     }

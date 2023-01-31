@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Main/Home/Home';
 import Category from './Main/Category';
 import StoreList from './Main/Store/StoreList';
-import Alarm from './Main/Alarm/Alarm';
+import AlarmList from './Main/Alarm/AlarmList';
 import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
 import MainAppBar from './AppBar/MainAppBar';
@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
         <Route path="/stores" element={<StoreList user={user} />} />
-        <Route path="/alarms" element={<Alarm />} />
+        <Route path="/alarms" element={<AlarmList />} />
         <Route path="/profile/seller" element={<SellerProfile />} />
         <Route path="/profile/buyer" element={<BuyerProfile />} />
         <Route path="/post/:postId" element={<PostDetail />} />
