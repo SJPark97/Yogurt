@@ -28,6 +28,6 @@ public class Zzim {
     private Post post;
 
     public void delete(){
-        status = "STATUS_DELETE";
+        this.status = "STATUS_DELETE";
     }
 }

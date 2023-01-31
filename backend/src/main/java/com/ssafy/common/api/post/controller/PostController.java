@@ -37,11 +37,18 @@ public class PostController {
         return new ResponseEntity<>(postService.findPostAll(), HttpStatus.OK);
     }
     // 상품 수정 API
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<PostDetailResponse> update(@PathVariable("id") Long post_id, @RequestBody PostUpdateRequest request){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.updatePost(post_id, request, user), HttpStatus.CREATED);
     }
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<PostDetailResponse> delete(@PathVariable("id")Long post_id){
+        User user = postService.getLoginUser();
+        return new ResponseEntity<>(postService.deletePost(post_id, user), HttpStatus.OK);
+    }
+
     // user id로 전체 상품 찾기
     @GetMapping("/user/{user_id}")
     public ResponseEntity<List<UserPostResponse>> getUserPostAll(@PathVariable("user_id") Long user_id){

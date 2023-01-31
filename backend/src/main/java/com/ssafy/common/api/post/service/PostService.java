@@ -57,7 +57,6 @@ public class PostService {
         return userRepository.findById(user_Id).stream().map(UserPostResponse::new).collect(Collectors.toList());
     }
 
-
     // 상품 저장
     @Transactional
     public PostDetailResponse createPost(PostInsertRequest request, User user) {
@@ -81,6 +80,12 @@ public class PostService {
     }
 
     // 상품 삭제
+    @Transactional
+    public PostDetailResponse deletePost(Long postId, User user){
+        Post post = postRepository.findById(postId).get();
+        post.delete();
+        return new PostDetailResponse(post);
+    }
 
     // 로그인 유저 정보
     public User getLoginUser() {

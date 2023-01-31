@@ -69,6 +69,9 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Zzim> zzims = new ArrayList<>();
 
+    public void delete(){
+        this.status = 0L;
+    }
     public void update(PostUpdateRequest request){
         title = request.getTitle();
         content = request.getContent();
