@@ -1,0 +1,5 @@
+.mid-nav {
+  position: sticky;
+  top: 56px;
+  z-index: 1;
+}
