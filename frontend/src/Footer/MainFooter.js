@@ -25,7 +25,7 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function FixedBottomNavigation() {
+export default function MainFooter({ user }) {
   const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
@@ -38,10 +38,18 @@ export default function FixedBottomNavigation() {
       setValue(1);
     } else if (pageUrl === '/alarms') {
       setValue(2);
-    } else if (pageUrl === '/profile') {
+    } else if (pageUrl.includes('/profile')) {
       setValue(3);
     }
   }, [value]);
+
+  // 유저정보
+  let userRole;
+  if (user.role === 'buyer') {
+    userRole = 'buyer';
+  } else {
+    userRole = 'seller';
+  }
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -79,7 +87,11 @@ export default function FixedBottomNavigation() {
           <CustomBottomNavigationAction
             label="프로필"
             icon={<AccountCircleIcon />}
-            onClick={() => navigate('/profile')} // 이거는 로그인 안됐을 때 로그인 페이지로 가게
+            onClick={() =>
+              userRole === 'buyer'
+                ? navigate('/profile/buyer')
+                : navigate('/profile/seller')
+            } // 이거는 로그인 안됐을 때 로그인 페이지로 가게
             // sx={[
             //   {
             //     color: "#bdbdbd",
