@@ -1,19 +1,18 @@
-import React from 'react';
+import BackToTop from '../../AppBar/BackToTop';
+import Alarm from './Alarm';
+import dummy from '../../db/SJ.json';
 import './AlarmList.css';
-import CloseIcon from '@mui/icons-material/Close';
 
-function AlarmList(props) {
-  const { data } = props;
+function AlarmList() {
+  const alarm = dummy.Alarm;
   return (
-    <div>
-      <div className="AlarmTag">
-        <img className="AlarmImg" src={data.alarm_thumbnail} alt="#" />
-        <div className="AlarmContent">
-          <span>{data.alarm_content}</span>
-        </div>
-        <CloseIcon className="AlarmCloseIcon" />
+    <div className="alarm-list">
+      <BackToTop />
+      <div>
+        {alarm.map(data => (
+          <Alarm alarmData={data} key={data.alarm_id} />
+        ))}
       </div>
-      <hr className="AlarmHr" />
     </div>
   );
 }
