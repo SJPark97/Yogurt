@@ -9,8 +9,11 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
+
 import { styled } from '@mui/material/styles';
 import { deepOrange } from '@mui/material/colors';
+import { Link } from 'react-router-dom';
+
 import './SellerProfile.css';
 
 // 유저 데이터 받아오고 그 데이터를 가지고 구성하기
@@ -38,6 +41,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+// const StyledLink = styled(Link)``;
+
 function SellerProfile() {
   let likeCnt = '';
   if (userData.likes >= 10000) {
@@ -52,8 +57,11 @@ function SellerProfile() {
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
+
+  // 상품 라이브 공지사항 리뷰 선택된 것
+
   return (
-    <header>
+    <div>
       <Box
         sx={{
           margin: '16px',
@@ -83,15 +91,32 @@ function SellerProfile() {
           <div>{likeCnt}</div>
         </div>
       </Box>
-      <Stack spacing={2} direction="row" sx={{ marginX: '16px' }}>
-        <ColorButton variant="contained" fullWidth startIcon={<AddIcon />}>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          marginLeft: '16px',
+        }}
+      >
+        <ColorButton
+          fullWidth
+          variant="contained"
+          startIcon={<AddIcon />}
+          href="/post/join"
+        >
           상품등록
         </ColorButton>
-        <ColorButton variant="contained" fullWidth startIcon={<LiveTvIcon />}>
+        <ColorButton
+          fullWidth
+          variant="contained"
+          startIcon={<LiveTvIcon />}
+          href="/post/join"
+        >
           라이브 열기
         </ColorButton>
+        <Link to="/post/join" />
       </Stack>
-    </header>
+    </div>
   );
 }
 

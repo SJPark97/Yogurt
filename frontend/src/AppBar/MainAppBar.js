@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ButtonAppBar from './ButtonAppBar';
 import SubAppBar from './SubAppBar';
+import StoreAppBar from './StoreAppBar';
 
 function MainAppBar() {
   const pageUrl = useLocation().pathname;
@@ -15,7 +16,7 @@ function MainAppBar() {
       {appBar === '/' && <ButtonAppBar />}
       {appBar === '/stores' && <ButtonAppBar />}
       {appBar === '/alarms' && <ButtonAppBar />}
-      {appBar === '/profile' && <ButtonAppBar />}
+      {appBar === '/profile' && <StoreAppBar />}
       {appBar === '/category' && <SubAppBar />}
       {appBar.includes('post') && <SubAppBar />}
     </div>
