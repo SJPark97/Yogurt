@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,13 +9,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { Link } from 'react-router-dom';
+
 import { styled } from '@mui/material/styles';
 
 const CustomAppBar = styled(AppBar)`
   background: #ff3d00;
 `;
 
-export default function StoreAppBar() {
+export default function ProfileAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CustomAppBar position="fixed" elevation={1}>
