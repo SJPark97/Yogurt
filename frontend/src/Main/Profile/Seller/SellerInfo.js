@@ -14,18 +14,7 @@ import { styled } from '@mui/material/styles';
 import { deepOrange } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
 
-import './SellerProfile.css';
-
-// 유저 데이터 받아오고 그 데이터를 가지고 구성하기
-const userData = {
-  id: 0,
-  name: '박토어',
-  img: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMjBfMTU2%2FMDAxNjQ1Mjk5Nzc5MTIw.mJ2_TNR9r4uCDxlpP1-OamKd4fJe2Nwi1rdrjfVu4V8g.KUiZJHyUqgwhNqK4gw0J6GYNKSrUPM_8566BQ4WuDUAg.JPEG.zxc7421%2F44884218_345707102882519_2446069589734326272_n.jpg&type=a340',
-  likes: 12565,
-  introduce:
-    '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-  isLiked: [0, 2, 3],
-};
+import './SellerInfo.css';
 
 const ColorButton = styled(Button)(({ theme }) => ({
   boxShadow: 'none',
@@ -43,16 +32,18 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 // const StyledLink = styled(Link)``;
 
-function SellerProfile() {
+function SellerInfo({ sellerData }) {
   let likeCnt = '';
-  if (userData.likes >= 10000) {
-    likeCnt = `${(userData.likes / 10000).toFixed(1)} 만`;
-  } else if (userData.likes >= 1000) {
-    likeCnt = `${(userData.likes / 1000).toFixed(1)} 천`;
+  if (sellerData.likes >= 10000) {
+    likeCnt = `${(sellerData.likes / 10000).toFixed(1)} 만`;
+  } else if (sellerData.likes >= 1000) {
+    likeCnt = `${(sellerData.likes / 1000).toFixed(1)} 천`;
   } else {
-    likeCnt = `${userData.likes}`;
+    likeCnt = `${sellerData.likes}`;
   }
-  const frist = userData.isLiked.includes(userData.id);
+
+  // 상점 좋아요
+  const frist = sellerData.isLiked.includes(sellerData.id);
   const [isLiked, setIsLiked] = useState(frist);
   const toggleLike = () => {
     setIsLiked(!isLiked);
@@ -65,6 +56,7 @@ function SellerProfile() {
       <Box
         sx={{
           margin: '16px',
+          marginBottom: '8px',
           display: 'flex',
           height: '100%',
           maxWidth: '360px',
@@ -72,10 +64,10 @@ function SellerProfile() {
           justifyContent: 'space-between',
         }}
       >
-        <img src={userData.img} alt="#" className="profileImg" />
+        <img src={sellerData.img} alt="#" className="profileImg" />
         <div className="profile-text">
-          <p className="profile-name">{userData.name}</p>
-          <div className="profile-introduce">{userData.introduce}</div>
+          <p className="profile-name">{sellerData.name}</p>
+          <div className="profile-introduce">{sellerData.introduce}</div>
         </div>
         <div>
           <IconButton
@@ -91,6 +83,7 @@ function SellerProfile() {
           <div>{likeCnt}</div>
         </div>
       </Box>
+
       <Stack
         spacing={2}
         direction="row"
@@ -120,4 +113,4 @@ function SellerProfile() {
   );
 }
 
-export default SellerProfile;
+export default SellerInfo;
