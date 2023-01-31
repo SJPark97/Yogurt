@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import './CustomerInfo.css';
 
 const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
-  color: #dbdbdb;
+  color: #cccccc;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;

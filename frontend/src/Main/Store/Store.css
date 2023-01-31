@@ -1,0 +1,37 @@
+.store-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 16px;
+}
+.store-text {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.store_like {
+  display: flex;
+  align-items: center;
+}
+
+.store-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+}
+.store-cnt {
+  font-size: 12px;
+}
+.store-introduce {
+  margin-left: 16px;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+}
