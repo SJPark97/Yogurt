@@ -34,16 +34,16 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 function SellerInfo({ sellerData }) {
   let likeCnt = '';
-  if (sellerData.likes >= 10000) {
-    likeCnt = `${(sellerData.likes / 10000).toFixed(1)} 만`;
-  } else if (sellerData.likes >= 1000) {
-    likeCnt = `${(sellerData.likes / 1000).toFixed(1)} 천`;
+  if (sellerData.Store_likes >= 10000) {
+    likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
+  } else if (sellerData.Store_likes >= 1000) {
+    likeCnt = `${(sellerData.Store_likes / 1000).toFixed(1)} 천`;
   } else {
-    likeCnt = `${sellerData.likes}`;
+    likeCnt = `${sellerData.Store_likes}`;
   }
 
   // 상점 좋아요
-  const frist = sellerData.isLiked.includes(sellerData.id);
+  const frist = sellerData.Store_isLiked.includes(sellerData.Store_id);
   const [isLiked, setIsLiked] = useState(frist);
   const toggleLike = () => {
     setIsLiked(!isLiked);
@@ -59,15 +59,15 @@ function SellerInfo({ sellerData }) {
           marginBottom: '8px',
           display: 'flex',
           height: '100%',
-          maxWidth: '360px',
+          maxWidth: '100%',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'start',
         }}
       >
-        <img src={sellerData.img} alt="#" className="profileImg" />
+        <img src={sellerData.Store_thumbnail} alt="#" className="profileImg" />
         <div className="profile-text">
-          <p className="profile-name">{sellerData.name}</p>
-          <div className="profile-introduce">{sellerData.introduce}</div>
+          <p className="profile-name">{sellerData.Store_name}</p>
+          <div className="profile-introduce">{sellerData.Store_oneline}</div>
         </div>
         <div>
           <IconButton

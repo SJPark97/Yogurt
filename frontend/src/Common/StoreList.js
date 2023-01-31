@@ -1,3 +1,5 @@
+// 이거는 남겨는 놓을 께
+
 import React from 'react';
 import './StoreList.css';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';

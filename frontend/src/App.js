@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './Main/Home/Home';
 import Category from './Main/Category';
-import Store from './Main/Store';
+import StoreList from './Main/Store/StoreList';
 import Alarm from './Main/Alarm/Alarm';
 import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
@@ -14,8 +14,9 @@ import NotedRegister from './Register/NotedRegister';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
-  role: 'buyer',
-  // role: 'seller',
+  // role: 'buyer',
+  role: 'seller',
+  id: 0,
 };
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
-        <Route path="/stores" element={<Store />} />
+        <Route path="/stores" element={<StoreList user={user} />} />
         <Route path="/alarms" element={<Alarm />} />
         <Route path="/profile/seller" element={<SellerProfile />} />
         <Route path="/profile/buyer" element={<BuyerProfile />} />
