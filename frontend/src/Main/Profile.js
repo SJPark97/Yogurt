@@ -1,20 +1,14 @@
-import logo from '../logo.svg';
 import '../App.css';
 import BackToTop from '../AppBar/BackToTop';
 import SellerProfile from '../Profile/Seller/SellerProfile';
+import StoreProfile from '../Profile/Store/StoreProfile';
 
 function Profile() {
   return (
     <div>
       <BackToTop />
       <SellerProfile />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <img src={logo} className="App-logo" alt="logo" />
+      <StoreProfile />
       <h1>아래</h1>
     </div>
   );
