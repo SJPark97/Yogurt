@@ -117,4 +117,7 @@ public class User {
 
     @OneToMany(mappedBy = "seller")
     private List<Post> posts = new ArrayList<>();
+
+
+
 }

@@ -1,12 +1,15 @@
 package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
-import com.ssafy.common.api.post.postimage.Postimage;
+import com.ssafy.common.api.post.postimage.dto.PostImageDto;
 import lombok.Getter;
-import java.sql.Timestamp;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
+@Transactional
 public class PostDetailResponse {
     private final Long id;
     private final String title;
@@ -15,11 +18,12 @@ public class PostDetailResponse {
     private final Long sale_price;
     private final Long status;
     private final String size;
-    private final Timestamp created;
-    private final Timestamp updated;
     private final Long brCateId;
+    private final String brCateName;
     private final Long typeCateId;
-    private final List<Postimage> postImages;
+    private final String typeCateName;
+//    private final List<PostImageDto> postImages;
+    private final Long sellerId;
 
     public PostDetailResponse(Post post) {
         id = post.getId();
@@ -29,10 +33,13 @@ public class PostDetailResponse {
         sale_price = post.getSale_price();
         status = post.getStatus();
         size = post.getSize();
-        created = post.getCreated();
-        updated = post.getUpdated();
         brCateId = post.getBrandcategory().getId();
+        brCateName = post.getBrandcategory().getName();
         typeCateId = post.getTypecategory().getId();
-        postImages = post.getPostImages();
+        typeCateName = post.getTypecategory().getName();
+//        postImages = post.getPostImages()
+//                .stream().map(postimage -> new PostImageDto(postimage))
+//                .collect(Collectors.toList());
+        sellerId = post.getSeller().getId();
     }
 }

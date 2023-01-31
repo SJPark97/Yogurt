@@ -3,7 +3,8 @@ package com.ssafy.common.api.post.domain;
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
 import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
-import com.ssafy.common.api.post.postimage.Postimage;
+import com.ssafy.common.api.post.postimage.domain.Postimage;
+import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.user.domain.User;
 import lombok.*;
 
@@ -60,8 +61,13 @@ public class Post {
     @JoinColumn(name = "seller_id")
     private User seller;
 
+    // 상품 사진
     @OneToMany(mappedBy = "post_id")
     private List<Postimage> postImages = new ArrayList<>();
+
+    // 찜 목록
+    @OneToMany(mappedBy = "post")
+    private List<Zzim> zzims = new ArrayList<>();
 
     public void update(PostUpdateRequest request){
         title = request.getTitle();
