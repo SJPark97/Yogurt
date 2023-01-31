@@ -4,10 +4,11 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
-import './StoreProfile.css';
+import './StoreInfo.css';
 
 const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
-  color: #dbdbdb;
+  color: #cccccc;
+  max-width: 100%;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;
@@ -25,7 +26,7 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function StoreProfile() {
+export default function StoreInfo() {
   const [value, setValue] = React.useState(0);
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
   // 그러면 이미 받아오려나 아니며누를때 받아오려나?

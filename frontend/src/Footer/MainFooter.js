@@ -15,6 +15,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   color: #bdbdbd;
+  max-width: 100%;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;

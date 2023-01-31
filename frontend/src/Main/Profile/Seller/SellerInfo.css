@@ -1,6 +1,7 @@
 .profileImg {
   height: 80px;
   width: 80px;
+  border-radius: 16px;
 }
 .profile-text {
   margin-left: 16px;
