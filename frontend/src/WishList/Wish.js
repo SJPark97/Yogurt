@@ -1,8 +1,8 @@
 import React from 'react';
 import dummy from '../db/list.json';
-import './WhishList.css';
+import './Wish.css';
 
-function WhishList() {
+function Wish() {
   const wishlist = dummy.WishLists.filter(wish => wish.post);
 
   return (
@@ -32,4 +32,4 @@ function WhishList() {
   );
 }
 
-export default WhishList;
+export default Wish;
