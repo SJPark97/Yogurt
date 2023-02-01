@@ -1,0 +1,39 @@
+.wish-post {
+  display: flex;
+}
+.wish-checkbox {
+  margin: 0px 8px;
+}
+
+.wish-post-img {
+  width: 64px;
+  height: 64px;
+  margin: 0px 8px;
+  border-radius: 16px;
+}
+
+.wish-post-info {
+  display: block;
+  align-items: center;
+  text-align: left;
+  justify-content: left;
+  margin: 0px 8px;
+}
+
+.wish-post-sellername,
+.wish-post-title {
+  margin: 0px 0px 4px 0px;
+}
+
+.wish-post-sellername {
+  font-size: 10px;
+}
+
+.wish-post-title {
+  font-size: 14;
+}
+
+.wish-post-price {
+  font-size: 12;
+  font-weight: bold;
+}
