@@ -12,9 +12,8 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
   margin: 0;
-  margin-top: 8px;
 }
 .profile-introduce {
   font-weight: 500;
@@ -23,4 +22,7 @@
   text-overflow: ellipsis;
   word-wrap: break-word;
   word-break: break-all;
+}
+.profile-cnt {
+  font-size: 14px;
 }
