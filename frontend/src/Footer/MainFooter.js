@@ -42,7 +42,7 @@ export default function MainFooter({ user }) {
     } else if (pageUrl.includes('/profile')) {
       setValue(3);
     }
-  }, [value]);
+  }, [pageUrl]);
 
   // 유저정보
   let userRole;

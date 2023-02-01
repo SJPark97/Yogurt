@@ -5,6 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
+import { useNavigate } from 'react-router-dom';
 
 import './Store.css';
 
@@ -23,12 +24,19 @@ function Store({ sellerData, user }) {
   // 상점 좋아요 - id부분이 달라야함
   const frist = sellerData.Store_isLiked.includes(user.id);
 
+  // 상점 디테일 이동위해 naviate 사용
+  const navigate = useNavigate();
+  const storeId = sellerData.Store_id;
+  const handleClick = () => {
+    console.log(storeId);
+    navigate(`/stores/${storeId}`, { state: sellerData });
+  };
   // 상품 라이브 공지사항 리뷰 선택된 것
 
   return (
     <div>
       <Box
-        onClick={() => console.log('gkgkgkgk')}
+        onClick={() => handleClick()}
         sx={{
           marginBottom: '8px',
           margin: '16px',
