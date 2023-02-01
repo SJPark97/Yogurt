@@ -41,12 +41,11 @@ public class ZzimService {
     @Transactional
     public ZzimResponse deleteZzim (Long zzim_id) {
         Zzim zzim = zzimRepository.findById(zzim_id).get();
-        System.out.println(zzim);
         zzim.delete();
         return new ZzimResponse(zzim);
     }
 
-
+    // user로 찜 조회
     public UserZzimResponse userZzim(User user){
         return userRepository.findById(user.getId())
                 .map(UserZzimResponse::new)

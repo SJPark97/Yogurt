@@ -12,16 +12,12 @@ public class ZzimResponse {
     private final Long id;
     private final Long buyerId;
     private final Long postId;
-    @Builder
-    public ZzimResponse(Long id, Long buyerId, Long postId) {
-        this.id = id;
-        this.buyerId = buyerId;
-        this.postId = postId;
-    }
+    private final String status;
     public ZzimResponse(Zzim zzim){
         id = zzim.getId();
         buyerId = zzim.getBuyer().getId();
         postId = zzim.getPost().getId();
+        status = zzim.getStatus();
     }
 }
 

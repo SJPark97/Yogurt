@@ -1,15 +1,10 @@
 package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
-import com.ssafy.common.api.post.postimage.dto.PostImageDto;
 import lombok.Getter;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
-@Transactional
 public class PostAllResponse {
     private final Long id;
     private final String brCateName;

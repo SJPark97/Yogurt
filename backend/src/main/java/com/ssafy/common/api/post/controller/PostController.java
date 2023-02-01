@@ -20,7 +20,7 @@ public class PostController {
         this.postService = postService;
     }
     // 상품 생성 API
-    @PostMapping("/create")
+    @PostMapping("")
     @ResponseBody
     public ResponseEntity<PostDetailResponse> create(@RequestBody PostInsertRequest request){
         User user = postService.getLoginUser();
@@ -37,13 +37,13 @@ public class PostController {
         return new ResponseEntity<>(postService.findPostAll(), HttpStatus.OK);
     }
     // 상품 수정 API
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PostDetailResponse> update(@PathVariable("id") Long post_id, @RequestBody PostUpdateRequest request){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.updatePost(post_id, request, user), HttpStatus.CREATED);
     }
 
-    @PutMapping("/delete/{id}")
+    @PatchMapping ("/{id}")
     public ResponseEntity<PostDetailResponse> delete(@PathVariable("id")Long post_id){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.deletePost(post_id, user), HttpStatus.OK);

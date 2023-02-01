@@ -2,15 +2,12 @@ package com.ssafy.common.api.relation.controller;
 
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.dto.ZzimResponse;
-import com.ssafy.common.api.relation.dto.ZzimUserPostResponse;
 import com.ssafy.common.api.relation.service.ZzimService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserZzimResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/zzim")
@@ -24,7 +21,7 @@ public class ZzimController {
     }
 
     // 찜 저장 API
-    @PostMapping("/save/{post_id}")
+    @PostMapping("/{post_id}")
     public ResponseEntity<ZzimResponse> createZzim(@PathVariable("post_id") Long postId){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(zzimService.createZzim(postId,user),HttpStatus.CREATED);
@@ -38,7 +35,7 @@ public class ZzimController {
     }
 
     // 찜 삭제 API
-    @PostMapping("/delete/{zzim_id}")
+    @PatchMapping("/delete/{zzim_id}")
     public ResponseEntity<ZzimResponse> deleteZzim(@PathVariable("zzim_id") Long zzim_id){
         return new ResponseEntity<>(zzimService.deleteZzim(zzim_id), HttpStatus.OK);
     }
