@@ -16,7 +16,6 @@ function PostDetail() {
   return (
     <div>
       <BackToTop />
-
       <img className="detail_img" src={post.image} alt="이미지사진" />
       <div className="detail-basic-info">
         <div className="detail-post-store">{post.post_store}</div>

@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Main/Home/Home';
 import Category from './Main/Category';
 import StoreList from './Main/Store/StoreList';
+import StoreDetail from './Store/StoreDetail';
 import AlarmList from './Main/Alarm/AlarmList';
 import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
@@ -16,7 +17,7 @@ import NotedRegister from './Register/NotedRegister';
 const user = {
   // role: 'buyer',
   role: 'seller',
-  id: 0,
+  id: 1,
 };
 
 function App() {
@@ -28,12 +29,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
-        <Route path="/stores" element={<StoreList user={user} />} />
+        <Route path="/stores">
+          <Route path="" element={<StoreList user={user} />} />
+          <Route path=":storeId" element={<StoreDetail />} />
+        </Route>
         <Route path="/alarms" element={<AlarmList />} />
-        <Route path="/profile/seller" element={<SellerProfile />} />
-        <Route path="/profile/buyer" element={<BuyerProfile />} />
-        <Route path="/post/:postId" element={<PostDetail />} />
-        <Route path="/post/join" element={<PostRegister />} />
+        <Route path="/profile">
+          <Route path="seller" element={<SellerProfile />} />
+          <Route path="buyer" element={<BuyerProfile />} />
+        </Route>
+        <Route path="/post">
+          <Route path="join" element={<PostRegister />} />
+          <Route path=":postId" element={<PostDetail />} />
+        </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
       </Routes>
       <footer>

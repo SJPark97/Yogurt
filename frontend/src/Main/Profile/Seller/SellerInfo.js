@@ -12,7 +12,7 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 
 import { styled } from '@mui/material/styles';
 import { deepOrange } from '@mui/material/colors';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import './SellerInfo.css';
 
@@ -32,7 +32,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 // const StyledLink = styled(Link)``;
 
-function SellerInfo({ sellerData }) {
+function SellerInfo({ sellerData, loginId }) {
   let likeCnt = '';
   if (sellerData.Store_likes >= 10000) {
     likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
@@ -48,7 +48,8 @@ function SellerInfo({ sellerData }) {
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
-
+  // navigate
+  const navigate = useNavigate();
   // 상품 라이브 공지사항 리뷰 선택된 것
 
   return (
@@ -61,7 +62,7 @@ function SellerInfo({ sellerData }) {
           height: '100%',
           maxWidth: '100%',
           alignItems: 'center',
-          justifyContent: 'start',
+          justifyContent: 'space-between',
         }}
       >
         <img src={sellerData.Store_thumbnail} alt="#" className="profileImg" />
@@ -80,35 +81,35 @@ function SellerInfo({ sellerData }) {
             {isLiked && <FavoriteIcon />}
             {!isLiked && <FavoriteBorderIcon />}
           </IconButton>
-          <div>{likeCnt}</div>
+          <div className="profile-cnt">{likeCnt}</div>
         </div>
       </Box>
-
-      <Stack
-        spacing={2}
-        direction="row"
-        sx={{
-          marginLeft: '16px',
-        }}
-      >
-        <ColorButton
-          fullWidth
-          variant="contained"
-          startIcon={<AddIcon />}
-          href="/post/join"
+      {loginId === sellerData.Store_id && (
+        <Stack
+          spacing={2}
+          direction="row"
+          sx={{
+            marginLeft: '16px',
+          }}
         >
-          상품등록
-        </ColorButton>
-        <ColorButton
-          fullWidth
-          variant="contained"
-          startIcon={<LiveTvIcon />}
-          href="/post/join"
-        >
-          라이브 열기
-        </ColorButton>
-        <Link to="/post/join" />
-      </Stack>
+          <ColorButton
+            fullWidth
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => navigate('/post/join')}
+          >
+            상품등록
+          </ColorButton>
+          <ColorButton
+            fullWidth
+            variant="contained"
+            startIcon={<LiveTvIcon />}
+            onClick={() => navigate('/post/join')}
+          >
+            라이브 열기
+          </ColorButton>
+        </Stack>
+      )}
     </div>
   );
 }

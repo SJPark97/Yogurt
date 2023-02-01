@@ -5,7 +5,7 @@ import SellerInfo from './Seller/SellerInfo';
 import StoreInfo from './Store/StoreInfo';
 
 // 이 페이지로 들어오면 axios를 해서 유저 데이터를 받아온다.
-const userData1 = {
+const userData = {
   Store_id: 0,
   Store_role: 'seller',
   Store_name: '박토어',
@@ -21,9 +21,9 @@ function SellerProfile() {
   return (
     <div>
       <BackToTop />
-      {userData1 && userData1.Store_role === 'seller' && (
+      {userData && userData.Store_role === 'seller' && (
         <div>
-          <SellerInfo sellerData={userData1} />
+          <SellerInfo sellerData={userData} loginId={1} />
           <StoreInfo />
         </div>
       )}
