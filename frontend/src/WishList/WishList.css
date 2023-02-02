@@ -9,7 +9,7 @@
   margin: 8px 0px 0px 8px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: left;
 }
 
 .wish-select-all span {

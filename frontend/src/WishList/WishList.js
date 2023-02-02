@@ -36,7 +36,6 @@ function WishList() {
       setTotalPrice(0);
     }
   };
-  console.log(checkItems);
 
   return (
     <div>
