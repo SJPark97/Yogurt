@@ -1,21 +1,40 @@
 package com.ssafy.common.api.live.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ssafy.common.api.live.domain.LiveRoom;
+import com.ssafy.common.api.live.dto.request.LiveroomRegistForm;
+import com.ssafy.common.api.live.service.LiveService;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequestMapping("/live")
+@RequiredArgsConstructor
 public class LiveController {
+
+
+    private final LiveService liveService;
 
     /**
      * /live : POST
      * 판매자가 라이브를 등록할때 호출하는 api
-     *
      */
-//    @PostMapping
-//    public String
+    @PostMapping
+    @ApiOperation(value= "라이브 룸 등록")
+    public ResponseEntity<?>  saveLiveroom ( @RequestBody @NotNull LiveroomRegistForm request){
+        System.out.println("make log !!!!!!!!!!!!!!!!!");
+        System.out.println("req title"+request.getTitle());
+        System.out.println("req thumbnail"+request.getThumbnail());
+        System.out.println("req time"+request.getTime().getTime());
+        log.info("한글로 쳐도 보여? -----  can you see this?  {}",request);
+        LiveRoom liveRoom = liveService.saveLiveroom(request);//=null
+        return ResponseEntity.ok(liveRoom);
+    }
+
 
     /**
      * /live/item/{liveId} : GET
