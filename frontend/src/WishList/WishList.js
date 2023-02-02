@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dummy from '../db/list.json';
 import './WishList.css';
 
@@ -6,6 +7,7 @@ function WishList() {
   const wishlist = dummy.WishLists;
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkItems, setCheckItems] = useState([]);
+  const navigate = useNavigate();
   checkItems.sort();
 
   const SingleCheck = (checked, id, price) => {
@@ -34,7 +36,7 @@ function WishList() {
       setTotalPrice(0);
     }
   };
-  console.log(checkItems, totalPrice);
+  console.log(checkItems);
 
   return (
     <div>
@@ -90,6 +92,18 @@ function WishList() {
           결제 예상 금액
           <span>{totalPrice.toLocaleString()}</span>원
         </div>
+        <hr />
+        <button
+          className="wish-payment-btn"
+          type="submit"
+          onClick={() =>
+            navigate('/payment', {
+              state: { ...checkItems },
+            })
+          }
+        >
+          결제하기
+        </button>
       </div>
     </div>
   );
