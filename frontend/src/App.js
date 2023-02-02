@@ -15,6 +15,7 @@ import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
 import WishList from './WishList/WishList';
 import PayMent from './Payment/PayMent';
+import VideoRoomComponent from './components/VideoRoomComponent';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -31,6 +32,7 @@ function App() {
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/video" element={<VideoRoomComponent />} />
         <Route path="/category" element={<Category />} />
         <Route path="/stores">
           <Route path="" element={<StoreList user={user} />} />
