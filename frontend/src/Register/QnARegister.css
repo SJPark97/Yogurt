@@ -1,0 +1,29 @@
+.qna_reg_title,
+.qna_reg_detail {
+  margin: 8px 0px 0px 8px;
+}
+
+.qna_reg_title p,
+.qna_reg_detail p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+#qna_reg_title,
+#qna_reg_detail {
+  width: 312px;
+  padding: 0px;
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#qna_reg_detail {
+  height: 100px;
+}

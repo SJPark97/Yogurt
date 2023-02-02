@@ -1,0 +1,40 @@
+.bgdiv {
+  border: 1px solid black;
+}
+
+.ReviewListdiv {
+  display: flex;
+  align-items: center;
+}
+
+.ReviewListdiv img {
+  margin: 8px 16px 8px 8px;
+  height: 64px;
+  width: 64px;
+}
+
+.ReviewListdivdiv {
+  overflow: hidden;
+}
+
+.review-name {
+  font-size: 14px;
+  margin: 4px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.review-price {
+  font-size: 12px;
+  margin: 4px 0px;
+}
+
+.review-price span {
+  font-weight: bold;
+}
+
+.review-online {
+  margin: 0px 8px 8px 8px;
+}
