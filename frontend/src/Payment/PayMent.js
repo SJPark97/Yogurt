@@ -11,8 +11,6 @@ function Payment() {
 
   return (
     <div>
-      <div>결제는 밥먹고와서하자,,,, props랑 넘길려면</div>;
-      <div>일단 넘어온 list에서 추리기</div>
       <div>
         {wishlist.map(wish => (
           <div>

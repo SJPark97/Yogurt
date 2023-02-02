@@ -13,6 +13,8 @@ import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
 import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
+import WishList from './WishList/WishList';
+import PayMent from './Payment/PayMent';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -44,6 +46,8 @@ function App() {
           <Route path=":postId" element={<PostDetail />} />
         </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
       <footer>
