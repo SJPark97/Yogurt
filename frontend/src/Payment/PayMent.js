@@ -5,9 +5,12 @@ import dummy from '../db/list.json';
 function Payment() {
   const location = useLocation();
   const checkItemList = location.state;
-  const wishlist = dummy.WishLists.filter(el =>
-    console.log(el.wishListId in checkItemList),
+  console.log(checkItemList[0]);
+  const wishlist = dummy.WishLists.filter(
+    el => el.post,
+    // [3,4]
   );
+  console.log(wishlist);
 
   return (
     <div>

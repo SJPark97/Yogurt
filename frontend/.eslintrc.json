@@ -4,7 +4,6 @@
     "es6": true,
     "node": true
   },
-  "parser": "@babel-parser",
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -13,4 +12,4 @@
     "react/prop-types": "off",
     "no-console": "off"
   }
-} 
+}
