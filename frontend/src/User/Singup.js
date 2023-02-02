@@ -4,13 +4,13 @@
 // import Button from '@mui/material/Button';
 // import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import StoreIcon from '@mui/icons-material/Store';
+// import BackToTop from '../AppBar/BackToTop';
 // import Box from '@mui/material/Box';
 // import TextField from '@mui/material/TextField';
 
 // import { styled } from '@mui/material/styles';
 // import { deepOrange } from '@mui/material/colors';
-// // import Divider from '@mui/material/Divider';
-// import BackToTop from '../AppBar/BackToTop';
+// //
 
 // const ColorButton = styled(Button)(({ theme }) => ({
 //   color: theme.palette.getContrastText(deepOrange.A400),
@@ -20,9 +20,9 @@
 // function SignUp() {
 //   const [role, setRole] = useState('');
 //   const [inputText, setinputText] = useState('');
-//   const handleClick = data => {
-//     setRole(data);
-//   };
+// const handleClick = data => {
+//   setRole(data);
+// };
 //   console.log(role);
 
 // const onChange = useCallback(e => {
@@ -37,7 +37,6 @@
 //   return (
 //     <div>
 //       <BackToTop />
-//       <div>어떤 역할을 하실래요?</div>
 //       <Stack
 //         spacing={2}
 //         direction="row"
@@ -92,25 +91,31 @@
 
 // export default SignUp;
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+
 import {
   Button,
   CssBaseline,
   TextField,
   FormControl,
-  FormControlLabel,
-  Checkbox,
   FormHelperText,
   Grid,
   Box,
   Typography,
   Container,
 } from '@mui/material/';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import styled from 'styled-components';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
+import Stack from '@mui/material/Stack';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
+import { deepOrange } from '@mui/material/colors';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(deepOrange.A400),
+  backgroundColor: '#cccccc',
+}));
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -125,264 +130,437 @@ const Boxs = styled(Box)`
 
 function SignUp() {
   const theme = createTheme();
-  // name
-  const [name, setName] = useState();
-  const [nameError, setNameError] = useState('');
-  // id
-  const [rawId, setRawId] = useState('');
-  const [checkedId, setCheckedId] = useState('');
-  const [idError, setIdError] = useState('');
-  // nickname
-  const [rawNickname, setRawNickname] = useState('');
-  // const [checkedNickname, setCheckedNickname] = useState('');
-  const [checked, setChecked] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordState, setPasswordState] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [registerError, setRegisterError] = useState('');
-  const navigate = useNavigate();
-
-  // name onCnange
-  // id onChange
-  const onChangeId = useCallback(e => {
-    setRawId(e.target.value);
-    console.log(e.target.value);
-    console.log(rawId);
-  });
-  // id 중복 검사 - 유효성 검사 후 진행
-  useEffect(() => {
-    console.log('중복검사', checkedId);
-  }, [checkedId]);
-  // nickname onChange
-  const onChangeNickname = useCallback(e => {
-    setRawNickname(e.target.value);
-    console.log(e.target.value);
+  const [role, setRole] = useState('');
+  const [form, setForm] = useState({
+    name: '',
+    nameConfirm: '',
+    id: '',
+    idConfirm: '',
+    nickname: '',
+    nicknameConfirm: '',
+    password1: '',
+    password2: '',
+    passwordConfirm: '',
+    email: '',
+    emailConfirm: '',
   });
 
-  const handleAgree = event => {
-    setChecked(event.target.checked);
-    console.log(rawNickname);
+  const [error, setError] = useState({
+    name: '',
+    id: '',
+    nickname: '',
+    password1: '',
+    password2: '',
+    email: '',
+  });
+
+  const [onlyOne, setOnlyOne] = useState({
+    id: false,
+    nickname: false,
+  });
+  // role
+  const handleClick = data => {
+    setRole(data);
+    console.log(role);
   };
 
-  const onhandlePost = async data => {
-    const { email, name, password } = data;
-    const postData = { email, name, password };
-
-    // 회원가입 post
-    await axios
-      .post('/member/join', postData)
-      .then(function (response) {
-        console.log(response, '성공');
-        navigate.push('/login');
-      })
-      .catch(function (err) {
-        console.log(err);
-        setRegisterError('회원가입에 실패하였습니다. 다시한번 확인해 주세요.');
-      });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    const data = new FormData(e.currentTarget);
-    console.log(data);
-    const joinData = {
-      id: data.get('id'),
-      name: data.get('name'),
-      nickname: data.get('nickname'),
-      password: data.get('password'),
-      rePassword: data.get('rePassword'),
-      email: data.get('email'),
-    };
-    const { id, name, nickname, password, rePassword, email } = joinData;
-    // id 유효성 체크(중복 체크)
-    console.log(id);
-    // nickname 유효성 체크(중복 체크)
-    console.log(nickname);
-    // 이메일 유효성 체크
-    const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    if (!emailRegex.test(email))
-      setEmailError('올바른 이메일 형식이 아닙니다.');
-    else setEmailError('');
-
-    // 비밀번호 유효성 체크
-    const passwordRegex =
-      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    if (!passwordRegex.test(password))
-      setPasswordState(
-        '숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!',
-      );
-    else setPasswordState('');
-
-    // 비밀번호 같은지 체크
-    if (password !== rePassword)
-      setPasswordError('비밀번호가 일치하지 않습니다.');
-    else setPasswordError('');
-
-    // 이름 유효성 검사
-    const nameRegex = /^[가-힣a-zA-Z]+$/;
-    if (!nameRegex.test(name) || name.length < 1)
-      setNameError('올바른 이름을 입력해주세요.');
-    else setNameError('');
-
-    // 회원가입 동의 체크
-    if (!checked) alert('회원가입 약관에 동의해주세요.');
-
-    if (
-      emailRegex.test(email) &&
-      passwordRegex.test(password) &&
-      password === rePassword &&
-      nameRegex.test(name) &&
-      checked
-    ) {
-      onhandlePost(joinData);
+  const handleChange = e => {
+    const handling = e.target.name;
+    const { value } = e.target;
+    // console.log('handlechange', handling, value);
+    if (handling === 'id') {
+      setOnlyOne({ ...onlyOne, id: false });
+    } else if (handling === 'nickname') {
+      setOnlyOne({ ...onlyOne, nickname: false });
+    }
+    setForm({ ...form, [handling]: e.target.value });
+    // name id error: 12글자 이상
+    if (handling === 'name' || handling === 'id') {
+      if (value.length > 12) {
+        setError({
+          ...error,
+          [handling]: '12글자 이하로 입력해주세요.',
+        });
+      } else {
+        setError({ ...error, [handling]: '' });
+      }
+    } else if (handling === 'nickname') {
+      if (value.length > 6) {
+        setError({
+          ...error,
+          [handling]: '6글자 이하로 입력해주세요.',
+        });
+      } else {
+        setError({ ...error, [handling]: '' });
+      }
+    } else if (handling === 'password2') {
+      if (form.password1 !== value) {
+        setError({ ...error, password2: '비밀번호가 일치하지 않습니다.' });
+      } else {
+        setError({ ...error, password2: '' });
+      }
     }
   };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h4" variant="h5">
-            개인정보를 입력해주세요.
-          </Typography>
-          <Boxs
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <FormControl component="fieldset" variant="standard">
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    autoFocus
-                    fullWidth
-                    id="name"
-                    name="name"
-                    label="이름"
-                    error={nameError !== '' || false}
-                  />
-                </Grid>
-                <Grid item xs={12} sx={{ display: 'flex' }}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="id"
-                    name="id"
-                    label="아이디"
-                    error={idError !== '' || rawId.length > 12 || false}
-                    helperText={rawId.length > 12 ? '아이디 12글자 이하' : ''}
-                    onChange={onChangeId}
-                    onBlur={() => {
-                      console.log('포커스 아웃', rawId);
-                      // 포커스 아웃될 때 입력여부를 먼저 검사하고
-                      if (rawId !== '') {
-                        setCheckedId(rawId);
-                      } else {
-                        alert('아이디를 입력해주세요!');
-                      }
-                      if (checkedId) {
-                        console.log('체크확인2', checkedId);
-                        console.log(setIdError);
-                      }
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12} sx={{ display: 'flex' }}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="nickname"
-                    name="nickname"
-                    label="닉네임"
-                    error={nameError !== '' || false}
-                    onChange={onChangeNickname}
-                  />
-                  <Button
-                    onClick={() => {
-                      if (rawNickname !== '') {
-                        console.log('중복체크', rawNickname);
-                      } else {
-                        alert('닉네임을 입력해주세요!');
-                      }
-                    }}
-                  >
-                    중복 체크
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="email"
-                    id="email"
-                    name="email"
-                    label="이메일 주소"
-                    error={emailError !== '' || false}
-                  />
-                </Grid>
-                <FormHelperTexts>{emailError}</FormHelperTexts>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="password"
-                    id="password"
-                    name="password"
-                    label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
-                    error={passwordState !== '' || false}
-                  />
-                </Grid>
-                <FormHelperTexts>{passwordState}</FormHelperTexts>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    type="password"
-                    id="rePassword"
-                    name="rePassword"
-                    label="비밀번호 재입력"
-                    error={passwordError !== '' || false}
-                  />
-                </Grid>
-                <FormHelperTexts>{passwordError}</FormHelperTexts>
+  const handleFocusName = () => {
+    // nameConfirm
+    setForm({ ...form, nameConfirm: '' });
+  };
+  // name
+  const handleBlurName = () => {
+    console.log(form.name);
+    if (form.name === '') {
+      setError({ ...error, name: '필수항목입니다.' });
+    } else if (error.name === '') {
+      setForm({ ...form, nameConfirm: form.name });
+    }
+  };
+  // id
+  const handleBlurId = () => {
+    if (form.id === '') {
+      setError({ ...error, id: '필수항목입니다.' });
+    } else if (!onlyOne.id) {
+      setError({ ...error, id: ' 중복확인이 필요합니다.' });
+    }
+  };
 
-                <FormHelperTexts>{nameError}</FormHelperTexts>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox onChange={handleAgree} color="primary" />
-                    }
-                    label="회원가입 약관에 동의합니다."
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
+  const handleClickId = () => {
+    console.log(onlyOne.id);
+    // 성공시
+    setOnlyOne({ ...onlyOne, id: !onlyOne.id });
+    setError({ ...error, id: '' });
+    setForm({ ...form, idConfirm: form.id });
+  };
+
+  const handleFocusId = () => {
+    // idConfirm
+    setForm({ ...form, idConfirm: '' });
+  };
+
+  // nickname
+  const handleBlurNickname = () => {
+    if (form.nickname === '') {
+      setError({ ...error, nickname: '필수항목입니다.' });
+    } else if (!onlyOne.nickname) {
+      setError({
+        ...error,
+        nickname: ' 중복확인이 필요합니다.',
+      });
+    }
+  };
+  const handleFocusNickname = () => {
+    setForm({ ...form, nicknameConfirm: '' });
+  };
+  const handleClickNickname = () => {
+    console.log(onlyOne.nickname);
+    // 성공시
+    setOnlyOne({ ...onlyOne, nickname: !onlyOne.nickname });
+    setError({ ...error, nickname: '' });
+    setForm({ ...form, nicknameConfirm: form.nickname });
+  };
+
+  // password1
+  const handleBlurPassword1 = () => {
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    if (form.password1 === '') {
+      setError({ ...error, password1: '필수항목입니다.' });
+    } else if (!passwordRegex.test(form.password1)) {
+      setError({
+        ...error,
+        password1: '숫자+영문자+특수문자 8자리 이상 입력해주세요.',
+      });
+    }
+  };
+  // password2
+  const handleBlurPassword2 = () => {
+    if (form.password1 === form.password2) {
+      setForm({ ...form, passwordConfirm: form.password1 });
+    }
+  };
+
+  // email
+  const handleBlurEmail = () => {
+    console.log('이메일');
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (form.email === '') {
+      setError({ ...error, email: '필수항목입니다.' });
+    } else if (!emailRegex.test(form.email)) {
+      setError({ ...error, email: '이메일 형식이 옳바르지 않습니다.' });
+    } else {
+      setForm({ ...form, emailConfirm: form.email });
+      setError({ ...error, email: '' });
+    }
+  };
+  const handleFocusEmail = () => {
+    setForm({ ...form, emailConfirm: '' });
+  };
+
+  let allowed = true;
+  if (
+    error.name === '' &&
+    error.id === '' &&
+    error.nickname === '' &&
+    error.password1 === '' &&
+    error.password2 === '' &&
+    form.nameConfirm !== '' &&
+    form.idConfirm !== '' &&
+    form.nicknameConfirm !== '' &&
+    form.passwordConfirm !== '' &&
+    form.emailConfirm !== ''
+  ) {
+    allowed = !allowed;
+  }
+
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Typography component="h4" variant="h5">
+              구매자 판매자 선택해주세요.
+            </Typography>
+            <Stack
+              spacing={2}
+              direction="row"
+              sx={{
+                margin: '16px',
+              }}
+            >
+              <ColorButton
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                size="large"
+                startIcon={<ShoppingCartIcon />}
+                onClick={() => handleClick('buyer')}
+                // {role === 'buyer' && }
               >
-                회원가입
-              </Button>
-            </FormControl>
-            <FormHelperTexts>{registerError}</FormHelperTexts>
-          </Boxs>
-        </Box>
-      </Container>
-    </ThemeProvider>
+                옷을 살래요
+              </ColorButton>
+              <ColorButton
+                fullWidth
+                variant="contained"
+                startIcon={<StoreIcon />}
+                onClick={() => handleClick('seller')}
+                className="btn-content"
+              >
+                옷을 팔래요
+              </ColorButton>
+            </Stack>
+            <Typography component="h4" variant="h5">
+              개인정보를 입력해주세요.
+            </Typography>
+
+            <Boxs
+              component="form"
+              noValidate
+              // onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
+              <FormControl component="fieldset" variant="standard">
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="name"
+                      name="name"
+                      label="이름"
+                      error={
+                        error.name !== '' || form.name.length > 12 || false
+                      }
+                      onChange={handleChange}
+                      onFocus={handleFocusName}
+                      onBlur={handleBlurName}
+                      helperText={
+                        form.nameConfirm !== '' ? '사용이 가능합니다' : ''
+                      }
+                    />
+                    <FormHelperTexts>{error.name}</FormHelperTexts>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="id"
+                      name="id"
+                      label="아이디"
+                      error={error.id !== '' || form.id.length > 12 || false}
+                      onChange={handleChange}
+                      onBlur={handleBlurId}
+                      onFocus={handleFocusId}
+                      helperText={(() => {
+                        if (form.idConfirm !== '' && onlyOne.id) {
+                          return '사용이 가능합니다.';
+                        }
+                        return '';
+                      })()}
+                      InputProps={{
+                        endAdornment: (
+                          <Button
+                            variant="contained"
+                            size="small"
+                            disabled={
+                              onlyOne.id ||
+                              form.id === '' ||
+                              form.id.length > 12 ||
+                              false
+                            }
+                            // 컬러 바꾸기
+                            sx={{ fontSize: '10px' }}
+                            onClick={handleClickId}
+                          >
+                            중복확인
+                          </Button>
+                        ),
+                      }}
+                    />
+                    <FormHelperTexts>{error.id}</FormHelperTexts>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="nickname"
+                      name="nickname"
+                      label="닉네임 (6글자 이하)"
+                      error={
+                        error.nickname !== '' ||
+                        form.nickname.length > 6 ||
+                        false
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlurNickname}
+                      onFocus={handleFocusNickname}
+                      helperText={(() => {
+                        if (form.nicknameConfirm !== '' && onlyOne.nickname) {
+                          return '사용이 가능합니다.';
+                        }
+                        return '';
+                      })()}
+                      InputProps={{
+                        endAdornment: (
+                          <Button
+                            variant="contained"
+                            size="small"
+                            disabled={
+                              onlyOne.nickname ||
+                              form.nickname === '' ||
+                              form.nickname.length > 6 ||
+                              false
+                            }
+                            // 컬러 바꾸기
+                            sx={{ fontSize: '10px' }}
+                            onClick={handleClickNickname}
+                          >
+                            중복확인
+                          </Button>
+                        ),
+                      }}
+                    />
+                    <FormHelperTexts>{error.nickname}</FormHelperTexts>
+                  </Grid>
+
+                  {/* <FormHelperTexts>{emailError}</FormHelperTexts> */}
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      type="password"
+                      id="password1"
+                      name="password1"
+                      label="비밀번호 (숫자+영문자+특수문자 8자리 이상)"
+                      onChange={handleChange}
+                      onBlur={handleBlurPassword1}
+                      error={error.password1 !== '' || false}
+                    />
+                    <FormHelperTexts>{error.password1}</FormHelperTexts>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      type="password"
+                      id="password2"
+                      name="password2"
+                      label="비밀번호 재입력"
+                      onChange={handleChange}
+                      onBlur={handleBlurPassword2}
+                      error={error.password2 !== '' || false}
+                    />
+                    <FormHelperTexts>{error.password2}</FormHelperTexts>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      type="email"
+                      id="email"
+                      name="email"
+                      label="이메일 주소"
+                      onChange={handleChange}
+                      onBlur={handleBlurEmail}
+                      onFocus={handleFocusEmail}
+                      error={error.email !== '' || false}
+                    />
+                    <FormHelperTexts>{error.email}</FormHelperTexts>
+                  </Grid>
+                  {role === 'seller' && (
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        type="bank"
+                        id="bank"
+                        name="bank"
+                        label="은행을 선택해주세요."
+                      />
+                      <FormHelperTexts>{error.email}</FormHelperTexts>
+                    </Grid>
+                  )}
+                  {role === 'seller' && (
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        type="account"
+                        id="account"
+                        name="account"
+                        label="계좌번호"
+                      />
+                      <FormHelperTexts>{error.email}</FormHelperTexts>
+                    </Grid>
+                  )}
+                </Grid>
+                <Button
+                  // type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  size="large"
+                  disabled={allowed}
+                  onClick={() => {
+                    console.log('데이터', form);
+                    console.log('에러', error);
+                    console.log('회원가입 axios로 Confirm데이터 전달');
+                  }}
+                >
+                  회원가입
+                </Button>
+              </FormControl>
+            </Boxs>
+          </Box>
+        </Container>
+      </ThemeProvider>
+    </div>
   );
 }
 
