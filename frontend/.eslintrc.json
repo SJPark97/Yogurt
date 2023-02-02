@@ -10,12 +10,6 @@
     "react/react-in-jsx-scope": 0, // import React 생략 가능
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
-    "no-console": "off",
-    "jsx-a11y/label-has-associated-control": [
-      2,
-      {
-        "labelAttributes": ["htmlFor"]
-      }
-    ]
+    "no-console": "off"
   }
 }

@@ -151,6 +151,21 @@
       },
       "wishListId": 3,
       "sellerId": "승토어"
+    },
+    {
+      "post": {
+        "id": 4,
+        "br_cateName": "nike",
+        "br_cateId": 1,
+        "post_title": "스타일리쉬해서 어디든 입기 좋은 나이키 티셔츠",
+        "post_price": 24300,
+        "post_sale_price": 34000,
+        "post_status": 1,
+        "postimage_url": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg",
+        "sellerId": 3,
+        "sellerName": "채토어"
+      },
+      "wishListId": 4
     }
   ]
 }
