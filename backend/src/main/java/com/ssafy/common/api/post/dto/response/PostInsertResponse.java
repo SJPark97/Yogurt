@@ -1,6 +1,7 @@
 package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.domain.PostStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ public class PostInsertResponse{
     private String content;
     private Long price;
     private Long sale_price;
-    private Long status;
+    private PostStatus status;
     private String size;
     private Timestamp created;
     private Timestamp updated;

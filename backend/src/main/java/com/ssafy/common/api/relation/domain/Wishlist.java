@@ -26,11 +26,11 @@ public class Wishlist {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private RelationStatus status;
 
     public void delete(){
-        this.status = "STATUS_DELETE";
+        this.status = RelationStatus.STATUS_DELETE;
     }
 
 }

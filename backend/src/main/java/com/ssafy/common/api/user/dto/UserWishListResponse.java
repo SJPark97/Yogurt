@@ -1,7 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
-import com.ssafy.common.api.relation.domain.Wishlist;
-import com.ssafy.common.api.relation.dto.WishListUserPostResponse;
+import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
 import org.springframework.transaction.annotation.Transactional;

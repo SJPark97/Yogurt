@@ -1,7 +1,7 @@
 package com.ssafy.common.api.relation.controller;
 
 import com.ssafy.common.api.post.service.PostService;
-import com.ssafy.common.api.relation.dto.ZzimResponse;
+import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.service.ZzimService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserZzimResponse;

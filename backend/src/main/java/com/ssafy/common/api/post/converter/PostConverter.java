@@ -5,6 +5,7 @@ import com.ssafy.common.api.category.repository.BrandCategoryRepository;
 import com.ssafy.common.api.category.repository.TypeCategoryRepository;
 import com.ssafy.common.api.category.typecategory.Typecategory;
 import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
@@ -28,10 +29,11 @@ public class PostConverter {
                 .content(request.getContent())
                 .price(request.getPrice())
                 .sale_price(request.getSale_price())
-                .status(request.getStatus())
+                .status(PostStatus.STATUS_SELL)
                 .seller(user)
                 .brandcategory(brandcategory)
                 .typecategory(typecategory)
+                .size(request.getSize())
                 .build();
         }
     }

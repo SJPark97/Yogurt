@@ -5,7 +5,7 @@ import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.relation.converter.ZzimConverter;
 import com.ssafy.common.api.relation.domain.Zzim;
-import com.ssafy.common.api.relation.dto.ZzimResponse;
+import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.repository.ZzimRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserZzimResponse;

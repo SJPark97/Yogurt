@@ -4,7 +4,6 @@ import com.ssafy.common.api.post.converter.PostConverter;
 import com.ssafy.common.api.post.converter.PostImageConverter;
 import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
-import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
 
@@ -62,20 +61,20 @@ public class PostService {
     public PostDetailResponse createPost(PostInsertRequest request, User user) {
         Post post = postConverter.createRequestDtoToEntity(request, user);
         Post createPost = postRepository.save(post);
-        List<Postimage> images = request.getPostImages();
-        for (Postimage image : images) {
-            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image ,createPost);
-            Postimage createpostimage = postimageRepository.save(postimage);
-            System.out.println(createpostimage);
-        }
+//        List<Postimage> images = request.getPostImages();
+//        for (Postimage image : images) {
+//            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image ,createPost);
+//            Postimage createpostimage = postimageRepository.save(postimage);
+//            System.out.println(createpostimage);
+//        }
         return new PostDetailResponse(postRepository.findById(createPost.getId()).get());
     }
 
-    // 상품 수정
+    // 상품 라이브 status 변환
     @Transactional
-    public PostDetailResponse updatePost(Long postId, PostUpdateRequest request, User user){
+    public PostDetailResponse updateLiveStatus(Long postId, User user){
         Post post = postRepository.findById(postId).get();
-        post.update(request);
+        post.updateStatus(post);
         return new PostDetailResponse(post);
     }
 

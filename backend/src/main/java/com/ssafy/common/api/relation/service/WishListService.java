@@ -4,7 +4,7 @@ import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.relation.converter.WishConverter;
 import com.ssafy.common.api.relation.domain.Wishlist;
-import com.ssafy.common.api.relation.dto.WishListResponse;
+import com.ssafy.common.api.relation.dto.wishList.WishListResponse;
 import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserWishListResponse;

@@ -14,8 +14,8 @@ public class Zzim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private RelationStatus status;
 
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,6 +28,6 @@ public class Zzim {
     private Post post;
 
     public void delete(){
-        this.status = "STATUS_DELETE";
+        this.status = RelationStatus.STATUS_DELETE;
     }
 }

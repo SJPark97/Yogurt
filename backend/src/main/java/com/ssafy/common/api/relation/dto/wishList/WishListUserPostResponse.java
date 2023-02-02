@@ -1,4 +1,4 @@
-package com.ssafy.common.api.relation.dto;
+package com.ssafy.common.api.relation.dto.wishList;
 
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.relation.domain.Wishlist;

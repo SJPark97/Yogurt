@@ -1,6 +1,7 @@
 package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.post.postimage.dto.PostImageDto;
 import lombok.Getter;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ public class PostDetailResponse {
     private final String content;
     private final Long price;
     private final Long sale_price;
-    private final Long status;
+    private final PostStatus status;
     private final String size;
     private final Long brCateId;
     private final String brCateName;

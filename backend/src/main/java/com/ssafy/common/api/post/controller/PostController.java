@@ -1,5 +1,4 @@
 package com.ssafy.common.api.post.controller;
-import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
@@ -36,13 +35,15 @@ public class PostController {
     public ResponseEntity<List<PostAllResponse>> getPostAll(){
         return new ResponseEntity<>(postService.findPostAll(), HttpStatus.OK);
     }
-    // 상품 수정 API
-    @PutMapping("/{id}")
-    public ResponseEntity<PostDetailResponse> update(@PathVariable("id") Long post_id, @RequestBody PostUpdateRequest request){
+
+    // 상품 라이브 여부 수정 API
+    @PatchMapping ("/live/{id}")
+    public ResponseEntity<PostDetailResponse> updateLiveStatus(@PathVariable("id") Long post_id){
         User user = postService.getLoginUser();
-        return new ResponseEntity<>(postService.updatePost(post_id, request, user), HttpStatus.CREATED);
+        return new ResponseEntity<>(postService.updateLiveStatus(post_id, user), HttpStatus.OK);
     }
 
+    // 상품 삭제 API
     @PatchMapping ("/{id}")
     public ResponseEntity<PostDetailResponse> delete(@PathVariable("id")Long post_id){
         User user = postService.getLoginUser();

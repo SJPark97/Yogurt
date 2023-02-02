@@ -1,4 +1,4 @@
-package com.ssafy.common.api.relation.dto;
+package com.ssafy.common.api.relation.dto.zzim;
 
 
 import com.ssafy.common.api.post.dto.response.PostAllResponse;

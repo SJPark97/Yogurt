@@ -1,5 +1,6 @@
-package com.ssafy.common.api.relation.dto;
+package com.ssafy.common.api.relation.dto.zzim;
 
+import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.domain.Zzim;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ public class ZzimResponse {
     private final Long id;
     private final Long buyerId;
     private final Long postId;
-    private final String status;
+    private final RelationStatus status;
     public ZzimResponse(Zzim zzim){
         id = zzim.getId();
         buyerId = zzim.getBuyer().getId();

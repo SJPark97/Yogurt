@@ -1,6 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
-import com.ssafy.common.api.relation.dto.ZzimUserPostResponse;
+import com.ssafy.common.api.relation.dto.zzim.ZzimUserPostResponse;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
 

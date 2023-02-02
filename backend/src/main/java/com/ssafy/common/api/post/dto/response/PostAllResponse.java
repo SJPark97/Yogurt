@@ -1,6 +1,7 @@
 package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.domain.PostStatus;
 import lombok.Getter;
 
 
@@ -12,11 +13,15 @@ public class PostAllResponse {
     private final String title;
     private final Long price;
     private final Long sale_price;
-    private final Long status;
+    private final PostStatus status;
+    private final Long sellerId;
+    private final String sellerName;
 //    private final List<PostImageDto> postImages;
 
     public PostAllResponse(Post post){
         id = post.getId();
+        sellerId = post.getSeller().getId();
+        sellerName = post.getSeller().getName();
         title = post.getTitle();
         brCateName = post.getBrandcategory().getName();
         brCateId= post.getBrandcategory().getId();

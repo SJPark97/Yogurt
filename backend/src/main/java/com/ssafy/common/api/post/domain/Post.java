@@ -2,7 +2,6 @@ package com.ssafy.common.api.post.domain;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
-import com.ssafy.common.api.post.dto.request.PostUpdateRequest;
 import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.user.domain.User;
@@ -35,8 +34,8 @@ public class Post {
     @Column(name = "post_sale_price")
     private Long sale_price;
 
-    @Column(name = "post_status")
-    private Long status;
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
 
     @Column(name = "post_created")
     private Timestamp created;
@@ -70,14 +69,14 @@ public class Post {
     private List<Zzim> zzims = new ArrayList<>();
 
     public void delete(){
-        this.status = 0L;
+        this.status = PostStatus.STATUS_DELETE;
     }
-    public void update(PostUpdateRequest request){
-        title = request.getTitle();
-        content = request.getContent();
-        size = request.getSize();
-        sale_price = request.getSale_price();
-        price = request.getPrice();
-        status = request.getStatus();
+    public void updateStatus (Post post){
+        if (post.status == PostStatus.STATUS_SELL){
+            this.status = PostStatus.STATUS_LIVE_SOON;
+        }
+        else {
+            this.status = PostStatus.STATUS_SELL;
+        }
     }
 }
