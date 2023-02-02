@@ -7,6 +7,7 @@ import AlarmList from './Main/Alarm/AlarmList';
 import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
 import MainAppBar from './AppBar/MainAppBar';
+import SignUp from './User/Singup';
 // import BackToTop from "./AppBar/BackToTop";
 import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
@@ -43,6 +44,7 @@ function App() {
           <Route path=":postId" element={<PostDetail />} />
         </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <footer>
         <MainFooter user={user} />
