@@ -25,6 +25,7 @@ function MainAppBar() {
       {/* {useMatch('/post/join') && <SubAppBar />} */}
       {useMatch('/post/:postId') && <SubAppBar />}
       {/* {appBar.includes('post') && <SubAppBar />} */}
+      {useMatch('/signup') && <SubAppBar />}
     </div>
   );
 }

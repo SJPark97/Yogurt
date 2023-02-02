@@ -13,10 +13,10 @@ const data = {
   '/category': {
     name: '카테고리',
   },
-  '/user/login': {
+  '/login': {
     name: '로그인',
   },
-  '/user/join': {
+  '/signup': {
     name: '회원가입',
   },
   '/wishlist': {
