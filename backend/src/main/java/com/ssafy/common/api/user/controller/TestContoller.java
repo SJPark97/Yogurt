@@ -1,6 +1,7 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+
+import static com.ssafy.common.api.user.domain.UserStatus.ACTIVE;
 
 @CrossOrigin("*")
 @RestController
@@ -31,12 +34,14 @@ public class TestContoller {
                 .description("1")
                 .email("1")
                 .name("1")
-                .nickName("1")
+                .nickName("ssafy")
                 .password(passwordEncoder.encode("1234"))
                 .phoneNumber("1")
                 .profileImage("1")
-                .role("ROLE_BUYER")
+                .role(UserRole.ROLE_BUYER)
                 .update_date(timestamp)
+                .banCount(0)
+                .userStatus(ACTIVE)
                 .build();
         userService.join(user);
     }
