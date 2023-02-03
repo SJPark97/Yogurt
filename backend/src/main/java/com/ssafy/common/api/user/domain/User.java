@@ -54,23 +54,26 @@ public class User {
     private String bank;    //계좌 은행
     private String account; //계좌
 
+    private String refreshToken; //리프레시 토큰
+
     public User() {
 
     }
-    private String role;    //ROLE_SELLER, ROLE_BUYER
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private UserRole role;    //ROLE_SELLER, ROLE_BUYER
 
     //해당 계정이 활성화 상태인지 삭제된 상태인지 구분
     @NotNull
-    private enum status{
-        ACTIVE, DELETE
-    }
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
 
-    public List<String> getRoleList(){
-        if(this.role.length()>0){
-            return Arrays.asList(this.role.split(","));
-        }
-        return new ArrayList<>();
-    }
+//    public List<String> getRoleList(){
+//        if(this.role.length()>0){
+//            return Arrays.asList(this.role.split(","));
+//        }
+//        return new ArrayList<>();
+//    }
 
     @OneToMany(mappedBy = "buyer")
     private List<Zzim> zzims = new ArrayList<>();
