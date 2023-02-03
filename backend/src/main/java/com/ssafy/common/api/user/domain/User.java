@@ -4,7 +4,7 @@ import com.ssafy.common.api.alarm.domain.BuyerAlarm;
 import com.ssafy.common.api.alarm.domain.SellerAlarm;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.notice.domain.Notice;
-import com.ssafy.common.api.post.Post;
+import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.qna.domain.Qna;
 import com.ssafy.common.api.relation.domain.Likes;
 import com.ssafy.common.api.relation.domain.Wishlist;
@@ -120,4 +120,7 @@ public class User {
 
     @OneToMany(mappedBy = "seller")
     private List<Post> posts = new ArrayList<>();
+
+
+
 }
