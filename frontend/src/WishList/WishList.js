@@ -7,34 +7,16 @@ function WishList() {
   const wishlist = dummy.WishLists;
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkItems, setCheckItems] = useState([]);
-  // const [resultItems, setResultItems] = useState([{}]);
   const navigate = useNavigate();
   checkItems.sort();
-  console.log(checkItems, 'check');
-  // console.log(resultItems, 'result');
 
   const SingleCheck = (checked, id, post, price) => {
     if (checked) {
       setCheckItems(prev => [...prev, id]);
       setTotalPrice(totalPrice + price);
-      // setResultItems(prev => {
-      //   console.log(prev, 'prev');
-      //   return {
-      //     ...prev,
-      //     key: id,
-      //     post,
-      //   };
-      // });
     } else {
       setCheckItems(checkItems.filter(el => el !== id));
       setTotalPrice(totalPrice - price);
-      // const newResultItem = checkItems.map((item, i) => {
-      //   if (id === i) {
-      //     return { ...item };
-      //   }
-      //   return item;
-      // });
-      // setResultItems(newResultItem);
     }
   };
 
@@ -54,7 +36,6 @@ function WishList() {
       setTotalPrice(0);
     }
   };
-  console.log(checkItems);
 
   return (
     <div>
@@ -71,7 +52,7 @@ function WishList() {
       <hr />
       <div>
         {wishlist.map(wish => (
-          <div>
+          <div key={wish.wishListId}>
             <div className="wish-post">
               <div className="wish-checkbox">
                 <input
@@ -117,7 +98,7 @@ function WishList() {
           type="submit"
           onClick={() =>
             navigate('/payment', {
-              state: { ...checkItems },
+              state: { checkItems, totalPrice },
             })
           }
         >
