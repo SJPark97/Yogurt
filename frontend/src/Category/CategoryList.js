@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Category from './Category';
+import './Category.css';
 
 const categoryData = [
   {
