@@ -2,6 +2,7 @@ package com.ssafy.common.api.post.dto.response;
 
 import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.domain.PostStatus;
+import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.post.postimage.dto.PostImageDto;
 import lombok.Getter;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class PostDetailResponse {
     private final String brCateName;
     private final Long typeCateId;
     private final String typeCateName;
-//    private final List<PostImageDto> postImages;
+    private final List<PostImageDto> postImages;
     private final Long sellerId;
 
     public PostDetailResponse(Post post) {
@@ -38,9 +39,9 @@ public class PostDetailResponse {
         brCateName = post.getBrandcategory().getName();
         typeCateId = post.getTypecategory().getId();
         typeCateName = post.getTypecategory().getName();
-//        postImages = post.getPostImages()
-//                .stream().map(postimage -> new PostImageDto(postimage))
-//                .collect(Collectors.toList());
+        postImages = post.getPostImages()
+                .stream().map(postimage -> new PostImageDto(postimage))
+                .collect(Collectors.toList());
         sellerId = post.getSeller().getId();
     }
 }

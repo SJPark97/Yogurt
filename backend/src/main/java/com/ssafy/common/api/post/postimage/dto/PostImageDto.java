@@ -6,9 +6,7 @@ import lombok.Getter;
 @Getter
 public class PostImageDto {
     private final String url;
-
     public PostImageDto(Postimage postimage){
         url = postimage.getUrl();
     }
 }
-

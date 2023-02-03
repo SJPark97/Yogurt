@@ -6,7 +6,6 @@ import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
-
 import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.post.postimage.repository.PostimageRepository;
 import com.ssafy.common.api.post.repository.PostRepository;
@@ -18,8 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,16 +57,16 @@ public class PostService {
 
     // 상품 저장
     @Transactional
-    public PostDetailResponse createPost(PostInsertRequest request, User user) {
+    public String createPost(PostInsertRequest request, User user) {
         Post post = postConverter.createRequestDtoToEntity(request, user);
         Post createPost = postRepository.save(post);
-//        List<Postimage> images = request.getPostImages();
-//        for (Postimage image : images) {
-//            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image ,createPost);
-//            Postimage createpostimage = postimageRepository.save(postimage);
-//            System.out.println(createpostimage);
-//        }
-        return new PostDetailResponse(postRepository.findById(createPost.getId()).get());
+        List<Map<String,String>> images = request.getPostImages();
+        for (Map map : images) {
+            String url = (String) map.get("url");
+            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(url, createPost);
+            postimageRepository.save(postimage);
+        }
+        return null;
     }
 
     // 상품 라이브 status 변환

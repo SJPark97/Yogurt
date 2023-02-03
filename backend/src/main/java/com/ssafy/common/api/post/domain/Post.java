@@ -8,7 +8,6 @@ import com.ssafy.common.api.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +35,6 @@ public class Post {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
-
-    @Column(name = "post_created")
-    private Timestamp created;
-    @Column(name = "post_updated")
-    private Timestamp updated;
 
     @Column(name = "post_size")
     private String size;
