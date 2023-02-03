@@ -1,13 +1,13 @@
 package com.ssafy.common.api.category.typecategory;
 
+import com.ssafy.common.api.post.domain.Post;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +27,9 @@ public class Typecategory {
 
     @Column(name = "type_cateCreated")
     private Timestamp created;
+
+    @OneToMany(mappedBy = "typecategory")
+    private List<Post> postList = new ArrayList<>();
+
 
 }

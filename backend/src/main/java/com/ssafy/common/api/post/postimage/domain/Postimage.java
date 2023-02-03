@@ -1,13 +1,15 @@
-package com.ssafy.common.api.post.postimage;
+package com.ssafy.common.api.post.postimage.domain;
 
-import com.ssafy.common.api.post.Post;
-import lombok.Getter;
-import lombok.Setter;
+import com.ssafy.common.api.post.domain.Post;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Postimage {
 
     @Id @GeneratedValue

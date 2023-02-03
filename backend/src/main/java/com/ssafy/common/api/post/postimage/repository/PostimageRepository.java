@@ -1,13 +1,9 @@
-package com.ssafy.common.api.post.postimage;
+package com.ssafy.common.api.post.postimage.repository;
 
 
-import com.ssafy.common.api.post.Post;
-
+import com.ssafy.common.api.post.postimage.domain.Postimage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import java.util.List;
 
 @Repository
 public interface PostimageRepository extends JpaRepository<Postimage, Long> {
