@@ -8,6 +8,7 @@ import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
 import MainAppBar from './AppBar/MainAppBar';
 import SignUp from './User/Singup';
+import LogIn from './User/Login';
 // import BackToTop from "./AppBar/BackToTop";
 import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
@@ -51,6 +52,7 @@ function App() {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LogIn />} />
       </Routes>
       <footer>
         <MainFooter user={user} />
