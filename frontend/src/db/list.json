@@ -58,12 +58,27 @@
       "post_title": "제일 트렌디한 나이키 티셔츠",
       "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
       "post_created": "2023-12-31",
-      "post_status": 1,
+      "post_status": 2,
       "post_updated": "2024-12-31",
       "post_price": 177000,
       "post_sale_price": 120000,
       "post_size": "총장:52 하단:42",
       "image": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg"
+    },
+    {
+      "postId": 3,
+      "userId": 1,
+      "br_cateId": 1,
+      "type_cateID": 1,
+      "post_title": "세련된 선글라스",
+      "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
+      "post_created": "2023-12-31",
+      "post_status": 2,
+      "post_updated": "2024-12-31",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "image": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+      "br_cateName": "샤넬"
     }
   ],
 
@@ -102,21 +117,6 @@
       "post_sale_price": 120000,
       "postimage_url": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
       "br_cateName": "샤넬"
-    }
-  ],
-
-  "Live": [
-    {
-      "liveroom_id": 1,
-      "liveroom_title": "시대를 강타한 샤넬 컬렉션",
-      "liveroom_shop_name": "박토어",
-      "liveroom_thumbnail": "https://img.freepik.com/premium-photo/female-autumn-clothes-on-hangers-in-white-room-close-up_176873-13271.jpg?auto=format&h=200"
-    },
-    {
-      "liveroom_id": 2,
-      "liveroom_title": "가을을 맞이하는 우리",
-      "liveroom_shop_name": "송토어",
-      "liveroom_thumbnail": "https://contents.lotteon.com/itemimage/_v134624/LO/16/75/45/94/78/_1/67/54/59/47/9/LO1675459478_1675459479_1.jpg"
     }
   ],
 
@@ -165,6 +165,25 @@
         "sellerName": "채토어"
       },
       "wishListId": 4
+    }
+  ],
+
+  "Live": [
+    {
+      "liveroom_id": 1,
+      "liveroom_title": "시대를 강타한 샤넬 컬렉션",
+      "liveroom_shop_name": "박토어",
+      "liveroom_thumbnail": "https://img.freepik.com/premium-photo/female-autumn-clothes-on-hangers-in-white-room-close-up_176873-13271.jpg?auto=format&h=200",
+      "liveroom_status": 0,
+      "liveroom_time": "2024-12-31"
+    },
+    {
+      "liveroom_id": 2,
+      "liveroom_title": "가을을 맞이하는 우리",
+      "liveroom_shop_name": "송토어",
+      "liveroom_thumbnail": "https://contents.lotteon.com/itemimage/_v134624/LO/16/75/45/94/78/_1/67/54/59/47/9/LO1675459478_1675459479_1.jpg",
+      "liveroom_status": 1,
+      "liveroom_time": "2023-02-04"
     }
   ]
 }
