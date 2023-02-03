@@ -5,12 +5,20 @@ import dummy from '../db/list.json';
 function Payment() {
   const location = useLocation();
   const checkItemList = location.state;
-  console.log(checkItemList[0]);
-  const wishlist = dummy.WishLists.filter(
-    el => el.post,
-    // [3,4]
+  console.log(checkItemList, 'check');
+  const wishlist = dummy.WishLists;
+  const myresult = wishlist.filter(
+    item => checkItemList.filter(wish => console.log(wish, item)).post,
   );
-  console.log(wishlist);
+
+  console.log(myresult, 'wish');
+
+  // {
+  //     if (el.wishListId === checkItemList.map(event => event)) {
+  //       return el.post;
+  //     }
+  //   });
+  // [3,4]
 
   return (
     <div>
