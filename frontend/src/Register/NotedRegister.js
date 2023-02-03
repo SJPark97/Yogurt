@@ -21,7 +21,7 @@ function PostRegister() {
           <textarea
             id="noted_reg_detail"
             name="size"
-            placeholder="공지사항을 적어주세요"
+            placeholder="공지사항을 적어주세요&#13;&#10;주문을 하기전에 알아둬야 될 사항을 적어주세요"
           />
         </div>
         <div id="submit_btn">

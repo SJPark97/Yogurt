@@ -21,7 +21,7 @@ function QnARegister() {
           <textarea
             id="qna_reg_detail"
             name="size"
-            placeholder="질문 내용을 적어주세요"
+            placeholder="질문할 사항을 적어주세요"
           />
         </div>
         <div id="submit_btn">
