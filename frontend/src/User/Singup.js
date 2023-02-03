@@ -1,96 +1,3 @@
-// import { useState, useCallback } from 'react';
-
-// import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import StoreIcon from '@mui/icons-material/Store';
-// import BackToTop from '../AppBar/BackToTop';
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-
-// import { styled } from '@mui/material/styles';
-// import { deepOrange } from '@mui/material/colors';
-// //
-
-// const ColorButton = styled(Button)(({ theme }) => ({
-//   color: theme.palette.getContrastText(deepOrange.A400),
-//   backgroundColor: '#cccccc',
-// }));
-
-// function SignUp() {
-//   const [role, setRole] = useState('');
-//   const [inputText, setinputText] = useState('');
-// const handleClick = data => {
-//   setRole(data);
-// };
-//   console.log(role);
-
-// const onChange = useCallback(e => {
-//   setinputText(e.target.value);
-//   console.log(e.target.value);
-// });
-
-//   const handleSubmit = e => {
-//     e.preventDefault();
-//     console.log(inputText);
-//   };
-//   return (
-//     <div>
-//       <BackToTop />
-//       <Stack
-//         spacing={2}
-//         direction="row"
-//         sx={{
-//           margin: '16px',
-//         }}
-//       >
-//         <ColorButton
-//           fullWidth
-//           variant="contained"
-//           startIcon={<ShoppingCartIcon />}
-//           onClick={() => handleClick('buyer')}
-//           // {role === 'buyer' && }
-//         >
-//           옷을 살래요!
-//         </ColorButton>
-//         <ColorButton
-//           fullWidth
-//           variant="contained"
-//           startIcon={<StoreIcon />}
-//           onClick={() => handleClick('seller')}
-//           className="btn-content"
-//         >
-//           옷을 팔래요
-//         </ColorButton>
-//       </Stack>
-
-//       <Box
-//         component="form"
-//         sx={{
-//           marginX: '16px',
-//           maxWidth: '100%',
-//         }}
-//         noValidate
-//         autoComplete="off"
-//         onSubmit={handleSubmit}
-//       >
-//         <TextField
-//           fullWidth
-//           id="outlined-basic"
-//           label="Outlined"
-//           variant="outlined"
-//           required
-//           value={inputText}
-//           onChange={onChange}
-//         />
-//       </Box>
-//       <button type="submit">submit</button>
-//     </div>
-//   );
-// }
-
-// export default SignUp;
-
 import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 
@@ -105,12 +12,40 @@ import {
   Typography,
   Container,
 } from '@mui/material/';
+import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
 import { deepOrange } from '@mui/material/colors';
+
+const banks = [
+  {
+    bankId: 0,
+    bankName: '국민은행',
+  },
+  {
+    bankId: 1,
+    bankName: '우리은행',
+  },
+  {
+    bankId: 2,
+    bankName: '하나은행',
+  },
+  {
+    bankId: 3,
+    bankName: '카카오뱅크',
+  },
+  {
+    bankId: 4,
+    bankName: '신한은행',
+  },
+  {
+    bankId: 5,
+    bankName: '농협',
+  },
+];
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(deepOrange.A400),
@@ -517,12 +452,17 @@ function SignUp() {
                     <Grid item xs={12}>
                       <TextField
                         required
+                        select
                         fullWidth
                         type="bank"
                         id="bank"
                         name="bank"
                         label="은행을 선택해주세요."
-                      />
+                      >
+                        {banks.map(bank => (
+                          <MenuItem key={bank.bankId}>{bank.bankName}</MenuItem>
+                        ))}
+                      </TextField>
                       <FormHelperTexts>{error.email}</FormHelperTexts>
                     </Grid>
                   )}
@@ -531,7 +471,7 @@ function SignUp() {
                       <TextField
                         required
                         fullWidth
-                        type="account"
+                        type="number"
                         id="account"
                         name="account"
                         label="계좌번호"
