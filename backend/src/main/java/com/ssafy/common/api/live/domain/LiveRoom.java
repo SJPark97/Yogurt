@@ -1,5 +1,6 @@
 package com.ssafy.common.api.live.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.common.api.user.domain.User;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class LiveRoom {
 
     // 판매자 고유 번호 sellerId
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinColumn(name = "seller_id")
     private User seller;
 
@@ -52,7 +54,9 @@ public class LiveRoom {
     @Column(name = "liveroom_time")
     private Timestamp time ;
 
-
+    public void update_status(LiveRoomStatus status){
+        this.status=status;
+    }
 
     // 라이브 리스트 : livelist
     @OneToMany(mappedBy = "liveRoom")
