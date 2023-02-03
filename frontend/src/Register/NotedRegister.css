@@ -14,10 +14,15 @@ textarea {
   resize: none;
 }
 
+.noted_reg_title,
+.noted_reg_detail {
+  margin: 0px 16px 0px 8px;
+}
+
 #noted_reg_title,
 #noted_reg_detail {
-  width: 312px;
-  padding: 0px;
+  width: 100%;
+  padding: 4px 0px 4px 8px;
   margin: 8px 0px 0px 8px;
   display: flex;
   align-items: center;

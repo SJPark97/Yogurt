@@ -42,7 +42,7 @@ function ReviewRegister() {
           <textarea
             id="review_reg_detail"
             name="size"
-            placeholder="리뷰 내용을 적어주세요"
+            placeholder="리뷰 내용을 적어주세요&#13;&#10;배송의 상태, 판매자의 응대 등에 대해 적어주세요"
           />
         </div>
         <div id="submit_btn">
