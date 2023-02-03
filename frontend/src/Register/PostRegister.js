@@ -109,7 +109,7 @@ function PostRegister() {
           <textarea
             id="post_reg_detail"
             name="detail"
-            placeholder="상세내용에 대해 기입해주세요"
+            placeholder="상세내용에 대해 기입해주세요&#13;&#10;ex) 옷의 상태, 어울리는 옷차림, 특별함을 어필하면 더 좋아요"
           />
         </div>
         <hr />
@@ -118,7 +118,7 @@ function PostRegister() {
           <textarea
             id="post_reg_size"
             name="size"
-            placeholder="사이즈에 대해 설명해주세요"
+            placeholder="사이즈에 대해 설명해주세요&#13;&#10;ex)가슴둘레:40cm 총장:65cm"
           />
         </div>
         <div id="submit_btn">
