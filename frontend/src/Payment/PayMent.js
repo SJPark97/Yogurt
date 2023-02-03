@@ -50,7 +50,7 @@ function Payment() {
       </div>
       <hr />
       <div className="pay-total-price">
-        <div>결재하기</div>
+        <div>결제하기</div>
         <div className="pay-price">{totalPrice.toLocaleString()} 원</div>
       </div>
       <hr />
