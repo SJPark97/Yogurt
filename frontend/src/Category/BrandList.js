@@ -1,6 +1,7 @@
 // DB에 저장되어있는 브랜드 이름과 브랜드 사진을 가져오면 json 형태로 데이터들이 있을 것임
 // 그 데이터들을 반복문을 통해서 이미지와 이름을 props로 내리거나 해서 하나하나 요소에 적용시키기
 import Brand from './Brand';
+import './Category.css';
 
 const brandData = [
   {

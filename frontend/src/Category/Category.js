@@ -1,3 +1,5 @@
+import './Category.css';
+
 function Category({ sub }) {
   return (
     <div
@@ -7,8 +9,8 @@ function Category({ sub }) {
         console.log('서브카테고리', sub.name);
       }}
     >
-      <img src={sub.image} alt="#" />
-      <p>{sub.name}</p>
+      <img src={sub.image} alt="#" className="categoryImg" />
+      <div className="subName">{sub.name}</div>
     </div>
   );
 }

@@ -1,0 +1,76 @@
+.post_reg_title,
+.post_reg_price,
+.post_reg_state,
+.post_reg_category,
+.post_reg_detail,
+.post_reg_size {
+  margin: 8px 0px 0px 8px;
+}
+
+.post_reg_sale_state {
+  margin: 8px 0px 8px 8px;
+}
+.post_reg_title p,
+.post_reg_price p,
+.post_reg_sale_price p,
+.post_reg_state p,
+.post_reg_category p,
+.post_reg_detail p,
+.post_reg_size p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+#post_reg_title,
+#post_reg_price,
+#post_reg_sale_price,
+#post_reg_detail,
+#post_reg_size {
+  width: 312px;
+  padding: 0px;
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#post_reg_detail,
+#post_reg_size {
+  height: 100px;
+}
+
+.post_reg_sale_state {
+  display: flex;
+  align-items: center;
+}
+
+.post_reg_sale_state button,
+.post_reg_state button {
+  margin: 0px 0px 0px 8px;
+  padding: 0px;
+}
+
+.post_reg_state_btn,
+.post_reg_sale_btn {
+  margin: 0px 0px 0px 8px;
+  padding: 0px;
+  color: red;
+}
+
+.post_reg_category_div {
+  margin: 0px 0px 0px 8px;
+}
+
+.post_reg_state_div,
+.post_reg_category_cloth,
+.post_reg_category_brand {
+  margin: 8px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}

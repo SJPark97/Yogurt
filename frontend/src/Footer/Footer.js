@@ -8,12 +8,14 @@ import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Paper from '@mui/material/Paper';
+import { useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   color: #bdbdbd;
+  max-width: 100%;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;
@@ -24,10 +26,32 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function FixedBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+export default function Footer({ user }) {
+  const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
+  const pageUrl = useLocation().pathname;
+
+  useEffect(() => {
+    if (pageUrl === '/') {
+      setValue(0);
+    } else if (pageUrl === '/stores') {
+      setValue(1);
+    } else if (pageUrl === '/alarms') {
+      setValue(2);
+    } else if (pageUrl.includes('/profile')) {
+      setValue(3);
+    }
+  }, [pageUrl]);
+
+  // 유저정보
+  let userRole;
+  if (user.role === 'buyer') {
+    userRole = 'buyer';
+  } else {
+    userRole = 'seller';
+  }
+
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
@@ -64,7 +88,11 @@ export default function FixedBottomNavigation() {
           <CustomBottomNavigationAction
             label="프로필"
             icon={<AccountCircleIcon />}
-            onClick={() => navigate('/profile')} // 이거는 로그인 안됐을 때 로그인 페이지로 가게
+            onClick={() =>
+              userRole === 'buyer'
+                ? navigate('/profile/buyer')
+                : navigate('/profile/seller')
+            } // 이거는 로그인 안됐을 때 로그인 페이지로 가게
             // sx={[
             //   {
             //     color: "#bdbdbd",
