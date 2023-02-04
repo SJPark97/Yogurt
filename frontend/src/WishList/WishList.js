@@ -10,7 +10,7 @@ function WishList() {
   const navigate = useNavigate();
   checkItems.sort();
 
-  const SingleCheck = (checked, id, price) => {
+  const SingleCheck = (checked, id, post, price) => {
     if (checked) {
       setCheckItems(prev => [...prev, id]);
       setTotalPrice(totalPrice + price);
@@ -52,7 +52,7 @@ function WishList() {
       <hr />
       <div>
         {wishlist.map(wish => (
-          <div>
+          <div key={wish.wishListId}>
             <div className="wish-post">
               <div className="wish-checkbox">
                 <input
@@ -61,6 +61,7 @@ function WishList() {
                     SingleCheck(
                       event.target.checked,
                       wish.wishListId,
+                      wish.post,
                       wish.post.post_sale_price,
                     )
                   }
@@ -97,7 +98,7 @@ function WishList() {
           type="submit"
           onClick={() =>
             navigate('/payment', {
-              state: { ...checkItems },
+              state: { checkItems, totalPrice },
             })
           }
         >

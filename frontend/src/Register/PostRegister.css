@@ -26,13 +26,21 @@ textarea {
   resize: none;
 }
 
+.post_reg_title,
+.post_reg_price,
+.post_reg_sale_price,
+.post_reg_detail,
+.post_reg_size {
+  margin: 0px 16px 0px 8px;
+}
+
 #post_reg_title,
 #post_reg_price,
 #post_reg_sale_price,
 #post_reg_detail,
 #post_reg_size {
-  width: 312px;
-  padding: 0px;
+  width: 100%;
+  padding: 4px 0px 4px 8px;
   margin: 8px 0px 0px 8px;
   display: flex;
   align-items: center;
@@ -52,14 +60,14 @@ textarea {
 .post_reg_sale_state button,
 .post_reg_state button {
   margin: 0px 0px 0px 8px;
-  padding: 0px;
+  padding: 1px;
 }
 
 .post_reg_state_btn,
 .post_reg_sale_btn {
   margin: 0px 0px 0px 8px;
-  padding: 0px;
-  color: red;
+  padding: 1px;
+  color: burlywood;
 }
 
 .post_reg_category_div {

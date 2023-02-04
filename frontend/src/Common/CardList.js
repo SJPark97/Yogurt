@@ -10,7 +10,7 @@ function CardList(props) {
 
   return (
     <div className="Card">
-      <Link to={'/video'}>
+      <Link to="/video">
         <img className="CardImg" src={data.postimage_url} alt="#" />
         <div className="CardBrand">{data.br_cateName}</div>
         <div className="CardName">{data.post_title}</div>
