@@ -1,8 +1,8 @@
-// import { useState, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
 import ButtonAppBar from './ButtonAppBar';
 import SubAppBar from './SubAppBar';
 import ProfileAppBar from './ProfileAppBar';
+import SearchAppBar from './SearchAppBar';
 
 function MainAppBar() {
   const pageUrl = useLocation().pathname;
@@ -27,6 +27,8 @@ function MainAppBar() {
       {/* {appBar.includes('post') && <SubAppBar />} */}
       {useMatch('/signup') && <SubAppBar />}
       {useMatch('/login') && <SubAppBar />}
+      {useMatch('/search') && <SearchAppBar />}
+      {useMatch('/search/result') && <SearchAppBar />}
     </div>
   );
 }
