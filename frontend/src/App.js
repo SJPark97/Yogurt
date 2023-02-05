@@ -9,6 +9,8 @@ import BuyerProfile from './Main/Profile/BuyerProfile';
 import MainAppBar from './AppBar/MainAppBar';
 import SignUp from './User/Singup';
 import LogIn from './User/Login';
+import Search from './Search/Search';
+import SearchResult from './Search/SearchResult';
 // import BackToTop from "./AppBar/BackToTop";
 import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
@@ -53,6 +55,8 @@ function App() {
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/search/result" element={<SearchResult />} />
       </Routes>
       <footer>
         <MainFooter user={user} />
