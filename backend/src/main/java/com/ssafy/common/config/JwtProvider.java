@@ -1,7 +1,10 @@
 package com.ssafy.common.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,9 +13,8 @@ import java.util.Map;
 
 import static com.ssafy.common.filter.JwtProperties.*;
 
-@Component
+@Configuration
 public class JwtProvider {
-
     public String createAccessToken(String userId, Enum role) {
         Map<String, Object> headers = new HashMap<>();
 
@@ -40,6 +42,7 @@ public class JwtProvider {
         return jwt;
     }
 
+
     public String createRefreshToken(String userId, Enum role) {
         Map<String, Object> headers = new HashMap<>();
 
@@ -65,5 +68,13 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY.getBytes())  //HS256과 key로 sign
                 .compact(); //토큰생성
         return jwt;
+    }
+
+    public Claims getClaim(String token){
+        return Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

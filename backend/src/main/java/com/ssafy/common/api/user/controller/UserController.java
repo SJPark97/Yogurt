@@ -3,7 +3,6 @@ package com.ssafy.common.api.user.controller;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.domain.UserResponseForm;
-import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.api.user.service.UserService;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -24,7 +23,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
@@ -32,14 +30,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.ssafy.common.filter.JwtProperties.*;
+import static com.ssafy.common.filter.JwtProperties.SECRET_KEY;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
@@ -117,6 +114,17 @@ public class UserController {
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    @PatchMapping("/user/{id}")
+    @ApiOperation(value = "탈퇴")
+    public ResponseEntity<?> deleteUser(@PathVariable long id){
+        try{
+            userService.deleteUser(id);
+            return ResponseEntity.status(HttpStatus.OK).body("유저가 정상적으로 삭제되었습니다");
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
         }
     }
 }
