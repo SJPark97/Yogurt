@@ -45,7 +45,7 @@ export default function SubAppBar() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="back"
             sx={{ mr: 2 }}
             onClick={() => navigate(-1)}
           >
