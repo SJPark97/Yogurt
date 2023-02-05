@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 
@@ -17,6 +17,7 @@ const CustomAppBar = styled(AppBar)`
 `;
 
 export default function ButtonAppBar() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CustomAppBar position="fixed" elevation={1}>
@@ -27,10 +28,11 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => {
+              navigate('/category');
+            }}
           >
-            <Link to="/category" style={{ color: '#ffffff' }}>
-              <MenuIcon />
-            </Link>
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             LOGO
@@ -43,6 +45,9 @@ export default function ButtonAppBar() {
             edge="end"
             color="inherit"
             aria-label="search"
+            onClick={() => {
+              navigate('/search');
+            }}
           >
             <SearchOutlinedIcon />
           </IconButton>
