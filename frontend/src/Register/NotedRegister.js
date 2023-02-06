@@ -10,16 +10,6 @@ function PostRegister() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const titleHandler = event => {
-    event.preventDefault();
-    setTitle(event.target.value);
-  };
-
-  const contentHandler = event => {
-    event.preventDefault();
-    setContent(event.target.value);
-  };
-
   const submitHandler = event => {
     event.preventDefault();
     navigate('/profile/seller');
@@ -48,7 +38,7 @@ function PostRegister() {
             id="noted_reg_title"
             name="title"
             placeholder="공지 제목을 입력해주세요"
-            onChange={titleHandler}
+            onChange={event => setTitle(event.target.value)}
           />
         </div>
         <hr />
@@ -58,7 +48,7 @@ function PostRegister() {
             id="noted_reg_detail"
             name="size"
             placeholder="공지사항을 적어주세요&#13;&#10;알아둬야 될 사항을 적어주세요"
-            onChange={contentHandler}
+            onChange={event => setContent(event.target.value)}
           />
         </div>
         <div className="submit_btn">
