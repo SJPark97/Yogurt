@@ -18,22 +18,7 @@ function ReviewRegister() {
         <hr />
         <div className="review_reg_star">
           <p> 별점</p>
-          <div className="review_star-ratings">
-            <div className="review_star-ratings-fill">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-            </div>
-            <div className="review_star-ratings-base">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-            </div>
-          </div>
+          {/* 1점부터 5점 사이로 구현하기 */}
         </div>
 
         <hr />

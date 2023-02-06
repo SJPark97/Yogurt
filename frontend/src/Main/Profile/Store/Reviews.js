@@ -88,7 +88,27 @@ function Reviews() {
             <div>
               <div className="reviewItemBrand">{review.reviewItemBrand}</div>
               <div className="reviewItem">{review.reviewItem}</div>
-              <div className="reviewRate">{review.reviewRate}점</div>
+              <div className="review_star">
+                <div className="review_star-ratings">
+                  <div
+                    className="review_star-ratings-fill"
+                    style={{ width: review.reviewRate * 15 }}
+                  >
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                  </div>
+                  <div className="review_star-ratings-base">
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </Box>
           <div className="reviewContent">{review.reviewContent}</div>
