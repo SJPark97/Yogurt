@@ -12,6 +12,7 @@ import './Store.css';
 // const StyledLink = styled(Link)``;
 
 function Store({ sellerData, user }) {
+  console.log(sellerData);
   let likeCnt = '';
   if (sellerData.Store_likes >= 10000) {
     likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
@@ -29,7 +30,7 @@ function Store({ sellerData, user }) {
   const storeId = sellerData.Store_id;
   const handleClick = () => {
     console.log(storeId);
-    navigate(`/stores/${storeId}`, { state: sellerData });
+    navigate(`/stores/${storeId}?tab=0`, { state: sellerData });
   };
   // 상품 라이브 공지사항 리뷰 선택된 것
 

@@ -1,5 +1,7 @@
+import { Divider } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackToTop from '../AppBar/BackToTop';
 import dummy from '../db/list.json';
 import './WishList.css';
 
@@ -39,6 +41,8 @@ function WishList() {
 
   return (
     <div>
+      <BackToTop />
+
       <div className="wish-select-all">
         <input
           type="checkbox"
@@ -49,7 +53,7 @@ function WishList() {
           {checkItems.length === wishlist.length ? '전체 해제' : '전체 선택'}
         </span>
       </div>
-      <hr />
+      <Divider variant="middle" sx={{ marginY: '0.75rem' }} />
       <div>
         {wishlist.map(wish => (
           <div key={wish.wishListId}>
@@ -85,14 +89,14 @@ function WishList() {
                 </div>
               </div>
             </div>
-            <hr />
+            <Divider variant="middle" sx={{ marginY: '0.75rem' }} />
           </div>
         ))}
         <div className="wish-total-price">
           결제 예상 금액
           <span>{totalPrice.toLocaleString()}</span>원
         </div>
-        <hr />
+        <Divider variant="middle" sx={{ marginY: '0.75rem' }} />
         <button
           className="wish-payment-btn"
           type="submit"

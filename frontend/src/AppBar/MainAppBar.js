@@ -18,7 +18,7 @@ function MainAppBar() {
       {useMatch('/stores') && <ButtonAppBar />}
       {useMatch('/stores/:storeId') && <SubAppBar />}
       {useMatch('/alarms') && <ButtonAppBar />}
-      {useMatch('/profile/buyer') && <ButtonAppBar />}
+      {useMatch('/profile/buyer') && <ProfileAppBar />}
       {useMatch('/profile/seller') && <ProfileAppBar />}
       {useMatch('/category') && <SubAppBar />}
       {/** 아니 아래꺼 두개가 겹쳐서 join이라는 :storeId가 설정된다 */}
@@ -30,6 +30,8 @@ function MainAppBar() {
       {useMatch('/search') && <SearchAppBar />}
       {useMatch('/search/result') && <SearchAppBar />}
       {useMatch('/noted/join') && <SubAppBar />}
+      {useMatch('/review/join') && <SubAppBar />}
+      {useMatch('/wishlist') && <SubAppBar />}
     </div>
   );
 }

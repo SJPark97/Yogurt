@@ -33,6 +33,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 // const StyledLink = styled(Link)``;
 
 function SellerInfo({ sellerData, loginId }) {
+  console.log(sellerData);
   let likeCnt = '';
   if (sellerData.Store_likes >= 10000) {
     likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;

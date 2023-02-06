@@ -17,10 +17,10 @@ import PostDetail from './PostDetail/PostDetail';
 import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
 import ReviewRegister from './Register/ReviewRegister';
-import LiveRegister from './Register/LiveRegister';
 import WishList from './WishList/WishList';
 import PayMent from './Payment/PayMent';
 import VideoRoomComponent from './components/VideoRoomComponent';
+import ProfileModify from './Main/Profile/ProfileModify';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -54,13 +54,13 @@ function App() {
         </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
         <Route path="/review/join" element={<ReviewRegister />} />
-        <Route path="/live/join" element={<LiveRegister />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/result" element={<SearchResult />} />
+        <Route path="/profile/modify" element={<ProfileModify />} />
       </Routes>
       <footer>
         <MainFooter user={user} />
