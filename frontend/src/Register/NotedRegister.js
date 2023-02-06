@@ -22,6 +22,8 @@ function PostRegister() {
 
     console.log(body);
 
+    return false;
+
     // axios
     //   .post('http://localhost:3000/profile/seller', body)
     //   .then(res => console.log(res));
