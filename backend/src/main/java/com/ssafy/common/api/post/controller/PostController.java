@@ -18,14 +18,14 @@ public class PostController {
     public PostController(PostService postService){
         this.postService = postService;
     }
+
     // 상품 생성 API
     @PostMapping("")
-    @ResponseBody
     public ResponseEntity<String> create(@RequestBody PostInsertRequest request){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.createPost(request,user), HttpStatus.CREATED);
     }
-    // id로 상품 조회 API
+    // 상품 상세 페이지 조회 API
     @GetMapping("/{id}")
     public ResponseEntity<PostDetailResponse> getPostOne(@PathVariable("id") Long id ){
         return new ResponseEntity<>(postService.findByPostId(id), HttpStatus.OK);
