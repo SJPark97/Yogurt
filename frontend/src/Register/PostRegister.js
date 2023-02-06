@@ -57,6 +57,7 @@ function PostRegister() {
             <p>할인상태</p>
             {saleStates.map(state => (
               <button
+                key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
                 className={`${sale === state.type ? 'post_reg_sale_btn' : ''}`}
@@ -83,6 +84,7 @@ function PostRegister() {
           <div className="post_reg_state_div">
             {States.map(state => (
               <button
+                key={state.type}
                 type="button"
                 onClick={() => setPostState(state.type)}
                 className={`${

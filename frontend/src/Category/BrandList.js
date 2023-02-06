@@ -118,7 +118,9 @@ const brandData = [
 
 function BrandList() {
   // map 할때 키값 index 불가능해서 id 값 받기
-  const brands = brandData.map(brand => <Brand brand={brand} />);
+  const brands = brandData.map(brand => (
+    <Brand brand={brand} key={brand.name} />
+  ));
   return <div className="brands">{brands}</div>;
 }
 
