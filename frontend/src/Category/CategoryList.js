@@ -223,7 +223,7 @@ function CategoryList() {
         <Box
           sx={{
             width: '73.33334%',
-            maxWidth: 360,
+            maxWidth: '100%',
             bgcolor: '#D9D9D9',
           }}
         >
