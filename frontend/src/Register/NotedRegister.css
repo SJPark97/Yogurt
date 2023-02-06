@@ -5,7 +5,7 @@
 
 .noted_reg_title p,
 .noted_reg_detail p {
-  margin: 0px;
+  margin: 8px 0px 0px 0px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -16,7 +16,7 @@ textarea {
 
 .noted_reg_title,
 .noted_reg_detail {
-  margin: 0px 16px 0px 8px;
+  margin: 0px 24px 0px 8px;
 }
 
 #noted_reg_title,
@@ -31,4 +31,15 @@ textarea {
 
 #noted_reg_detail {
   height: 100px;
+}
+
+.submit_btn {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin: 8px 8px 0px 0px;
+}
+
+.submit_btn:hover {
+  color: burlywood;
 }
