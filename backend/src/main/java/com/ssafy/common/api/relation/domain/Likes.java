@@ -1,11 +1,8 @@
 package com.ssafy.common.api.relation.domain;
 
 
-import com.ssafy.common.api.post.Post;
 import com.ssafy.common.api.user.domain.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,14 +10,14 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NonNull
-    private Timestamp like_created;
-
+    @Enumerated(EnumType.STRING)
+    private RelationStatus status;
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
@@ -31,4 +28,7 @@ public class Likes {
     @JoinColumn(name = "seller_id")
     private User seller;
 
+    public void delete(){
+        this.status = RelationStatus.STATUS_DELETE;
+    }
 }

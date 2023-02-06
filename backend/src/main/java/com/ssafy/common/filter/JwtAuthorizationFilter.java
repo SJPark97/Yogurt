@@ -6,7 +6,6 @@ import com.ssafy.common.config.auth.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,7 +16,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 
 import static com.ssafy.common.filter.JwtProperties.*;
@@ -46,8 +44,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             chain.doFilter(request,response);
             return;
         }
-
         //JWT 토큰을 검증해 정상적인 사용자인지 확인
+        //정상이지 않으면 해당 Method /error페이지 반환
         String jwtToken = request.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
 
         Claims claims = Jwts.parserBuilder()
