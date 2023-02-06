@@ -1,0 +1,45 @@
+.review_reg_title,
+.review_reg_detail,
+.review_reg_star {
+  margin: 8px 0px 0px 8px;
+}
+
+.review_reg_title p,
+.review_reg_detail p,
+.review_reg_star p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+#review_reg_title,
+#review_reg_detail {
+  width: 100%;
+  padding: 4px 0px 4px 8px;
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.review_reg_title,
+.review_reg_detail {
+  margin: 0px 16px 0px 8px;
+}
+
+#review_reg_detail {
+  height: 100px;
+}
+
+.review_reg_star {
+  display: flex;
+  align-items: center;
+}
+
+.review_reg_num {
+  margin: 0px 0px 0px 8px;
+}

@@ -1,0 +1,34 @@
+.qna_reg_title,
+.qna_reg_detail {
+  margin: 8px 0px 0px 8px;
+}
+
+.qna_reg_title p,
+.qna_reg_detail p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+.qna_reg_title,
+.qna_reg_detail {
+  margin: 0px 16px 0px 8px;
+}
+
+#qna_reg_title,
+#qna_reg_detail {
+  width: 100%;
+  padding: 0px;
+  padding: 4px 0px 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#qna_reg_detail {
+  height: 100px;
+}
