@@ -21,6 +21,13 @@ function ReviewRegister() {
       rate,
     };
 
+    // {
+    //   if (body.title === '') {
+    //     alert('제목을 입력해주세요');
+    //     return false;
+    //   }
+    // }
+
     console.log(body);
   };
 

@@ -1,0 +1,42 @@
+.live_reg_date {
+  margin: 8px 0px 0px 8px;
+}
+
+.live_reg_title p,
+.live_reg_date p,
+.live_reg_detail p {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+.live_reg_title,
+.live_reg_price,
+.live_reg_sale_price,
+.live_reg_detail {
+  margin: 8px 24px 0px 8px;
+}
+
+#live_reg_date,
+#live_reg_time {
+  margin: 8px 8px 0px 8px;
+  padding: 0px;
+}
+
+#live_reg_title,
+#live_reg_detail {
+  width: 100%;
+  padding: 4px 0px 4px 8px;
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#live_reg_detail {
+  height: 100px;
+}

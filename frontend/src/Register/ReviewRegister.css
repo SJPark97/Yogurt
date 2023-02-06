@@ -1,5 +1,3 @@
-.review_reg_title,
-.review_reg_detail,
 .review_reg_star {
   margin: 8px 0px 0px 8px;
 }
@@ -28,7 +26,7 @@ textarea {
 
 .review_reg_title,
 .review_reg_detail {
-  margin: 0px 16px 0px 8px;
+  margin: 8px 24px 0px 8px;
 }
 
 #review_reg_detail {
