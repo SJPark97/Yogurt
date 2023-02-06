@@ -61,6 +61,8 @@ dependencies {
 
 	//스프링시큐리티 의존성 추가
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 }
 
 tasks.named('test') {

@@ -27,7 +27,7 @@ public class WishlistController {
     }
 
     // 장바구니 상품 삭제
-    @PatchMapping("/delete/{wishList_id}")
+    @PatchMapping("/{wishList_id}")
     public ResponseEntity<WishListResponse> deleteWishList(@PathVariable("wishList_id") Long wishList_id){
         return new ResponseEntity<>(wishListService.deleteWishList(wishList_id), HttpStatus.OK);
     }
