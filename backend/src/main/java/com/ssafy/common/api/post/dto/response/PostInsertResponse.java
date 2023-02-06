@@ -20,7 +20,6 @@ public class PostInsertResponse{
     private PostStatus status;
     private String size;
 
-
     public PostInsertResponse(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();

@@ -1,62 +1,44 @@
 package com.ssafy.common.api.notice.service;
 
-
+import com.ssafy.common.api.notice.converter.NoticeConverter;
 import com.ssafy.common.api.notice.domain.Notice;
-import com.ssafy.common.api.notice.dto.request.RequestNoticeForm;
+import com.ssafy.common.api.notice.dto.NoticeInsertRequest;
+import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.notice.repository.NoticeRepository;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.config.auth.PrincipalDetails;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.ssafy.common.api.user.dto.UserNoticeResponse;
+import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.sql.Timestamp;
-import java.util.List;
-
+@Transactional
 @Service
-@Slf4j
-@Transactional(readOnly = true)
 public class NoticeService {
-    private  final NoticeRepository noticeRepository;
+    private NoticeConverter noticeConverter;
+    private NoticeRepository noticeRepository;
+    private UserRepository userRepository;
 
-    public NoticeService(NoticeRepository noticeRepository) {
+    public NoticeService(NoticeConverter noticeConverter,NoticeRepository noticeRepository,UserRepository userRepository) {
+        this.noticeConverter = noticeConverter;
         this.noticeRepository = noticeRepository;
+        this.userRepository = userRepository;
     }
-
-
-    // requestNoticeForm 을 인자로 새로운 notice 등록
-    public Notice save(RequestNoticeForm requestNoticeForm) {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        Notice notice = new Notice();
-        notice=notice.builder()
-                .notice_content(requestNoticeForm.getContent())
-                .notice_title(requestNoticeForm.getTitle())
-                .notice_createtime(ts)
-                .seller(getLoginUser())
-                .build();
-        noticeRepository.save(notice);
-        return notice;
+    // 공지 생성
+    public NoticeResponse createNotice(NoticeInsertRequest request, User user){
+        Notice notice = noticeConverter.createNoticeRequestDtoToEntity(request, user);
+        Notice create=noticeRepository.save(notice);
+        return new NoticeResponse(create);
     }
-
-    // sellerId 를 인자로 매칭되는 Notice를 검색 후 리턴
-    public List<Notice> getall(Long sellerId) {
-
-        return null;
+    // 공지 삭제
+    public NoticeResponse deleteNotice(Long noticeId){
+        Notice notice = noticeRepository.findById(noticeId).get();
+        notice.delete();
+        return new NoticeResponse(notice);
     }
-
-    //noticeId를 인자로 해당 notice삭제
-    public void delete(Long id) {
-
+    // 판매자 공지 조회
+    public UserNoticeResponse userNotice(Long sellerId){
+        return userRepository.findById(sellerId)
+                .map(UserNoticeResponse::new)
+                .get();
     }
-
-    public User getLoginUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-        log.info("principal : {}",principal.getUser());
-        return principal.getUser();
-    }
-
 }
