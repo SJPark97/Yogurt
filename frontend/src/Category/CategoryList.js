@@ -10,7 +10,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Category from './Category';
-import './Category.css';
 
 const categoryData = [
   {
@@ -223,7 +222,7 @@ function CategoryList() {
         <Box
           sx={{
             width: '73.33334%',
-            maxWidth: '100%',
+            maxWidth: 360,
             bgcolor: '#D9D9D9',
           }}
         >

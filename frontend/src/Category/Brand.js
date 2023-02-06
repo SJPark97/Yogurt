@@ -1,5 +1,3 @@
-import './Category.css';
-
 function Brand({ brand }) {
   return (
     <div
@@ -10,8 +8,8 @@ function Brand({ brand }) {
         console.log(brand.name);
       }}
     >
-      <img src={brand.image} alt="#" className="brandImg" />
-      <p className="brandName">{brand.name}</p>
+      <img src={brand.image} alt="#" />
+      <p>{brand.name}</p>
     </div>
   );
 }
