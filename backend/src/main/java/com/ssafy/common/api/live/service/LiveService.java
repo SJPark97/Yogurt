@@ -8,19 +8,13 @@ import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 import static com.ssafy.common.api.live.domain.LiveRoomStatus.*;
 
@@ -33,7 +27,7 @@ public class LiveService {
     // 라이브 등록
     // time , title , thumbnail 은 requset로 받았고
     // status , created , sellerId는 내가 만들어서 생성
-    public LiveRoom saveLiveroom (@NotNull LiveroomRegistForm request ) throws Exception {
+    public LiveRoom saveLiveroom (LiveroomRegistForm request ) throws Exception {
         LiveRoom liveRoom = new LiveRoom();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         // DB에 해당 유저(판매자)가 이미 개설한 라이브 룸(liveroom)이 있는지 확인
