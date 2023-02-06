@@ -1,9 +1,9 @@
 package com.ssafy.common.api.notice.domain;
 
+import com.ssafy.common.api.post.domain.PostStatus;
+import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Notice {
 
 
@@ -18,21 +20,24 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     //공지사항 제목
     @NonNull
-    private String notice_title;
+    private String title;
 
     //공지사항 내용
     @NonNull
-    private String notice_content;
+    private String content;
 
-    //공지사항 생성 시간
-    @NonNull
-    private Timestamp notice_createtime;
 
     // 판매자 아이디 : seller_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
     private User seller;
+
+    //공지사항 상태
+    private PostStatus status;
+    public void delete(){
+        this.status = PostStatus.STATUS_DELETE;
+    }
+
 }

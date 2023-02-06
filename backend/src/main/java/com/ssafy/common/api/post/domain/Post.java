@@ -2,6 +2,7 @@ package com.ssafy.common.api.post.domain;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
+import com.ssafy.common.api.endpost.domain.EndPost;
 import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.user.domain.User;
@@ -62,6 +63,11 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Zzim> zzims = new ArrayList<>();
 
+    // 거래 완료 post
+    @OneToOne
+    @JoinColumn(name = "id")
+    private EndPost endPost;
+
     public void delete(){
         this.status = PostStatus.STATUS_DELETE;
     }
@@ -72,5 +78,8 @@ public class Post {
         else {
             this.status = PostStatus.STATUS_SELL;
         }
+    }
+    public void deal(){
+        this.status = PostStatus.STATUS_SELL;
     }
 }
