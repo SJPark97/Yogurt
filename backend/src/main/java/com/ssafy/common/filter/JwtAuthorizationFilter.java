@@ -2,6 +2,7 @@ package com.ssafy.common.filter;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.repository.UserRepository;
+import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -30,6 +31,7 @@ import static com.ssafy.common.filter.JwtProperties.*;
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserRepository userRepository;
+    private JwtProvider jwtProvider;
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         super(authenticationManager);
@@ -55,11 +57,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             //정상이지 않으면 해당 Method /error페이지 반환
             String jwtToken = request.getHeader(HEADER_STRING).replace(TOKEN_PREFIX, "");
 
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(SECRET_KEY.getBytes())
-                    .build()
-                    .parseClaimsJws(jwtToken)
-                    .getBody();
+            Claims claims = jwtProvider.getClaim(jwtToken);
             String userId = (String) claims.get("userId");
 
             // 서명이 정상적으로 됨

@@ -6,7 +6,6 @@ import com.ssafy.common.api.live.service.LiveService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +19,6 @@ import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_ONAIR;
 @RequestMapping("/live")
 @RequiredArgsConstructor
 public class LiveController {
-
-
     private final LiveService liveService;
 
     /**
@@ -30,7 +27,7 @@ public class LiveController {
      */
     @PostMapping
     @ApiOperation(value= "라이브 룸 등록")
-    public ResponseEntity<?>  saveLiveroom ( @RequestBody @NotNull LiveroomRegistForm request){
+    public ResponseEntity<?>  saveLiveroom ( @RequestBody LiveroomRegistForm request){
         log.info(" check req :   {}",request);
         LiveRoom liveRoom =null;
         try{
