@@ -3,7 +3,6 @@ import ProductCard from './ProductCard';
 import './ProductCard.css';
 
 function ProductInfo({ products }) {
-  console.log(products);
   const navigate = useNavigate();
   return (
     <div className="productCardList">
