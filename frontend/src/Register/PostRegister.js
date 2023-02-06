@@ -32,6 +32,8 @@ function PostRegister() {
     };
 
     console.log(body);
+
+    return false;
   };
 
   const States = [
@@ -168,7 +170,7 @@ function PostRegister() {
             placeholder="사이즈에 대해 설명해주세요&#13;&#10;ex)가슴둘레:40cm 총장:65cm"
           />
         </div>
-        <div id="submit_btn">
+        <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
       </form>
