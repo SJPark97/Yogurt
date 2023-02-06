@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
-
 import './Ordered.css';
+import { useNavigate } from 'react-router';
 
 const responses = [
   {
@@ -36,6 +36,12 @@ const responses = [
 ];
 
 export default function Ordered() {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/review/join`);
+  };
+
   return (
     <div>
       {responses.map(ordered => (
@@ -69,6 +75,7 @@ export default function Ordered() {
               sx={{
                 marginBottom: '16px',
               }}
+              onClick={onClick}
             >
               리뷰 작성
             </Button>

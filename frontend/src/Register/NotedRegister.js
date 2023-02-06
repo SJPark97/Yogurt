@@ -22,7 +22,6 @@ function PostRegister() {
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(event);
     navigate('/profile/seller');
 
     const body = {
@@ -63,7 +62,6 @@ function PostRegister() {
           />
         </div>
         <div className="submit_btn">
-          {/* 저장 누르면 판매자 페이지로 rendering되도록 */}
           <button type="submit">저장</button>
         </div>
       </form>
