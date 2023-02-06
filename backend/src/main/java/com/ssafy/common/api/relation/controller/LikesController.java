@@ -27,7 +27,7 @@ public class LikesController {
         return new ResponseEntity<>(likesService.addlikes(user, seller_id) , HttpStatus.CREATED);
     }
     // 즐겨 찾기 삭제
-    @PatchMapping("/delete/{likes_id}")
+    @PatchMapping("/{likes_id}")
     public ResponseEntity<LikesResponse> deletelikes(@PathVariable("likes_id") Long likes_id){
         return new ResponseEntity<>(likesService.deletelikes(likes_id),HttpStatus.OK);
     }
