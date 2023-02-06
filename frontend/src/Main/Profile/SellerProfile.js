@@ -4,6 +4,8 @@ import BackToTop from '../../AppBar/BackToTop';
 import SellerInfo from './Seller/SellerInfo';
 import StoreInfo from './Store/StoreInfo';
 
+import dummy from '../../db/list.json';
+
 // 이 페이지로 들어오면 axios를 해서 유저 데이터를 받아온다.
 const userData = {
   Store_id: 0,
@@ -15,6 +17,7 @@ const userData = {
   Store_oneline:
     '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
   Store_isLiked: [0, 2, 3],
+  store_products: dummy.Goods,
 };
 
 function SellerProfile() {
@@ -23,8 +26,8 @@ function SellerProfile() {
       <BackToTop />
       {userData && userData.Store_role === 'seller' && (
         <div>
-          <SellerInfo sellerData={userData} loginId={1} />
-          <StoreInfo />
+          <SellerInfo sellerData={userData} loginId={0} />
+          <StoreInfo products={userData.store_products} />
         </div>
       )}
       <h1>아래</h1>

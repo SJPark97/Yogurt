@@ -1,10 +1,12 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import dummy from '../db/list.json';
 import BackToTop from '../AppBar/BackToTop';
 import SearchCard from './SearchCard';
 import './SearchResult.css';
 
 function SearchResult() {
+  const navigate = useNavigate();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
 
@@ -15,12 +17,19 @@ function SearchResult() {
   // 무한 스크롤에서 사용?
   console.log('검색결과', search);
   console.log(setSearchParams);
+
   return (
     <div>
       <BackToTop />
       <div className="searchCardList">
         {responses.map(response => {
-          return <SearchCard result={response} />;
+          return (
+            <SearchCard
+              result={response}
+              key={response.postId}
+              navigate={navigate}
+            />
+          );
         })}
       </div>
     </div>
