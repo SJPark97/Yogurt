@@ -1,9 +1,5 @@
-.post_reg_title,
-.post_reg_price,
 .post_reg_state,
-.post_reg_category,
-.post_reg_detail,
-.post_reg_size {
+.post_reg_category {
   margin: 8px 0px 0px 8px;
 }
 
@@ -17,7 +13,7 @@
 .post_reg_category p,
 .post_reg_detail p,
 .post_reg_size p {
-  margin: 0px;
+  margin: 8px 0px 0px 0px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -31,7 +27,7 @@ textarea {
 .post_reg_sale_price,
 .post_reg_detail,
 .post_reg_size {
-  margin: 0px 16px 0px 8px;
+  margin: 8px 24px 0px 8px;
 }
 
 #post_reg_title,
