@@ -17,6 +17,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,10 +37,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         System.out.println("JwtAuthenticationFilter : 로그인 시도중");
+
         // 1.username,password 받아서
         // 2.정상인지 로그인 시도
         // 3. authenticationManager로 로그인 시도를 하면 PrincipalDetatilsService가 호출
-        // 4. loadUserByUserId()함수 실행됨.
+        // 4. loadUserByUsername()함수 실행됨.
         // 5. PrincipalDetails를 세션에 담고 (만약에 안담으면 권한 관리가 안됨)
         // 6. JWT토큰을 만들어서 응답해주면 됨.
         try {
@@ -54,9 +56,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(user.getUserId(),user.getPassword());
-
-            System.out.println("토큰 정보 : " + authenticationToken);
-
             //PrincipalDetailService의 loadUserByUserId() 함수가 실행됨
             //실행 후 정상이면 authentication이 리턴됨.
             //authentication에 로그인한 정보가 담김

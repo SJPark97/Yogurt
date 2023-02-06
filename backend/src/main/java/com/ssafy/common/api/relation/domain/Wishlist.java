@@ -1,8 +1,10 @@
 package com.ssafy.common.api.relation.domain;
 
-import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.Post;
 import com.ssafy.common.api.user.domain.User;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,12 +12,15 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
-@Builder
-@AllArgsConstructor
 public class Wishlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    // wishlist 의 생성시간 : wish_created
+    @NonNull
+    private Timestamp wish_created;
 
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,11 +31,6 @@ public class Wishlist {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
-    @Enumerated(EnumType.STRING)
-    private RelationStatus status;
 
-    public void delete(){
-        this.status = RelationStatus.STATUS_DELETE;
-    }
 
 }

@@ -35,6 +35,7 @@ public class TestContoller {
                 .password(passwordEncoder.encode("1234"))
                 .phoneNumber("1")
                 .profileImage("1")
+                .refreshToken("1")
                 .role("ROLE_BUYER")
                 .update_date(timestamp)
                 .build();

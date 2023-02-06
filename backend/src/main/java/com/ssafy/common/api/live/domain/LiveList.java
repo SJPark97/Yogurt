@@ -1,7 +1,7 @@
 package com.ssafy.common.api.live.domain;
 
 
-import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.Post;
 import lombok.Data;
 
 import javax.persistence.*;

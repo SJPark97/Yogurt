@@ -4,7 +4,7 @@ import com.ssafy.common.api.alarm.domain.BuyerAlarm;
 import com.ssafy.common.api.alarm.domain.SellerAlarm;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.notice.domain.Notice;
-import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.Post;
 import com.ssafy.common.api.qna.domain.Qna;
 import com.ssafy.common.api.relation.domain.Likes;
 import com.ssafy.common.api.relation.domain.Wishlist;
@@ -46,17 +46,30 @@ public class User {
     @NotNull
     private String phoneNumber;
 
+    @NotNull
     private Timestamp create_date;//생성날짜
+    @NotNull
     private Timestamp update_date;//수정날짜
 
+    @NotNull
     private long banCount;//신고카운트
+
     private String description; //판매자 설명
+
     private String bank;    //계좌 은행
+
     private String account; //계좌
+
+    private String refreshToken;
+
+    public void changeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
     public User() {
 
     }
+    @NotNull
     private String role;    //ROLE_SELLER, ROLE_BUYER
 
     //해당 계정이 활성화 상태인지 삭제된 상태인지 구분
@@ -117,7 +130,4 @@ public class User {
 
     @OneToMany(mappedBy = "seller")
     private List<Post> posts = new ArrayList<>();
-
-
-
 }
