@@ -6,17 +6,19 @@ import com.ssafy.common.api.live.service.LiveService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_CLOSE;
+import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_ONAIR;
 
 @RestController
 @Slf4j
 @RequestMapping("/live")
 @RequiredArgsConstructor
 public class LiveController {
-
-
     private final LiveService liveService;
 
     /**
@@ -25,13 +27,18 @@ public class LiveController {
      */
     @PostMapping
     @ApiOperation(value= "라이브 룸 등록")
-    public ResponseEntity<?>  saveLiveroom ( @RequestBody @NotNull LiveroomRegistForm request){
-        System.out.println("make log !!!!!!!!!!!!!!!!!");
-        System.out.println("req title"+request.getTitle());
-        System.out.println("req thumbnail"+request.getThumbnail());
-        System.out.println("req time"+request.getTime().getTime());
-        log.info("한글로 쳐도 보여? -----  can you see this?  {}",request);
-        LiveRoom liveRoom = liveService.saveLiveroom(request);//=null
+    public ResponseEntity<?>  saveLiveroom ( @RequestBody LiveroomRegistForm request){
+        log.info(" check req :   {}",request);
+        LiveRoom liveRoom =null;
+        try{
+            liveRoom = liveService.saveLiveroom(request);
+        }
+        catch (Exception e){
+            // 이미 STATUS_ONAIR 이거나 , STATUS_READY 인 liveroom이 있는 user인 경우
+            // 예외 발생
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(liveRoom);
     }
 
@@ -40,16 +47,21 @@ public class LiveController {
      * /live/item/{liveId} : GET
      * 라이브를 참여했을때 호출 하는 api.
      * 구매자든 판매자든 현재 라이브에 사용되는 상품(post)들의 id를 불러온다.
-     *
      */
-//    @GetMapping
+
 
     /**
      * /live : GET
      * 라이브 예정 , 라이브 중인것들 조회
      * 메인페이지에서 해당하는 라이브들(LiveRoom) 조회
+     *
+     * 현재는 작동안됨
      */
-
+    @GetMapping("/getall")
+    public ResponseEntity<?> getAll(){
+        List<LiveRoom> getall = liveService.getall();
+        return ResponseEntity.ok(getall);
+    }
 
     /**
      * /live/{sellerId} : GET
@@ -64,12 +76,33 @@ public class LiveController {
      * 라이브룸(LiveRoom)의 상태(live_status)를
      * 라이브 중상태(onair)로 바꾸는 api
      */
+    @PatchMapping("/onair")
+    public ResponseEntity<?> onair (@RequestParam("id") Long id){
+        try{
+            liveService.changeStatus(STATUS_ONAIR,id);
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(STATUS_ONAIR);
+    }
 
     /**
      * /live/close/{liveId} : PATCH
      * 라이브룸(LiveRoom)의 상태(live_status)를
      * 라이브 종료상태(close)로 바꾸는 api
      */
-
+    @PatchMapping("/close")
+    public ResponseEntity<?> close (@RequestParam("id") Long id){
+        try {
+            liveService.changeStatus(STATUS_CLOSE,id);
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(STATUS_CLOSE);
+    }
 
 }
