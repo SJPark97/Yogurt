@@ -31,7 +31,7 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
 `;
 
 export default function StoreInfo({ products }) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState();
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
   // 그러면 이미 받아오려나 아니며누를때 받아오려나?
   return (
