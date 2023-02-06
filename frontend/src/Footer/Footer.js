@@ -90,8 +90,8 @@ export default function Footer({ user }) {
             icon={<AccountCircleIcon />}
             onClick={() =>
               userRole === 'buyer'
-                ? navigate('/profile/buyer')
-                : navigate('/profile/seller')
+                ? navigate('/profile/buyer?tab=0')
+                : navigate('/profile/seller?tab=0')
             } // 이거는 로그인 안됐을 때 로그인 페이지로 가게
             // sx={[
             //   {

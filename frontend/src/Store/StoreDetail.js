@@ -13,7 +13,7 @@ function StoreDetail() {
     <div>
       <BackToTop />
       <SellerInfo sellerData={state} loginId={2} />
-      <StoreInfo products={dummy.Goods} />
+      <StoreInfo products={dummy.Goods} sellerData={state} />
     </div>
   );
 }
