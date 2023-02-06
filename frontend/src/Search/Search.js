@@ -1,6 +1,7 @@
 // 유저정보 받아와서 기존에 검색히스토리 가져와서 컴포넌트에 내려주기
 // 검색 시 검색 히스토리 사라지고 그부분에 검색 내용 찾아주기
 import { useState } from 'react';
+
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import BackToTop from '../AppBar/BackToTop';
