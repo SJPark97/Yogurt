@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import BackToTop from '../AppBar/BackToTop';
 import './PostRegister.css';
 
 function PostRegister() {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState(0);
   const [sale, setSale] = useState(false);
+  const [saleprice, setSalePrice] = useState(0);
   const [postState, setPostState] = useState(1);
+  const [catecloth, setCateCloth] = useState('');
+  const [catebrand, setBrand] = useState('');
+  const [content, setContent] = useState('');
+
+  const submitHandler = event => {
+    event.preventDefault();
+    console.log(event);
+    navigate(`/post/2`);
+    // navigate(`/post/${postId}`);
+
+    const body = {
+      title,
+      price,
+      sale,
+      saleprice,
+      postState,
+      catecloth,
+      catebrand,
+      content,
+    };
+
+    console.log(body);
+  };
+
   const States = [
     {
       type: 1,
@@ -34,7 +63,7 @@ function PostRegister() {
   return (
     <div className="postregister">
       <BackToTop />
-      <form action="/post/join" method="post">
+      <form onSubmit={submitHandler}>
         <div className="post_reg_title">
           <p>제품제목</p>
           <input
@@ -42,6 +71,7 @@ function PostRegister() {
             id="post_reg_title"
             name="title"
             placeholder="상품명을 입력해주세요"
+            onClick={event => setTitle(event.target.value)}
           />
         </div>
         <hr />
@@ -52,6 +82,7 @@ function PostRegister() {
             id="post_reg_price"
             name="price"
             placeholder="제품가격을 입력해주세요"
+            onClick={event => setPrice(event.target.value)}
           />
           <div className="post_reg_sale_state">
             <p>할인상태</p>
@@ -74,6 +105,7 @@ function PostRegister() {
                 id="post_reg_sale_price"
                 name="sale_price"
                 placeholder="제품가격을 입력해주세요"
+                onClick={event => setSalePrice(event.target.value)}
               />
             </div>
           )}
@@ -101,8 +133,20 @@ function PostRegister() {
           <p>카테고리</p>
           <div className="post_reg_category_div">
             {/* 카테고리 db만들어지면 가져오기 */}
-            <div className="post_reg_category_cloth">옷</div>
-            <div className="post_reg_category_brand">브랜드</div>
+            <div className="post_reg_category_cloth">
+              옷
+              <input
+                type="text"
+                onClick={event => setCateCloth(event.target.value)}
+              />
+            </div>
+            <div className="post_reg_category_brand">
+              브랜드
+              <input
+                type="text"
+                onClick={event => setBrand(event.target.value)}
+              />
+            </div>
           </div>
         </div>
         <hr />
@@ -112,6 +156,7 @@ function PostRegister() {
             id="post_reg_detail"
             name="detail"
             placeholder="상세내용에 대해 기입해주세요&#13;&#10;ex) 옷의 상태, 어울리는 옷차림, 특별함을 어필하면 더 좋아요"
+            onClick={event => setContent(event.target.value)}
           />
         </div>
         <hr />
