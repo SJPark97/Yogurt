@@ -71,7 +71,7 @@ function Reviews() {
   return (
     <div>
       {responses.map(review => (
-        <div>
+        <div key={review.reviewId}>
           <Box
             sx={{
               marginBottom: '8px',
