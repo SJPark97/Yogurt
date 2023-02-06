@@ -10,21 +10,6 @@ function ReviewRegister() {
   const [content, setContent] = useState('');
   const [rate, setRate] = useState(5);
 
-  const titleHandler = event => {
-    event.preventDefault();
-    setTitle(event.target.value);
-  };
-
-  const contentHandler = event => {
-    event.preventDefault();
-    setContent(event.target.value);
-  };
-
-  const rateHandler = event => {
-    event.preventDefault();
-    setRate(event.target.value);
-  };
-
   const submitHandler = event => {
     event.preventDefault();
     console.log(event);
@@ -50,7 +35,7 @@ function ReviewRegister() {
             id="review_reg_title"
             name="title"
             placeholder="리뷰 제목을 입력해주세요"
-            onChange={titleHandler}
+            onChange={event => setTitle(event.target.value)}
           />
         </div>
         <hr />
@@ -58,7 +43,7 @@ function ReviewRegister() {
           <p> 별점</p>
           <select
             name="rate"
-            onChange={rateHandler}
+            onChange={event => setRate(event.target.value)}
             value={rate}
             className="review_reg_num"
           >
@@ -77,7 +62,7 @@ function ReviewRegister() {
             id="review_reg_detail"
             name="size"
             placeholder="리뷰 내용을 적어주세요&#13;&#10;배송의 상태, 판매자의 응대 등에 대해 적어주세요"
-            onChange={contentHandler}
+            onChange={event => setContent(event.target.value)}
           />
         </div>
         <div id="submit_btn">
