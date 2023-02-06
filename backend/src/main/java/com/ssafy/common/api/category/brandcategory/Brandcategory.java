@@ -1,13 +1,13 @@
 package com.ssafy.common.api.category.brandcategory;
 
+import com.ssafy.common.api.post.domain.Post;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -26,13 +26,8 @@ public class Brandcategory {
     @Column(name = "br_cateCreated")
     private Timestamp created;
 
-
-
-
-
-
-
-
+    @OneToMany(mappedBy = "brandcategory")
+    private List<Post> postList = new ArrayList<>();
 
 
 }
