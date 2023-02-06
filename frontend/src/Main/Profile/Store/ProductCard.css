@@ -6,11 +6,19 @@
   gap: 16px;
 }
 
+@media screen and (min-width: 768px) {
+  .productCardList {
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+  }
+}
+
 .productCardImg {
   width: 100%;
-  height: 156px;
+  height: 160px;
   border-radius: 16px;
-  align-items: center;
+  align-items: flex-start;
   /* 이미지 크기 어떻게? */
   object-fit: fill;
 }
@@ -34,8 +42,8 @@
 }
 
 .productCardTag {
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
+  display: flex;
+  /* grid-template-columns: 1fr 3fr 2fr; */
   align-items: center;
 }
 
@@ -43,12 +51,14 @@
   font-size: 16px;
   color: red;
   font-weight: 600;
+  margin-right: 8px;
 }
 
 .productCardPrice {
   font-size: 16px;
   font-weight: 700;
   color: black;
+  margin-right: 8px;
 }
 
 .productCardBeforePrice {

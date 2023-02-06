@@ -39,7 +39,7 @@ export default function Ordered() {
   return (
     <div>
       {responses.map(ordered => (
-        <div>
+        <div key={ordered.postId}>
           <Box
             sx={{
               marginBottom: '8px',
@@ -56,7 +56,9 @@ export default function Ordered() {
             <div>
               <div className="orderedBrand">{ordered.postBrand}</div>
               <div className="orderedName">{ordered.postName}</div>
-              <div className="orderedPrice">{ordered.postPrice}원</div>
+              <div className="orderedPrice">
+                {ordered.postPrice.toLocaleString()}원
+              </div>
             </div>
           </Box>
           <div className="reviewBtn">

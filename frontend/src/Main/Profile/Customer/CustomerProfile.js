@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 import './CustomerProfile.css';
 
@@ -9,7 +10,8 @@ function CustomerProfile({ customerData }) {
         sx={{
           margin: '16px',
           marginBottom: '8px',
-          display: 'flex',
+          display: 'grid',
+          gridTemplateColumns: '2fr 5fr 4fr',
           height: '100%',
           maxWidth: '360px',
           alignItems: 'center',
@@ -20,6 +22,7 @@ function CustomerProfile({ customerData }) {
         <div className="profile-text">
           <div className="profile-nickname">{customerData.nickname}</div>
         </div>
+        <Button variant="outlined">프로필 수정</Button>
       </Box>
     </div>
   );

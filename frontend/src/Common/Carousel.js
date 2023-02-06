@@ -8,7 +8,7 @@ function Carousel(props) {
     <div>
       <div className="Carousel">
         {card.map(data => (
-          <CardList data={data} />
+          <CardList data={data} key={data.postId} />
         ))}
       </div>
     </div>

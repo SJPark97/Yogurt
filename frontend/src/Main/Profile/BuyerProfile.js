@@ -24,7 +24,6 @@ function BuyerProfile() {
           <CustomerInfo />
         </div>
       )}
-      <h1>아래</h1>
     </div>
   );
 }
