@@ -24,7 +24,7 @@ import VideoRoomComponent from './components/VideoRoomComponent';
 const user = {
   // role: 'buyer',
   role: 'seller',
-  id: 1,
+  id: 0,
 };
 
 function App() {

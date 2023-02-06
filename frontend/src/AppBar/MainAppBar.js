@@ -29,6 +29,7 @@ function MainAppBar() {
       {useMatch('/login') && <SubAppBar />}
       {useMatch('/search') && <SearchAppBar />}
       {useMatch('/search/result') && <SearchAppBar />}
+      {useMatch('/noted/join') && <SubAppBar />}
     </div>
   );
 }

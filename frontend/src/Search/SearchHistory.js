@@ -3,8 +3,15 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import './SearchHistory.css';
+import { useNavigate } from 'react-router-dom';
 
 function SearchHistory({ content }) {
+  // console.log('f', navigate);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate({ pathname: '/search/result', search: `?search=${content}` });
+  };
+
   return (
     <Box
       sx={{
@@ -18,7 +25,13 @@ function SearchHistory({ content }) {
         justifyContent: 'space-between',
       }}
     >
-      <Typography variant="p" component="div" sx={{ textAlign: 'start' }}>
+      <Typography
+        variant="p"
+        component="div"
+        role="presentation"
+        sx={{ textAlign: 'start' }}
+        onClick={handleClick}
+      >
         {content}
       </Typography>
       <IconButton
