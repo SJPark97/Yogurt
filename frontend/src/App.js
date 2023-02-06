@@ -16,6 +16,7 @@ import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
 import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
+import ReviewRegister from './Register/ReviewRegister';
 import WishList from './WishList/WishList';
 import PayMent from './Payment/PayMent';
 import VideoRoomComponent from './components/VideoRoomComponent';
@@ -51,6 +52,7 @@ function App() {
           <Route path=":postId" element={<PostDetail />} />
         </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
+        <Route path="/review/join" element={<ReviewRegister />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />

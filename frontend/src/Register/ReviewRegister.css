@@ -34,3 +34,12 @@ textarea {
 #review_reg_detail {
   height: 100px;
 }
+
+.review_reg_star {
+  display: flex;
+  align-items: center;
+}
+
+.review_reg_num {
+  margin: 0px 0px 0px 8px;
+}
