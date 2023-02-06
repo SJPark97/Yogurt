@@ -90,6 +90,7 @@ function SellerInfo({ sellerData, loginId }) {
           direction="row"
           sx={{
             marginLeft: '16px',
+            marginRight: '16px',
           }}
         >
           <ColorButton
