@@ -38,7 +38,7 @@ const responses = [
 export default function Ordered() {
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const handleClick = () => {
     navigate(`/review/join`);
   };
 
@@ -75,7 +75,7 @@ export default function Ordered() {
               sx={{
                 marginBottom: '16px',
               }}
-              onClick={onClick}
+              onClick={handleClick}
             >
               리뷰 작성
             </Button>

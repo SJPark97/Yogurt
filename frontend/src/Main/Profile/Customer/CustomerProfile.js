@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import './CustomerProfile.css';
 
 function CustomerProfile({ customerData }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Box
@@ -22,7 +25,16 @@ function CustomerProfile({ customerData }) {
         <div className="profile-text">
           <div className="profile-nickname">{customerData.nickname}</div>
         </div>
-        <Button variant="outlined">프로필 수정</Button>
+        <Button
+          variant="outlined"
+          startIcon={<ShoppingBagOutlinedIcon fontSize="small" />}
+          sx={{ fontSize: '12px' }}
+          onClick={() => {
+            navigate('/wishlist');
+          }}
+        >
+          장바구니
+        </Button>
       </Box>
     </div>
   );

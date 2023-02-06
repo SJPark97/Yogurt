@@ -5,6 +5,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import './StoreInfo.css';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LiveInfo from './LiveInfo';
 import ProductInfo from './ProductInfo';
 import Notice from './Notice';
@@ -30,8 +31,13 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function StoreInfo({ products }) {
-  const [value, setValue] = React.useState();
+export default function StoreInfo({ products, sellerData }) {
+  const navigate = useNavigate();
+
+  const url = useLocation().pathname;
+  const id = Number(url.split('/')[2]);
+  const tab = Number(useLocation().search.split('=')[1]);
+  console.log('fff', tab);
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
   // 그러면 이미 받아오려나 아니며누를때 받아오려나?
   return (
@@ -40,9 +46,16 @@ export default function StoreInfo({ products }) {
         <Box sx={{ width: '100%', height: '100%' }}>
           <BottomNavigation
             showLabels
-            value={value}
+            value={tab}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              // setValue(newValue);
+              if (url.includes('profile')) {
+                navigate(`/profile/seller?tab=${newValue}`);
+              } else {
+                navigate(`/stores/${id}?tab=${newValue}`, {
+                  state: sellerData,
+                });
+              }
             }}
             sx={{ background: '#ffffff' }}
           >
@@ -55,10 +68,10 @@ export default function StoreInfo({ products }) {
         </Box>
       </header>
       <main>
-        {value === 0 && <ProductInfo products={products} />}
-        {value === 1 && <LiveInfo />}
-        {value === 2 && <Notice />}
-        {value === 3 && <Reviews />}
+        {tab === 0 && <ProductInfo products={products} />}
+        {tab === 1 && <LiveInfo />}
+        {tab === 2 && <Notice />}
+        {tab === 3 && <Reviews />}
       </main>
     </>
   );

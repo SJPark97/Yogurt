@@ -5,9 +5,11 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import './CustomerInfo.css';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Ordered from './Ordered';
 import MyReview from './MyReview';
 import LikePost from './LikePost';
+import LikeStore from './LikeStore';
 
 const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   color: #cccccc;
@@ -29,7 +31,11 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
 `;
 
 export default function CustomerInfo() {
-  const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
+
+  const tab = Number(useLocation().search.split('=')[1]);
+  console.log(tab);
+
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
   // 그러면 이미 받아오려나 아니며누를때 받아오려나?
   return (
@@ -38,9 +44,9 @@ export default function CustomerInfo() {
         <Box sx={{ width: '100%', height: '100%' }}>
           <BottomNavigation
             showLabels
-            value={value}
+            value={tab}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              navigate(`/profile/buyer?tab=${newValue}`);
             }}
             sx={{ background: '#ffffff' }}
           >
@@ -53,11 +59,10 @@ export default function CustomerInfo() {
         </Box>
       </header>
       <main>
-        {value === 0 && <Ordered />}
-        {value === 1 && <LikePost />}
-        {value === 2 &&
-          '찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어찜한 스토어'}
-        {value === 3 && <MyReview />}
+        {tab === 0 && <Ordered />}
+        {tab === 1 && <LikePost />}
+        {tab === 2 && <LikeStore />}
+        {tab === 3 && <MyReview />}
       </main>
     </>
   );
