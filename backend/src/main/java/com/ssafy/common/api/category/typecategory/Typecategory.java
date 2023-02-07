@@ -31,5 +31,20 @@ public class Typecategory {
     @OneToMany(mappedBy = "typecategory")
     private List<Post> postList = new ArrayList<>();
 
-
+    private Long detail1;
+    private String detail1_image;
+    private Long detail2;
+    private String detail2_image;
+    private Long detail3;
+    private String detail3_image;
+    private Long detail4;
+    private String detail4_image;
+    private Long detail5;
+    private String detail5_image;
+    private Long detail6;
+    private String detail6_image;
+    private Long detail7;
+    private String detail7_image;
+    private Long detail8;
+    private String detail8_image;
 }
