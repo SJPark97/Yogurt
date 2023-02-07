@@ -635,8 +635,8 @@ class VideoRoomComponent extends Component {
       {
         headers: { 'Content-Type': 'application/json' },
       },
-      console.log(`${APPLICATION_SERVER_URL}api/sessions`),
     );
+    console.log(`${APPLICATION_SERVER_URL}api/sessions`);
     return response.data; // The sessionId
   }
 
