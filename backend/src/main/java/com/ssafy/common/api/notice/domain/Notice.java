@@ -1,16 +1,16 @@
 package com.ssafy.common.api.notice.domain;
 
 import com.ssafy.common.api.user.domain.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Notice {
 
 

@@ -31,7 +31,7 @@ public class PostInsertResponse{
         this.sale_price = post.getSale_price();
         this.status = post.getStatus();
         this.size = post.getSize();
-        this.created = post.getCreated();
-        this.updated = post.getUpdated();
+//        this.created = post.getCreated();
+//        this.updated = post.getUpdated();
     }
 }
