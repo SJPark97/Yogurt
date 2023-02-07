@@ -12,45 +12,41 @@ import {
   Typography,
   Container,
 } from '@mui/material/';
-import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
-import { deepOrange } from '@mui/material/colors';
 
-const banks = [
-  {
-    bankId: 0,
-    bankName: '국민은행',
+const ColorButton = styled(Button)(() => ({
+  // color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: 'lightgrey',
+  '&:hover': {
+    backgroundColor: '#deb887',
   },
-  {
-    bankId: 1,
-    bankName: '우리은행',
-  },
-  {
-    bankId: 2,
-    bankName: '하나은행',
-  },
-  {
-    bankId: 3,
-    bankName: '카카오뱅크',
-  },
-  {
-    bankId: 4,
-    bankName: '신한은행',
-  },
-  {
-    bankId: 5,
-    bankName: '농협',
-  },
-];
-
-const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(deepOrange.A400),
-  backgroundColor: '#cccccc',
 }));
+
+const SignupButton = styled(Button)(() => ({
+  // color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: '#deb887',
+  '&:hover': {
+    backgroundColor: '#deb887',
+  },
+}));
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#deb887',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#deb887',
+  },
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: '#deb887',
+    },
+  },
+});
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -65,8 +61,8 @@ const Boxs = styled(Box)`
 
 function SignUp() {
   const theme = createTheme();
-  const [role, setRole] = useState('');
   const [form, setForm] = useState({
+    role: '',
     name: '',
     nameConfirm: '',
     id: '',
@@ -81,6 +77,7 @@ function SignUp() {
   });
 
   const [error, setError] = useState({
+    role: '구매자, 판매자를 선택해주세요!',
     name: '',
     id: '',
     nickname: '',
@@ -93,10 +90,11 @@ function SignUp() {
     id: false,
     nickname: false,
   });
+
   // role
   const handleClick = data => {
-    setRole(data);
-    console.log(role);
+    setForm({ ...form, role: data });
+    setError({ ...error, role: '' });
   };
 
   const handleChange = e => {
@@ -234,6 +232,7 @@ function SignUp() {
 
   let allowed = true;
   if (
+    error.role === '' &&
     error.name === '' &&
     error.id === '' &&
     error.nickname === '' &&
@@ -276,7 +275,9 @@ function SignUp() {
                 variant="contained"
                 startIcon={<ShoppingCartIcon />}
                 onClick={() => handleClick('buyer')}
-                // {role === 'buyer' && }
+                sx={{
+                  background: form.role === 'buyer' ? '#deb887' : 'lightgrey',
+                }}
               >
                 옷을 살래요
               </ColorButton>
@@ -286,6 +287,9 @@ function SignUp() {
                 startIcon={<StoreIcon />}
                 onClick={() => handleClick('seller')}
                 className="btn-content"
+                sx={{
+                  background: form.role === 'seller' ? '#deb887' : 'lightgrey',
+                }}
               >
                 옷을 팔래요
               </ColorButton>
@@ -303,7 +307,7 @@ function SignUp() {
               <FormControl component="fieldset" variant="standard">
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       id="name"
@@ -322,7 +326,7 @@ function SignUp() {
                     <FormHelperTexts>{error.name}</FormHelperTexts>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       id="id"
@@ -361,7 +365,7 @@ function SignUp() {
                     <FormHelperTexts>{error.id}</FormHelperTexts>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       id="nickname"
@@ -406,7 +410,7 @@ function SignUp() {
 
                   {/* <FormHelperTexts>{emailError}</FormHelperTexts> */}
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       type="password"
@@ -420,7 +424,7 @@ function SignUp() {
                     <FormHelperTexts>{error.password1}</FormHelperTexts>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       type="password"
@@ -434,7 +438,7 @@ function SignUp() {
                     <FormHelperTexts>{error.password2}</FormHelperTexts>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       type="email"
@@ -448,39 +452,8 @@ function SignUp() {
                     />
                     <FormHelperTexts>{error.email}</FormHelperTexts>
                   </Grid>
-                  {role === 'seller' && (
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        select
-                        fullWidth
-                        type="bank"
-                        id="bank"
-                        name="bank"
-                        label="은행을 선택해주세요."
-                      >
-                        {banks.map(bank => (
-                          <MenuItem key={bank.bankId}>{bank.bankName}</MenuItem>
-                        ))}
-                      </TextField>
-                      <FormHelperTexts>{error.email}</FormHelperTexts>
-                    </Grid>
-                  )}
-                  {role === 'seller' && (
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        type="number"
-                        id="account"
-                        name="account"
-                        label="계좌번호"
-                      />
-                      <FormHelperTexts>{error.email}</FormHelperTexts>
-                    </Grid>
-                  )}
                 </Grid>
-                <Button
+                <SignupButton
                   // type="submit"
                   fullWidth
                   variant="contained"
@@ -494,7 +467,7 @@ function SignUp() {
                   }}
                 >
                   회원가입
-                </Button>
+                </SignupButton>
               </FormControl>
             </Boxs>
           </Box>

@@ -5,7 +5,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import './StoreInfo.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import LiveInfo from './LiveInfo';
 import ProductInfo from './ProductInfo';
 import Notice from './Notice';
@@ -25,19 +25,21 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   }
 
   &.Mui-selected {
-    color: #ff3d00;
+    color: #deb887;
     font-weight: Bold;
-    border-bottom: 2px #ff3d00 solid;
+    border-bottom: 2px #deb887 solid;
   }
 `;
 
 export default function StoreInfo({ products, sellerData }) {
   const navigate = useNavigate();
 
+  const [searchParams, setserchParams] = useSearchParams();
+  console.log(searchParams.get('tab'), setserchParams);
   const url = useLocation().pathname;
   const id = Number(url.split('/')[2]);
-  const tab = Number(useLocation().search.split('=')[1]);
-  console.log('fff', tab);
+  const tab = Number(searchParams.get('tab'));
+
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
   // 그러면 이미 받아오려나 아니며누를때 받아오려나?
   return (
@@ -47,10 +49,10 @@ export default function StoreInfo({ products, sellerData }) {
           <BottomNavigation
             showLabels
             value={tab}
-            onChange={(event, newValue) => {
-              // setValue(newValue);
+            onChange={(e, newValue) => {
               if (url.includes('profile')) {
-                navigate(`/profile/seller?tab=${newValue}`);
+                setserchParams({ tab: `${newValue}` });
+                // navigate(`/profile/seller?tab=${newValue}`);
               } else {
                 navigate(`/stores/${id}?tab=${newValue}`, {
                   state: sellerData,

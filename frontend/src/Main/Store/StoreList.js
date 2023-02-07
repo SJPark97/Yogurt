@@ -5,7 +5,7 @@ import dummy from '../../db/SJ.json';
 import Store from './Store';
 import './StoreList.css';
 
-function StoreList({ user }) {
+function StoreList() {
   const store = dummy.Stores;
 
   return (
@@ -14,7 +14,7 @@ function StoreList({ user }) {
       <div>
         {store.map(data => (
           // <StoreList data={data} />
-          <Store sellerData={data} key={data.Store_id} user={user} />
+          <Store sellerData={data} key={data.Store_id} />
         ))}
       </div>
     </div>

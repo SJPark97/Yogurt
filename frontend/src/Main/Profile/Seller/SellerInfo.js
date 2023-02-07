@@ -11,22 +11,20 @@ import AddIcon from '@mui/icons-material/Add';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 
 import { styled } from '@mui/material/styles';
-import { deepOrange } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 
 import './SellerInfo.css';
 
 const ColorButton = styled(Button)(({ theme }) => ({
   boxShadow: 'none',
-  color: theme.palette.getContrastText(deepOrange.A400),
-  backgroundColor: deepOrange.A200,
+  backgroundColor: '#deb887',
   '&:hover': {
-    backgroundColor: deepOrange.A200,
+    backgroundColor: '#deb887',
     boxShadow: 'none',
   },
   '&:active': {
     boxShadow: 'none',
-    backgroundColor: deepOrange.A200,
+    backgroundColor: '#deb887',
   },
 }));
 

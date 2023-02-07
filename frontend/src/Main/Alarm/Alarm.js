@@ -21,7 +21,7 @@ function Alarm({ alarmData }) {
         }}
       >
         <img src={alarmData.alarm_thumbnail} alt="#" className="alarm-img" />
-        <p className="alarm-contetn">{alarmData.alarm_content}</p>
+        <p className="alarm-content">{alarmData.alarm_content}</p>
         <IconButton
           size="medium"
           color="inherit"

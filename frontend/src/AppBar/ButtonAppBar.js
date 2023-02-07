@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 const CustomAppBar = styled(AppBar)`
-  background: #ff3d00;
+  background: #deb887;
 `;
 
 export default function ButtonAppBar() {

@@ -96,7 +96,7 @@ export default function LikeStore() {
               justifyContent: 'start',
             }}
             onClick={() => {
-              navigate(`/stores/${store.storeId}?tab=0`);
+              navigate(`/stores/${store.storeId}?tab=0`, { state: store });
             }}
           >
             <img src={store.storeImg} alt="#" className="store-img" />
