@@ -13,7 +13,7 @@ function ReviewRegister() {
   const submitHandler = event => {
     event.preventDefault();
     console.log(event);
-    navigate('/profile/buyer');
+    navigate('/profile/buyer?tab=3');
 
     const body = {
       title,
