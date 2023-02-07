@@ -1,10 +1,11 @@
-p {
-  text-align: left;
-  font-weight: 1000;
-  margin: 16px;
+.mainpage div {
+  display: flex;
+  align-content: center;
+  justify-content: left;
 }
 
-hr {
-  margin-top: 16px;
-  margin-bottom: 0px;
+.mainpage p {
+  text-align: left;
+  font-weight: 1000;
+  margin: 8px;
 }
