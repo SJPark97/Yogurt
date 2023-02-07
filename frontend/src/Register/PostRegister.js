@@ -5,14 +5,35 @@ import './PostRegister.css';
 
 function PostRegister() {
   const navigate = useNavigate();
+  const [images, setImages] = useState([]);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState(0);
-  const [sale, setSale] = useState(false);
+  const [sale, setSale] = useState(true);
   const [saleprice, setSalePrice] = useState(0);
-  const [postState, setPostState] = useState(1);
+  const [postState, setPostState] = useState(0);
   const [catecloth, setCateCloth] = useState('');
   const [catebrand, setBrand] = useState('');
   const [content, setContent] = useState('');
+
+  const handleAddImages = event => {
+    const imageLists = event.target.files;
+    let imageUrlLists = [...images];
+
+    for (let i = 0; i < imageLists.length; i += 1) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+
+    if (imageUrlLists.length > 10) {
+      imageUrlLists = imageUrlLists.slice(0, 10);
+    }
+
+    setImages(imageUrlLists);
+  };
+
+  const handleDeleteImage = id => {
+    setImages(images.filter((_, index) => index !== id));
+  };
 
   const submitHandler = event => {
     event.preventDefault();
@@ -35,6 +56,17 @@ function PostRegister() {
 
     return false;
   };
+
+  // const handleDeleteIamge = event => {
+  // const imageLists = event.target.files;
+  // const imageUrls = [...images];
+
+  // for (let i = 0; i < imageLists.lenth; i++) {
+  //   const currentImageUrls = URL.createObjectURL(imageUrls[i])
+  //   imageUrls.push(currentImageUrls)
+  // }
+
+  // if(imageUrls.length > )
 
   const States = [
     {
@@ -66,6 +98,32 @@ function PostRegister() {
     <div className="postregister">
       <BackToTop />
       <form onSubmit={submitHandler}>
+        <div className="post_reg_file">
+          <p>사진 등록(10장까지 가능)</p>
+          <div className="post_reg_prev">
+            {images.map((image, id) => (
+              <div key={image.id} className="post_reg_prev_img">
+                <div>
+                  <img src={image} alt="메인사진" />
+                </div>
+                <div>
+                  <button type="button" onClick={() => handleDeleteImage(id)}>
+                    X
+                  </button>
+                </div>
+              </div>
+            ))}
+            {images.length < 10 && <label htmlFor="post_reg_file">+</label>}
+          </div>
+          <input
+            type="file"
+            id="post_reg_file"
+            multiple
+            accept="image/*"
+            onChange={handleAddImages}
+          />
+        </div>
+        <hr />
         <div className="post_reg_title">
           <p>제품제목</p>
           <input
@@ -93,7 +151,11 @@ function PostRegister() {
                 key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
-                className={`${sale === state.type ? 'post_reg_sale_btn' : ''}`}
+                className={`${
+                  sale === state.type
+                    ? 'post_reg_sale_btn'
+                    : 'post_reg_sale_state_btn'
+                }`}
               >
                 {state.title}
               </button>
@@ -122,7 +184,9 @@ function PostRegister() {
                 type="button"
                 onClick={() => setPostState(state.type)}
                 className={`${
-                  postState === state.type ? 'post_reg_state_btn' : ''
+                  postState === state.type
+                    ? 'post_reg_state_btn'
+                    : 'post_reg_state_state_btn'
                 }`}
               >
                 {state.title}

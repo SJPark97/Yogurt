@@ -6,9 +6,15 @@ import './LiveRegister.css';
 function LiveRegister() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
+  const [image, setImage] = useState(null);
   const [date, setDate] = useState(Date());
   const [time, setTime] = useState(Date());
   const [content, setContent] = useState('');
+
+  const handleDeleteIamge = () => {
+    URL.revokeObjectURL(image);
+    setImage(null);
+  };
 
   const submitHandler = event => {
     event.preventDefault();
@@ -17,6 +23,7 @@ function LiveRegister() {
 
     const body = {
       title,
+      image,
       date,
       time,
       content,
@@ -40,6 +47,29 @@ function LiveRegister() {
             placeholder="라이브 제목을 입력해주세요"
             onClick={event => setTitle(event.target.value)}
           />
+        </div>
+        <hr />
+        <div className="live_reg_file">
+          <p>라이브 대표 사진 등록</p>
+          <input
+            type="file"
+            id="live_reg_file"
+            accept="image/*"
+            onChange={event =>
+              setImage(URL.createObjectURL(event.target.files[0]))
+            }
+          />
+          <label htmlFor="live_reg_file">+</label>
+          <div>
+            {image && (
+              <div>
+                <img src={image} alt="메인사진" />
+                <button type="button" onClick={() => handleDeleteIamge()}>
+                  X
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <hr />
         <div className="live_reg_date">
