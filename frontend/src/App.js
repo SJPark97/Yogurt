@@ -23,6 +23,7 @@ import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
 import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
+import ScrollToTop from './ScrollToTop';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -37,12 +38,13 @@ function App() {
       <header>
         <MainAppBar />
       </header>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/video" element={<VideoRoomComponent />} />
         <Route path="/category" element={<Category />} />
         <Route path="/stores">
-          <Route path="" element={<StoreList user={user} />} />
+          <Route path="" element={<StoreList />} />
           <Route path=":storeId" element={<StoreDetail />} />
         </Route>
         <Route path="/alarms" element={<AlarmList />} />

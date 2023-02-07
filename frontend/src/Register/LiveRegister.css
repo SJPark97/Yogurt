@@ -7,7 +7,7 @@
 .live_reg_date p,
 .live_reg_detail p {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin: 0px;
   font-size: 14px;
   font-weight: bold;
