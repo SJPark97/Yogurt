@@ -2,7 +2,7 @@ package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
-import com.ssafy.common.api.user.domain.UserResponseForm;
+import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.service.UserService;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.ssafy.common.api.user.domain.UserRole.ROLE_SELLER;
 import static com.ssafy.common.filter.JwtProperties.SECRET_KEY;
 
 @RestController
@@ -110,7 +111,7 @@ public class UserController {
     @Parameter(name = "keyword", description = "판매자 키워드", in = ParameterIn.QUERY)
     public ResponseEntity<?> findSellers(@RequestParam String keyword){
         try{
-            List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains("ROLE_SELLER", keyword);
+            List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains(ROLE_SELLER, keyword);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
