@@ -2,6 +2,7 @@ package com.ssafy.common.api.user.domain;
 
 import com.ssafy.common.api.alarm.domain.BuyerAlarm;
 import com.ssafy.common.api.alarm.domain.SellerAlarm;
+import com.ssafy.common.api.endpost.domain.EndPost;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.notice.domain.Notice;
 import com.ssafy.common.api.post.domain.Post;
@@ -9,13 +10,13 @@ import com.ssafy.common.api.qna.domain.Qna;
 import com.ssafy.common.api.relation.domain.Likes;
 import com.ssafy.common.api.relation.domain.Wishlist;
 import com.ssafy.common.api.relation.domain.Zzim;
+import com.ssafy.common.api.review.domain.Review;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -121,6 +122,10 @@ public class User {
     @OneToMany(mappedBy = "seller")
     private List<Post> posts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "buyer")
+    private List<EndPost> endPosts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "seller")
+    private List<Review> reviews = new ArrayList<>();
 
 }

@@ -39,7 +39,7 @@ public class CategoryController {
     public ResponseEntity<CategoryTypePostResponse> getTypeCatePost(@PathVariable("cateId") Long cateId){
         return new ResponseEntity<>(categoryService.findTypeCatePost(cateId), HttpStatus.OK);
     }
-    // 타입 카테고리 종류 ApI
+    // 타입 카테고리 종류 API
     @GetMapping("/type")
     public ResponseEntity<List<CategoryTypeResponse>> getTypeCate(){
         return  new ResponseEntity<>(categoryService.findTypeCate(), HttpStatus.OK);

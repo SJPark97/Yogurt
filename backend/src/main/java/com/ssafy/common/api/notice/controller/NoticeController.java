@@ -1,53 +1,42 @@
 package com.ssafy.common.api.notice.controller;
 
-import com.ssafy.common.api.notice.domain.Notice;
-import com.ssafy.common.api.notice.dto.request.RequestNoticeForm;
+import com.ssafy.common.api.notice.dto.NoticeInsertRequest;
+import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.notice.service.NoticeService;
-import lombok.RequiredArgsConstructor;
+import com.ssafy.common.api.post.service.PostService;
+import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.UserNoticeResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/notice")
-@RequiredArgsConstructor
 public class NoticeController {
 
-    private final NoticeService noticeService;
+    public NoticeService noticeService;
+    public PostService postService;
 
-    /*
-     /notice/{sellerId}  ,GET
-     sellerId를 가진 판매자의 모든 공지사항을 불러오는 함수
-     */
-    @GetMapping
-    public ResponseEntity<?> getAllNotice(@RequestParam("sellerId") Long sellerId){
-        List<Notice> notices = noticeService.getall(sellerId);
 
-        return ResponseEntity.ok(notices);
+    public NoticeController(NoticeService noticeService, PostService postService) {
+        this.noticeService = noticeService;
+        this.postService =postService;
     }
-
-    /*
-     /notice  , POST
-     받아온 내용을 기반으로 공지사항 등록
-     */
-    @PostMapping
-    public ResponseEntity<?> addNotice(@RequestBody RequestNoticeForm requestNoticeForm){
-        return ResponseEntity.ok(noticeService.save(requestNoticeForm));
+    // 공지 생성 API
+    @PostMapping("")
+    public ResponseEntity<NoticeResponse> createNotice(@RequestBody NoticeInsertRequest request) {
+        User user = postService.getLoginUser();
+        return new ResponseEntity<>(noticeService.createNotice(request, user), HttpStatus.CREATED);
     }
-
-
-
-    /*
-     /notice/{noticeId}  , DELETE
-     해당 공지사항을 삭제
-     */
-    @DeleteMapping
-    public ResponseEntity<?> deleteNotice(@RequestParam("noticeId") Long id ){
-        noticeService.delete(id);
-        return ResponseEntity.ok("Notice deleted");
+    // 공지 삭제 API
+    @PatchMapping("/{noticeId}")
+    public ResponseEntity<NoticeResponse> delNotice(@PathVariable("noticeId") Long noticeId){
+        return new ResponseEntity<>(noticeService.deleteNotice(noticeId), HttpStatus.CREATED);
     }
-
-
+    // 판매자 공지 리스트 조회 API
+    @GetMapping("/{sellerId}")
+    public ResponseEntity<UserNoticeResponse> userNotice(@PathVariable("sellerId") Long sellerId) {
+        return new ResponseEntity<>(noticeService.userNotice(sellerId), HttpStatus.OK);
+    }
 
 }
