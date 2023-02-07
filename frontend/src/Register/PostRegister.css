@@ -1,3 +1,48 @@
+.post_reg_file label {
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+#post_reg_file {
+  visibility: hidden;
+}
+
+.post_reg_prev {
+  display: inline-flex;
+  width: 300px;
+  overflow: auto;
+  margin: 8px 0px 0px 8px;
+}
+
+.post_reg_prev::-webkit-scrollbar {
+  display: none;
+}
+
+.post_reg_prev_img {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 4px;
+}
+
+.post_reg_prev_img img {
+  width: 40px;
+  height: 54px;
+}
+
+.post_reg_prev_img button {
+  font-size: 10px;
+  padding: 1px 2px;
+  display: flex;
+  background-color: white;
+  border: 1px solid burlywood;
+  color: burlywood;
+}
+
 .post_reg_state,
 .post_reg_category {
   margin: 8px 0px 0px 8px;
@@ -6,6 +51,8 @@
 .post_reg_sale_state {
   margin: 8px 0px 8px 8px;
 }
+
+.post_reg_file p,
 .post_reg_title p,
 .post_reg_price p,
 .post_reg_sale_price p,
@@ -13,6 +60,7 @@
 .post_reg_category p,
 .post_reg_detail p,
 .post_reg_size p {
+  display: flex;
   margin: 8px 0px 0px 0px;
   font-size: 14px;
   font-weight: bold;
@@ -22,6 +70,7 @@ textarea {
   resize: none;
 }
 
+.post_reg_file,
 .post_reg_title,
 .post_reg_price,
 .post_reg_sale_price,
@@ -53,17 +102,21 @@ textarea {
   align-items: center;
 }
 
-.post_reg_sale_state button,
-.post_reg_state button {
+.post_reg_sale_state_btn,
+.post_reg_state_state_btn {
   margin: 0px 0px 0px 8px;
-  padding: 1px;
+  padding: 2px 6px;
+  background-color: white;
+  border: 1px solid burlywood;
+  color: burlywood;
 }
-
 .post_reg_state_btn,
 .post_reg_sale_btn {
   margin: 0px 0px 0px 8px;
-  padding: 1px;
-  color: burlywood;
+  padding: 2px 6px;
+  background-color: burlywood;
+  border: 1px solid white;
+  color: white;
 }
 
 .post_reg_category_div {

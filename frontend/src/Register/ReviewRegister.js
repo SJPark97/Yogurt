@@ -5,7 +5,6 @@ import './ReviewRegister.css';
 
 function ReviewRegister() {
   const navigate = useNavigate();
-
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [rate, setRate] = useState(5);
