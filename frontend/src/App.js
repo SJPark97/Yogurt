@@ -22,6 +22,7 @@ import PayMent from './Payment/PayMent';
 import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
 import PayResult from './Payment/PayResult';
+import LiveRegister from './Register/LiveRegister';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -55,6 +56,7 @@ function App() {
         </Route>
         <Route path="/noted/join" element={<NotedRegister />} />
         <Route path="/review/join" element={<ReviewRegister />} />
+        <Route path="/live/join" element={<LiveRegister />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
