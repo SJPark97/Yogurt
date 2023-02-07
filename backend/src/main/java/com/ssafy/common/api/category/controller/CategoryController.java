@@ -49,5 +49,6 @@ public class CategoryController {
     @GetMapping("/type/{detailId}")
     public ResponseEntity<List<PostAllResponse>>getTypeTopCatePost(@PathVariable("detailId") Long detailId){
         return new ResponseEntity<>(categoryService.findTypeTopCatePost(detailId), HttpStatus.OK);
+
     }
 }
