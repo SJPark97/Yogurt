@@ -10,6 +10,8 @@ import com.ssafy.common.api.relation.domain.Likes;
 import com.ssafy.common.api.relation.domain.Wishlist;
 import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.review.domain.Review;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,20 +32,35 @@ public class User {
     private Long id; // 고유번호
 
     @NotNull
+    @ApiParam(value = "사용자 ID", required = true)
+    @ApiModelProperty(example = "ABCD1234")
     private String userId; // 유저 아이디
 
     @NotNull
+    @ApiParam(value = "사용자 password", required = true)
+    @ApiModelProperty(example = "1234")
     private String password; // 유저 password
 
     @NotNull
+    @ApiParam(value = "사용자 이름", required = true)
+    @ApiModelProperty(example = "왕현석")
     private String name;//이름
 
     @NotNull
+    @ApiParam(value = "사용자 nickName", required = true)
+    @ApiModelProperty(example = "왕싸피")
     private String nickName;//닉네임
     @NotNull
+    @ApiParam(value = "사용자 E-mail", required = true)
+    @ApiModelProperty(example = "ssafy1234@ssafy.com")
     private String email;//이메일
+
+    @ApiParam(value = "사용자 이미지", required = true)
+    @ApiModelProperty(example = "s3.amazon.com/etc...")
     private String profileImage;//프로필 이미지 URL
     @NotNull
+    @ApiParam(value = "사용자 핸드폰 번호", required = true)
+    @ApiModelProperty(example = "01234567890")
     private String phoneNumber;
 
     private Timestamp create_date;//생성날짜
@@ -51,11 +68,7 @@ public class User {
 
     private long banCount;//신고카운트
     private String description; //판매자 설명
-    private String bank;    //계좌 은행
-    private String account; //계좌
-
     private String refreshToken; //리프레시 토큰
-
     public User() {
 
     }
