@@ -1,13 +1,13 @@
 .Carousel {
-	display: inline-flex;
-	width: 360px;
-	overflow: auto;
+  display: inline-flex;
+  width: 360px;
+  overflow: auto;
 }
 
 .Carousel::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .Card {
-	margin-left: 16px;
+  margin-left: 16px;
 }
