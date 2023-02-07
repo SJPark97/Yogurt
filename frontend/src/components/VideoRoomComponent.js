@@ -109,6 +109,7 @@ class VideoRoomComponent extends Component {
       this.connect(this.props.token);
     } else {
       try {
+        console.log('error_sjp');
         const token = await this.getToken();
         console.log(token);
         this.connect(token);
