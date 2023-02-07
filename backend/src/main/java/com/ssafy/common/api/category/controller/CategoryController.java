@@ -45,5 +45,9 @@ public class CategoryController {
     public ResponseEntity<List<CategoryTypeResponse>> getTypeCate(){
         return  new ResponseEntity<>(categoryService.findTypeCate(), HttpStatus.OK);
     }
-
+    // 상세 카테고리 조회 API
+    @GetMapping("/type/{detailId}")
+    public ResponseEntity<List<PostAllResponse>>getTypeTopCatePost(@PathVariable("detailId") Long detailId){
+        return new ResponseEntity<>(categoryService.findTypeTopCatePost(detailId), HttpStatus.OK);
+    }
 }

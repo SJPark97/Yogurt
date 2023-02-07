@@ -33,6 +33,7 @@ public class PostConverter {
                 .seller(user)
                 .brandcategory(brandcategory)
                 .typecategory(typecategory)
+                .detailCategory(request.getTypeDetailId())
                 .size(request.getSize())
                 .build();
         }
