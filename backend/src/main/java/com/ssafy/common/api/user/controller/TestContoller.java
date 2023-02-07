@@ -29,8 +29,6 @@ public class TestContoller {
         Timestamp timestamp = new Timestamp(now);
         User user = User.builder()
                 .userId("ssafy")
-                .account("1")
-                .bank("1")
                 .email("1")
                 .create_date(timestamp)
                 .description("1")
