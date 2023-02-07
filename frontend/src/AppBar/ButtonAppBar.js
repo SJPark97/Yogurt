@@ -37,7 +37,14 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             LOGO
           </Typography>
-          <IconButton size="large" color="inherit" aria-label="cart">
+          <IconButton
+            size="large"
+            color="inherit"
+            aria-label="cart"
+            onClick={() => {
+              navigate('/wishlist');
+            }}
+          >
             <ShoppingBagOutlinedIcon />
           </IconButton>
           <IconButton
