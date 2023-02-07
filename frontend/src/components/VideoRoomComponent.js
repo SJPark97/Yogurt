@@ -114,6 +114,8 @@ class VideoRoomComponent extends Component {
         console.log(token);
         this.connect(token);
       } catch (error) {
+        const token = await this.getToken();
+        console.log(token);
         console.error(
           'There was an error getting the token:',
           error.code,
