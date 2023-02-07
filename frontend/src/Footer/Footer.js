@@ -22,7 +22,7 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   }
 
   &.Mui-selected {
-    color: #ff3d00;
+    color: #deb887;
   }
 `;
 
@@ -96,7 +96,7 @@ export default function Footer({ user }) {
             // sx={[
             //   {
             //     color: "#bdbdbd",
-            //     "&.Mui-selected": { color: "#ff3d00", background: "#ffffff" },
+            //     "&.Mui-selected": { color: "#deb887", background: "#ffffff" },
             //   },
             // ]}
           />
