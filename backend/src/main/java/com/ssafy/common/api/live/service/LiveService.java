@@ -1,43 +1,71 @@
 package com.ssafy.common.api.live.service;
 
+import com.ssafy.common.api.live.converter.LiveitemConverter;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.live.domain.LiveRoomStatus;
 import com.ssafy.common.api.live.dto.request.LiveroomRegistForm;
+import com.ssafy.common.api.live.dto.response.LivelistResponseForm;
+import com.ssafy.common.api.live.dto.response.LiveroomLivelistResponse;
+import com.ssafy.common.api.live.dto.response.OnairLiveroomResponseForm;
+import com.ssafy.common.api.live.dto.response.SellerLiveroomForm;
+import com.ssafy.common.api.live.repository.LiveItemRepository;
 import com.ssafy.common.api.live.repository.LiveRepository;
+import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.dto.response.PostAllResponse;
+import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.UserLiveroomResponse;
+import com.ssafy.common.api.user.dto.UserPostResponse;
+import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.ssafy.common.api.live.domain.LiveRoomStatus.*;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class LiveService {
+    private final UserRepository userRepository;
+
+    private final PostRepository postRepository;
+
+    private final LiveItemRepository liveItemRepository;
+
+    private final LiveitemConverter liveitemConverter;
 
     public final LiveRepository liveRepository;
+
     // 라이브 등록
     // time , title , thumbnail 은 requset로 받았고
     // status , created , sellerId는 내가 만들어서 생성
-    public LiveRoom saveLiveroom (LiveroomRegistForm request ) throws Exception {
+    public LiveRoom saveLiveroom ( LiveroomRegistForm request ) throws Exception {
         LiveRoom liveRoom = new LiveRoom();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         // DB에 해당 유저(판매자)가 이미 개설한 라이브 룸(liveroom)이 있는지 확인
-        List<LiveRoom> liveRooms = liveRepository.findAllBySeller(getLoginUser());
-        for (LiveRoom liveRoom1: liveRooms) {
-            if(liveRoom1.getStatus()!=STATUS_CLOSE){
-                log.info("status : {}  ,  id : {}",liveRoom1.getStatus(),liveRoom1.getId());
-                throw new Exception("already exists Liveroom as STATUS_ONAIR or STATUS_READY");
-            }
-        }
+//        List<LiveRoom> liveRooms = liveRepository.findAllBySeller(getLoginUser());
+//        for (LiveRoom liveRoom1: liveRooms) {
+//            if(liveRoom1.getStatus()!=STATUS_CLOSE){
+//                log.info("status : {}  ,  id : {}",liveRoom1.getStatus(),liveRoom1.getId());
+//                throw new Exception("already exists Liveroom as STATUS_ONAIR or STATUS_READY");
+//            }
+//        }
+
 
         liveRoom= liveRoom.builder()
                 .thumbnail(request.getThumbnail())
@@ -49,24 +77,27 @@ public class LiveService {
                 .build();
         // 생성된 liveroom 확인
         log.info("--------------- created liveroom id ---------------- :  {}",liveRoom.getSeller().getId() );
+
+
+        /*
+           request로 받은 postId들을 이용해 LiveList 등록
+         */
+        Long curLiveId = liveRoom.getId();
+        for (Long postId: request.getPostIds()) {
+            Post post = postRepository.findById(postId).get();
+            liveItemRepository.save( liveitemConverter.MakeLiveItem( post , liveRoom ) );
+        }
+        //
         return liveRepository.save(liveRoom);
     }
 
 
     //현재 모든 라이브룸(liveroom)중에서 방송중(STATUS_ONAIR)인 라이브룸 전부 조회
-    public  List<LiveRoom> getall(){
-//        List<LiveRoom> liveRooms = liveRepository.findAll();
-//        log.info("liverooms count : {}",liveRooms.size());
-//        for (int i=liveRooms.size()-1 ; i>=0 ; i--  ) {
-//            LiveRoom liveRoom = liveRooms.get(i);
-//            log.info("liveroom id : {}  , i value : {} ",liveRoom.getId(),i);
-//            if(liveRoom.getStatus()!=STATUS_ONAIR){
-//                liveRooms.remove(i);
-//            }
-//        }
-//        log.info("livroom 순찰끝 ");
-//        return liveRooms;
-        return null;
+    public  List<OnairLiveroomResponseForm> getall(){
+        log.info("--------------------------------- find 하기 전 ---------------------------------");
+        List<OnairLiveroomResponseForm> liveRooms =liveRepository.findByStatus(STATUS_ONAIR).stream().map(OnairLiveroomResponseForm::new).collect(Collectors.toList());;
+        log.info("--------------------------------- find 한 후 ---------------------------------");
+        return liveRooms;
     }
 
 
@@ -104,5 +135,17 @@ public class LiveService {
         else{
             return false;
         }
+    }
+
+    public List<SellerLiveroomForm> getSellersLiveroom(Long sellerId) {
+        List<SellerLiveroomForm> sellerLiveroomFormList =  userRepository.findById(sellerId).map(UserLiveroomResponse::new).get().getSellerLiveroomFormList();
+        return sellerLiveroomFormList;
+    }
+
+
+    //
+    public List<LivelistResponseForm> getItems(Long liveId) {
+            List<LivelistResponseForm> livelistResponseFormList = liveRepository.findById(liveId).map(LiveroomLivelistResponse::new).get().getLiveLists();
+        return livelistResponseFormList;
     }
 }
