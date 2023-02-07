@@ -10,6 +10,32 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import BackToTop from '../AppBar/BackToTop';
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(() => ({
+  // color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: '#deb887',
+  '&:hover': {
+    backgroundColor: '#deb887',
+  },
+}));
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#deb887',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#deb887',
+  },
+  '& .MuiOutlinedInput-root': {
+    '&:hover fieldset': {
+      borderColor: 'yellow',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#deb887',
+    },
+  },
+});
 
 function Copyright(props) {
   return (
@@ -63,7 +89,7 @@ export default function LogIn() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
+            <CssTextField
               margin="normal"
               required
               fullWidth
@@ -73,7 +99,7 @@ export default function LogIn() {
               autoComplete="id"
               autoFocus
             />
-            <TextField
+            <CssTextField
               margin="normal"
               required
               fullWidth
@@ -84,14 +110,14 @@ export default function LogIn() {
               autoComplete="current-password"
             />
 
-            <Button
+            <ColorButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               로그인
-            </Button>
+            </ColorButton>
             <Grid container justifyContent="center">
               <Grid item>
                 <Button
@@ -99,6 +125,7 @@ export default function LogIn() {
                   onClick={() => {
                     navigate('/signup');
                   }}
+                  sx={{ color: '#deb887' }}
                 >
                   계정이 없으신가요? 회원가입하기
                 </Button>

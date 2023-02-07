@@ -128,7 +128,7 @@
       "Store_name": "송토어",
       "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
       "Store_likes": 23345,
-      "Store_like": true,
+      "Store_like": false,
       "Store_id": 3,
       "Store_oneline": "송토어송토어송토어송토어송토어송토어",
       "Store_isLiked": [1, 2, 3]

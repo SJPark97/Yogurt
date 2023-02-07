@@ -13,7 +13,7 @@ import { styled } from '@mui/material/styles';
 import ProfileDrawer from './ProfileDrawer';
 
 const CustomAppBar = styled(AppBar)`
-  background: #ff3d00;
+  background: #deb887;
 `;
 
 export default function ProfileAppBar() {

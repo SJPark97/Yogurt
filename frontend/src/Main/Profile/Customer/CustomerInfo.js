@@ -24,9 +24,9 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   }
 
   &.Mui-selected {
-    color: #ff3d00;
+    color: #deb887;
     font-weight: Bold;
-    border-bottom: 2px #ff3d00 solid;
+    border-bottom: 2px #deb887 solid;
   }
 `;
 
