@@ -50,7 +50,7 @@ public class UserController {
 
     @ApiOperation(value = "accessToken 재발급")
     @GetMapping("/refresh")
-    public Map<String, String> refresh(String refreshToken){
+    public ResponseEntity<?> refresh(String refreshToken){
 
         HashMap<String, String> map = new HashMap<>();
 
@@ -75,7 +75,7 @@ public class UserController {
             jwt = jwtProvider.createRefreshToken(userId,user.getRole());
             map.put("refresh-token",jwt);
         }
-        return map;
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @PostMapping("/join")
@@ -99,7 +99,7 @@ public class UserController {
     @ApiOperation(value = "판매자 전체 조회")
     public ResponseEntity<?> getAllSeller(){
         try {
-            List<UserResponseForm> formList = userService.findByRole("ROLE_SELLER");
+            List<UserResponseForm> formList = userService.findByRole(ROLE_SELLER);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
