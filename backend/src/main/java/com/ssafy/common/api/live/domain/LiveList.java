@@ -2,12 +2,18 @@ package com.ssafy.common.api.live.domain;
 
 
 import com.ssafy.common.api.post.domain.Post;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class LiveList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

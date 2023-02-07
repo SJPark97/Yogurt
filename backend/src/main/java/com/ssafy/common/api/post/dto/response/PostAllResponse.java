@@ -22,7 +22,7 @@ public class PostAllResponse {
     private final String sellerName;
     private final List<PostImageDto> postImages;
 
-    public PostAllResponse(Post post){
+    public   PostAllResponse(Post post){
         id = post.getId();
         sellerId = post.getSeller().getId();
         sellerName = post.getSeller().getName();
