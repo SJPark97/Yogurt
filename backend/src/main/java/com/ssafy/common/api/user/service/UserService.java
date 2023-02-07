@@ -2,7 +2,8 @@ package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
-import com.ssafy.common.api.user.domain.UserResponseForm;
+import com.ssafy.common.api.user.dto.UserResponseForm;
+import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class UserService {
         return formList;
     }
 
-    public List<UserResponseForm> findALLByRoleAndNickNameContains(String role, String keyword) {
+    public List<UserResponseForm> findALLByRoleAndNickNameContains(UserRole role, String keyword) {
         List<User> user = userRepository.findALLByRoleAndNickNameContains(role,keyword);
         List<UserResponseForm> formList = new ArrayList<>();
         user.forEach(u ->{
