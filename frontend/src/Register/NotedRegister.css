@@ -1,5 +1,6 @@
 .noted_reg_title p,
 .noted_reg_detail p {
+  display: flex;
   margin: 8px 0px 0px 0px;
   font-size: 14px;
   font-weight: bold;
