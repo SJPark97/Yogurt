@@ -6,6 +6,7 @@ import com.ssafy.common.api.category.dto.CategoryBrandResponse;
 import com.ssafy.common.api.category.dto.CategoryTypePostResponse;
 import com.ssafy.common.api.category.dto.CategoryTypeResponse;
 import com.ssafy.common.api.category.service.CategoryService;
+import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,4 +45,5 @@ public class CategoryController {
     public ResponseEntity<List<CategoryTypeResponse>> getTypeCate(){
         return  new ResponseEntity<>(categoryService.findTypeCate(), HttpStatus.OK);
     }
+
 }
