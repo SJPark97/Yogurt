@@ -22,7 +22,6 @@ public class ReviewController {
 
     // 판매자 리뷰 생성 API
     @PostMapping("/{postId}")
-    @ResponseBody
     public ResponseEntity<ReviewResponse> createReview(@PathVariable("postId") Long postId, @RequestBody ReviewInsertRequest request){
         return new ResponseEntity<>(reviewService.createReview(request, postId), HttpStatus.CREATED);
     }
