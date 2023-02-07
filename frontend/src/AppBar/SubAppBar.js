@@ -32,6 +32,15 @@ export default function SubAppBar() {
   const pageUrl = useLocation();
   const navigate = useNavigate();
   const pageName = data[pageUrl.pathname];
+
+  const handleClick = () => {
+    if (pageUrl.pathname.includes('stores')) {
+      navigate('/stores');
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -47,7 +56,7 @@ export default function SubAppBar() {
             color="inherit"
             aria-label="back"
             sx={{ mr: 2 }}
-            onClick={() => navigate(-1)}
+            onClick={handleClick}
           >
             <ArrowBackIosNewIcon />
           </IconButton>
