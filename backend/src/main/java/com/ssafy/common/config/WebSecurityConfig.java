@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()  //기본 Http 폼으로 로그인 막음
                 .httpBasic().disable()
                 .addFilter(authenticationFilter)   //AuthenticationManager를 매개변수로 넘겨야함
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository))   //AuthenticationManager를 매개변수로 넘겨야함
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository,jwtProvider))   //AuthenticationManager를 매개변수로 넘겨야함
                 .authorizeRequests()
                 .antMatchers("/user/seller/**").access("hasRole('ROLE_SELLER')")
                 .antMatchers("/user/buyer/**").access("hasRole('ROLE_BUYER')")

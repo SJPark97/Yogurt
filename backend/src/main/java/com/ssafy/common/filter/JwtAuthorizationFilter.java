@@ -7,7 +7,6 @@ import com.ssafy.common.config.auth.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,9 +32,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private UserRepository userRepository;
     private JwtProvider jwtProvider;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository, JwtProvider jwtProvider) {
         super(authenticationManager);
         this.userRepository=userRepository;
+        this.jwtProvider=jwtProvider;
     }
 
     @Override
@@ -56,7 +56,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             //JWT 토큰을 검증해 정상적인 사용자인지 확인
             //정상이지 않으면 해당 Method /error페이지 반환
             String jwtToken = request.getHeader(HEADER_STRING).replace(TOKEN_PREFIX, "");
-
             Claims claims = jwtProvider.getClaim(jwtToken);
             String userId = (String) claims.get("userId");
 
