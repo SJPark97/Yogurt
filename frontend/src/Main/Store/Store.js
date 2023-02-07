@@ -11,8 +11,7 @@ import './Store.css';
 
 // const StyledLink = styled(Link)``;
 
-function Store({ sellerData, user }) {
-  console.log(sellerData);
+function Store({ sellerData }) {
   let likeCnt = '';
   if (sellerData.Store_likes >= 10000) {
     likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
@@ -22,14 +21,11 @@ function Store({ sellerData, user }) {
     likeCnt = `${sellerData.Store_likes}`;
   }
 
-  // 상점 좋아요 - id부분이 달라야함
-  const frist = sellerData.Store_isLiked.includes(user.id);
-
   // 상점 디테일 이동위해 naviate 사용
   const navigate = useNavigate();
   const storeId = sellerData.Store_id;
   const handleClick = () => {
-    console.log(storeId);
+    console.log('디테일 페이지 스토어 아이디', storeId);
     navigate(`/stores/${storeId}?tab=0`, { state: sellerData });
   };
   // 상품 라이브 공지사항 리뷰 선택된 것
@@ -59,8 +55,11 @@ function Store({ sellerData, user }) {
                 aria-label="like"
                 sx={{ color: 'red' }}
               >
-                {frist && <FavoriteIcon fontSize="small" />}
-                {!frist && <FavoriteBorderIcon fontSize="small" />}
+                {sellerData.Store_like ? (
+                  <FavoriteIcon fontSize="small" />
+                ) : (
+                  <FavoriteBorderIcon fontSize="small" />
+                )}
               </IconButton>
               <div className="store-cnt">{likeCnt}</div>
             </div>

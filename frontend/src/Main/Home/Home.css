@@ -1,10 +1,10 @@
-.mainpage div {
+/* .mainpage div {
   display: flex;
   align-content: center;
   justify-content: left;
-}
+} */
 
-.mainpage p {
+.mainpageTitle {
   text-align: left;
   font-weight: 1000;
   margin: 8px;

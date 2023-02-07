@@ -11,6 +11,10 @@
   font-size: 20px;
   margin: 0;
 }
+
+.alarm-content {
+  margin-left: 1rem;
+}
 /* 
 .store-introduce {
   margin-left: 16px;
