@@ -10,6 +10,7 @@ import {
   Box,
   Container,
 } from '@mui/material/';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
@@ -54,8 +55,15 @@ const Boxs = styled(Box)`
 
 function Testing() {
   const theme = createTheme();
+
+  const [bankname, setBankname] = useState();
+
+  const handleBankChange = e => {
+    setBankname(e.target.value);
+  };
+
   // role state에서 불러오기
-  const role = 'buyer';
+  const role = 'seller';
   const [form, setForm] = useState({
     nickname: '',
     nicknameConfirm: '',
@@ -220,19 +228,23 @@ function Testing() {
                   </Grid>
                   {role === 'seller' && (
                     <Grid item xs={12}>
-                      <TextField
+                      <Select
                         required
-                        select
                         fullWidth
-                        type="bank"
                         id="bank"
                         name="bank"
                         label="은행을 선택해주세요."
+                        value={bankname}
+                        onChange={handleBankChange}
                       >
-                        {banks.map(bank => (
-                          <MenuItem key={bank.bankId}>{bank.bankName}</MenuItem>
-                        ))}
-                      </TextField>
+                        <div>
+                          {banks.map(bank => (
+                            <MenuItem key={bank.bankId} value={bank.bankName}>
+                              {bank.bankName}
+                            </MenuItem>
+                          ))}
+                        </div>
+                      </Select>
                       <FormHelperTexts>{error.email}</FormHelperTexts>
                     </Grid>
                   )}
