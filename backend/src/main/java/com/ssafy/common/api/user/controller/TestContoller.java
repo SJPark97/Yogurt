@@ -44,6 +44,7 @@ public class TestContoller {
                 .userStatus(ACTIVE)
                 .build();
         userService.join(user);
+
     }
     @PostMapping("/login")
     public String Login(){
