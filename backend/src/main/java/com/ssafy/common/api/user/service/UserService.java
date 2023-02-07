@@ -34,7 +34,7 @@ public class UserService {
         return userRepository.findByUserId(userId);
     }
 
-    public List<UserResponseForm> findByRole(String role) {
+    public List<UserResponseForm> findByRole(UserRole role) {
         List<User> user = userRepository.findAllByRole(role);
         List<UserResponseForm> formList = new ArrayList<>();
         user.forEach(u ->{
