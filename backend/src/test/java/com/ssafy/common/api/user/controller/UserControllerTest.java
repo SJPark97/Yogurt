@@ -2,6 +2,7 @@ package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserResponseForm;
+import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.service.UserService;
 import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class UserControllerTest {
                 .nickName("ssafy")
                 .password(passwordEncoder.encode("1234"))
                 .phoneNumber("012-3456-7890")
-                .role("ROLE_SELLER")
+                .role(UserRole.valueOf("ROLE_SELLER"))
                 .build();
         userService.join(user);
 
