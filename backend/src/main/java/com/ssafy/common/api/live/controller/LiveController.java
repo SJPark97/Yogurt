@@ -1,7 +1,12 @@
 package com.ssafy.common.api.live.controller;
 
+import com.ssafy.common.api.live.domain.LiveList;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.live.dto.request.LiveroomRegistForm;
+import com.ssafy.common.api.live.dto.response.LivelistResponseForm;
+import com.ssafy.common.api.live.dto.response.OnairLiveroomResponseForm;
+import com.ssafy.common.api.live.dto.response.SellerLiveroomForm;
+import com.ssafy.common.api.live.repository.LiveRepository;
 import com.ssafy.common.api.live.service.LiveService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +24,21 @@ import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_ONAIR;
 @RequestMapping("/live")
 @RequiredArgsConstructor
 public class LiveController {
+    private final LiveRepository liveRepository;
     private final LiveService liveService;
 
     /**
      * /live : POST
      * 판매자가 라이브를 등록할때 호출하는 api
+     * 라이브 자체의 정보와 (썸네일_thumbnail , 제목_title , 예정시간_time )
+     * 라이브 할 상품들(posts)을 LiveList에 등록
      */
     @PostMapping
     @ApiOperation(value= "라이브 룸 등록")
     public ResponseEntity<?>  saveLiveroom ( @RequestBody LiveroomRegistForm request){
-        log.info(" check req :   {}",request);
         LiveRoom liveRoom =null;
         try{
+            log.info(" check req :   {}",request);
             liveRoom = liveService.saveLiveroom(request);
         }
         catch (Exception e){
@@ -48,18 +56,27 @@ public class LiveController {
      * 라이브를 참여했을때 호출 하는 api.
      * 구매자든 판매자든 현재 라이브에 사용되는 상품(post)들의 id를 불러온다.
      */
+    @GetMapping("/item")
+    public ResponseEntity<?> getLiveItem (@RequestParam("liveId") Long liveId){
+        List<LivelistResponseForm> livelistResponseFormList = liveService.getItems(liveId);
+        return ResponseEntity.ok(null);
+    }
 
 
     /**
      * /live : GET
      * 라이브 예정 , 라이브 중인것들 조회
      * 메인페이지에서 해당하는 라이브들(LiveRoom) 조회
-     *
-     * 현재는 작동안됨
+     *  OnairLiveroomResponseForm
+     *  id = Long id
+     *  time =  Timestamp time
+     *  title = String title
+     *  thumbnail = String thumbnail
+     *  sellerId = Long sellerId
      */
     @GetMapping("/getall")
     public ResponseEntity<?> getAll(){
-        List<LiveRoom> getall = liveService.getall();
+        List<OnairLiveroomResponseForm> getall = liveService.getall();
         return ResponseEntity.ok(getall);
     }
 
@@ -69,6 +86,11 @@ public class LiveController {
      * 판매자와 조인되는 라이브예정 혹은 라이브 상태인
      * 라이브룸(LiveRoom)을 조회
      */
+    @GetMapping
+    public ResponseEntity<?> getSellerLiveroom(@RequestParam("sellerId") Long sellerId ){
+        List<SellerLiveroomForm> sellerLiveroomFormList = liveService.getSellersLiveroom(sellerId);
+        return ResponseEntity.ok(sellerLiveroomFormList);
+    }
 
 
     /**
