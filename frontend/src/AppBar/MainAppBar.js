@@ -32,6 +32,7 @@ function MainAppBar() {
       {useMatch('/noted/join') && <SubAppBar />}
       {useMatch('/review/join') && <SubAppBar />}
       {useMatch('/wishlist') && <SubAppBar />}
+      {useMatch('/live/join') && <SubAppBar />}
     </div>
   );
 }

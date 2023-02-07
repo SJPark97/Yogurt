@@ -31,7 +31,7 @@ export default function ProfileDrawer() {
       navigate('/post/join');
     } else if (index === 2) {
       // navigate('/noted/join');
-      console.log('라이브 등록 페이지로 이동');
+      navigate('/live/join');
     } else if (index === 3) {
       navigate('/noted/join');
     } else if (index === 4) {
