@@ -6,7 +6,6 @@ import com.ssafy.common.api.endpost.domain.EndPost;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.notice.domain.Notice;
 import com.ssafy.common.api.post.domain.Post;
-import com.ssafy.common.api.qna.domain.Qna;
 import com.ssafy.common.api.relation.domain.Likes;
 import com.ssafy.common.api.relation.domain.Wishlist;
 import com.ssafy.common.api.relation.domain.Zzim;
@@ -83,9 +82,6 @@ public class User {
     @OneToMany(mappedBy = "buyer")
     private List<Wishlist> wishlists = new ArrayList<>();
 
-    // qna 과의 조인 항목
-    @OneToMany(mappedBy = "buyer")
-    private List<Qna> qnas_Buyer = new ArrayList<>();
 
     // buyerAlarm 과의 조인 항목
     @OneToMany(mappedBy = "buyer")
@@ -107,9 +103,6 @@ public class User {
     @OneToMany(mappedBy = "seller")
     private  List<Likes> likess_Seller = new ArrayList<>();
 
-    // qna 과의 조인 항목
-    @OneToMany(mappedBy = "seller")
-    private List<Qna> qnas_Seller = new ArrayList<>();
 
     // notice 과의 조인 항목
     @OneToMany(mappedBy = "seller")
