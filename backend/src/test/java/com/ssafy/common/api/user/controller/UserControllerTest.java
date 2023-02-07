@@ -1,7 +1,7 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserResponseForm;
+import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.service.UserService;
 import org.assertj.core.api.ObjectAssert;
