@@ -18,4 +18,5 @@ public class PostInsertRequest {
     private List<Map<String,String>> postImages;
     private Long brandcategoryId;
     private Long typecategoryId;
+    private Long typeDetailId;
 }

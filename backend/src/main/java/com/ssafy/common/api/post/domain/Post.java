@@ -50,6 +50,10 @@ public class Post {
     @JoinColumn(name = "type_cateId")
     private Typecategory typecategory;
 
+    // 종류 상세 카테고리
+    @JoinColumn(name = "type_cateId_detail")
+    private Long detailCategory;
+
     // 유저
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")

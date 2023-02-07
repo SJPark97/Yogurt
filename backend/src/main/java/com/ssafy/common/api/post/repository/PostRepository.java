@@ -11,4 +11,6 @@ import java.util.List;
 @Transactional
 public interface PostRepository extends JpaRepository<Post,Long> {
     List<Post> findAllByTitleContaining(String searchKeyword);
+    List<Post> findAllByDetailCategoryLike(Long typeId);
+
 }
