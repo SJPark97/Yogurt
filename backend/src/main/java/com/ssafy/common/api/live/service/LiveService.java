@@ -1,6 +1,7 @@
 package com.ssafy.common.api.live.service;
 
 import com.ssafy.common.api.live.converter.LiveitemConverter;
+import com.ssafy.common.api.live.domain.LiveList;
 import com.ssafy.common.api.live.domain.LiveRoom;
 import com.ssafy.common.api.live.domain.LiveRoomStatus;
 import com.ssafy.common.api.live.dto.request.LiveroomRegistForm;
@@ -86,6 +87,8 @@ public class LiveService {
         for (Long postId: request.getPostIds()) {
             Post post = postRepository.findById(postId).get();
             liveItemRepository.save( liveitemConverter.MakeLiveItem( post , liveRoom ) );
+            // postId를 이용해 Livelist로 등록 했다면 Post의 상태 변경.
+            post.updateStatus(post);
         }
         //
         return liveRepository.save(liveRoom);
@@ -107,7 +110,7 @@ public class LiveService {
     public LiveRoomStatus changeStatus(LiveRoomStatus status , Long id) throws Exception {
         LiveRoom liveRoom = liveRepository.findById(id).get();
         log.info("before  status :  {}",liveRoom.getStatus() );
-        if(!checkCorrectStatus(status, liveRoom.getStatus() )){
+        if(!checkCorrectStatus(status, liveRoom.getStatus(), liveRoom )){
             throw new Exception("Incorrect Liveroom STATUS , check your liverooms ");
         }
         liveRoom.update_status(status);
@@ -125,9 +128,20 @@ public class LiveService {
 
     // 사용자가 라이브예정(STATUS_READY) -> 라이브중(STATUS_ONAIR) 혹은
     // 라이브중(STATUS_ONAIR) -> 라이브종료(STATUS_CLOSE) 과정을 정확하게 거치는지 확인하는 함수
-    public boolean checkCorrectStatus(LiveRoomStatus endStatus , LiveRoomStatus reqStatus ){
+    public boolean checkCorrectStatus(LiveRoomStatus endStatus , LiveRoomStatus reqStatus , LiveRoom liveRoom){
         if(endStatus==STATUS_CLOSE){
-            return  (reqStatus==STATUS_ONAIR)? true :false ;
+            if(reqStatus==STATUS_ONAIR){
+                // 해당 liveroom 의 아이디를 가진 livelist를 모두 삭제
+                for (LiveList liveList : liveRoom.getLiveLists()) {
+                    liveList.delete();
+                }
+                return true;
+            }
+            else{
+
+                return false;
+            }
+
         }
         else if(endStatus==STATUS_ONAIR) {
             return  (reqStatus==STATUS_READY)? true :false ;

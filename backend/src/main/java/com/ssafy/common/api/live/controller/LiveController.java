@@ -8,6 +8,7 @@ import com.ssafy.common.api.live.dto.response.OnairLiveroomResponseForm;
 import com.ssafy.common.api.live.dto.response.SellerLiveroomForm;
 import com.ssafy.common.api.live.repository.LiveRepository;
 import com.ssafy.common.api.live.service.LiveService;
+import com.ssafy.common.api.post.repository.PostRepository;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_CLOSE;
 import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_ONAIR;
@@ -24,14 +26,13 @@ import static com.ssafy.common.api.live.domain.LiveRoomStatus.STATUS_ONAIR;
 @RequestMapping("/live")
 @RequiredArgsConstructor
 public class LiveController {
-    private final LiveRepository liveRepository;
     private final LiveService liveService;
 
     /**
      * /live : POST
      * 판매자가 라이브를 등록할때 호출하는 api
      * 라이브 자체의 정보와 (썸네일_thumbnail , 제목_title , 예정시간_time )
-     * 라이브 할 상품들(posts)을 LiveList에 등록
+     * 라이브 할 상품들(List<postId>)을 LiveList에 등록
      */
     @PostMapping
     @ApiOperation(value= "라이브 룸 등록")
@@ -59,7 +60,7 @@ public class LiveController {
     @GetMapping("/item")
     public ResponseEntity<?> getLiveItem (@RequestParam("liveId") Long liveId){
         List<LivelistResponseForm> livelistResponseFormList = liveService.getItems(liveId);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(livelistResponseFormList);
     }
 
 
@@ -88,8 +89,15 @@ public class LiveController {
      */
     @GetMapping
     public ResponseEntity<?> getSellerLiveroom(@RequestParam("sellerId") Long sellerId ){
-        List<SellerLiveroomForm> sellerLiveroomFormList = liveService.getSellersLiveroom(sellerId);
-        return ResponseEntity.ok(sellerLiveroomFormList);
+
+        try {
+            List<SellerLiveroomForm> sellerLiveroomFormList = liveService.getSellersLiveroom(sellerId);
+            return ResponseEntity.ok(sellerLiveroomFormList);
+
+        }catch (NoSuchElementException e){
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 
