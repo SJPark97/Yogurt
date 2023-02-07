@@ -9,7 +9,7 @@ function Home() {
   const popular = dummy.Popular;
   const live = dummy.Live;
   return (
-    <div>
+    <div className="mainpage">
       <BackToTop />
       <h1>메인 페이지</h1>
       <p>라이브</p>
