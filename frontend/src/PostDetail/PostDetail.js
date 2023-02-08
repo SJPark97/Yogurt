@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import dummy from '../db/list.json';
 import BackToTop from '../AppBar/BackToTop';
-import Carousel from '../Common/Carousel';
+// import Carousel from '../Common/Carousel';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -11,38 +10,45 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-// import BottomNavigation from '@mui/material/BottomNavigation';
 
 import './PostDetail.css';
-
-const ColorButton = styled(Button)(() => ({
-  fontSize: '20px',
-  backgroundColor: '#deb887',
-  '&:hover': {
-    backgroundColor: '#deb887',
-  },
-}));
-
-const DarkColorButton = styled(Button)(() => ({
-  fontSize: '20px',
-  backgroundColor: '#cf974f',
-  '&:hover': {
-    backgroundColor: '#cf974f',
-  },
-}));
-
-const WhiteButton = styled(Button)(() => ({
-  backgroundColor: '#ffffff',
-  '&:hover': {
-    backgroundColor: '#ffffff',
-  },
-}));
+import axios from 'axios';
 
 function PostDetail() {
   const { postId } = useParams();
-  const post = dummy.Goods.find(event => event.postId === Number(postId));
+  const [post, setPost] = useState(null);
+
+  const ColorButton = styled(Button)(() => ({
+    fontSize: '20px',
+    backgroundColor: '#deb887',
+    '&:hover': {
+      backgroundColor: '#deb887',
+    },
+  }));
+
+  const DarkColorButton = styled(Button)(() => ({
+    fontSize: '20px',
+    backgroundColor: '#cf974f',
+    '&:hover': {
+      backgroundColor: '#cf974f',
+    },
+  }));
+
+  const WhiteButton = styled(Button)(() => ({
+    backgroundColor: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#ffffff',
+    },
+  }));
+
+  useEffect(() => {
+    axios
+      .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
+      .then(res => setPost(res.data));
+  }, []);
+
   const salePercent = Math.floor(
-    ((post.post_price - post.post_sale_price) / post.post_price) * 100,
+    ((post.price - post.sale_price) / post.price) * 100,
   );
 
   const navigate = useNavigate();
@@ -54,28 +60,26 @@ function PostDetail() {
     setIsLiked(!isLiked);
   };
 
-  const id = [Number(postId)];
-  const price = post.post_sale_price;
-
   return (
     <div>
       <BackToTop />
-      <img className="detail_img" src={post.image} alt="이미지사진" />
+      <img className="detail_img" src={post.postImages} alt="이미지사진" />
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
-            <div className="detail-post-store">{post.post_store}</div>
-            <div className="detail-post-title">{post.post_title}</div>
-            <div className="detail-br-cateId">{post.br_cateId}</div>
+            <div className="detail-post-store">{post.sellerId}</div>
+            <div className="detail-post-title">{post.title}</div>
+            <div className="detail-br-cateId">{post.typeCateName}</div>
+            <div className="detail-br-cateId">{post.brCateName}</div>
             <div className="detail-price">
               {salePercent ? (
                 <div className="detail-sale-percent">{salePercent}%</div>
               ) : null}
               <div className="detail-post-sale-price">
-                {post.post_sale_price.toLocaleString()}원
+                {post.sale_price.toLocaleString()}원
               </div>
               <div className="detail-post-price">
-                {post.post_price.toLocaleString()}
+                {post.price.toLocaleString()}
               </div>
             </div>
           </div>
@@ -111,7 +115,7 @@ function PostDetail() {
           </div>
         </div>
         {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
-        <Carousel card={dummy.Popular} />
+        {/* <Carousel card={dummy.Popular} /> */}
       </div>
       <footer>
         <Paper
@@ -148,7 +152,7 @@ function PostDetail() {
               onClick={() => {
                 console.log('바로구매하기 페이지로 이동하기');
                 navigate('/payment', {
-                  state: { checkItems: id, totalPrice: price },
+                  state: { checkItems: [post.id], totalPrice: post.sale_price },
                 });
               }}
             >
