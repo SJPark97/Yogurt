@@ -46,9 +46,6 @@ public class SellerAlarmService {
     }
     @Transactional
     public SellerAlarmResponse deleteSellerAlarm (Long seller_id) {
-//        Zzim zzim = zzimRepository.findById(zzim_id).get();
-//        zzim.delete();
-//        return new ZzimResponse(zzim);
         SellerAlarm sellerAlarm = sellerAlarmRepository.findById(seller_id).get();
         sellerAlarm.delete();
         return new SellerAlarmResponse(sellerAlarm);
