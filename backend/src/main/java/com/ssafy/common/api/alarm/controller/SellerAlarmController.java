@@ -27,13 +27,13 @@ public class SellerAlarmController {
         return new ResponseEntity<>(sellerAlarmService.saveAlarm(post_id, user_id), HttpStatus.CREATED);
     }
 
-    // 장바구니 상품 삭제
+    // 알람 삭제
     @PatchMapping("/{seller_alarm_id}")
     public ResponseEntity<SellerAlarmResponse> deleteWishList(@PathVariable("seller_alarm_id") Long seller_alarm_id){
         return new ResponseEntity<>(sellerAlarmService.deleteSellerAlarm(seller_alarm_id), HttpStatus.OK);
     }
 
-    // buyer 장바구니 리스트 조회
+    // buyer 알람 조회
     @GetMapping("")
     public ResponseEntity<UserSellerAlarmResponse> userSellerAlarm(){
         User user = postService.getLoginUser();
