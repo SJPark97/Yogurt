@@ -1,9 +1,7 @@
 package com.ssafy.common.api.alarm.domain;
 
 import com.ssafy.common.api.user.domain.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,13 +9,16 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class BuyerAlarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
-    private Timestamp wish_created;
+    @Column(name = "buyer_alarm_created")
+    private Timestamp created;
 
     // 구매자 아이디 : buyer_id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,6 +30,8 @@ public class BuyerAlarm {
     @JoinColumn(name = "seller_id")
     private User seller;
 
-
-
+    @NonNull
+    @Column(name = "buyer_alarm_status")
+    private AlarmStatus status;
+    public void delete(){status=AlarmStatus.STATUS_DELETE;}
 }
