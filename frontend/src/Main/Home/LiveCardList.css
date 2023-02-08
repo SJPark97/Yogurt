@@ -31,7 +31,7 @@
   float: left;
   margin-top: 8px;
   font-size: 10px;
-  font-weight: 1000;
+  font-weight: bold;
   width: 96;
   text-align: left;
 }
@@ -39,7 +39,7 @@
 .LiveCardStoreTitle {
   float: left;
   font-size: 14px;
-  font-weight: 1000;
+  font-weight: bold;
   width: 96px;
   text-align: left;
   overflow: hidden;
