@@ -1,13 +1,14 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+// import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import VideoRoomComponent from './VideoRoomComponent';
 
 export default function Room() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [sessionId, setSessionId] = useState();
   const [userId, setUserId] = useState();
   const [owner, setOwner] = useState(false);
+  const [go, setGo] = useState(false);
 
   const handelOwner = () => {
     setOwner(p => !p);
@@ -23,7 +24,7 @@ export default function Room() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    navigate('/video');
+    setGo(p => !p);
   };
 
   return (
@@ -44,18 +45,10 @@ export default function Room() {
         </div>
         <button type="submit">입장</button>
       </form>
-      <Routes>
-        <Route
-          path="/video"
-          element={
-            <VideoRoomComponent
-              sessionName={sessionId}
-              user={userId}
-              owner={owner}
-            />
-          }
-        />
-      </Routes>
+      {go ?
+      <VideoRoomComponent sessionName={sessionId} user={userId} owner={owner} />
+      : null
+      }
     </div>
   );
 }

@@ -104,7 +104,7 @@ function SellerInfo({ sellerData, loginId }) {
             fullWidth
             variant="contained"
             startIcon={<LiveTvIcon />}
-            onClick={() => navigate('/lgc')}
+            onClick={() => navigate('/room')}
           >
             라이브 시작
           </ColorButton>
