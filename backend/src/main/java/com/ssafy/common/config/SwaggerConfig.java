@@ -12,6 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -19,14 +20,19 @@ import java.util.List;
 public class SwaggerConfig {
         @Bean
         public Docket api() {
+
+            Server local = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
+            Server dev = new Server("dev", "https://localhost:8081/", "for testing", Collections.emptyList(), Collections.emptyList());
+
             //api 정보 설정
             final ApiInfo apiInfo = new ApiInfoBuilder()
-                    .title("USER 관리 API")
+                    .title("Yogurt 관리 API")
                     .description("<h3>유저 관리에서 사용되는 RestApi에 대한 문서를 제공한다.</h3>")
                     .version("1.0")
                     .build();
 
             return new Docket(DocumentationType.SWAGGER_2)    //스웨거 타입으로 문서화
+                    .servers(local,dev)
                     .apiInfo(apiInfo)//위에서 설정한 정보를 통해 문서화
                     .securityContexts(Arrays.asList(securityContext()))
                     .securitySchemes(Arrays.asList(apiKey()))
