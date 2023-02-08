@@ -9,6 +9,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useLocation, useNavigate, useMatch } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 
+import { styled } from '@mui/material/styles';
+const CustomAppBar = styled(AppBar)`
+  background: #deb887;
+`;
+
 const data = {
   '/category': {
     name: '카테고리',
@@ -43,7 +48,7 @@ export default function SubAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
+      <CustomAppBar
         position="fixed"
         color="inherit"
         elevation={0}
@@ -58,9 +63,13 @@ export default function SubAppBar() {
             sx={{ mr: 2 }}
             onClick={handleClick}
           >
-            <ArrowBackIosNewIcon />
+            <ArrowBackIosNewIcon sx={{ color: '#ffffff' }} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, color: '#ffffff' }}
+          >
             {pageName && pageName.name}
           </Typography>
           {useMatch('/stores/:storeId') && (
@@ -70,12 +79,12 @@ export default function SubAppBar() {
               color="inherit"
               aria-label="search"
             >
-              <MoreVertIcon />
+              <MoreVertIcon sx={{ color: '#ffffff' }} />
             </IconButton>
           )}
         </Toolbar>
         <Divider />
-      </AppBar>
+      </CustomAppBar>
     </Box>
   );
 }

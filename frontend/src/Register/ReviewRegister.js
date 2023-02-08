@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Divider from '@mui/material/Divider';
 import BackToTop from '../AppBar/BackToTop';
 import './ReviewRegister.css';
 
@@ -44,7 +45,7 @@ function ReviewRegister() {
             onChange={event => setTitle(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider variant="middle" />
         <div className="review_reg_star">
           <p> 별점</p>
           <select
@@ -60,8 +61,7 @@ function ReviewRegister() {
             <option value="5">5</option>
           </select>
         </div>
-
-        <hr />
+        <Divider variant="middle" />
         <div className="review_reg_detail">
           <p>리뷰 내용</p>
           <textarea

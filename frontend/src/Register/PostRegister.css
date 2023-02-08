@@ -1,3 +1,8 @@
+.postregister {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .post_reg_file label {
   margin: 8px 0px 0px 8px;
   display: flex;
@@ -11,6 +16,7 @@
 
 .post_reg_prev {
   display: inline-flex;
+
   width: 300px;
   overflow: auto;
   margin: 8px 0px 0px 8px;
@@ -24,6 +30,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
   margin: 0px 4px;
@@ -41,15 +48,16 @@
   background-color: white;
   border: 1px solid burlywood;
   color: burlywood;
+  align-items: center;
 }
 
 .post_reg_state,
 .post_reg_category {
-  margin: 8px 0px 0px 8px;
+  margin: 8px 0px 0px 0px;
 }
 
 .post_reg_sale_state {
-  margin: 8px 0px 8px 8px;
+  margin: 8px 0px 8px 0px;
 }
 
 .post_reg_file p,
@@ -60,24 +68,24 @@
 .post_reg_category p,
 .post_reg_detail p,
 .post_reg_size p {
-  display: flex;
-  margin: 8px 0px 0px 0px;
+  margin: 8px 0px 8px 0px;
   font-size: 14px;
   font-weight: bold;
+  text-align: left;
 }
 
 textarea {
   resize: none;
 }
 
-.post_reg_file,
+/* .post_reg_file,
 .post_reg_title,
 .post_reg_price,
 .post_reg_sale_price,
 .post_reg_detail,
 .post_reg_size {
-  margin: 8px 24px 0px 8px;
-}
+  margin: 1pxpx 16px 0px 0px;
+} */
 
 #post_reg_title,
 #post_reg_price,
@@ -86,10 +94,7 @@ textarea {
 #post_reg_size {
   width: 100%;
   padding: 4px 0px 4px 8px;
-  margin: 8px 0px 0px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: left;
+  /* margin: 16px 0px 0px 0px; */
 }
 
 #post_reg_detail,
@@ -119,15 +124,10 @@ textarea {
   color: white;
 }
 
-.post_reg_category_div {
-  margin: 0px 0px 0px 8px;
-}
-
 .post_reg_state_div,
 .post_reg_category_cloth,
 .post_reg_category_brand {
   margin: 8px 0px 0px 0px;
   display: flex;
-  align-items: center;
-  justify-content: left;
+  align-items: flex-end;
 }

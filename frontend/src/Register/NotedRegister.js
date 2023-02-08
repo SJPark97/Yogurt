@@ -1,6 +1,8 @@
 // import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import Divider from '@mui/material/Divider';
+
 import BackToTop from '../AppBar/BackToTop';
 import './NotedRegister.css';
 
@@ -43,7 +45,7 @@ function PostRegister() {
             onChange={event => setTitle(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider variant="middle" />
         <div className="noted_reg_detail">
           <p>공지 내용</p>
           <textarea
