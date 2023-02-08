@@ -1,7 +1,7 @@
-import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import VideoRoomComponent from "./VideoRoomComponent";
+import React from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import VideoRoomComponent from './VideoRoomComponent';
 
 export default function Lgc() {
   const navigate = useNavigate();
@@ -10,20 +10,20 @@ export default function Lgc() {
   const [owner, setOwner] = useState(false);
 
   const handelOwner = () => {
-    setOwner((p) => !p)
-  }
+    setOwner(p => !p);
+  };
 
-  const handelSession = (e) => {
+  const handelSession = e => {
     setSessionId(e.target.value);
   };
 
-  const handelUser = (e) => {
+  const handelUser = e => {
     setUserId(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    navigate("/video");
+    navigate('/video');
   };
 
   return (
@@ -47,7 +47,13 @@ export default function Lgc() {
       <Routes>
         <Route
           path="/video"
-          element={<VideoRoomComponent sessionName={sessionId} user={userId} owner={owner} />}
+          element={
+            <VideoRoomComponent
+              sessionName={sessionId}
+              user={userId}
+              owner={owner}
+            />
+          }
         />
       </Routes>
     </div>
