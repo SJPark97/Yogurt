@@ -13,38 +13,10 @@ import {
 } from '@mui/material/';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import './ProfileModifiy.css';
 import BackToTop from '../../AppBar/BackToTop';
-
-const banks = [
-  {
-    bankId: 0,
-    bankName: '국민은행',
-  },
-  {
-    bankId: 1,
-    bankName: '우리은행',
-  },
-  {
-    bankId: 2,
-    bankName: '하나은행',
-  },
-  {
-    bankId: 3,
-    bankName: '카카오뱅크',
-  },
-  {
-    bankId: 4,
-    bankName: '신한은행',
-  },
-  {
-    bankId: 5,
-    bankName: '농협',
-  },
-];
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -57,18 +29,32 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
+const ColorButton = styled(Button)(() => ({
+  // color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: '#deb887',
+  '&:hover': {
+    backgroundColor: '#deb887',
+  },
+}));
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#deb887',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#deb887',
+  },
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: '#deb887',
+    },
+  },
+});
+
 export default function ProfileModify() {
   const theme = createTheme();
 
-  const [bankname, setBankname] = useState('');
-
-  const handleBankChange = e => {
-    console.log('dd');
-    setBankname(e.target.value);
-  };
-
   // role state에서 불러오기
-  const role = 'seller';
   const [form, setForm] = useState({
     nickname: '',
     nicknameConfirm: '',
@@ -184,26 +170,6 @@ export default function ProfileModify() {
     <div>
       <BackToTop />
       <h2>프로필 수정</h2>
-      <Stack spacing={1} justifyContent="center" alignItems="center">
-        <Avatar
-          src={Image}
-          onClick={() => {
-            fileInput.current.click();
-          }}
-          sx={{
-            width: '50%',
-            height: '50%',
-          }}
-        />
-        <input
-          type="file"
-          style={{ display: 'none' }}
-          accept="image/jpg,impge/png,image/jpeg"
-          name="profile_img"
-          onChange={onChange}
-          ref={fileInput}
-        />
-      </Stack>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <Box
@@ -220,9 +186,34 @@ export default function ProfileModify() {
               // onSubmit={handleSubmit}
             >
               <FormControl component="fieldset" variant="standard">
+                <Stack
+                  spacing={1}
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{ marginBottom: '1rem' }}
+                >
+                  <Avatar
+                    src={Image}
+                    onClick={() => {
+                      fileInput.current.click();
+                    }}
+                    sx={{
+                      width: '50%',
+                      height: '50%',
+                    }}
+                  />
+                  <input
+                    type="file"
+                    style={{ display: 'none' }}
+                    accept="image/jpg,impge/png,image/jpeg"
+                    name="profile_img"
+                    onChange={onChange}
+                    ref={fileInput}
+                  />
+                </Stack>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       id="nickname"
@@ -244,7 +235,7 @@ export default function ProfileModify() {
                       })()}
                       InputProps={{
                         endAdornment: (
-                          <Button
+                          <ColorButton
                             variant="contained"
                             size="small"
                             disabled={
@@ -258,14 +249,14 @@ export default function ProfileModify() {
                             onClick={handleClickNickname}
                           >
                             중복확인
-                          </Button>
+                          </ColorButton>
                         ),
                       }}
                     />
                     <FormHelperTexts>{error.nickname}</FormHelperTexts>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CssTextField
                       required
                       fullWidth
                       type="email"
@@ -279,42 +270,8 @@ export default function ProfileModify() {
                     />
                     <FormHelperTexts>{error.email}</FormHelperTexts>
                   </Grid>
-                  {role === 'seller' && (
-                    <Grid item xs={12}>
-                      <TextField
-                        select
-                        required
-                        fullWidth
-                        id="bank"
-                        name="bank"
-                        label="은행을 선택해주세요."
-                        value={bankname}
-                        onChange={handleBankChange}
-                      >
-                        {banks.map(bank => (
-                          <MenuItem key={bank.bankId} value={bank.bankName}>
-                            {bank.bankName}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                      <FormHelperTexts>{error.email}</FormHelperTexts>
-                    </Grid>
-                  )}
-                  {role === 'seller' && (
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        type="number"
-                        id="account"
-                        name="account"
-                        label="계좌번호"
-                      />
-                      <FormHelperTexts>{error.email}</FormHelperTexts>
-                    </Grid>
-                  )}
                 </Grid>
-                <Button
+                <ColorButton
                   // type="submit"
                   fullWidth
                   variant="contained"
@@ -328,7 +285,7 @@ export default function ProfileModify() {
                   }}
                 >
                   회원정보 수정
-                </Button>
+                </ColorButton>
               </FormControl>
             </Boxs>
           </Box>
