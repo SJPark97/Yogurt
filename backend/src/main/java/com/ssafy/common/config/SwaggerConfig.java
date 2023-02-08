@@ -2,12 +2,14 @@ package com.ssafy.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
+import springfox.documentation.spring.data.rest.BasePathAwareServicesProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -21,9 +23,6 @@ public class SwaggerConfig {
         @Bean
         public Docket api() {
 
-            Server local = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
-            Server dev = new Server("dev", "https://i8b204.p.ssafy.io/be-api/", "for testing", Collections.emptyList(), Collections.emptyList());
-
             //api 정보 설정
             final ApiInfo apiInfo = new ApiInfoBuilder()
                     .title("Yogurt 관리 API")
@@ -32,7 +31,6 @@ public class SwaggerConfig {
                     .build();
 
             return new Docket(DocumentationType.SWAGGER_2)    //스웨거 타입으로 문서화
-                    .servers(local,dev)
                     .apiInfo(apiInfo)//위에서 설정한 정보를 통해 문서화
                     .securityContexts(Arrays.asList(securityContext()))
                     .securitySchemes(Arrays.asList(apiKey()))
