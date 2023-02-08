@@ -40,15 +40,16 @@ function PostDetail() {
       backgroundColor: '#ffffff',
     },
   }));
-
+  console.log(postId);
   useEffect(() => {
-    axios
-      .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
-      .then(res => setPost(res.data));
+    axios.get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`).then(res => {
+      setPost(res.data);
+    });
   }, []);
+  console.log(post);
 
   const salePercent = Math.floor(
-    ((post.price - post.sale_price) / post.price) * 100,
+    ((post?.price - post?.sale_price) / post?.price) * 100,
   );
 
   const navigate = useNavigate();
@@ -63,23 +64,23 @@ function PostDetail() {
   return (
     <div>
       <BackToTop />
-      <img className="detail_img" src={post.postImages} alt="이미지사진" />
+      <img className="detail_img" src={post?.postImages} alt="이미지사진" />
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
-            <div className="detail-post-store">{post.sellerId}</div>
-            <div className="detail-post-title">{post.title}</div>
-            <div className="detail-br-cateId">{post.typeCateName}</div>
-            <div className="detail-br-cateId">{post.brCateName}</div>
+            <div className="detail-post-store">{post?.sellerId}</div>
+            <div className="detail-post-title">{post?.title}</div>
+            <div className="detail-br-cateId">{post?.typeCateName}</div>
+            <div className="detail-br-cateId">{post?.brCateName}</div>
             <div className="detail-price">
               {salePercent ? (
                 <div className="detail-sale-percent">{salePercent}%</div>
               ) : null}
               <div className="detail-post-sale-price">
-                {post.sale_price.toLocaleString()}원
+                {post?.sale_price.toLocaleString()}원
               </div>
               <div className="detail-post-price">
-                {post.price.toLocaleString()}
+                {post?.price.toLocaleString()}
               </div>
             </div>
           </div>
@@ -100,18 +101,18 @@ function PostDetail() {
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-size-info">
           <div className="detail-size-name">사이즈</div>
-          <div className="detail-size">{post.post_size}</div>
+          <div className="detail-size">{post?.size}</div>
         </div>
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-detail-info">
           <div className="detail-detail-name">상세설명</div>
           {/* 왜 왼쪽정렬안되지? */}
-          <div className="detail-detail">{post.post_content}</div>
+          <div className="detail-detail">{post?.content}</div>
         </div>
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-store-info">
           <div className="detail-store-name">
-            {post.post_store}님의 다른 상품
+            {post?.sellerId}님의 다른 상품
           </div>
         </div>
         {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
@@ -152,7 +153,10 @@ function PostDetail() {
               onClick={() => {
                 console.log('바로구매하기 페이지로 이동하기');
                 navigate('/payment', {
-                  state: { checkItems: [post.id], totalPrice: post.sale_price },
+                  state: {
+                    checkItems: [post?.id],
+                    totalPrice: post?.sale_price,
+                  },
                 });
               }}
             >
