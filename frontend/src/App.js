@@ -46,9 +46,9 @@ function App() {
           path="/video"
           element={
             <VideoRoomComponent
-              // sessionName={sessionId}
-              // user={userId}
-              // owner={owner}
+            // sessionName={sessionId}
+            // user={userId}
+            // owner={owner}
             />
           }
         />
