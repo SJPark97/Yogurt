@@ -3,13 +3,22 @@ package com.ssafy.common.api.alarm.service;
 import com.ssafy.common.api.alarm.converter.BuyerAlarmConverter;
 import com.ssafy.common.api.alarm.domain.BuyerAlarm;
 import com.ssafy.common.api.alarm.domain.SellerAlarm;
+import com.ssafy.common.api.alarm.dto.response.BuyerAlarmResponse;
+import com.ssafy.common.api.alarm.dto.response.SellerAlarmResponse;
 import com.ssafy.common.api.alarm.repository.BuyerAlarmRepository;
 import com.ssafy.common.api.post.repository.PostRepository;
+import com.ssafy.common.api.relation.dto.Likes.LikesUserResponse;
 import com.ssafy.common.api.relation.service.LikesService;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.UserBuyerAlarmResponse;
+import com.ssafy.common.api.user.dto.UserSellerAlarmResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -32,11 +41,30 @@ public class BuyerAlarmService {
         this.buyerAlarmConverter = buyerAlarmConverter;
     }
 
-    public BuyerAlarm saveAlarm(User sellerId) {
+    @Transactional
+    public List<BuyerAlarm> saveAlarm(User seller) {
         // 1. 현재 seller 를 likes한 유저(buyer)들을 모두 구한다.
-
+        List<LikesUserResponse> likesUserResponses = likesService.sellerLikesList(seller);
         // 2. 구한 buyer들과  ,seller 를 이용해 BuyerAlarm 으로 이용해 alarm 저장
+        List<BuyerAlarm> buyerAlarmList = new ArrayList<>();
+        for (LikesUserResponse likesUserResponse: likesUserResponses) {
+            User buyer = userRepository.findById(likesUserResponse.getBuyer().getId()).get();
+            BuyerAlarm buyerAlarm = buyerAlarmConverter.ConvertUserBuyerSellerAlarm(buyer, seller, new Timestamp(System.currentTimeMillis()));
+            buyerAlarmList.add(buyerAlarmRepository.save(buyerAlarm));
+        }
+        return buyerAlarmList;
+    }
 
-        return null;
+
+    @Transactional
+    public BuyerAlarmResponse deleteBuyerAlarm(Long buyerAlarmId) {
+        BuyerAlarm buyerAlarm = buyerAlarmRepository.findById(buyerAlarmId).get();
+        buyerAlarm.delete();
+        return new BuyerAlarmResponse(buyerAlarm);
+    }
+
+
+    public UserBuyerAlarmResponse userBuyerAlarm(User user) {
+        return userRepository.findById(user.getId()).map(UserBuyerAlarmResponse::new).orElseThrow();
     }
 }
