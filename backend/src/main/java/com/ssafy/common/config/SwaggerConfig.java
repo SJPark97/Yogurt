@@ -22,7 +22,7 @@ public class SwaggerConfig {
         public Docket api() {
 
             Server local = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
-            Server dev = new Server("dev", "https://localhost:8081/", "for testing", Collections.emptyList(), Collections.emptyList());
+            Server dev = new Server("dev", "https://i8b204.p.ssafy.io/be-api/", "for testing", Collections.emptyList(), Collections.emptyList());
 
             //api 정보 설정
             final ApiInfo apiInfo = new ApiInfoBuilder()
