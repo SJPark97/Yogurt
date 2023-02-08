@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import VideoRoomComponent from './VideoRoomComponent';
 
-export default function Lgc() {
+export default function Room() {
   const navigate = useNavigate();
   const [sessionId, setSessionId] = useState();
   const [userId, setUserId] = useState();
