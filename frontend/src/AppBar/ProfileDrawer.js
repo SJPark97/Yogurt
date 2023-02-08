@@ -81,11 +81,27 @@ export default function ProfileDrawer() {
                 }}
               >
                 <ListItemIcon>
-                  {index === 0 ? <LogoutIcon /> : ''}
-                  {index === 1 ? <AddBusinessOutlinedIcon /> : ''}
-                  {index === 2 ? <VideoCallOutlinedIcon /> : ''}
-                  {index === 3 ? <NotificationAddOutlinedIcon /> : ''}
-                  {index === 4 ? <ManageAccountsIcon /> : ''}
+                  {index === 0 ? <LogoutIcon sx={{ color: '#cf974f' }} /> : ''}
+                  {index === 1 ? (
+                    <AddBusinessOutlinedIcon sx={{ color: '#cf974f' }} />
+                  ) : (
+                    ''
+                  )}
+                  {index === 2 ? (
+                    <VideoCallOutlinedIcon sx={{ color: '#cf974f' }} />
+                  ) : (
+                    ''
+                  )}
+                  {index === 3 ? (
+                    <NotificationAddOutlinedIcon sx={{ color: '#cf974f' }} />
+                  ) : (
+                    ''
+                  )}
+                  {index === 4 ? (
+                    <ManageAccountsIcon sx={{ color: '#cf974f' }} />
+                  ) : (
+                    ''
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

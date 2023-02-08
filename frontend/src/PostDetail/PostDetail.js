@@ -5,10 +5,38 @@ import BackToTop from '../AppBar/BackToTop';
 import Carousel from '../Common/Carousel';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+// import BottomNavigation from '@mui/material/BottomNavigation';
 
 import './PostDetail.css';
+
+const ColorButton = styled(Button)(() => ({
+  fontSize: '20px',
+  backgroundColor: '#deb887',
+  '&:hover': {
+    backgroundColor: '#deb887',
+  },
+}));
+
+const DarkColorButton = styled(Button)(() => ({
+  fontSize: '20px',
+  backgroundColor: '#cf974f',
+  '&:hover': {
+    backgroundColor: '#cf974f',
+  },
+}));
+
+const WhiteButton = styled(Button)(() => ({
+  backgroundColor: '#ffffff',
+  '&:hover': {
+    backgroundColor: '#ffffff',
+  },
+}));
 
 function PostDetail() {
   const { postId } = useParams();
@@ -80,6 +108,35 @@ function PostDetail() {
         {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
         <Carousel card={dummy.Popular} />
       </div>
+      <footer>
+        <Paper
+          sx={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
+          elevation={3}
+        >
+          <Box className="detail-footer" sx={{ height: '56px' }}>
+            <WhiteButton
+              className="like-bnt"
+              variant="contained"
+              sx={{ background: '#ffffff', color: 'red' }}
+              onClick={handleClick}
+            >
+              {isLiked && <FavoriteIcon />}
+              {!isLiked && <FavoriteBorderIcon />}
+            </WhiteButton>
+            <ColorButton variant="contained" fullWidth>
+              <div>장바구니</div>
+            </ColorButton>
+            <DarkColorButton variant="contained" fullWidth>
+              <div>결제하기</div>
+            </DarkColorButton>
+          </Box>
+        </Paper>
+      </footer>
     </div>
   );
 }

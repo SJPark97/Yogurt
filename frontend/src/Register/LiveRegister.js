@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import BackToTop from '../AppBar/BackToTop';
+import Divider from '@mui/material/Divider';
 import './LiveRegister.css';
 
 function LiveRegister() {
@@ -48,7 +49,7 @@ function LiveRegister() {
             onClick={event => setTitle(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="live_reg_file">
           <p>라이브 대표 사진 등록</p>
           <input
@@ -71,7 +72,7 @@ function LiveRegister() {
             )}
           </div>
         </div>
-        <hr />
+        <Divider variant="middle" />
         <div className="live_reg_date">
           <p>라이브 예정 시간</p>
           <input
@@ -87,7 +88,7 @@ function LiveRegister() {
             onClick={event => setTime(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider variant="middle" />
         <div className="live_reg_detail">
           <p>라이브 상세정보</p>
           <textarea
@@ -97,7 +98,7 @@ function LiveRegister() {
             onClick={event => setContent(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider variant="middle" />
         <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
