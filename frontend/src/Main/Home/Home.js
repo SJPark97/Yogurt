@@ -15,13 +15,13 @@ function Home() {
       <BackToTop />
       <h1>메인 페이지 - 여기에 사진 캐러셀?</h1>
       <p className="mainpageTitle">라이브</p>
-      <LiveCarousel card={live} className="home-carousel" />
+      <LiveCarousel card={live} />
       <Divider variant="middle" />
       <p className="mainpageTitle">이번 주 주목해야 될 상품</p>
-      <Carousel card={popular} className="home-carousel" />
+      <Carousel card={popular} />
       <Divider variant="middle" />
       <p className="mainpageTitle">신상</p>
-      <Carousel card={card} className="home-carousel" />
+      <Carousel card={card} />
     </div>
   );
 }
