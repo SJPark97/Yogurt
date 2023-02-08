@@ -45,10 +45,13 @@ export default function Room() {
         </div>
         <button type="submit">입장</button>
       </form>
-      {go ?
-      <VideoRoomComponent sessionName={sessionId} user={userId} owner={owner} />
-      : null
-      }
+      {go ? (
+        <VideoRoomComponent
+          sessionName={sessionId}
+          user={userId}
+          owner={owner}
+        />
+      ) : null}
     </div>
   );
 }
