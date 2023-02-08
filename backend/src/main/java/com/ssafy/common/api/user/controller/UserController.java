@@ -11,8 +11,11 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +31,6 @@ import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.ssafy.common.api.user.domain.UserRole.ROLE_SELLER;
 import static com.ssafy.common.filter.JwtProperties.SECRET_KEY;
@@ -43,13 +45,19 @@ public class UserController {
     private final UserService userService;
     private final JwtProvider jwtProvider;
 
-    @GetMapping("/home")
-    public String goHome() {
-        return "<h1>home</h1>";
-    }
+//    @GetMapping("/home")
+//    public String goHome() {
+//        return "<h1>home</h1>";
+//    }
 
-    @ApiOperation(value = "accessToken 재발급")
+
     @GetMapping("/refresh")
+    @ApiOperation(value = "accessToken 재발급")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "refresh 토큰 생성 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
     public ResponseEntity<?> refresh(String refreshToken){
 
         HashMap<String, String> map = new HashMap<>();
@@ -80,6 +88,11 @@ public class UserController {
 
     @PostMapping("/join")
     @ApiOperation(value= "회원가입")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "refresh 토큰 생성 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
     public ResponseEntity<?> join(@Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
@@ -89,14 +102,21 @@ public class UserController {
 
         return ResponseEntity.ok(user);
     }
-    @PostMapping("/login")
-    @ApiOperation(value="로그인")
-    public String login(HttpServletResponse response, @RequestBody @ApiParam(value = "회원",required = true)UserLoginForm form){
-        return response.getHeader("Authorization");
-    }
+//    @PostMapping("/login")
+//    @ApiOperation(value="로그인")
+//    public String login(HttpServletResponse response, @RequestBody @ApiParam(value = "회원",required = true)UserLoginForm form){
+//        return response.getHeader("Authorization");
+//    }
 
     @GetMapping("/seller")
     @ApiOperation(value = "판매자 전체 조회")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "판매자 전체 조회 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 401, message = "인증이 되지 않음"),
+            @ApiResponse(code = 403, message = "권한 없음"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
     public ResponseEntity<?> getAllSeller(){
         try {
             List<UserResponseForm> formList = userService.findByRole(ROLE_SELLER);
@@ -109,6 +129,13 @@ public class UserController {
     @GetMapping("/seller/search")
     @ApiOperation(value = "판매자 검색")
     @Parameter(name = "keyword", description = "판매자 키워드", in = ParameterIn.QUERY)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "판매자 검색 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 401, message = "인증이 되지 않음"),
+            @ApiResponse(code = 403, message = "권한 없음"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
     public ResponseEntity<?> findSellers(@RequestParam String keyword){
         try{
             List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains(ROLE_SELLER, keyword);
@@ -120,6 +147,11 @@ public class UserController {
 
     @PatchMapping("/user/{id}")
     @ApiOperation(value = "탈퇴")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "판매자 검색 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
     public ResponseEntity<?> deleteUser(@PathVariable long id){
         try{
             userService.deleteUser(id);
