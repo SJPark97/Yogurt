@@ -8,8 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 import { useNavigate } from 'react-router-dom';
-
 import { styled } from '@mui/material/styles';
+import Logo from '../Images/Yogurt_Logo.png';
+
 import ProfileDrawer from './ProfileDrawer';
 
 const CustomAppBar = styled(AppBar)`
@@ -36,7 +37,14 @@ export default function ProfileAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            LOGO
+            <img
+              src={Logo}
+              alt="LOGO"
+              style={{
+                width: '120px',
+                height: '48px',
+              }}
+            />
           </Typography>
           <IconButton
             size="large"

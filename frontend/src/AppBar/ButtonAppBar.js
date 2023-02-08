@@ -11,7 +11,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
-
+import Logo from '../Images/Yogurt_Logo.png';
 const CustomAppBar = styled(AppBar)`
   background: #deb887;
 `;
@@ -34,10 +34,24 @@ export default function ButtonAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            LOGO
+          <Typography variant="div" component="div" sx={{ flexGrow: 1 }}>
+            <img
+              src={Logo}
+              alt="LOGO"
+              style={{
+                width: '120px',
+                height: '48px',
+              }}
+            />
           </Typography>
-          <IconButton size="large" color="inherit" aria-label="cart">
+          <IconButton
+            size="large"
+            color="inherit"
+            aria-label="cart"
+            onClick={() => {
+              navigate('/wishlist');
+            }}
+          >
             <ShoppingBagOutlinedIcon />
           </IconButton>
           <IconButton
