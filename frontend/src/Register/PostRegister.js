@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+
+import Divider from '@mui/material/Divider';
 import BackToTop from '../AppBar/BackToTop';
 import './PostRegister.css';
 
@@ -123,7 +125,7 @@ function PostRegister() {
             onChange={handleAddImages}
           />
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_title">
           <p>제품제목</p>
           <input
@@ -134,7 +136,7 @@ function PostRegister() {
             onClick={event => setTitle(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_price">
           <p>제품가격</p>
           <input
@@ -174,7 +176,7 @@ function PostRegister() {
             </div>
           )}
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_state">
           <p>제품상태</p>
           <div className="post_reg_state_div">
@@ -194,28 +196,30 @@ function PostRegister() {
             ))}
           </div>
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_category">
           <p>카테고리</p>
           <div className="post_reg_category_div">
             {/* 카테고리 db만들어지면 가져오기 */}
             <div className="post_reg_category_cloth">
-              옷
+              <div style={{ marginRight: '8px' }}>옷</div>
               <input
                 type="text"
                 onClick={event => setCateCloth(event.target.value)}
+                style={{ marginLeft: '8px' }}
               />
             </div>
             <div className="post_reg_category_brand">
-              브랜드
+              <div style={{ marginRight: '8px' }}>브랜드</div>
               <input
                 type="text"
                 onClick={event => setBrand(event.target.value)}
+                style={{ marginLeft: '8px' }}
               />
             </div>
           </div>
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_detail">
           <p>제품 상세정보</p>
           <textarea
@@ -225,7 +229,7 @@ function PostRegister() {
             onClick={event => setContent(event.target.value)}
           />
         </div>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_size">
           <p>사이즈</p>
           <textarea

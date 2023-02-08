@@ -7,11 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import Logo from '../Images/Yogurt_Logo.png';
 
 import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
-import Logo from '../Images/Yogurt_Logo.png';
 const CustomAppBar = styled(AppBar)`
   background: #deb887;
 `;
