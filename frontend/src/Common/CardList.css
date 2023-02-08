@@ -19,17 +19,15 @@
   margin-top: 8px;
   display: flex;
   font-size: 10px;
-  font-weight: 1000;
+  font-weight: bold;
   width: 96;
   text-align: left;
   color: black;
 }
 
 .CardName {
-  float: left;
-  display: flex;
   font-size: 14px;
-  font-weight: 1000;
+  font-weight: bold;
   width: 96px;
   text-align: left;
   overflow: hidden;
