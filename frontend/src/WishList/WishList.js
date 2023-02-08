@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import dummy from '../db/list.json';
