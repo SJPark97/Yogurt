@@ -19,15 +19,18 @@ const APPLICATION_SERVER_URL = 'https://i8b204.p.ssafy.io/api/';
 class VideoRoomComponent extends Component {
   constructor(props) {
     super(props);
+
+    
+    
     this.hasBeenUpdated = false;
     this.layout = new OpenViduLayout();
     let sessionName = this.props.sessionName
       ? this.props.sessionName
-      : `yogurt`;
-    let userName = this.props.user
+      : "1";
+      let userName = this.props.user
       ? this.props.user
-      : "OpenVidu_User" + Math.floor(Math.random() * 100);
-    this.owner = this.props.owner
+      : `${Math.floor(Math.random() * 5)} ++++++`;
+      this.owner = this.props.owner
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
@@ -40,6 +43,8 @@ class VideoRoomComponent extends Component {
       currentVideoDevice: undefined,
     };
 
+    console.log(this.props, 'ddfdfsssssssssssssssssssssssssssdfdf')
+    
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);

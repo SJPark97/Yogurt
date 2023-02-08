@@ -19,7 +19,7 @@ import NotedRegister from './Register/NotedRegister';
 import ReviewRegister from './Register/ReviewRegister';
 import WishList from './WishList/WishList';
 import PayMent from './Payment/PayMent';
-// import VideoRoomComponent from './components/VideoRoomComponent';
+import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
 import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
@@ -42,6 +42,16 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+          path="/video"
+          element={
+            <VideoRoomComponent
+              // sessionName={sessionId}
+              // user={userId}
+              // owner={owner}
+            />
+          }
+        />
         {/* <Route path="/video" element={<VideoRoomComponent />} /> */}
         <Route path="/room" element={<Room />} />
         <Route path="/category" element={<Category />} />
