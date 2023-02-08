@@ -45,7 +45,7 @@ function PostRegister() {
             onChange={event => setTitle(event.target.value)}
           />
         </div>
-        <Divider variant="middle" />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="noted_reg_detail">
           <p>공지 내용</p>
           <textarea

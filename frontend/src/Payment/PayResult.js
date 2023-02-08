@@ -29,7 +29,7 @@ function PayResult() {
   return (
     <div>
       <BackToTop />
-      <div>
+      <div className="payment-form">
         <form action="http://localhost:3000/kakaopay" method="get">
           <input className="btn" type="submit" value="카카오페이 결제" />
         </form>

@@ -2,22 +2,25 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import dummy from '../db/list.json';
+import Divider from '@mui/material/Divider';
 import './PayMent.css';
 
 function Payment() {
   const location = useLocation();
+  console.log('ff', location);
   const { checkItems } = location.state;
+  console.log('dd', checkItems);
   const { totalPrice } = location.state;
   const wishlist = dummy.WishLists.filter(item =>
     checkItems.includes(item.wishListId),
   );
 
   return (
-    <div>
+    <div className="payment-wrap">
       <BackToTop />
       <div className="pay-total">
         <p>주문 상품 총 {checkItems.length}개</p>
-        <hr />
+        <Divider sx={{ marginY: '1rem' }} />
         {wishlist.map(wish => (
           <div key={wish.wishListId}>
             <div className="pay-post">
@@ -41,7 +44,7 @@ function Payment() {
           </div>
         ))}
       </div>
-      <hr />
+      <Divider sx={{ marginY: '1rem' }} />
       <div className="pay-deliver">
         <p>배송지 정보</p>
         <textarea
@@ -50,12 +53,12 @@ function Payment() {
           placeholder="주소를 입력하세요"
         />
       </div>
-      <hr />
+      <Divider sx={{ marginY: '1rem' }} />
       <div className="pay-total-price">
         <div>결제하기</div>
         <div className="pay-price">{totalPrice.toLocaleString()} 원</div>
       </div>
-      <hr />
+      <Divider sx={{ marginY: '1rem' }} />
       <div className="pay-kakao">
         <p>카카오페이로 결제하기</p>
         <img
