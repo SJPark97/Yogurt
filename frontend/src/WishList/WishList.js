@@ -1,38 +1,45 @@
 import { Divider } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import dummy from '../db/list.json';
 import './WishList.css';
 
 function WishList() {
-  const wishlist = dummy.WishLists;
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [checkItems, setCheckItems] = useState([]);
   const navigate = useNavigate();
+
+  const wishlist = dummy.WishLists;
+
+  const allWish = wishlist.map(wish => wish.wishListId);
+  const [checkItems, setCheckItems] = useState(allWish);
   checkItems.sort();
 
-  const SingleCheck = (checked, id, post, price) => {
+  const totalwishprice = wishlist.map(el => el.post.post_sale_price);
+  const priceTotal = totalwishprice.reduce((a, b) => a + b, 0);
+  console.log(priceTotal);
+
+  const [totalPrice, setTotalPrice] = useState(priceTotal);
+
+  const SingleCheck = (checked, id, price) => {
     if (checked) {
       setCheckItems(prev => [...prev, id]);
       setTotalPrice(totalPrice + price);
+      console.log(totalPrice);
+      console.log(price);
     } else {
       setCheckItems(checkItems.filter(el => el !== id));
       setTotalPrice(totalPrice - price);
+      console.log(totalPrice, 'check');
+      console.log(price, 'check');
     }
   };
 
   const AllCheck = checked => {
     if (checked) {
       const idArray = [];
-      const allprice = 0;
       wishlist.forEach(el => idArray.push(el.wishListId));
-      const totalwishprice = wishlist.map(
-        el => allprice + el.post.post_sale_price,
-      );
-      const pricetotal = totalwishprice.reduce((a, b) => a + b, 0);
       setCheckItems(idArray);
-      setTotalPrice(pricetotal);
+      setTotalPrice(priceTotal);
     } else {
       setCheckItems([]);
       setTotalPrice(0);
@@ -42,7 +49,6 @@ function WishList() {
   return (
     <div>
       <BackToTop />
-
       <div className="wish-select-all">
         <input
           type="checkbox"
@@ -65,7 +71,6 @@ function WishList() {
                     SingleCheck(
                       event.target.checked,
                       wish.wishListId,
-                      wish.post,
                       wish.post.post_sale_price,
                     )
                   }
