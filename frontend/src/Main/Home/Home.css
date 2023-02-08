@@ -1,7 +1,9 @@
-.mainpage div {
+.LiveCarousel,
+.Carousel {
   display: flex;
   align-content: center;
   justify-content: left;
+  margin: 8px 0px 8px 8px;
 }
 
 .mainpageTitle {
