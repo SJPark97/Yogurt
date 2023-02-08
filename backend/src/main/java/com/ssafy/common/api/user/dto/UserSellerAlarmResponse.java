@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
+import com.ssafy.common.api.alarm.domain.AlarmStatus;
 import com.ssafy.common.api.alarm.dto.response.SellerAlarmUserResponse;
 import com.ssafy.common.api.relation.dto.zzim.ZzimUserPostResponse;
 import com.ssafy.common.api.user.domain.User;
@@ -15,7 +16,10 @@ public class UserSellerAlarmResponse {
     public UserSellerAlarmResponse(User user){
         id = user.getId();
         sellerAlarmUserResponses = user.getSellerAlarms()
-                .stream().map(sellerAlarm -> new SellerAlarmUserResponse(sellerAlarm))
+                .stream().map(sellerAlarm ->
+                        // delete가 아닌 알람만 조회
+//                        sellerAlarm.getStatus()== AlarmStatus.STATUS_DELETE? :
+                        new SellerAlarmUserResponse(sellerAlarm))
                 .collect(Collectors.toList());
     }
 }
