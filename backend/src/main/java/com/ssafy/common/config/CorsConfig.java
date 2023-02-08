@@ -21,4 +21,6 @@ public class CorsConfig{
         source.registerCorsConfiguration("/user/buyer/**",config);
         return new CorsFilter(source);
     }
+
+
 }
