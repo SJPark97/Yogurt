@@ -36,7 +36,7 @@ function LiveRegister() {
   };
 
   return (
-    <div className="liveregister">
+    <div className="live-register">
       <BackToTop />
       <form onSubmit={submitHandler}>
         <div className="live_reg_title">
@@ -72,7 +72,7 @@ function LiveRegister() {
             )}
           </div>
         </div>
-        <Divider variant="middle" />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="live_reg_date">
           <p>라이브 예정 시간</p>
           <input
@@ -88,7 +88,7 @@ function LiveRegister() {
             onClick={event => setTime(event.target.value)}
           />
         </div>
-        <Divider variant="middle" />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="live_reg_detail">
           <p>라이브 상세정보</p>
           <textarea
@@ -98,7 +98,7 @@ function LiveRegister() {
             onClick={event => setContent(event.target.value)}
           />
         </div>
-        <Divider variant="middle" />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
