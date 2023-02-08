@@ -104,9 +104,9 @@ function SellerInfo({ sellerData, loginId }) {
             fullWidth
             variant="contained"
             startIcon={<LiveTvIcon />}
-            onClick={() => navigate('/video')}
+            onClick={() => navigate('/lgc')}
           >
-            라이브 열기
+            라이브 시작
           </ColorButton>
         </Stack>
       )}
