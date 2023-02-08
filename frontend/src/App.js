@@ -24,7 +24,7 @@ import ProfileModify from './Main/Profile/ProfileModify';
 import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
 import ScrollToTop from './ScrollToTop';
-import Lgc from './components/Lgc';
+import Room from './components/Room';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
 const user = {
@@ -43,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/video" element={<VideoRoomComponent />} /> */}
-        <Route path="/lgc" element={<Lgc />} />
+        <Route path="/room" element={<Room />} />
         <Route path="/category" element={<Category />} />
         <Route path="/stores">
           <Route path="" element={<StoreList />} />
