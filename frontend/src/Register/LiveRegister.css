@@ -1,5 +1,5 @@
-.live_reg_date {
-  margin: 8px 0px 0px 8px;
+.live-register {
+  margin: 1rem;
 }
 
 .live_reg_title p,
@@ -9,12 +9,11 @@
   display: flex;
   justify-content: flex-start;
   margin: 0px;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .live_reg_file label {
-  margin: 0px 0px 16px 0px;
   display: flex;
   justify-content: center;
   font-size: 30px;

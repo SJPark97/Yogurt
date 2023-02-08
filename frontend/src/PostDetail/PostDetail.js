@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import dummy from '../db/list.json';
 import BackToTop from '../AppBar/BackToTop';
 import Carousel from '../Common/Carousel';
@@ -45,12 +45,17 @@ function PostDetail() {
     ((post.post_price - post.post_sale_price) / post.post_price) * 100,
   );
 
+  const navigate = useNavigate();
+
   // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
   // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
   const [isLiked, setIsLiked] = useState(true);
   const handleClick = () => {
     setIsLiked(!isLiked);
   };
+
+  const id = [Number(postId)];
+  const price = post.post_sale_price;
 
   return (
     <div>
@@ -128,11 +133,26 @@ function PostDetail() {
               {isLiked && <FavoriteIcon />}
               {!isLiked && <FavoriteBorderIcon />}
             </WhiteButton>
-            <ColorButton variant="contained" fullWidth>
+            <ColorButton
+              variant="contained"
+              fullWidth
+              onClick={() => {
+                console.log('장바구니 아이템 추가 후 alert');
+              }}
+            >
               <div>장바구니</div>
             </ColorButton>
-            <DarkColorButton variant="contained" fullWidth>
-              <div>결제하기</div>
+            <DarkColorButton
+              variant="contained"
+              fullWidth
+              onClick={() => {
+                console.log('바로구매하기 페이지로 이동하기');
+                navigate('/payment', {
+                  state: { checkItems: id, totalPrice: price },
+                });
+              }}
+            >
+              <div>바로 구매</div>
             </DarkColorButton>
           </Box>
         </Paper>
