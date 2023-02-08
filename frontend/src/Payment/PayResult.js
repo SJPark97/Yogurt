@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import BackToTop from '../AppBar/BackToTop';
 import './PayResult.css';
 
 function PayResult() {
@@ -27,6 +28,7 @@ function PayResult() {
 
   return (
     <div>
+      <BackToTop />
       <div>
         <form action="http://localhost:3000/kakaopay" method="get">
           <input className="btn" type="submit" value="카카오페이 결제" />
