@@ -2,6 +2,7 @@
   text-align: center;
   width: 100%;
   height: 800px;
+  font-family: 'gangwondo';
 }
 
 .App-logo {
@@ -30,4 +31,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: 'bunseok';
+  src: url('./Font/휴먼범석체.ttf');
+}
+
+@font-face {
+  font-family: 'gangwondo';
+  src: url('./Font/강원교육모두\ Light.ttf');
 }
