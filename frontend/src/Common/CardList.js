@@ -19,8 +19,10 @@ function CardList(props) {
       }}
     >
       <img className="CardImg" src={data.postimage_url} alt="#" />
-      <div className="CardBrand">{data.br_cateName}</div>
-      <div className="CardName">{data.post_title}</div>
+      <div className="CardBrand">스토어 이름</div>
+      <div className="CardName">
+        [{data.br_cateName}] {data.post_title}
+      </div>
       {discount ? <div className="CardDiscount">{discount}%</div> : null}
       <div className="CardPrice">{data.post_sale_price.toLocaleString()}원</div>
     </div>

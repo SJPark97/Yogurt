@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import BackToTop from '../AppBar/BackToTop';
 import dummy from '../db/list.json';
 import './PayMent.css';
 
@@ -13,6 +14,7 @@ function Payment() {
 
   return (
     <div>
+      <BackToTop />
       <div className="pay-total">
         <p>주문 상품 총 {checkItems.length}개</p>
         <hr />

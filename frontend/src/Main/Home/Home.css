@@ -7,5 +7,8 @@
 .mainpageTitle {
   text-align: left;
   font-weight: 1000;
-  margin: 8px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
