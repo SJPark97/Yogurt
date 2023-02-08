@@ -2,13 +2,12 @@ import React from 'react';
 import './Carousel.css';
 import CardList from './CardList';
 
-function Carousel(props) {
-  const { card } = props;
+function Carousel({ list }) {
   return (
     <div>
       <div className="Carousel">
-        {card.map(data => (
-          <CardList data={data} key={data.postId} />
+        {list.map(data => (
+          <CardList data={data} key={data.id} />
         ))}
       </div>
     </div>

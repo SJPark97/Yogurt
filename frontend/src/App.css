@@ -40,5 +40,5 @@
 
 @font-face {
   font-family: 'gangwondo';
-  src: url('./Font/강원교육모두\ Light.ttf');
+  src: url('./Font/강원교육모두\ Light.ttf') format('font-ttf');
 }

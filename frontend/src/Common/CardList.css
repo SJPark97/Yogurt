@@ -26,7 +26,7 @@
 }
 
 .CardName {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   width: 96px;
   text-align: left;
@@ -47,10 +47,18 @@
 }
 
 .CardPrice {
-  float: right;
   text-align: right;
   font-size: 10px;
   font-weight: 600;
   width: 66px;
   color: black;
+}
+
+.CardSalePrice {
+  text-align: right;
+  font-size: 8px;
+  font-weight: 500;
+  width: 66px;
+  color: black;
+  text-decoration: line-through;
 }
