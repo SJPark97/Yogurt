@@ -344,7 +344,7 @@ function SignUp() {
                       })()}
                       InputProps={{
                         endAdornment: (
-                          <Button
+                          <SignupButton
                             variant="contained"
                             size="small"
                             disabled={
@@ -358,7 +358,7 @@ function SignUp() {
                             onClick={handleClickId}
                           >
                             중복확인
-                          </Button>
+                          </SignupButton>
                         ),
                       }}
                     />
@@ -387,7 +387,7 @@ function SignUp() {
                       })()}
                       InputProps={{
                         endAdornment: (
-                          <Button
+                          <SignupButton
                             variant="contained"
                             size="small"
                             disabled={
@@ -401,7 +401,7 @@ function SignUp() {
                             onClick={handleClickNickname}
                           >
                             중복확인
-                          </Button>
+                          </SignupButton>
                         ),
                       }}
                     />
