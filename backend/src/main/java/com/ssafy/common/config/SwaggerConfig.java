@@ -31,6 +31,7 @@ public class SwaggerConfig {
                     .build();
 
             return new Docket(DocumentationType.SWAGGER_2)    //스웨거 타입으로 문서화
+                    .servers(local,dev)
                     .apiInfo(apiInfo)//위에서 설정한 정보를 통해 문서화
                     .securityContexts(Arrays.asList(securityContext()))
                     .securitySchemes(Arrays.asList(apiKey()))
