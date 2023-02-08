@@ -24,13 +24,9 @@ function WishList() {
     if (checked) {
       setCheckItems(prev => [...prev, id]);
       setTotalPrice(totalPrice + price);
-      console.log(totalPrice);
-      console.log(price);
     } else {
       setCheckItems(checkItems.filter(el => el !== id));
       setTotalPrice(totalPrice - price);
-      console.log(totalPrice, 'check');
-      console.log(price, 'check');
     }
   };
 
