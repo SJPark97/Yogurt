@@ -16,8 +16,8 @@ import './PostDetail.css';
 function PostDetail() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState([]);
-  const [seller, setSeller] = useState([]);
+  const [post, setPost] = useState(null);
+  const [seller, setSeller] = useState(null);
   // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
   // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
   const [isLiked, setIsLiked] = useState(true);
@@ -95,14 +95,15 @@ function PostDetail() {
   return (
     <div>
       <BackToTop />
-      {post?.postImages.map(image => (
-        <img
-          className="detail_img"
-          src={image.url}
-          alt="이미지사진"
-          key={image.url}
-        />
-      ))}
+      {post &&
+        post?.postImages.map(image => (
+          <img
+            className="detail_img"
+            src={image.url}
+            alt="이미지사진"
+            key={image.url}
+          />
+        ))}
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">

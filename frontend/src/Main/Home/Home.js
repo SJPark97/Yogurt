@@ -16,7 +16,6 @@ function Home() {
       .get('https://i8b204.p.ssafy.io/be-api/post')
       .then(res => {
         setPopulars(res.data);
-        console.log('인기순 데이터 받았어유', res.data);
       })
       .catch(err => {
         console.log(err);
@@ -28,7 +27,6 @@ function Home() {
       .get('https://i8b204.p.ssafy.io/be-api/post')
       .then(res => {
         setLatests(res.data);
-        console.log('최신순 데이터에유', res.data);
       })
       .catch(err => {
         console.log(err);
@@ -40,12 +38,7 @@ function Home() {
     getLatestList();
   }, []);
 
-  console.log(populars);
-  console.log(latests);
-
-  // const card = dummy.New;
   const live = dummy.Live;
-  // console.log(card);
 
   return (
     <div className="mainpage">
