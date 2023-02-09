@@ -27,13 +27,14 @@ public class BuyerAlarmController {
     public final PostService postService;
     /*
      판매자 알람 ApI
-
+      판매자에게 가는 알람
      /seller_alarm/{post_id}/{user_id} , Post
      */
     @PostMapping
-    public ResponseEntity<List<BuyerAlarm>> addBuyerAlarmList(){
+    public ResponseEntity<?> addBuyerAlarmList(){
         User seller = postService.getLoginUser();
-        return new ResponseEntity<>(buyerAlarmService.saveAlarm(seller), HttpStatus.CREATED);
+        buyerAlarmService.saveAlarm(seller);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     //  구매자 알람 삭제
