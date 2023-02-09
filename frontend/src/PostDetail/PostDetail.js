@@ -16,8 +16,8 @@ import './PostDetail.css';
 function PostDetail() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState('');
-  const [seller, setSeller] = useState('');
+  const [post, setPost] = useState([]);
+  const [seller, setSeller] = useState([]);
   // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
   // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
   const [isLiked, setIsLiked] = useState(true);
@@ -50,16 +50,21 @@ function PostDetail() {
   const token2 =
     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYxNzYyOTF9.lKI0WuuNy6McJEW_-R_vO1aDbbzn0LKhzH8kMD9BNt8';
 
+  console.log(postId);
   useEffect(() => {
     axios
       .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
       .then(res => {
+        console.log(res);
         setPost(res.data);
+      })
+      .catch(err => {
+        console.log(err);
       })
       .then(
         axios
           .get(
-            `https://i8b204.p.ssafy.io/be-api/user/seller/${seller?.sellerId}`,
+            `https://i8b204.p.ssafy.io/be-api/user/seller/${post?.sellerId}`,
             {
               headers: { Authorization: token1 },
             },
@@ -67,7 +72,8 @@ function PostDetail() {
           .then(res => setSeller(res.data))
           .catch(err => console.log('seller', err)),
       );
-  }, [postId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const wishPost = () => {
     axios
@@ -83,6 +89,8 @@ function PostDetail() {
   const salePercent = Math.floor(
     ((post?.price - post?.sale_price) / post?.price) * 100,
   );
+
+  console.log(post);
 
   return (
     <div>
