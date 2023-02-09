@@ -11,6 +11,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import BackToTop from '../AppBar/BackToTop';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
+
+import { useSelector } from 'react-redux';
 
 const ColorButton = styled(Button)(() => ({
   // color: theme.palette.getContrastText(purple[500]),
@@ -28,9 +31,6 @@ const CssTextField = styled(TextField)({
     borderBottomColor: '#deb887',
   },
   '& .MuiOutlinedInput-root': {
-    '&:hover fieldset': {
-      borderColor: 'yellow',
-    },
     '&.Mui-focused fieldset': {
       borderColor: '#deb887',
     },
@@ -56,15 +56,32 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LogIn() {
+export default function LogInPage() {
+  const user = useSelector(state => state.user.value);
+  console.log('유저', user);
+
   const navigate = useNavigate();
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      id: data.get('id'),
+      userId: data.get('id'),
       password: data.get('password'),
     });
+    const loginInfo = {
+      userId: data.get('id'),
+      password: data.get('password'),
+    };
+    console.log(loginInfo);
+    await axios
+      .post('https://i8b204.p.ssafy.io/be-api/user/login', loginInfo)
+
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (

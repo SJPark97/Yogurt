@@ -8,7 +8,7 @@ import SellerProfile from './Main/Profile/SellerProfile';
 import BuyerProfile from './Main/Profile/BuyerProfile';
 import MainAppBar from './AppBar/MainAppBar';
 import SignUp from './User/Singup';
-import LogIn from './User/Login';
+import LogInPage from './User/Login';
 import Search from './Search/Search';
 import SearchResult from './Search/SearchResult';
 // import BackToTop from "./AppBar/BackToTop";
@@ -27,7 +27,7 @@ import ScrollToTop from './ScrollToTop';
 import Room from './components/Room';
 
 // 이거에 따라서 프로필이 다르게 들어가짐
-const user = {
+const userRole = {
   // role: 'buyer',
   role: 'seller',
   id: 0,
@@ -74,14 +74,14 @@ function App() {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<PayMent />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/login" element={<LogInPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/result" element={<SearchResult />} />
         <Route path="/profile/modify" element={<ProfileModify />} />
         <Route path="/kakaopay" element={<PayResult />} />
       </Routes>
       <footer>
-        <MainFooter user={user} />
+        <MainFooter userRole={userRole} />
       </footer>
     </div>
   );
