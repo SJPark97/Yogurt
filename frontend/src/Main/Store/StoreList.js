@@ -7,6 +7,7 @@ import './StoreList.css';
 
 function StoreList() {
   const store = dummy.Stores;
+  console.log(store)
 
   return (
     <div className="Store">

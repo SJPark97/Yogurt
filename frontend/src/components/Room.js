@@ -29,6 +29,12 @@ export default function Room() {
 
   return (
     <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <form onSubmit={handleSubmit}>
         <div>
           <p>SessionId</p>
