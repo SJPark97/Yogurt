@@ -25,8 +25,9 @@ public class SellerAlarmController {
      /seller_alarm/{post_id}/{user_id} , Post
      */
     @PostMapping("/{post_id}/{user_id}")
-    public ResponseEntity<SellerAlarm> addWishList(@PathVariable("post_id") Long post_id , @PathVariable("user_id") Long user_id){
-        return new ResponseEntity<>(sellerAlarmService.saveAlarm(post_id, user_id), HttpStatus.CREATED);
+    public ResponseEntity<?> addWishList(@PathVariable("post_id") Long post_id , @PathVariable("user_id") Long user_id){
+        sellerAlarmService.saveAlarm(post_id, user_id);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     // 알람 삭제

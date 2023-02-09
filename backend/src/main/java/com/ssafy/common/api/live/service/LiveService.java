@@ -50,7 +50,7 @@ public class LiveService {
 
     private final LiveitemConverter liveitemConverter;
 
-    public final LiveRepository liveRepository;
+    private final LiveRepository liveRepository;
 
     // 라이브 등록
     // time , title , thumbnail 은 requset로 받았고
