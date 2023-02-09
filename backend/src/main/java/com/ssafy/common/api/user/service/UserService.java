@@ -4,6 +4,7 @@ import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
+import com.ssafy.common.api.user.dto.UserSellerResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,11 @@ public class UserService {
 
     public User findByUserId(String userId){
         return userRepository.findByUserId(userId);
+    }
+    public UserSellerResponse findById(Long id){
+        User user = userRepository.findById(id).get();
+        UserSellerResponse userSellerResponse = new UserSellerResponse(user);
+        return userSellerResponse;
     }
 
     public List<UserResponseForm> findByRole(UserRole role) {
