@@ -1,6 +1,5 @@
 package com.ssafy.common.api.relation.dto.zzim;
 
-
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.domain.Zzim;
