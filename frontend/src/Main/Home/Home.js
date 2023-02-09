@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import './Home.css';
 import BackToTop from '../../AppBar/BackToTop';
@@ -64,4 +63,4 @@ function Home() {
   );
 }
 
-export default React.memo(Home);
+export default Home;

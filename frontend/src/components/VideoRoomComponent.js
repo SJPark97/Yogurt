@@ -7,11 +7,11 @@ import StreamComponent from './stream/StreamComponent';
 import './VideoRoomComponent.css';
 
 import OpenViduLayout from '../layout/openvidu-layout';
-import UserModel from '../models/user-model';
+import UserWebModel from '../models/user-model';
 import ToolbarSellerComponent from './toolbar/ToolbarSellerComponent';
 import ToolbarBuyerComponent from './toolbar/ToolbarBuyerComponent';
 
-var localUser = new UserModel();
+var localUser = new UserWebModel();
 const APPLICATION_SERVER_URL = 'https://i8b204.p.ssafy.io/api/';
 // const APPLICATION_SERVER_URL =
 //   process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
@@ -330,7 +330,7 @@ class VideoRoomComponent extends Component {
           'custom-class',
         );
       });
-      const newUser = new UserModel();
+      const newUser = new UserWebModel();
       newUser.setStreamManager(subscriber);
       newUser.setConnectionId(event.stream.connection.connectionId);
       newUser.setType('remote');

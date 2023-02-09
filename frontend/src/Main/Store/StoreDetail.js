@@ -11,7 +11,7 @@ import './Store.css';
 
 // const StyledLink = styled(Link)``;
 
-function Store({ sellerData }) {
+function StoreDetail({ sellerData }) {
   let likeCnt = '';
   if (sellerData.Store_likes >= 10000) {
     likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
@@ -72,4 +72,4 @@ function Store({ sellerData }) {
   );
 }
 
-export default Store;
+export default StoreDetail;
