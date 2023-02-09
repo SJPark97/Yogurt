@@ -10,6 +10,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserBuyerAlarmResponse;
 import com.ssafy.common.api.user.dto.UserSellerAlarmResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/buyer_alarm")
+@RequiredArgsConstructor
 public class BuyerAlarmController {
-    public BuyerAlarmService buyerAlarmService;
+    public final BuyerAlarmService buyerAlarmService;
 
 
-    public PostService postService;
+    public final PostService postService;
     /*
      판매자 알람 ApI
 
