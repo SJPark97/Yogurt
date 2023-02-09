@@ -26,6 +26,7 @@ public class PostDetailResponse {
     private final String typeCateName;
     private final List<PostImageDto> postImages;
     private final Long sellerId;
+    private final String sellerName;
 
     public PostDetailResponse(Post post) {
         id = post.getId();
@@ -43,5 +44,6 @@ public class PostDetailResponse {
                 .stream().map(postimage -> new PostImageDto(postimage))
                 .collect(Collectors.toList());
         sellerId = post.getSeller().getId();
+        sellerName = post.getSeller().getNickName();
     }
 }
