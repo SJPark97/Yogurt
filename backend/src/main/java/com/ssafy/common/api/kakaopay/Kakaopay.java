@@ -39,9 +39,10 @@ public class Kakaopay {
         params.add("quantity","1" );
         params.add("total_amount", "2100");
         params.add("tax_free_amount", "100");
-        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
-        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
-        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
+        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccess");
+        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api//kakaoPayCancel");
+        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccessFail");
+
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
         try {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
@@ -80,14 +81,11 @@ public class Kakaopay {
         params.add("total_amount", "2100");
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
-
         try {
             kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
             log.info("" + kakaoPayApprovalVO);
             System.out.println(kakaoPayApprovalVO);
-
             return kakaoPayApprovalVO;
-
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
