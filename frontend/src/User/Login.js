@@ -13,7 +13,8 @@ import BackToTop from '../AppBar/BackToTop';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../redux/user';
 
 const ColorButton = styled(Button)(() => ({
   // color: theme.palette.getContrastText(purple[500]),
@@ -61,6 +62,8 @@ export default function LogInPage() {
   console.log('유저', user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -75,9 +78,10 @@ export default function LogInPage() {
     console.log(loginInfo);
     await axios
       .post('https://i8b204.p.ssafy.io/be-api/user/login', loginInfo)
-
       .then(res => {
         console.log(res);
+        dispatch(login({ token: res.headers.authorization }));
+        alert('로그인되었습니다.');
       })
       .catch(err => {
         console.log(err);
