@@ -46,10 +46,11 @@ public class UserController {
     private final UserService userService;
     private final JwtProvider jwtProvider;
 
-    @GetMapping("/home")
-    public String goHome() {
-        return "<h1>home</h1>";
-    }
+//    @GetMapping("/home")
+//    public String goHome() {
+//        return "<h1>home</h1>";
+//    }
+
 
     @GetMapping("/refresh")
     @ApiOperation(value = "accessToken 재발급")
@@ -93,7 +94,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "입력 오류"),
             @ApiResponse(code = 500, message = "서버에러")
     })
-    public ResponseEntity<?> join(@Valid @RequestBody User user, BindingResult bindingResult){
+    public ResponseEntity<?> join(@Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
         }
