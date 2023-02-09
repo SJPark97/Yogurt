@@ -25,7 +25,7 @@ public class PostAllResponse {
     public   PostAllResponse(Post post){
         id = post.getId();
         sellerId = post.getSeller().getId();
-        sellerName = post.getSeller().getName();
+        sellerName = post.getSeller().getNickName();
         title = post.getTitle();
         brCateName = post.getBrandcategory().getName();
         brCateId= post.getBrandcategory().getId();
