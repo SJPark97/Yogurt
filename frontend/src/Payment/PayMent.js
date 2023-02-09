@@ -1,19 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
-import dummy from '../db/list.json';
 import Divider from '@mui/material/Divider';
+
 import './PayMent.css';
 
 function Payment() {
   const location = useLocation();
-  console.log('ff', location);
   const { checkItems } = location.state;
-  console.log('dd', checkItems);
   const { totalPrice } = location.state;
-  const wishlist = dummy.WishLists.filter(item =>
-    checkItems.includes(item.wishListId),
-  );
+  const { post } = location.state;
 
   return (
     <div className="payment-wrap">
@@ -21,23 +17,22 @@ function Payment() {
       <div className="pay-total">
         <p>주문 상품 총 {checkItems.length}개</p>
         <Divider sx={{ marginY: '1rem' }} />
-        {wishlist.map(wish => (
-          <div key={wish.wishListId}>
+        {post.map(pay => (
+          <div key={pay.id}>
+            {console.log(pay)}
             <div className="pay-post">
               <div className="pay-post-img-div">
                 <img
                   className="pay-post-img"
-                  src={wish.post.postimage_url}
+                  src={pay.postImages[0].url}
                   alt="이미지사진"
                 />
               </div>
               <div className="pay-post-info">
-                <div className="pay-post-sellername">
-                  {wish.post.sellerName}
-                </div>
-                <div className="pay-post-title">{wish.post.post_title}</div>
+                <div className="pay-post-sellername">{pay.nickName}</div>
+                <div className="pay-post-title">{pay.title}</div>
                 <div className="pay-post-price">
-                  {wish.post.post_sale_price.toLocaleString()}원
+                  {pay.sale_price.toLocaleString()}원
                 </div>
               </div>
             </div>
