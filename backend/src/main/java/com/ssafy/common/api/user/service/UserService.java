@@ -2,6 +2,7 @@ package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.dto.UserLoginResponse;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.dto.UserSellerResponse;
@@ -31,8 +32,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User findByUserId(String userId){
-        return userRepository.findByUserId(userId);
+    public UserLoginResponse getUserLoginResponseById(long id){
+        User user = userRepository.findById(id).get();
+        UserLoginResponse res = new UserLoginResponse(user.getId(), user.getUserId(), user.getRole(),user.getNickName());
+        return res;
     }
     public UserSellerResponse findById(Long id){
         User user = userRepository.findById(id).get();
@@ -75,4 +78,5 @@ public class UserService {
     public void deleteUser(long id){
         userRepository.deleteById(id);
     }
+
 }
