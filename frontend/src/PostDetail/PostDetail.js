@@ -45,7 +45,7 @@ function PostDetail() {
     axios.get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`).then(res => {
       setPost(res.data);
     });
-  }, []);
+  }, [postId]);
   console.log(post);
 
   const salePercent = Math.floor(

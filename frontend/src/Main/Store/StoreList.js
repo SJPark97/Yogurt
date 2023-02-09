@@ -2,7 +2,7 @@ import '../../App.css';
 import BackToTop from '../../AppBar/BackToTop';
 // import StoreList from '../Common/StoreList';
 import dummy from '../../db/SJ.json';
-import Store from './Store';
+import StoreDetail from './StoreDetail';
 import './StoreList.css';
 
 function StoreList() {
@@ -14,7 +14,7 @@ function StoreList() {
       <div>
         {store.map(data => (
           // <StoreList data={data} />
-          <Store sellerData={data} key={data.Store_id} />
+          <StoreDetail sellerData={data} key={data.Store_id} />
         ))}
       </div>
     </div>

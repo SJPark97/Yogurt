@@ -26,7 +26,7 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function Footer({ user }) {
+export default function Footer({ userRole }) {
   const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
@@ -44,13 +44,13 @@ export default function Footer({ user }) {
     }
   }, [pageUrl]);
 
-  // 유저정보
-  let userRole;
-  if (user.role === 'buyer') {
-    userRole = 'buyer';
-  } else {
-    userRole = 'seller';
-  }
+  // // 유저정보
+  // let userRole;
+  // if (user.role === 'buyer') {
+  //   userRole = 'buyer';
+  // } else {
+  //   userRole = 'seller';
+  // }
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
