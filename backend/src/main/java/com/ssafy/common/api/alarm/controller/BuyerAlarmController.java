@@ -10,6 +10,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserBuyerAlarmResponse;
 import com.ssafy.common.api.user.dto.UserSellerAlarmResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +19,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/buyer_alarm")
+@RequiredArgsConstructor
 public class BuyerAlarmController {
-    public BuyerAlarmService buyerAlarmService;
+    public final BuyerAlarmService buyerAlarmService;
 
 
-    public PostService postService;
+    public final PostService postService;
     /*
      판매자 알람 ApI
-
+      판매자에게 가는 알람
      /seller_alarm/{post_id}/{user_id} , Post
      */
     @PostMapping
-    public ResponseEntity<List<BuyerAlarm>> addBuyerAlarmList(){
+    public ResponseEntity<?> addBuyerAlarmList(){
         User seller = postService.getLoginUser();
-        return new ResponseEntity<>(buyerAlarmService.saveAlarm(seller), HttpStatus.CREATED);
+        buyerAlarmService.saveAlarm(seller);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     //  구매자 알람 삭제

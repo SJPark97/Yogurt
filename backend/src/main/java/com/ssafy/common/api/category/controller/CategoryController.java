@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping(value = "/cate")
 public class CategoryController {
@@ -46,9 +45,8 @@ public class CategoryController {
         return  new ResponseEntity<>(categoryService.findTypeCate(), HttpStatus.OK);
     }
     // 상세 카테고리 조회 API
-    @GetMapping("/type/{detailId}")
+    @GetMapping("/type/detail/{detailId}")
     public ResponseEntity<List<PostAllResponse>>getTypeTopCatePost(@PathVariable("detailId") Long detailId){
         return new ResponseEntity<>(categoryService.findTypeTopCatePost(detailId), HttpStatus.OK);
-
     }
 }

@@ -2,10 +2,10 @@ package com.ssafy.common.api.relation.controller;
 
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.dto.Likes.LikesResponse;
-import com.ssafy.common.api.relation.dto.Likes.LikesUserResponse;
+import com.ssafy.common.api.relation.dto.Likes.LikesUserBuyerResponse;
+import com.ssafy.common.api.relation.dto.Likes.LikesUserSellerResponse;
 import com.ssafy.common.api.relation.service.LikesService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLikesResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,13 +36,13 @@ public class LikesController {
     }
     // buyer 가 보는 즐겨 찾기 seller 목록
     @GetMapping("/seller")
-    public ResponseEntity<List<LikesUserResponse>> sellerLikes(){
+    public ResponseEntity<List<LikesUserSellerResponse>> sellerLikes(){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(likesService.sellerLikesList(user), HttpStatus.OK);
     }
     //seller 가 보는 즐겨찾기 buyer 의 목록
     @GetMapping("/buyer")
-    public ResponseEntity<List<LikesUserResponse>> buyerLikes(){
+    public ResponseEntity<List<LikesUserBuyerResponse>> buyerLikes(){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(likesService.buyerLikesList(user), HttpStatus.OK);
     }

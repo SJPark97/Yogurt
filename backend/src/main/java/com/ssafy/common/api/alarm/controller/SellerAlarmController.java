@@ -8,23 +8,26 @@ import com.ssafy.common.api.relation.dto.wishList.WishListResponse;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.UserSellerAlarmResponse;
 import com.ssafy.common.api.user.dto.UserWishListResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/seller_alarm")
+@RequiredArgsConstructor
 public class SellerAlarmController {
-    public SellerAlarmService sellerAlarmService;
+    public final SellerAlarmService sellerAlarmService;
 
-    public PostService postService;
+    public final PostService postService;
     /*
      판매자 알람 ApI
      /seller_alarm/{post_id}/{user_id} , Post
      */
     @PostMapping("/{post_id}/{user_id}")
-    public ResponseEntity<SellerAlarm> addWishList(@PathVariable("post_id") Long post_id , @PathVariable("user_id") Long user_id){
-        return new ResponseEntity<>(sellerAlarmService.saveAlarm(post_id, user_id), HttpStatus.CREATED);
+    public ResponseEntity<?> addWishList(@PathVariable("post_id") Long post_id , @PathVariable("user_id") Long user_id){
+        sellerAlarmService.saveAlarm(post_id, user_id);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     // 알람 삭제

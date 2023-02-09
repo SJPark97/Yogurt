@@ -8,7 +8,6 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class CorsConfig{
-
     @Bean
     public CorsFilter corsFilter(){
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -17,8 +16,7 @@ public class CorsConfig{
         config.addAllowedOrigin("*");   //모든 ip에 응답을 허용하겠다
         config.addAllowedHeader("*");   //모든 header에 응답을 허용하겠다.
         config.addAllowedMethod("*");   //모든 http method에 응답을 허용하겠다.
-        source.registerCorsConfiguration("/user/seller/**",config);
-        source.registerCorsConfiguration("/user/buyer/**",config);
+        source.registerCorsConfiguration("/**",config);
         return new CorsFilter(source);
     }
 
