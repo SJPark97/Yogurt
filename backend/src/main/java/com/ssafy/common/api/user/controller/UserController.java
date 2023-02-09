@@ -3,6 +3,7 @@ package com.ssafy.common.api.user.controller;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.dto.UserResponseForm;
+import com.ssafy.common.api.user.dto.UserSellerResponse;
 import com.ssafy.common.api.user.service.UserService;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -121,6 +122,24 @@ public class UserController {
         try {
             List<UserResponseForm> formList = userService.findByRole(ROLE_SELLER);
             return new ResponseEntity<>(formList, HttpStatus.OK);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    @GetMapping("/seller/{id}")
+    @ApiOperation(value = "판매자 1명 조회")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "판매자 전체 조회 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 401, message = "인증이 되지 않음"),
+            @ApiResponse(code = 403, message = "권한 없음"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
+    public ResponseEntity<?> getSeller(@PathVariable("id")Long id){
+        try {
+            UserSellerResponse userResponse = userService.findById(id);
+            return new ResponseEntity<>(userResponse, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
