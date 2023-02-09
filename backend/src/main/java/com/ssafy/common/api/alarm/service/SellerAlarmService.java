@@ -37,7 +37,7 @@ public class SellerAlarmService {
         Post post = postRepository.findById(postId).get();
         User user = userRepository.findById(userId).get();
         SellerAlarm sellerAlarm = sellerAlarmConverter.ConvertUserPostSellerAlarm(user,post,new Timestamp(System.currentTimeMillis()));
-        sellerAlarmRepository.save(sellerAlarm);
+         sellerAlarmRepository.save(sellerAlarm);
         return sellerAlarm;
     }
 
