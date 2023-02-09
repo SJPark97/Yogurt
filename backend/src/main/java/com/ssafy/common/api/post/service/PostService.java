@@ -71,7 +71,7 @@ public class PostService {
 
     // 상품 라이브 status 변환
     @Transactional
-    public PostDetailResponse updateLiveStatus(Long postId, User user){
+    public PostDetailResponse updateLiveStatus(Long postId){
         Post post = postRepository.findById(postId).get();
         post.updateStatus(post);
         return new PostDetailResponse(post);
@@ -79,7 +79,7 @@ public class PostService {
 
     // 상품 삭제
     @Transactional
-    public PostDetailResponse deletePost(Long postId, User user){
+    public PostDetailResponse deletePost(Long postId){
         Post post = postRepository.findById(postId).get();
         post.delete();
         return new PostDetailResponse(post);

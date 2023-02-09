@@ -39,15 +39,13 @@ public class PostController {
     // 상품 라이브 여부 수정 API
     @PatchMapping ("/live/{id}")
     public ResponseEntity<PostDetailResponse> updateLiveStatus(@PathVariable("id") Long post_id){
-        User user = postService.getLoginUser();
-        return new ResponseEntity<>(postService.updateLiveStatus(post_id, user), HttpStatus.OK);
+        return new ResponseEntity<>(postService.updateLiveStatus(post_id), HttpStatus.OK);
     }
 
     // 상품 삭제 API
     @PatchMapping ("/{id}")
     public ResponseEntity<PostDetailResponse> delete(@PathVariable("id")Long post_id){
-        User user = postService.getLoginUser();
-        return new ResponseEntity<>(postService.deletePost(post_id, user), HttpStatus.OK);
+        return new ResponseEntity<>(postService.deletePost(post_id), HttpStatus.OK);
     }
 
     // user id로 전체 상품 찾기
