@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class BuyerAlarmConverter {
 
-    private AlarmStatus status= AlarmStatus.STATUS_ACTIVE;
+    private final AlarmStatus status = AlarmStatus.STATUS_ACTIVE;
 
     public BuyerAlarm ConvertUserBuyerSellerAlarm( User buyer, User seller ,Timestamp time){
         return BuyerAlarm.builder()

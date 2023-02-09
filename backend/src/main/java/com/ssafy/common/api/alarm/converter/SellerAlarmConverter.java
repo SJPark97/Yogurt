@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Component
 @RequiredArgsConstructor
 public class SellerAlarmConverter {
-    private AlarmStatus status= AlarmStatus.STATUS_ACTIVE;
+    private final AlarmStatus status= AlarmStatus.STATUS_ACTIVE;
 
     public SellerAlarm ConvertUserPostSellerAlarm(User user , Post post, Timestamp time){
         return SellerAlarm.builder()
