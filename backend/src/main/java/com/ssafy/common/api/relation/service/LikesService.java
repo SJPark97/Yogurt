@@ -46,13 +46,13 @@ public class LikesService {
         UserLikesResponse response = userRepository.findById(user.getId())
                 .map(UserLikesResponse::new)
                 .get();
-        return response.getSellerLikes();
+        return response.getBuyerLikes();
     }
     // seller 의 buyer 즐겨찾기 목록 API
     public List<LikesUserBuyerResponse> buyerLikesList(User user){
         UserLikesResponse response = userRepository.findById(user.getId())
                 .map(UserLikesResponse::new)
                 .get();
-        return response.getBuyerLikes();
+        return response.getSellerLikes();
     }
 }
