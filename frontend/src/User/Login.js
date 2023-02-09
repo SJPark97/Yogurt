@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -38,6 +39,17 @@ const CssTextField = styled(TextField)({
   },
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 320,
+  height: 200,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+};
+
 function Copyright(props) {
   return (
     <Typography
@@ -59,7 +71,7 @@ const theme = createTheme();
 
 export default function LogInPage() {
   const user = useSelector(state => state.user.value);
-  console.log('유저', user);
+  console.log('홈페이지에서 유저 체크', user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,10 +79,6 @@ export default function LogInPage() {
   const handleSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      userId: data.get('id'),
-      password: data.get('password'),
-    });
     const loginInfo = {
       userId: data.get('id'),
       password: data.get('password'),
@@ -80,12 +88,33 @@ export default function LogInPage() {
       .post('https://i8b204.p.ssafy.io/be-api/user/login', loginInfo)
       .then(res => {
         console.log(res);
+        const accesToken = res.headers.authorization;
+        console.log(accesToken);
+
+        // 여기서 유저정보 조회해서 pk, nickname, role 가져와서 dispatch 저장
+        // axios
+        //   .get('https://i8b204.p.ssafy.io/be-api/user/seller', {
+        //     headers: {
+        //       Authorization: res.headers.authorization,
+        //     },
+        //   })
+        //   .then(res => {
+        //     console.log(res);
+        //   });
+
         dispatch(login({ token: res.headers.authorization }));
-        alert('로그인되었습니다.');
+        handleOpen();
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/');
   };
 
   return (
@@ -95,7 +124,7 @@ export default function LogInPage() {
         <BackToTop />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 16,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -156,6 +185,38 @@ export default function LogInPage() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="div"
+            sx={{
+              textAlign: 'center',
+              alignItems: 'center',
+              padding: '50px',
+              marginTop: '16px',
+            }}
+          >
+            로그인 되었습니다!
+          </Typography>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ marginTop: '16px', height: '50px' }}
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            홈으로 가기
+          </Button>
+        </Box>
+      </Modal>
     </ThemeProvider>
   );
 }

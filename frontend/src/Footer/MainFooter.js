@@ -7,7 +7,7 @@ function MainAppBar({ userRole }) {
   // useEffect(() => {
   //   setAppBar(pageUrl);
   // }, [pageUrl]);
-  console.log('이거다!', pageUrl);
+  console.log('푸터에서 이동한 페이지 주소', pageUrl);
 
   return (
     <div>

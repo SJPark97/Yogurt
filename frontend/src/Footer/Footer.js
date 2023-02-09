@@ -7,11 +7,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginIcon from '@mui/icons-material/Login';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 
 const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   color: #bdbdbd;
@@ -31,6 +34,9 @@ export default function Footer({ userRole }) {
   const ref = React.useRef(null);
   const navigate = useNavigate();
   const pageUrl = useLocation().pathname;
+
+  const accesToken = useSelector(state => state.user.value.token);
+  console.log('푸터에서 찍은 토큰 정보', accesToken);
 
   useEffect(() => {
     if (pageUrl === '/') {
@@ -67,39 +73,56 @@ export default function Footer({ userRole }) {
           }}
         >
           <CustomBottomNavigationAction
-            component={Link}
-            to="/"
             label="메인"
             icon={<HomeIcon />}
+            onClick={() => {
+              navigate('/');
+            }}
             // onClick={() => navigate("/")} 바로 이동할때는 Link쓰기
           />
           <CustomBottomNavigationAction
-            component={Link}
-            to="/stores"
             label="상점"
             icon={<StoreIcon />}
+            onClick={() => {
+              if (accesToken) {
+                navigate('/stores');
+              } else {
+                navigate('/login');
+              }
+            }}
           />
           <CustomBottomNavigationAction
-            component={Link}
-            to="/alarms"
             label="알림"
             icon={<NotificationsIcon />}
+            onClick={() => {
+              if (accesToken) {
+                navigate('/alarms');
+              } else {
+                navigate('/login');
+              }
+            }}
           />
-          <CustomBottomNavigationAction
-            label="프로필"
-            icon={<AccountCircleIcon />}
-            onClick={() =>
-              userRole === 'buyer'
-                ? navigate('/profile/buyer?tab=0')
-                : navigate('/profile/seller?tab=0')
-            } // 이거는 로그인 안됐을 때 로그인 페이지로 가게
-            // sx={[
-            //   {
-            //     color: "#bdbdbd",
-            //     "&.Mui-selected": { color: "#deb887", background: "#ffffff" },
-            //   },
-            // ]}
-          />
+          {accesToken ? (
+            <CustomBottomNavigationAction
+              label="프로필"
+              icon={<AccountCircleIcon />}
+              onClick={() => {
+                if (userRole === 'buyer') {
+                  navigate('/profile/buyer?tab=0');
+                } else {
+                  navigate('/profile/seller?tab=0');
+                }
+              }}
+            />
+          ) : (
+            <CustomBottomNavigationAction
+              label="로그인"
+              icon={<LoginIcon />}
+              onClick={() => {
+                navigate('/login');
+              }}
+            />
+          )}
         </BottomNavigation>
       </Paper>
     </Box>
