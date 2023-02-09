@@ -175,16 +175,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
         }
     }
-    @GetMapping("/{id}")
+    @GetMapping("")
     @ApiOperation(value = "유저 정보 조회")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "유저 정보 조회"),
             @ApiResponse(code = 400, message = "오류"),
             @ApiResponse(code = 500, message = "서버에러")
     })
-    public ResponseEntity<?> getUser(@PathVariable long id){
+    public ResponseEntity<?> getUser(@RequestParam String userId){
         try{
-            UserLoginResponse res = userService.getUserLoginResponseById(id);
+            UserLoginResponse res = userService.findByUserId(userId);
             System.out.println("ABC");
             return new ResponseEntity<>(res,HttpStatus.OK);
         }catch (NullPointerException e){

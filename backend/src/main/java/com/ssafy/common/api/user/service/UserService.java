@@ -32,8 +32,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserLoginResponse getUserLoginResponseById(long id){
-        User user = userRepository.findById(id).get();
+    public UserLoginResponse findByUserId(String userId){
+        User user = userRepository.findByUserId(userId);
         UserLoginResponse res = new UserLoginResponse(user.getId(), user.getUserId(), user.getRole(),user.getNickName());
         return res;
     }
