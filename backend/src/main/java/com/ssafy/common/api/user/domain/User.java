@@ -80,7 +80,7 @@ public class User {
     @NotNull
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
-
+    // ACTIVE, DELETE
 //    public List<String> getRoleList(){
 //        if(this.role.length()>0){
 //            return Arrays.asList(this.role.split(","));
