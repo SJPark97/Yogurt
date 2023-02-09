@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import BackToTop from '../AppBar/BackToTop';
-// import Carousel from '../Common/Carousel';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -12,11 +12,15 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
 import './PostDetail.css';
-import axios from 'axios';
 
 function PostDetail() {
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
+  const navigate = useNavigate();
+  const [post, setPost] = useState('');
+  const [seller, setSeller] = useState('');
+  // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
+  // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
+  const [isLiked, setIsLiked] = useState(true);
 
   const ColorButton = styled(Button)(() => ({
     fontSize: '20px',
@@ -40,38 +44,65 @@ function PostDetail() {
       backgroundColor: '#ffffff',
     },
   }));
-  console.log(postId);
+
+  const token1 =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJzc2FmeTEiLCJleHAiOjE2NzYxODE0OTV9.7RfncJBF-f_0Mn3EjjHhjWNw3-g-vH1GtvYZKEeKgMg';
+  const token2 =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYxNzYyOTF9.lKI0WuuNy6McJEW_-R_vO1aDbbzn0LKhzH8kMD9BNt8';
+
   useEffect(() => {
-    axios.get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`).then(res => {
-      setPost(res.data);
-    });
+    axios
+      .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
+      .then(res => {
+        setPost(res.data);
+      })
+      .then(
+        axios
+          .get(
+            `https://i8b204.p.ssafy.io/be-api/user/seller/${seller?.sellerId}`,
+            {
+              headers: { Authorization: token1 },
+            },
+          )
+          .then(res => setSeller(res.data))
+          .catch(err => console.log('seller', err)),
+      );
   }, [postId]);
-  console.log(post);
+
+  const wishPost = () => {
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${post?.id}`, {
+        headers: {
+          Authorization: token2,
+        },
+      })
+      .then(res => setPost(res))
+      .catch(err => console.log('wishlist', err));
+  };
 
   const salePercent = Math.floor(
     ((post?.price - post?.sale_price) / post?.price) * 100,
   );
 
-  const navigate = useNavigate();
-
-  // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
-  // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
-  const [isLiked, setIsLiked] = useState(true);
-  const handleClick = () => {
-    setIsLiked(!isLiked);
-  };
-
   return (
     <div>
       <BackToTop />
-      <img className="detail_img" src={post?.postImages} alt="이미지사진" />
+      {post?.postImages.map(image => (
+        <img
+          className="detail_img"
+          src={image.url}
+          alt="이미지사진"
+          key={image.url}
+        />
+      ))}
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
-            <div className="detail-post-store">{post?.sellerId}</div>
+            <div className="detail-post-store">{seller?.nickName}</div>
             <div className="detail-post-title">{post?.title}</div>
-            <div className="detail-br-cateId">{post?.typeCateName}</div>
-            <div className="detail-br-cateId">{post?.brCateName}</div>
+            <div className="detail-br-cateId">
+              {post?.brCateName}/{post?.typeCateName}
+            </div>
             <div className="detail-price">
               {salePercent ? (
                 <div className="detail-sale-percent">{salePercent}%</div>
@@ -90,7 +121,7 @@ function PostDetail() {
               color="inherit"
               aria-label="like"
               sx={{ color: 'red' }}
-              onClick={handleClick}
+              onClick={() => setIsLiked(!isLiked)}
             >
               {isLiked && <FavoriteIcon />}
               {!isLiked && <FavoriteBorderIcon />}
@@ -106,17 +137,16 @@ function PostDetail() {
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-detail-info">
           <div className="detail-detail-name">상세설명</div>
-          {/* 왜 왼쪽정렬안되지? */}
           <div className="detail-detail">{post?.content}</div>
         </div>
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-store-info">
           <div className="detail-store-name">
-            {post?.sellerId}님의 다른 상품
+            {seller?.nickName}님의 다른 상품
           </div>
+          {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
+          {/* <Carousel card={dummy.Popular} /> */}
         </div>
-        {/* 상점명 상품번호 넘겨서 할건가? 어떻게 할지 생각해보기 */}
-        {/* <Carousel card={dummy.Popular} /> */}
       </div>
       <footer>
         <Paper
@@ -133,7 +163,7 @@ function PostDetail() {
               className="like-bnt"
               variant="contained"
               sx={{ background: '#ffffff', color: 'red' }}
-              onClick={handleClick}
+              onClick={() => setIsLiked(!isLiked)}
             >
               {isLiked && <FavoriteIcon />}
               {!isLiked && <FavoriteBorderIcon />}
@@ -141,9 +171,7 @@ function PostDetail() {
             <ColorButton
               variant="contained"
               fullWidth
-              onClick={() => {
-                console.log('장바구니 아이템 추가 후 alert');
-              }}
+              onClick={() => wishPost()}
             >
               <div>장바구니</div>
             </ColorButton>
@@ -151,9 +179,9 @@ function PostDetail() {
               variant="contained"
               fullWidth
               onClick={() => {
-                console.log('바로구매하기 페이지로 이동하기');
                 navigate('/payment', {
                   state: {
+                    post: [post],
                     checkItems: [post?.id],
                     totalPrice: post?.sale_price,
                   },

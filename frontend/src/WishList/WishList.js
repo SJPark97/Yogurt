@@ -10,9 +10,9 @@ function WishList() {
 
   const wishlist = dummy.WishLists;
 
-  const allWish = wishlist.map(wish => wish.wishListId);
-  const [checkItems, setCheckItems] = useState(allWish);
+  const [checkItems, setCheckItems] = useState(null);
   checkItems.sort();
+  console.log(checkItems);
 
   const totalwishprice = wishlist.map(el => el.post.post_sale_price);
   const priceTotal = totalwishprice.reduce((a, b) => a + b, 0);
