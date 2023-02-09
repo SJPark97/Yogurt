@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /*
         스프링 시큐리티 처리 configure
         Cors정책을 피하기 위한 corsFilter 사용
-
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -49,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(authenticationFilter)   //AuthenticationManager를 매개변수로 넘겨야함
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository,jwtProvider))   //AuthenticationManager를 매개변수로 넘겨야함
                 .authorizeRequests()
-                .antMatchers("/user/seller/**").access("hasRole('ROLE_SELLER')")
+                .antMatchers("/user/seller/**").access("hasRole('ROLE_SELLER') or hasRole('ROLE_BUYER')")
                 .antMatchers("/user/buyer/**").access("hasRole('ROLE_BUYER')")
                 .anyRequest().permitAll();
     }
