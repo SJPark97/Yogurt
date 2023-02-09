@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 public class UserLikesResponse
 {
     private final Long id;
-    private final List<LikesUserBuyerResponse> sellerLikes;
-    private final List<LikesUserSellerResponse> buyerLikes;
+    private final List<LikesUserSellerResponse> sellerLikes;
+    private final List<LikesUserBuyerResponse> buyerLikes;
     public UserLikesResponse(User user){
         id = user.getId();
         sellerLikes = user.getLikess_Seller()
-                .stream().map(likes -> new LikesUserBuyerResponse(likes))
+                .stream().map(likes -> new LikesUserSellerResponse(likes))
                 .collect(Collectors.toList());
         buyerLikes = user.getLikess_Buyer()
-                .stream().map(likes -> new LikesUserSellerResponse(likes))
+                .stream().map(likes -> new LikesUserBuyerResponse(likes))
                 .collect(Collectors.toList());
     }
 }
