@@ -8,12 +8,12 @@ import lombok.Getter;
 
 @Getter
 public class LikesUserSellerResponse {
-    private final UserBuyerResponse seller;
+    private final UserSellerResponse seller;
     private final Long likesId;
     private final RelationStatus status;
     public LikesUserSellerResponse(Likes likes){
         likesId = likes.getId();
-        seller = new UserBuyerResponse(likes.getSeller());
+        seller = new UserSellerResponse(likes.getSeller());
         status = likes.getStatus();
     }
 }
