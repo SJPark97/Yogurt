@@ -97,6 +97,11 @@ export default class ChatComponent extends Component {
             <br />
             <br />
             <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {this.state.messageList.map((data, i) => (
               <div key={i} id="remoteUsers" className={'message left'}>
                 <div className="msg-detail">
