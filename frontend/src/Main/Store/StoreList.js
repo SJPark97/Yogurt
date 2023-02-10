@@ -1,20 +1,41 @@
 import '../../App.css';
+import { useEffect, useState, useCallback } from 'react';
 import BackToTop from '../../AppBar/BackToTop';
-// import StoreList from '../Common/StoreList';
-import dummy from '../../db/SJ.json';
-import StoreDetail from './StoreDetail';
+import { useSelector } from 'react-redux';
+import StoreItem from './StoreItem';
 import './StoreList.css';
+import axios from 'axios';
 
 function StoreList() {
-  const store = dummy.Stores;
+  const [stores, setStores] = useState([]);
+  const loginUser = useSelector(state => state.user.value);
+
+  const getStores = useCallback(async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/user/seller', {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        setStores(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loginUser]);
+
+  useEffect(() => {
+    getStores();
+  }, [getStores]);
+
+  console.log('스토어 페이지 - 스토어 리스트', stores);
 
   return (
     <div className="Store">
       <BackToTop />
       <div>
-        {store.map(data => (
+        {stores.map(store => (
           // <StoreList data={data} />
-          <StoreDetail sellerData={data} key={data.Store_id} />
+          <StoreItem store={store} key={store.id} />
         ))}
       </div>
     </div>
