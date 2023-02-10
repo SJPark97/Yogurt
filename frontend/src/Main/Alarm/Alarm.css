@@ -2,28 +2,29 @@
   height: 80px;
   width: 80px;
   border-radius: 16px;
+  border: 1px solid #dfbf96;
 }
 
-.alram-name {
-  font-family: 'Inter';
-  font-style: normal;
+.alarm-post {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   font-weight: 600;
-  font-size: 20px;
-  margin: 0;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .alarm-content {
-  margin-left: 1rem;
-  margin-right: 1rem;
-  font-weight: 700;
-}
-/* 
-.store-introduce {
-  margin-left: 16px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   font-weight: 500;
   font-size: 14px;
-  text-align: left;
+  overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: break-word;
-  word-break: break-all;
-} */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
