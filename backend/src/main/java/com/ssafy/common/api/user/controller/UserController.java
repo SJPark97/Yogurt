@@ -116,7 +116,7 @@ public class UserController {
     })
     public ResponseEntity<?> getAllSeller(){
         try {
-            List<UserResponseForm> formList = userService.findByRole(ROLE_SELLER);
+            List<UserSellerResponse> formList = userService.findByRole(ROLE_SELLER);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
