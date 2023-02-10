@@ -87,28 +87,37 @@ export default function LogInPage() {
     await axios
       .post('https://i8b204.p.ssafy.io/be-api/user/login', loginInfo)
       .then(res => {
-        console.log(res);
         const accesToken = res.headers.authorization;
-        console.log(accesToken);
 
         // 여기서 유저정보 조회해서 pk, nickname, role 가져와서 dispatch 저장
-        // axios
-        //   .get('https://i8b204.p.ssafy.io/be-api/user/seller', {
-        //     headers: {
-        //       Authorization: res.headers.authorization,
-        //     },
-        //   })
-        //   .then(res => {
-        //     console.log(res);
-        //   });
-
-        dispatch(login({ token: res.headers.authorization }));
+        axios
+          .get(
+            `https://i8b204.p.ssafy.io/be-api/user?userId=${loginInfo.userId}`,
+            {
+              headers: {
+                Authorization: res.headers.authorization,
+              },
+            },
+          )
+          .then(res => {
+            console.log(res.data);
+            dispatch(
+              login({
+                token: accesToken,
+                loginUserPk: res.data.id,
+                loginUserRole: res.data.role,
+                loginUserNickname: res.data.nickName,
+                loginId: res.data.userId,
+              }),
+            );
+          });
         handleOpen();
       })
       .catch(err => {
-        console.log(err);
+        console.log('로그인 에러', err);
       });
   };
+  console.log('dddd', user);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

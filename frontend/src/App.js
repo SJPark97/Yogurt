@@ -21,17 +21,10 @@ import WishList from './WishList/WishList';
 import PayMent from './Payment/PayMent';
 import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
-import PayResult from './Payment/PayResult';
+// import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
 import ScrollToTop from './ScrollToTop';
 import Room from './components/Room';
-
-// 이거에 따라서 프로필이 다르게 들어가짐
-const userRole = {
-  // role: 'buyer',
-  role: 'seller',
-  id: 0,
-};
 
 function App() {
   return (
@@ -61,8 +54,8 @@ function App() {
         </Route>
         <Route path="/alarms" element={<AlarmList />} />
         <Route path="/profile">
-          <Route path="seller" element={<SellerProfile />} />
-          <Route path="buyer" element={<BuyerProfile />} />
+          <Route path="seller/:sellerId" element={<SellerProfile />} />
+          <Route path="buyer/:buyerId" element={<BuyerProfile />} />
         </Route>
         <Route path="/post">
           <Route path="join" element={<PostRegister />} />
@@ -78,10 +71,10 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/search/result" element={<SearchResult />} />
         <Route path="/profile/modify" element={<ProfileModify />} />
-        <Route path="/kakaopay" element={<PayResult />} />
+        {/* <Route path="/kakaopay" element={<PayResult />} /> */}
       </Routes>
       <footer>
-        <MainFooter userRole={userRole} />
+        <MainFooter />
       </footer>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useLocation, useMatch } from 'react-router-dom';
 import Footer from './Footer';
 
-function MainAppBar({ userRole }) {
+function MainFooter() {
   const pageUrl = useLocation().pathname;
   // const [appBar, setAppBar] = useState('/');
   // useEffect(() => {
@@ -11,13 +11,13 @@ function MainAppBar({ userRole }) {
 
   return (
     <div>
-      {useMatch('/') && <Footer userRole={userRole.role} />}
-      {useMatch('/stores') && <Footer userRole={userRole.role} />}
-      {useMatch('/alarms') && <Footer userRole={userRole.role} />}
-      {useMatch('/profile/buyer') && <Footer userRole={userRole.role} />}
-      {useMatch('/profile/seller') && <Footer userRole={userRole.role} />}
+      {useMatch('/') && <Footer />}
+      {useMatch('/stores') && <Footer />}
+      {useMatch('/alarms') && <Footer />}
+      {useMatch('/profile/buyer') && <Footer />}
+      {useMatch('/profile/seller') && <Footer />}
     </div>
   );
 }
 
-export default MainAppBar;
+export default MainFooter;

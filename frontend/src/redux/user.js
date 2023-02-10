@@ -6,8 +6,9 @@ export const userSlice = createSlice({
     value: {
       token: '',
       loginUserPk: '',
+      loginId: '',
       loginUserRole: '',
-      loginUserNickName: '',
+      loginUserNickname: '',
     },
   },
   reducers: {

@@ -29,14 +29,14 @@ const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `;
 
-export default function Footer({ userRole }) {
+export default function Footer() {
   const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
   const pageUrl = useLocation().pathname;
 
-  const accesToken = useSelector(state => state.user.value.token);
-  console.log('푸터에서 찍은 토큰 정보', accesToken);
+  const loginUser = useSelector(state => state.user.value);
+  // console.log('푸터에서 찍은 user 정보', loginUser);
 
   useEffect(() => {
     if (pageUrl === '/') {
@@ -84,7 +84,7 @@ export default function Footer({ userRole }) {
             label="상점"
             icon={<StoreIcon />}
             onClick={() => {
-              if (accesToken) {
+              if (loginUser.token) {
                 navigate('/stores');
               } else {
                 navigate('/login');
@@ -95,19 +95,19 @@ export default function Footer({ userRole }) {
             label="알림"
             icon={<NotificationsIcon />}
             onClick={() => {
-              if (accesToken) {
+              if (loginUser.token) {
                 navigate('/alarms');
               } else {
                 navigate('/login');
               }
             }}
           />
-          {accesToken ? (
+          {loginUser.token ? (
             <CustomBottomNavigationAction
               label="프로필"
               icon={<AccountCircleIcon />}
               onClick={() => {
-                if (userRole === 'buyer') {
+                if (loginUser.loginUserRole === 'ROLE_BUYER') {
                   navigate('/profile/buyer?tab=0');
                 } else {
                   navigate('/profile/seller?tab=0');
