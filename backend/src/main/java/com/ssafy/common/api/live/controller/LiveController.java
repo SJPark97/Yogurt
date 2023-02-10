@@ -59,6 +59,7 @@ public class LiveController {
      */
     @GetMapping("/item")
     public ResponseEntity<?> getLiveItem (@RequestParam("liveId") Long liveId){
+        //DELETE 상태인것들 제외
         List<LivelistResponseForm> livelistResponseFormList = liveService.getItems(liveId);
         return ResponseEntity.ok(livelistResponseFormList);
     }

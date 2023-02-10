@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
+import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.dto.Likes.LikesUserBuyerResponse;
 import com.ssafy.common.api.relation.dto.Likes.LikesUserSellerResponse;
 import com.ssafy.common.api.user.domain.User;
@@ -17,10 +18,10 @@ public class UserLikesResponse
     public UserLikesResponse(User user){
         id = user.getId();
         sellerLikes = user.getLikess_Seller()
-                .stream().map(likes -> new LikesUserBuyerResponse(likes))
+                .stream().filter(likes -> likes.getStatus()!= RelationStatus.STATUS_DELETE).map(likes -> new LikesUserBuyerResponse(likes))
                 .collect(Collectors.toList());
         buyerLikes = user.getLikess_Buyer()
-                .stream().map(likes -> new LikesUserSellerResponse(likes))
+                .stream().filter(likes -> likes.getStatus()!= RelationStatus.STATUS_DELETE).map(likes -> new LikesUserSellerResponse(likes))
                 .collect(Collectors.toList());
     }
 }
