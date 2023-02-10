@@ -2,6 +2,7 @@ package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserLoginResponse;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
@@ -47,7 +48,10 @@ public class UserService {
         List<User> user = userRepository.findAllByRole(role);
         List<UserSellerResponse> formList = new ArrayList<>();
         user.forEach(u ->{
-            formList.add(new UserSellerResponse(u));
+            // status 가 ACTIVE인 USER만 조회
+            if(u.getUserStatus()== UserStatus.ACTIVE){
+                formList.add(new UserSellerResponse(u));
+            }
 //            formList.add(UserResponseForm.builder()
 //                    .description(u.getDescription())
 //                    .nickName(u.getNickName())
@@ -64,13 +68,16 @@ public class UserService {
         List<User> user = userRepository.findALLByRoleAndNickNameContains(role,keyword);
         List<UserResponseForm> formList = new ArrayList<>();
         user.forEach(u ->{
-            formList.add(UserResponseForm.builder()
-                    .description(u.getDescription())
-                    .nickName(u.getNickName())
-                    .id(u.getId())
-                    .profileImage(u.getProfileImage())
+            // status 가 ACTIVE인 USER만 조회
+            if(u.getUserStatus()== UserStatus.ACTIVE){
+                formList.add(UserResponseForm.builder()
+                        .description(u.getDescription())
+                        .nickName(u.getNickName())
+                        .id(u.getId())
+                        .profileImage(u.getProfileImage())
 //                .likesSize()
-                    .build());
+                        .build());
+            }
 
         });
         return formList;

@@ -8,6 +8,7 @@ import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.repository.ZzimRepository;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserZzimResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class ZzimService {
     // user로 찜 조회
     public UserZzimResponse userZzim(User user){
         return userRepository.findById(user.getId())
+                .filter(user1 -> user1.getUserStatus()!= UserStatus.DELETE)
                 .map(UserZzimResponse::new)
                 .orElseThrow();
     }

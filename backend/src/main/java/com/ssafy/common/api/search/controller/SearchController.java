@@ -25,6 +25,7 @@ public class SearchController {
     @GetMapping("/post/{input}")
     @ApiOperation(value = "상품 검색 API")
     public ResponseEntity<List<PostAllResponse>> postSearch(@PathVariable("input") String input){
+        // Delete 인 것은 필터링
         return new ResponseEntity<>(searchService.postSearch(input), HttpStatus.OK);
     }
     // 검색 브랜드 API
@@ -37,6 +38,7 @@ public class SearchController {
     @GetMapping("/seller/{input}")
     @ApiOperation(value = "판매자 검색 API")
     public  ResponseEntity<List<UserSellerResponse>> sellerSearch(@PathVariable("input") String input){
+        // Delete 인 것은 필터링
         return new ResponseEntity<>(searchService.sellerSearch(input), HttpStatus.OK);
     }
 }

@@ -152,6 +152,7 @@ public class LiveService {
     }
 
     public List<SellerLiveroomForm> getSellersLiveroom(Long sellerId) {
+        //CLOSE 상태인 것들 필터링
         List<SellerLiveroomForm> sellerLiveroomFormList =  userRepository.findById(sellerId).map(UserLiveroomResponse::new).get().getSellerLiveroomFormList();
         return sellerLiveroomFormList;
     }
@@ -159,6 +160,7 @@ public class LiveService {
 
     //
     public List<LivelistResponseForm> getItems(Long liveId) {
+        //Delete 인것들 필터링
             List<LivelistResponseForm> livelistResponseFormList = liveRepository.findById(liveId).map(LiveroomLivelistResponse::new).get().getLiveLists();
         return livelistResponseFormList;
     }

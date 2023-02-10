@@ -3,6 +3,7 @@ package com.ssafy.common.api.post.service;
 import com.ssafy.common.api.post.converter.PostConverter;
 import com.ssafy.common.api.post.converter.PostImageConverter;
 import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
@@ -10,6 +11,7 @@ import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.post.postimage.repository.PostimageRepository;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -47,12 +49,12 @@ public class PostService {
 
     // 상품 전체 조회
     public List<PostAllResponse> findPostAll() {
-        return postRepository.findAll().stream().map(PostAllResponse::new).collect(Collectors.toList());
+        return postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
     }
 
     // user id 상품 전체 조회
     public List<UserPostResponse> findByUserId(Long user_Id){
-        return userRepository.findById(user_Id).stream().map(UserPostResponse::new).collect(Collectors.toList());
+        return userRepository.findById(user_Id).filter(user -> user.getUserStatus()!= UserStatus.DELETE).stream().map(UserPostResponse::new).collect(Collectors.toList());
     }
 
     // 상품 저장
