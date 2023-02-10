@@ -27,13 +27,15 @@ function WishList() {
   }, []);
 
   const allcheck = wishlist.map(el => el.wishListId);
-  console.log('all', allcheck);
-  const [checkItems, setCheckItems] = useState(allcheck);
-  console.log('check', checkItems);
+  const [checkItems, setCheckItems] = useState([]);
+
+  useEffect(() => {
+    setCheckItems(allcheck);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wishlist]);
 
   const totalwishprice = wishlist.map(el => el.post.sale_price);
   const priceTotal = totalwishprice.reduce((a, b) => a + b, 0);
-  console.log('price', priceTotal);
 
   const [totalPrice, setTotalPrice] = useState(priceTotal);
 
@@ -91,7 +93,7 @@ function WishList() {
               <div className="wish-post-img-div">
                 <img
                   className="wish-post-img"
-                  src={wish.post.postImages[0]}
+                  src={wish.post.postImages[0].url}
                   alt="이미지사진"
                 />
               </div>
