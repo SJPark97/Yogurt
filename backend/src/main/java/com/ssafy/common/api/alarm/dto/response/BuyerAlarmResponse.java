@@ -22,11 +22,15 @@ public class BuyerAlarmResponse {
 
     private final AlarmStatus status;
 
+    private final String seller_nickname;
+
 
     public BuyerAlarmResponse(BuyerAlarm buyerAlarm) {
         id= buyerAlarm.getId();
         buyer_id = buyerAlarm.getBuyer().getId();
         seller_id = buyerAlarm.getSeller().getId();
+        seller_nickname = buyerAlarm.getSeller().getNickName();
+        //판매자 닉네임 , 라이브 일시
         created=buyerAlarm.getCreated();
         status = buyerAlarm.getStatus();
     }
