@@ -13,8 +13,6 @@ import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,10 +34,7 @@ public class WishListService {
         Post post = postRepository.findById(postId).get();
         Wishlist newWishList = wishConverter.createWishListRequestDtoToEntitiy(post, user);
         try {
-            List<WishListUserPostResponse> wishLists = user.getWishlists()
-                    .stream().map(wish -> new WishListUserPostResponse(wish))
-                    .collect(Collectors.toList());
-            for (WishListUserPostResponse wishList : wishLists) {
+            for (WishListUserPostResponse wishList : userWishList(user).getWishLists()) {
                 if (wishList.getPost().getId() == newWishList.getPost().getId()){
                     throw new Exception();
                 }
