@@ -34,10 +34,9 @@
 }
 
 #item-price-info {
-	display: flex;
+	display: flex-end;
 	margin-top: 2vw;
 	width: 73vw;
-	align-items: end;
 }
 
 #item-percent {
