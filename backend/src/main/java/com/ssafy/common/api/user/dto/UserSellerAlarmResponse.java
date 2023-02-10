@@ -17,9 +17,11 @@ public class UserSellerAlarmResponse {
         id = user.getId();
         sellerAlarmUserResponses = user.getSellerAlarms()
                 .stream().map(sellerAlarm ->
+
                         // delete가 아닌 알람만 조회
 //                        sellerAlarm.getStatus()== AlarmStatus.STATUS_DELETE? :
                         new SellerAlarmUserResponse(sellerAlarm))
+                .filter(sellerAlarmUserResponse -> sellerAlarmUserResponse.getSellerAlarmResponse().getStatus()==AlarmStatus.STATUS_ACTIVE)
                 .collect(Collectors.toList());
     }
 }

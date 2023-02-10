@@ -21,10 +21,11 @@ public class SellerAlarmResponse {
 
     private final AlarmStatus status;
 
-
+    private  final String post_name;
     public SellerAlarmResponse(SellerAlarm sellerAlarm) {
         id =sellerAlarm.getId();
         post_id = sellerAlarm.getPost().getId();
+        post_name = sellerAlarm.getPost().getTitle();
         user_id = sellerAlarm.getSeller().getId();
         created=sellerAlarm.getCreated();
         status=sellerAlarm.getStatus();
