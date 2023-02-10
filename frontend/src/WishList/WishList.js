@@ -1,22 +1,39 @@
 import { Divider } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
-import dummy from '../db/list.json';
+import axios from 'axios';
 import './WishList.css';
 
 function WishList() {
   const navigate = useNavigate();
+  const [wishlist, setWishList] = useState([]);
 
-  const wishlist = dummy.WishLists;
+  const token2 =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw  ';
 
-  const [checkItems, setCheckItems] = useState(null);
-  checkItems.sort();
-  console.log(checkItems);
+  useEffect(() => {
+    axios
+      .get('https://i8b204.p.ssafy.io/be-api/wishlist', {
+        headers: { Authorization: token2 },
+      })
+      .then(res => {
+        setWishList(res.data.wishLists);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const totalwishprice = wishlist.map(el => el.post.post_sale_price);
+  const allcheck = wishlist.map(el => el.wishListId);
+  console.log('all', allcheck);
+  const [checkItems, setCheckItems] = useState(allcheck);
+  console.log('check', checkItems);
+
+  const totalwishprice = wishlist.map(el => el.post.sale_price);
   const priceTotal = totalwishprice.reduce((a, b) => a + b, 0);
-  console.log(priceTotal);
+  console.log('price', priceTotal);
 
   const [totalPrice, setTotalPrice] = useState(priceTotal);
 
@@ -32,9 +49,7 @@ function WishList() {
 
   const AllCheck = checked => {
     if (checked) {
-      const idArray = [];
-      wishlist.forEach(el => idArray.push(el.wishListId));
-      setCheckItems(idArray);
+      setCheckItems(allcheck);
       setTotalPrice(priceTotal);
     } else {
       setCheckItems([]);
@@ -67,7 +82,7 @@ function WishList() {
                     SingleCheck(
                       event.target.checked,
                       wish.wishListId,
-                      wish.post.post_sale_price,
+                      wish.post.sale_price,
                     )
                   }
                   checked={checkItems.includes(wish.wishListId)}
@@ -76,7 +91,7 @@ function WishList() {
               <div className="wish-post-img-div">
                 <img
                   className="wish-post-img"
-                  src={wish.post.postimage_url}
+                  src={wish.post.postImages[0]}
                   alt="이미지사진"
                 />
               </div>
@@ -84,9 +99,9 @@ function WishList() {
                 <div className="wish-post-sellername">
                   {wish.post.sellerName}
                 </div>
-                <div className="wish-post-title">{wish.post.post_title}</div>
+                <div className="wish-post-title">{wish.post.title}</div>
                 <div className="wish-post-price">
-                  {wish.post.post_sale_price.toLocaleString()}원
+                  {wish.post.sale_price.toLocaleString()}원
                 </div>
               </div>
             </div>
