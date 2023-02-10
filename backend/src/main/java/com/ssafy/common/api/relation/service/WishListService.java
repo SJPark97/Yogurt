@@ -7,6 +7,7 @@ import com.ssafy.common.api.relation.domain.Wishlist;
 import com.ssafy.common.api.relation.dto.wishList.WishListResponse;
 import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserWishListResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,7 @@ public class WishListService {
     // user 장바구니 조회
     public UserWishListResponse userWishList(User user){
         return userRepository.findById(user.getId())
+                .filter(user1 -> user1.getUserStatus()!= UserStatus.DELETE)
                 .map(UserWishListResponse::new)
                 .get();
     };

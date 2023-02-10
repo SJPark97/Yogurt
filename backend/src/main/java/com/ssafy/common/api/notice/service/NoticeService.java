@@ -6,6 +6,7 @@ import com.ssafy.common.api.notice.dto.NoticeInsertRequest;
 import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.notice.repository.NoticeRepository;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserNoticeResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class NoticeService {
     // 판매자 공지 조회
     public UserNoticeResponse userNotice(Long sellerId){
         return userRepository.findById(sellerId)
+                .filter(user -> user.getUserStatus()!= UserStatus.DELETE)
                 .map(UserNoticeResponse::new)
                 .get();
     }
