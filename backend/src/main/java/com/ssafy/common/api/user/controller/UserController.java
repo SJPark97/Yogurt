@@ -116,6 +116,7 @@ public class UserController {
     })
     public ResponseEntity<?> getAllSeller(){
         try {
+            // active 인 것만 조회
             List<UserSellerResponse> formList = userService.findByRole(ROLE_SELLER);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
@@ -141,6 +142,8 @@ public class UserController {
         }
     }
 
+
+
     @GetMapping("/seller/search")
     @ApiOperation(value = "판매자 검색")
     @Parameter(name = "keyword", description = "판매자 키워드", in = ParameterIn.QUERY)
@@ -153,6 +156,7 @@ public class UserController {
     })
     public ResponseEntity<?> findSellers(@RequestParam String keyword){
         try{
+            // active 인것만 조회
             List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains(ROLE_SELLER, keyword);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){

@@ -37,6 +37,7 @@ public class ZzimController {
     // 찜 삭제 API
     @PatchMapping("/delete/{zzim_id}")
     public ResponseEntity<ZzimResponse> deleteZzim(@PathVariable("zzim_id") Long zzim_id){
+        // Delete 상태인것들 필터링
         return new ResponseEntity<>(zzimService.deleteZzim(zzim_id), HttpStatus.OK);
     }
 }

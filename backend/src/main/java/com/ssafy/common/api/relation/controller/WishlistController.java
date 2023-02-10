@@ -36,6 +36,7 @@ public class WishlistController {
     @GetMapping("")
     public ResponseEntity<UserWishListResponse> userWishList(){
         User user = postService.getLoginUser();
+        //delete인것들 필터링
         return new ResponseEntity<>(wishListService.userWishList(user), HttpStatus.OK);
     }
 }

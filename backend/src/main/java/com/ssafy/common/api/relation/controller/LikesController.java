@@ -38,12 +38,14 @@ public class LikesController {
     @GetMapping("/seller")
     public ResponseEntity<List<LikesUserSellerResponse>> sellerLikes(){
         User user = postService.getLoginUser();
+        //delete 상태인것들 필터링
         return new ResponseEntity<>(likesService.sellerLikesList(user), HttpStatus.OK);
     }
     //seller 가 보는 즐겨찾기 buyer 의 목록
     @GetMapping("/buyer")
     public ResponseEntity<List<LikesUserBuyerResponse>> buyerLikes(){
         User user = postService.getLoginUser();
+        //delete 상태인것들 필터링
         return new ResponseEntity<>(likesService.buyerLikesList(user), HttpStatus.OK);
     }
 }
