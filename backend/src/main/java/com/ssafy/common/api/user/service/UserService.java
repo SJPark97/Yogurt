@@ -43,17 +43,18 @@ public class UserService {
         return userSellerResponse;
     }
 
-    public List<UserResponseForm> findByRole(UserRole role) {
+    public List<UserSellerResponse> findByRole(UserRole role) {
         List<User> user = userRepository.findAllByRole(role);
-        List<UserResponseForm> formList = new ArrayList<>();
+        List<UserSellerResponse> formList = new ArrayList<>();
         user.forEach(u ->{
-            formList.add(UserResponseForm.builder()
-                    .description(u.getDescription())
-                    .nickName(u.getNickName())
-                    .id(u.getId())
-                    .profileImage(u.getProfileImage())
-//                .likesSize()
-                    .build());
+            formList.add(new UserSellerResponse(u));
+//            formList.add(UserResponseForm.builder()
+//                    .description(u.getDescription())
+//                    .nickName(u.getNickName())
+//                    .id(u.getId())
+//                    .profileImage(u.getProfileImage())
+////                .likesSize()
+//                    .build());
 
         });
         return formList;
