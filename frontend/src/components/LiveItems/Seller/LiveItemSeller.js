@@ -8,7 +8,6 @@ export default function LiveItemSeller() {
 
   return (
     <div id="live-item">
-      <h1>나는 판매자</h1>
       {liveItems.map((item, num) => {
         return <ItemInfo item={item} num={num} key={num} owner={true}/> 
       })}
