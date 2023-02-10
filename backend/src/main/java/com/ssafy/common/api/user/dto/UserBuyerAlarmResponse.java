@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
+import com.ssafy.common.api.alarm.domain.AlarmStatus;
 import com.ssafy.common.api.alarm.dto.response.BuyerAlarmUserResponse;
 import com.ssafy.common.api.alarm.dto.response.SellerAlarmUserResponse;
 import com.ssafy.common.api.user.domain.User;
@@ -20,6 +21,7 @@ public class UserBuyerAlarmResponse {
                         // delete가 아닌 알람만 조회
 //                        sellerAlarm.getStatus()== AlarmStatus.STATUS_DELETE? :
                         new BuyerAlarmUserResponse(buyerAlarm))
+                .filter(buyerAlarmUserResponse -> buyerAlarmUserResponse.getBuyerAlarmResponse().getStatus()== AlarmStatus.STATUS_ACTIVE)
                 .collect(Collectors.toList());
     }
 }
