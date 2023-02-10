@@ -84,6 +84,6 @@ public class Post {
         }
     }
     public void deal(){
-        this.status = PostStatus.STATUS_SELL;
+        this.status = PostStatus.STATUS_END;
     }
 }

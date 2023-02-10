@@ -5,6 +5,7 @@ import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.relation.converter.WishConverter;
 import com.ssafy.common.api.relation.domain.Wishlist;
 import com.ssafy.common.api.relation.dto.wishList.WishListResponse;
+import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
 import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
@@ -12,6 +13,7 @@ import com.ssafy.common.api.user.dto.UserWishListResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -31,9 +33,18 @@ public class WishListService {
     @Transactional
     public WishListResponse addWishList(Long postId, User user){
         Post post = postRepository.findById(postId).get();
-        Wishlist wishlist = wishConverter.createWishListRequestDtoToEntitiy(post, user);
-        Wishlist createwishList = wishListRepository.save(wishlist);
-        return new WishListResponse(createwishList);
+        Wishlist newWishList = wishConverter.createWishListRequestDtoToEntitiy(post, user);
+        try {
+            for (WishListUserPostResponse wishList : userWishList(user).getWishLists()) {
+                if (wishList.getPost().getId() == newWishList.getPost().getId()){
+                    throw new Exception();
+                }
+            }
+            Wishlist createwishList = wishListRepository.save(newWishList);
+            return new WishListResponse(createwishList);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     // 장바구니 삭제
     @Transactional
