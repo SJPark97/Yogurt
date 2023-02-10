@@ -14,6 +14,10 @@ import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 
 import IconButton from '@material-ui/core/IconButton';
 
+import Fullscreen from '@material-ui/icons/Fullscreen';
+import FullscreenExit from '@material-ui/icons/FullscreenExit';
+
+
 export default class ToolbarSellerComponent extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +25,7 @@ export default class ToolbarSellerComponent extends Component {
     this.micStatusChanged = this.micStatusChanged.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
+    this.toggleFullscreen = this.toggleFullscreen.bind(this);
   }
 
   state = { user: false };
@@ -39,12 +44,19 @@ export default class ToolbarSellerComponent extends Component {
       return { user: !state.user };
     });
   }
+
+  toggleFullscreen() {
+    this.setState({ fullscreen: !this.state.fullscreen });
+    this.props.toggleFullscreen();
+  }
+
   componentDidMount() {
     setTimeout(() => {
       this.props.toggleChat();
+      this.props.toggleFullscreen();
     }, 1000);
   }
-  
+
   toggleChat() {
     this.props.toggleChat();
   }
@@ -66,7 +78,17 @@ export default class ToolbarSellerComponent extends Component {
               <PowerSettingsNew />
             </IconButton>
             <div id="box-1"></div>
-
+            <IconButton
+              color="inherit"
+              className="navButton"
+              onClick={this.toggleFullscreen}
+            >
+              {localUser !== undefined && this.state.fullscreen ? (
+                <FullscreenExit />
+              ) : (
+                <Fullscreen />
+              )}
+            </IconButton>
             <IconButton
               color="inherit"
               className="navButton"
