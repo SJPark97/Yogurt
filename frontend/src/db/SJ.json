@@ -214,5 +214,50 @@
       "Store_oneline": "한줄 소개",
       "Store_isLiked": [1, 2, 3]
     }
+  ],
+
+  "liveItems" : [
+    {
+      "item_state": 0,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스1 판매 예정"
+    },
+    {
+      "item_state": 1,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스2 판매 중"
+    },
+    {
+      "item_state": 2,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스3 판매 완"
+    },
+    {
+      "item_state": 2,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스4 판매 완"
+    },
+    {
+      "item_state": 1,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스5 판매 중"
+    },
+    {
+      "item_state": 0,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스6 판매 예정"
+    }
   ]
 }

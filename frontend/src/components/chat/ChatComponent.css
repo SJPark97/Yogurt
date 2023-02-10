@@ -1,6 +1,7 @@
 #chatContainer {
     position: absolute;
-    top: 117vw;
+    /* top: 117vw; */
+    bottom: -26vw;
     z-index: 0;
     width: 77%;
     height: 40%;
