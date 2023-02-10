@@ -566,6 +566,7 @@ class VideoRoomComponent extends Component {
             micStatusChanged={this.micStatusChanged}
             leaveSession={this.leaveSession}
             toggleChat={this.toggleChat}
+            toggleFullscreen={this.toggleFullscreen}
           />
         ) : (
           <ToolbarBuyerComponent
@@ -576,6 +577,7 @@ class VideoRoomComponent extends Component {
             micStatusChanged={this.micStatusChanged}
             leaveSession={this.leaveSession}
             toggleChat={this.toggleChat}
+            toggleFullscreen={this.toggleFullscreen}
           />
         )}
 
