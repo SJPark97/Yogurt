@@ -20,6 +20,7 @@ public class SellerAlarmResponse {
     private final Timestamp created;
 
     private final AlarmStatus status;
+    private  final  String image_url;
 
     private  final String post_name;
     public SellerAlarmResponse(SellerAlarm sellerAlarm) {
@@ -29,5 +30,6 @@ public class SellerAlarmResponse {
         user_id = sellerAlarm.getSeller().getId();
         created=sellerAlarm.getCreated();
         status=sellerAlarm.getStatus();
+        image_url=sellerAlarm.getPost().getPostImages().get(0).getUrl();
     }
 }
