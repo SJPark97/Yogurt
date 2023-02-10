@@ -9,11 +9,13 @@
   z-index: 99;
   min-width: 400px !important;
 }
+
 .shop-card {
   position: absolute;
-  right: 5vw;
-  bottom: 11vw;
+  right: 6vw;
+  bottom: 5vw;
 }
+
 .toolbar{
   min-height: 40px !important;
 

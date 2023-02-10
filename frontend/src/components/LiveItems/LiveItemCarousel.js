@@ -1,0 +1,54 @@
+import * as React from 'react';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+import './LiveItemCarousel.css'
+import LiveItemSeller from './Seller/LiveItemSeller';
+import LiveItemBuyer from './Buyer/LiveItemBuyer';
+import CloseIcon from '@mui/icons-material/Close';
+
+export default function ProfileDrawer(props) {
+  const [state, setState] = React.useState({
+    bottom: false,
+  });
+
+  const owner = props.owner
+
+  const toggleDrawer = open => event => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState({ ...state, bottom: open });
+  };
+  return (
+    <div>
+      <React.Fragment key="bottom">
+        <IconButton
+          size="large"
+          edge="end"
+          color="inherit"
+          aria-label="more"
+          onClick={toggleDrawer(true)}
+          id="LiveItemBox"
+        >
+          <MoreVertIcon/>
+        </IconButton>
+        <Drawer
+          anchor="bottom"
+          open={state.bottom}
+          onClose={toggleDrawer(false)}
+          className="drop-up"
+        >
+          <div id="box-3"></div>
+          <CloseIcon id="drop-up-close" onClick={toggleDrawer(false)}/>
+          {owner ? <LiveItemSeller /> : <LiveItemBuyer />}
+        </Drawer>
+      </React.Fragment>
+    </div>
+  );
+}

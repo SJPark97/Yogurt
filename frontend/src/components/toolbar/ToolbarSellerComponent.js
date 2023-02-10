@@ -9,14 +9,11 @@ import MicOff from '@material-ui/icons/MicOff';
 import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
 import Tooltip from '@material-ui/core/Tooltip';
-import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
+// import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
+import CloseIcon from '@mui/icons-material/Close';
 import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 
 import IconButton from '@material-ui/core/IconButton';
-
-import Fullscreen from '@material-ui/icons/Fullscreen';
-import FullscreenExit from '@material-ui/icons/FullscreenExit';
-
 
 export default class ToolbarSellerComponent extends Component {
   constructor(props) {
@@ -25,7 +22,6 @@ export default class ToolbarSellerComponent extends Component {
     this.micStatusChanged = this.micStatusChanged.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
-    this.toggleFullscreen = this.toggleFullscreen.bind(this);
   }
 
   state = { user: false };
@@ -45,16 +41,16 @@ export default class ToolbarSellerComponent extends Component {
     });
   }
 
-  toggleFullscreen() {
-    this.setState({ fullscreen: !this.state.fullscreen });
-    this.props.toggleFullscreen();
-  }
-
   componentDidMount() {
     setTimeout(() => {
-      this.props.toggleChat();
-      this.props.toggleFullscreen();
+      this.props.camStatusChanged();
     }, 1000);
+    setTimeout(() => {
+      this.props.micStatusChanged();
+    }, 1200);
+    setTimeout(() => {
+      this.props.toggleChat();
+    }, 1400);
   }
 
   toggleChat() {
@@ -75,20 +71,9 @@ export default class ToolbarSellerComponent extends Component {
               onClick={this.leaveSession}
               id="navLeaveButton"
             >
-              <PowerSettingsNew />
+              <CloseIcon />
             </IconButton>
             <div id="box-1"></div>
-            <IconButton
-              color="inherit"
-              className="navButton"
-              onClick={this.toggleFullscreen}
-            >
-              {localUser !== undefined && this.state.fullscreen ? (
-                <FullscreenExit />
-              ) : (
-                <Fullscreen />
-              )}
-            </IconButton>
             <IconButton
               color="inherit"
               className="navButton"

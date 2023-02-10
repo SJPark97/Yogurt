@@ -11,7 +11,7 @@ import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarSellerComponent from './toolbar/ToolbarSellerComponent';
 import ToolbarBuyerComponent from './toolbar/ToolbarBuyerComponent';
-
+import LiveItemCarousel from './LiveItems/LiveItemCarousel'
 // import IconButton from '@material-ui/core/IconButton';
 // import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 // import Tooltip from '@material-ui/core/Tooltip';
@@ -553,7 +553,7 @@ class VideoRoomComponent extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const localUser = this.state.localUser;
-    var chatDisplay = { display: this.state.chatDisplay };
+    // var chatDisplay = { display: this.state.chatDisplay };
 
     return (
       <div className="container" id="container">
@@ -566,7 +566,6 @@ class VideoRoomComponent extends Component {
             micStatusChanged={this.micStatusChanged}
             leaveSession={this.leaveSession}
             toggleChat={this.toggleChat}
-            toggleFullscreen={this.toggleFullscreen}
           />
         ) : (
           <ToolbarBuyerComponent
@@ -577,7 +576,6 @@ class VideoRoomComponent extends Component {
             micStatusChanged={this.micStatusChanged}
             leaveSession={this.leaveSession}
             toggleChat={this.toggleChat}
-            toggleFullscreen={this.toggleFullscreen}
           />
         )}
 
@@ -613,23 +611,23 @@ class VideoRoomComponent extends Component {
                   </div>
                 ) : null,
               )}
-          {localUser !== undefined &&
-            localUser.getStreamManager() !== undefined && (
-              <div
-                className="OT_root OT_publisher custom-class"
-                style={chatDisplay}
-              >
+          <div
+            className="OT_root OT_publisher custom-class"
+          >
+            <LiveItemCarousel owner={this.owner}/>
+            <div className="shop-card">
+              <ShopCard data={mySessionId} />
+            </div>
+            {localUser !== undefined &&
+              localUser.getStreamManager() !== undefined && (
                 <ChatComponent
                   user={localUser}
                   chatDisplay={this.state.chatDisplay}
                   close={this.toggleChat}
                   messageReceived={this.checkNotification}
                 />
-              </div>
-            )}
-        </div>
-        <div className='shop-card'>
-          <ShopCard data={mySessionId}/>
+              )}
+          </div>
         </div>
       </div>
     );
