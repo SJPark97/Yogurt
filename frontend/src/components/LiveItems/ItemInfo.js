@@ -26,6 +26,7 @@ export default function ItemInfo(props) {
       {!owner && item.item_state === 0 ? <button id="button-sell-waitting">라이브 대기중</button> : null}
       {!owner && item.item_state === 1 ? <button id="button-sell-buy">구매하기</button> : null}
       {!owner && item.item_state === 1 ? <button id="button-sell-basket">장바구니</button> : null}
+      <hr id="live-hr-tag"/>
     </div>
   );
 }
