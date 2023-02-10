@@ -9,9 +9,10 @@
 }
 
 .drop-up > div {
-	border-radius: 16px;
-	left: 1%;
+	border-radius: 16px 16px 0px 0px;
+	/* left: 1%; */
 	width: 98%;
+	overflow-x: hidden
 }
 
 #box-3 {
