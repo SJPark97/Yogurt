@@ -1,6 +1,7 @@
 #item-number {
 	font-weight: 1000;
 	padding-left: 4vw;
+	margin-top: 2vw;
 }
 
 #live-item-info {
@@ -119,4 +120,11 @@
 	width: 44vw;
 	height: 12vw;
 	border: none;
+}
+
+#live-hr-tag {
+	margin: 0;
+	margin-top: 4vw;
+	margin-left: 4vw;
+	width: 92vw;
 }
