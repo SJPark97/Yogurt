@@ -107,7 +107,7 @@ public class LiveController {
      * 라이브 중상태(onair)로 바꾸는 api
      */
     @PatchMapping("/onair")
-    public ResponseEntity<?> onair (@RequestParam("id") Long id){
+    public ResponseEntity<?> onair (@RequestParam("liveId") Long id){
         try{
             liveService.changeStatus(STATUS_ONAIR,id);
         }
