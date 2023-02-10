@@ -19,7 +19,6 @@ public class KakaoController {
     @GetMapping("/kakaoPay")
     public void kakaoPayGet() {
     }
-
     @PostMapping("/kakaoPay")
     public String kakaoPay(@RequestBody KakaoPayRequest request) {
         log.info("kakaoPay post...............................");
