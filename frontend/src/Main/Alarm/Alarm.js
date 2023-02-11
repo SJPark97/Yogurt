@@ -4,11 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import Live from '../../Images/live_alarm-removebg-preview.png';
-import Sell from '../../Images/money.png';
 import axios from 'axios';
 import './Alarm.css';
 
 function Alarm({ alarm, role, token }) {
+  console.log('s', alarm);
   const handleClick = async () => {
     await axios
       .patch(`https://i8b204.p.ssafy.io/be-api/seller_alarm/${alarm.id}`, {
@@ -38,7 +38,7 @@ function Alarm({ alarm, role, token }) {
         }}
       >
         {role === 'ROLE_SELLER' && (
-          <img src={Sell} alt="#" className="alarm-img" />
+          <img src={alarm.image_url} alt="#" className="alarm-img" />
         )}
         {role === 'ROLE_SELLER' && (
           <div>
@@ -52,9 +52,8 @@ function Alarm({ alarm, role, token }) {
         )}
         {role === 'ROLE_BUYER' && (
           <div>
-            <div className="alarm-content">
-              000 상점에서 라이브 방송이 판매되었습니다.
-            </div>
+            <div className="alarm-post">{alarm.seller_nickname}상점에서</div>
+            <div className="alarm-content">라이브 방송이 등록되었습니다.</div>
           </div>
         )}
         <IconButton

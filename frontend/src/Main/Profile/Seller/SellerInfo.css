@@ -2,6 +2,7 @@
   height: 80px;
   width: 80px;
   border-radius: 16px;
+  border: 1px solid #dfbf96;
 }
 .profile-text {
   margin-left: 16px;
@@ -12,7 +13,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 19px;
   margin: 0;
 }
 .profile-introduce {

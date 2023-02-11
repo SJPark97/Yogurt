@@ -81,7 +81,6 @@ function MyReview() {
             <div>
               <div className="reviewItemBrand">{review.reviewItemBrand}</div>
               <div className="reviewItem">{review.reviewItem}</div>
-              <div className="reviewRate">{review.reviewRate}점</div>
               <div className="review_star">
                 <div className="review_star-ratings">
                   <div

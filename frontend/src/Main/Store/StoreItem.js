@@ -76,7 +76,7 @@ function StoreItem({ store }) {
       >
         <img
           src={store.profileImage ? store.profileImage : Logo}
-          alt="스토어 프로필"
+          alt="스토어 프로필 사진"
           className="store-img"
         />
         <div>
@@ -95,7 +95,7 @@ function StoreItem({ store }) {
                   <FavoriteBorderIcon fontSize="small" />
                 )}
               </IconButton>
-              <div className="store-cnt">1.4천</div>
+              <div className="store-cnt">{store.likesCount}</div>
             </div>
           </div>
           <div className="store-introduce">

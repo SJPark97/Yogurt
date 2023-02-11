@@ -1,6 +1,7 @@
 // 로그인 한 유저id를 가지고 구매자인지, 판매자인지 구분
 // 판매자라면 상품등록, 라이브 시작하기 버튼이 따로 있음
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -9,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
-
+import Logo from '../../../Images/Yogurt_Logo.png';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,20 +31,38 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 // const StyledLink = styled(Link)``;
 
-function SellerInfo({ sellerData, loginId }) {
-  console.log(sellerData);
-  let likeCnt = '';
-  if (sellerData.Store_likes >= 10000) {
-    likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
-  } else if (sellerData.Store_likes >= 1000) {
-    likeCnt = `${(sellerData.Store_likes / 1000).toFixed(1)} 천`;
-  } else {
-    likeCnt = `${sellerData.Store_likes}`;
-  }
-
+function SellerInfo({ profile, loginId, token }) {
   // 상점 좋아요
-  const frist = sellerData.Store_isLiked.includes(sellerData.Store_id);
-  const [isLiked, setIsLiked] = useState(frist);
+  const [isLiked, setIsLiked] = useState(false);
+  // const [likeCnt, setLikeCnt] = useState([]);
+
+  const getLikes = useCallback(async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/likes/seller', {
+        headers: { Authorization: token },
+      })
+      .then(res => {
+        if (res.data.includes(loginId)) {
+          setIsLiked(!isLiked);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [isLiked, token, loginId]);
+
+  useEffect(() => {
+    getLikes();
+  }, [getLikes]);
+
+  // let likeCnt = '';
+  // if (sellerData.Store_likes >= 10000) {
+  //   likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
+  // } else if (sellerData.Store_likes >= 1000) {
+  //   likeCnt = `${(sellerData.Store_likes / 1000).toFixed(1)} 천`;
+  // } else {
+  //   likeCnt = `${sellerData.Store_likes}`;
+  // }
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
@@ -64,10 +83,18 @@ function SellerInfo({ sellerData, loginId }) {
           justifyContent: 'space-between',
         }}
       >
-        <img src={sellerData.Store_thumbnail} alt="#" className="profileImg" />
+        <img
+          src={profile.profileImage ? profile.profileImage : Logo}
+          alt="스토어 프로필 사진"
+          className="profileImg"
+        />
         <div className="profile-text">
-          <p className="profile-name">{sellerData.Store_name}</p>
-          <div className="profile-introduce">{sellerData.Store_oneline}</div>
+          <p className="profile-name">{profile.nickName}</p>
+          <div className="profile-introduce">
+            {profile.description
+              ? profile.description
+              : `안녕하세요! 신규 입점한 ${profile.nickName}입니다!`}
+          </div>
         </div>
         <div>
           <IconButton
@@ -80,10 +107,10 @@ function SellerInfo({ sellerData, loginId }) {
             {isLiked && <FavoriteIcon />}
             {!isLiked && <FavoriteBorderIcon />}
           </IconButton>
-          <div className="profile-cnt">{likeCnt}</div>
+          <div className="profile-cnt">{profile.likesCount}</div>
         </div>
       </Box>
-      {loginId === sellerData.Store_id && (
+      {loginId === profile.id && (
         <Stack
           spacing={2}
           direction="row"

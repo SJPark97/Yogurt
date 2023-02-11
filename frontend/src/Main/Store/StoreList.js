@@ -34,7 +34,6 @@ function StoreList() {
       <BackToTop />
       <div>
         {stores.map(store => (
-          // <StoreList data={data} />
           <StoreItem store={store} key={store.id} />
         ))}
       </div>

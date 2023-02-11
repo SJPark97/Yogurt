@@ -1,75 +1,35 @@
+import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
-
-import { useNavigate } from 'react-router-dom';
-
-const responses = [
-  {
-    storeId: 0,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-  {
-    storeId: 1,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-  {
-    storeId: 2,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-  {
-    storeId: 3,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-  {
-    storeId: 4,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-  {
-    storeId: 5,
-    storeImg:
-      'http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg',
-    storeName: '박토어',
-    storeContent:
-      '27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰',
-    storeLikes: 4579677,
-    storeisLiked: true,
-  },
-];
+import Logo from '../../../Images/Yogurt_Logo.png';
+import './LikeStore.css';
 
 export default function LikeStore() {
+  const loginUser = useSelector(state => state.user.value);
+  const [likeStores, setLikeStores] = useState([]);
+
+  const getLikeStores = useCallback(async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/likes/seller', {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        setLikeStores(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loginUser]);
+
+  useEffect(() => {
+    getLikeStores();
+  }, [getLikeStores]);
+
   const navigate = useNavigate();
 
   const likeCnt = storeLikes => {
@@ -81,10 +41,14 @@ export default function LikeStore() {
     }
     return `${storeLikes}`;
   };
+
   return (
     <div>
-      {responses.map(store => (
-        <div key={store.storeId}>
+      <div className="totalLikeStore">
+        즐겨찾기한 상점 {likeStores.length} 개
+      </div>
+      {likeStores.map(likeStore => (
+        <div key={likeStore.likesId}>
           <Box
             sx={{
               marginBottom: '8px',
@@ -96,13 +60,21 @@ export default function LikeStore() {
               justifyContent: 'start',
             }}
             onClick={() => {
-              navigate(`/stores/${store.storeId}?tab=0`, { state: store });
+              navigate(`/stores/${likeStore.seller.id}?tab=0`);
             }}
           >
-            <img src={store.storeImg} alt="#" className="store-img" />
+            <img
+              src={
+                likeStore.seller.profileImage
+                  ? likeStore.seller.profileImage
+                  : Logo
+              }
+              alt="스토어 프로필 사진"
+              className="store-img"
+            />
             <div>
               <div className="store-text">
-                <p className="store-name">{store.storeName}</p>
+                <p className="store-name">{likeStore.seller.nickName}</p>
                 <div className="store_like">
                   <IconButton
                     size="small"
@@ -110,15 +82,18 @@ export default function LikeStore() {
                     aria-label="like"
                     sx={{ color: 'red' }}
                   >
-                    {store.storeisLiked && <FavoriteIcon fontSize="small" />}
-                    {!store.storeisLiked && (
-                      <FavoriteBorderIcon fontSize="small" />
-                    )}
+                    <FavoriteIcon fontSize="small" />
                   </IconButton>
-                  <div className="store-cnt">{likeCnt(store.storeLikes)}</div>
+                  <div className="store-cnt">
+                    {likeCnt(likeStore.seller.likesCount)}
+                  </div>
                 </div>
               </div>
-              <div className="store-introduce">{store.storeContent}</div>
+              <div className="store-introduce">
+                {likeStore.seller.description
+                  ? likeStore.seller.description
+                  : `안녕하세요! 신규 입점한 ${likeStore.seller.nickName}입니다!`}
+              </div>
             </div>
           </Box>
           <Divider variant="middle" />

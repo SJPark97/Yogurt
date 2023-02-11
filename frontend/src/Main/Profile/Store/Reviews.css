@@ -1,3 +1,11 @@
+.totalReview {
+  margin: 1rem;
+  margin-bottom: 0;
+  text-align: start;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .reviewImg {
   height: 72px;
   width: 72px;
@@ -13,6 +21,12 @@
 .reviewItem {
   font-size: 16px;
   font-weight: bold;
+}
+
+.reviewTitle {
+  margin: 8px 0px 8px 16px;
+  font-size: 16px;
+  text-align: start;
 }
 
 .reviewContent {

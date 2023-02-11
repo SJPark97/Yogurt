@@ -36,7 +36,7 @@ export default function Footer() {
   const pageUrl = useLocation().pathname;
 
   const loginUser = useSelector(state => state.user.value);
-  // console.log('푸터에서 찍은 user 정보', loginUser);
+  console.log('푸터에서 찍은 user 정보', loginUser.loginUserPk);
 
   useEffect(() => {
     if (pageUrl === '/') {
@@ -108,9 +108,9 @@ export default function Footer() {
               icon={<AccountCircleIcon />}
               onClick={() => {
                 if (loginUser.loginUserRole === 'ROLE_BUYER') {
-                  navigate('/profile/buyer?tab=0');
+                  navigate(`/profile/buyer/${loginUser.loginUserPk}?tab=0`);
                 } else {
-                  navigate('/profile/seller?tab=0');
+                  navigate(`/profile/seller/${loginUser.loginUserPk}?tab=0`);
                 }
               }}
             />

@@ -18,7 +18,6 @@ function AlarmList() {
           headers: { Authorization: loginUser.token },
         })
         .then(res => {
-          console.log('dfdfdfdfdf', res.data.sellerAlarmUserResponses);
           setAlarms(res.data.sellerAlarmUserResponses);
         })
         .catch(err => {
@@ -26,11 +25,11 @@ function AlarmList() {
         });
     } else {
       await axios
-        .get('https://i8b204.p.ssafy.io/be-api/likes/buyer_alarm', {
+        .get('https://i8b204.p.ssafy.io/be-api/buyer_alarm', {
           headers: { Authorization: loginUser.token },
         })
         .then(res => {
-          setAlarms(res.data);
+          setAlarms(res.data.buyerAlarmUserResponses);
         })
         .catch(err => {
           console.log(err);
@@ -63,8 +62,8 @@ function AlarmList() {
         <div>
           {alarms.map(alarm => (
             <Alarm
-              key={alarm.sellerAlarmId}
-              alarm={alarm.sellerAlarmResponse}
+              key={alarm.buyerAlarmId}
+              alarm={alarm.buyerAlarmResponse}
               role={loginUser.loginUserRole}
               token={loginUser.token}
             />
