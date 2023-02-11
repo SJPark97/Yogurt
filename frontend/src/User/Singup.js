@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
+import axios from 'axios';
 
 const ColorButton = styled(Button)(() => ({
   // color: theme.palette.getContrastText(purple[500]),
@@ -118,10 +119,10 @@ function SignUp() {
         setError({ ...error, [handling]: '' });
       }
     } else if (handling === 'nickname') {
-      if (value.length > 6) {
+      if (value.length > 8) {
         setError({
           ...error,
-          [handling]: '6글자 이하로 입력해주세요.',
+          [handling]: '8글자 이하로 입력해주세요.',
         });
       } else {
         setError({ ...error, [handling]: '' });
@@ -158,7 +159,6 @@ function SignUp() {
   };
 
   const handleClickId = () => {
-    console.log(onlyOne.id);
     // 성공시
     setOnlyOne({ ...onlyOne, id: !onlyOne.id });
     setError({ ...error, id: '' });
@@ -247,6 +247,34 @@ function SignUp() {
     allowed = !allowed;
   }
 
+  const handleSubmit = async () => {
+    const userData = JSON.stringify({
+      userId: form.idConfirm,
+      password: form.passwordConfirm,
+      name: form.nameConfirm,
+      nickName: form.nicknameConfirm,
+      email: form.emailConfirm,
+      role: form.role,
+      phoneNumber: '01011112222',
+      userStatus: 'ACTIVE',
+    });
+
+    await axios
+      .post(
+        'https://i8b204.p.ssafy.io/be-api/user/join',
+        { data: userData },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+      .then(res => {
+        console.log('dddd', res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -274,9 +302,10 @@ function SignUp() {
                 fullWidth
                 variant="contained"
                 startIcon={<ShoppingCartIcon />}
-                onClick={() => handleClick('buyer')}
+                onClick={() => handleClick('ROLE_BUYER')}
                 sx={{
-                  background: form.role === 'buyer' ? '#deb887' : 'lightgrey',
+                  background:
+                    form.role === 'ROLE_BUYER' ? '#deb887' : 'lightgrey',
                 }}
               >
                 옷을 살래요
@@ -285,10 +314,11 @@ function SignUp() {
                 fullWidth
                 variant="contained"
                 startIcon={<StoreIcon />}
-                onClick={() => handleClick('seller')}
+                onClick={() => handleClick('ROLE_SELLER')}
                 className="btn-content"
                 sx={{
-                  background: form.role === 'seller' ? '#deb887' : 'lightgrey',
+                  background:
+                    form.role === 'ROLE_SELLER' ? '#deb887' : 'lightgrey',
                 }}
               >
                 옷을 팔래요
@@ -370,10 +400,10 @@ function SignUp() {
                       fullWidth
                       id="nickname"
                       name="nickname"
-                      label="닉네임 (6글자 이하)"
+                      label="닉네임 (8글자 이하)"
                       error={
                         error.nickname !== '' ||
-                        form.nickname.length > 6 ||
+                        form.nickname.length > 8 ||
                         false
                       }
                       onChange={handleChange}
@@ -393,7 +423,7 @@ function SignUp() {
                             disabled={
                               onlyOne.nickname ||
                               form.nickname === '' ||
-                              form.nickname.length > 6 ||
+                              form.nickname.length > 8 ||
                               false
                             }
                             // 컬러 바꾸기
@@ -460,14 +490,18 @@ function SignUp() {
                   sx={{ mt: 3, mb: 2 }}
                   size="large"
                   disabled={allowed}
-                  onClick={() => {
-                    console.log('데이터', form);
-                    console.log('에러', error);
-                    console.log('회원가입 axios로 Confirm데이터 전달');
-                  }}
+                  onClick={handleSubmit}
                 >
                   회원가입
                 </SignupButton>
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log(form, 'ded');
+                  }}
+                >
+                  dd
+                </button>
               </FormControl>
             </Boxs>
           </Box>
