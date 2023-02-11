@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Button,
@@ -13,7 +13,7 @@ import {
   Container,
 } from '@mui/material/';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-
+import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
@@ -60,7 +60,19 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 320,
+  height: 200,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+};
+
 function SignUp() {
+  const navigate = useNavigate();
   const theme = createTheme();
   const [form, setForm] = useState({
     role: '',
@@ -248,7 +260,7 @@ function SignUp() {
   }
 
   const handleSubmit = async () => {
-    const userData = JSON.stringify({
+    const signupData = JSON.stringify({
       userId: form.idConfirm,
       password: form.passwordConfirm,
       name: form.nameConfirm,
@@ -260,19 +272,23 @@ function SignUp() {
     });
 
     await axios
-      .post(
-        'https://i8b204.p.ssafy.io/be-api/user/join',
-        { data: userData },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        },
-      )
+      .post('https://i8b204.p.ssafy.io/be-api/user/join', signupData, {
+        headers: { 'Content-Type': 'application/json' },
+      })
       .then(res => {
         console.log('dddd', res);
+        handleOpen();
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/login');
   };
 
   return (
@@ -494,18 +510,42 @@ function SignUp() {
                 >
                   회원가입
                 </SignupButton>
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log(form, 'ded');
-                  }}
-                >
-                  dd
-                </button>
               </FormControl>
             </Boxs>
           </Box>
         </Container>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="div"
+              sx={{
+                textAlign: 'center',
+                alignItems: 'center',
+                padding: '32px',
+                marginTop: '16px',
+              }}
+            >
+              환영합니다! 회원가입이 완료되었습니다!
+            </Typography>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ marginTop: '16px', height: '50px', fontSize: '16px' }}
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              로그인하러 가기
+            </Button>
+          </Box>
+        </Modal>
       </ThemeProvider>
     </div>
   );

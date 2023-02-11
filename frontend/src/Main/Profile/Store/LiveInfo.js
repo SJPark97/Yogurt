@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import dummy from '../../../db/list.json';
+import Divider from '@mui/material/Divider';
 import './LiveInfo.css';
 
 function LiveInfo() {
+  const navigate = useNavigate();
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
 
@@ -17,8 +18,8 @@ function LiveInfo() {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
-        console.log('ff', res.data);
-        setLive(res.data);
+        setLive(res.data[0]);
+        console.log('라이브데이터', res.data);
       })
       .catch(err => {
         console.log(err);
@@ -29,53 +30,70 @@ function LiveInfo() {
     getLive();
   }, [getLive]);
 
-  console.log(live);
-
-  const mylive = dummy.Live[0];
-  const livepost = dummy.Goods.filter(item => item.post_status === 2);
-
   return (
     <div>
-      <div className="liveinfo-info">
-        <img src={mylive.liveroom_thumbnail} alt="라이브대표이미지" />
-        <p>{mylive.liveroom_title}</p>
-      </div>
-      <div className="liveinfo-postinfo">
-        <hr />
-        <p>라이브 예정 상품</p>
-        {livepost.map(wish => (
-          <div key={wish.postId} className="liveinfo-post">
-            <div className="liveinfo-post-img-div">
-              <img
-                className="liveinfo-post-img"
-                src={wish.image}
-                alt="이미지사진"
-              />
-            </div>
-            <div className="liveinfo-post-info">
-              <p>{wish.post_title}</p>
-              <div className="liveinfo-price">
-                {wish.post_price - wish.post_sale_price ? (
-                  <div className="liveinfo-sale-percent">
-                    {Math.floor(
-                      ((wish.post_price - wish.post_sale_price) /
-                        wish.post_price) *
-                        100,
-                    )}
-                    %
-                  </div>
-                ) : null}
-                <div className="liveinfo-post-sale-price">
-                  {wish.post_sale_price.toLocaleString()}원
+      {live === 'n' ? (
+        <div className="liveinfo-info">
+          <p>등록된 라이브가 없습니다.</p>
+        </div>
+      ) : (
+        <div>
+          <div className="liveinfo-info">
+            <img
+              src={live?.thumbnail}
+              alt="라이브대표이미지"
+              className="liveinfoImg"
+            />
+            <p>{live?.title}</p>
+            <p>{live?.time}</p>
+          </div>
+          <div className="liveinfo-postinfo">
+            <Divider variant="middle" sx={{ marginBottom: '1rem' }} />
+            <p>라이브 예정 상품</p>
+            {live.liveLists?.map(liveItem => (
+              <div
+                key={liveItem.id}
+                className="liveinfo-post"
+                role="presentation"
+                onClick={() => {
+                  navigate(`/post/${liveItem.postDetailResponse.id}`);
+                }}
+              >
+                <div className="liveinfo-post-img-div">
+                  <img
+                    className="liveinfo-post-img"
+                    src={liveItem.postDetailResponse.postImages[0].url}
+                    alt="이미지사진"
+                  />
                 </div>
-                <div className="liveinfo-post-price">
-                  {wish.post_price.toLocaleString()}
+                <div className="liveinfo-post-info">
+                  <p>{liveItem.postDetailResponse.title}</p>
+                  <div className="liveinfo-price">
+                    {liveItem.postDetailResponse.price -
+                    liveItem.postDetailResponse.sale_price ? (
+                      <div className="liveinfo-sale-percent">
+                        {Math.floor(
+                          ((liveItem.postDetailResponse.price -
+                            liveItem.postDetailResponse.sale_price) /
+                            liveItem.postDetailResponse.price) *
+                            100,
+                        )}
+                        %
+                      </div>
+                    ) : null}
+                    <div className="liveinfo-post-sale-price">
+                      {liveItem.postDetailResponse.sale_price.toLocaleString()}
+                    </div>
+                    <div className="liveinfo-post-price">
+                      {liveItem.postDetailResponse.price.toLocaleString()}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
