@@ -3,13 +3,10 @@ package com.ssafy.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.dto.UserLoginForm;
 import com.ssafy.common.api.user.repository.UserRepository;
-import com.ssafy.common.api.user.service.UserService;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
