@@ -59,6 +59,7 @@ public class LiveController {
      */
     @GetMapping("/item")
     public ResponseEntity<?> getLiveItem (@RequestParam("liveId") Long liveId){
+        //DELETE 상태인것들 제외
         List<LivelistResponseForm> livelistResponseFormList = liveService.getItems(liveId);
         return ResponseEntity.ok(livelistResponseFormList);
     }
@@ -107,7 +108,7 @@ public class LiveController {
      * 라이브 중상태(onair)로 바꾸는 api
      */
     @PatchMapping("/onair")
-    public ResponseEntity<?> onair (@RequestParam("id") Long id){
+    public ResponseEntity<?> onair (@RequestParam("liveId") Long id){
         try{
             liveService.changeStatus(STATUS_ONAIR,id);
         }

@@ -36,6 +36,7 @@ public class NoticeController {
     // 판매자 공지 리스트 조회 API
     @GetMapping("/{sellerId}")
     public ResponseEntity<UserNoticeResponse> userNotice(@PathVariable("sellerId") Long sellerId) {
+        //DELETE상태인것들 필터링
         return new ResponseEntity<>(noticeService.userNotice(sellerId), HttpStatus.OK);
     }
 

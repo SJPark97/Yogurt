@@ -2,6 +2,7 @@ package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.dto.UserLoginResponse;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.dto.UserSellerResponse;
 import com.ssafy.common.api.user.service.UserService;
@@ -103,11 +104,6 @@ public class UserController {
 
         return ResponseEntity.ok(user);
     }
-//    @PostMapping("/login")
-//    @ApiOperation(value="로그인")
-//    public String login(HttpServletResponse response, @RequestBody @ApiParam(value = "회원",required = true)UserLoginForm form){
-//        return response.getHeader("Authorization");
-//    }
 
     @GetMapping("/seller")
     @ApiOperation(value = "판매자 전체 조회")
@@ -120,7 +116,8 @@ public class UserController {
     })
     public ResponseEntity<?> getAllSeller(){
         try {
-            List<UserResponseForm> formList = userService.findByRole(ROLE_SELLER);
+            // active 인 것만 조회
+            List<UserSellerResponse> formList = userService.findByRole(ROLE_SELLER);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
@@ -145,6 +142,8 @@ public class UserController {
         }
     }
 
+
+
     @GetMapping("/seller/search")
     @ApiOperation(value = "판매자 검색")
     @Parameter(name = "keyword", description = "판매자 키워드", in = ParameterIn.QUERY)
@@ -157,6 +156,7 @@ public class UserController {
     })
     public ResponseEntity<?> findSellers(@RequestParam String keyword){
         try{
+            // active 인것만 조회
             List<UserResponseForm> formList = userService.findALLByRoleAndNickNameContains(ROLE_SELLER, keyword);
             return new ResponseEntity<>(formList, HttpStatus.OK);
         }catch (Exception e){
@@ -175,6 +175,22 @@ public class UserController {
         try{
             userService.deleteUser(id);
             return ResponseEntity.status(HttpStatus.OK).body("유저가 정상적으로 삭제되었습니다");
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
+        }
+    }
+    @GetMapping("")
+    @ApiOperation(value = "유저 정보 조회")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "유저 정보 조회"),
+            @ApiResponse(code = 400, message = "오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
+    public ResponseEntity<?> getUser(@RequestParam String userId){
+        try{
+            UserLoginResponse res = userService.findByUserId(userId);
+            System.out.println("ABC");
+            return new ResponseEntity<>(res,HttpStatus.OK);
         }catch (NullPointerException e){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
         }

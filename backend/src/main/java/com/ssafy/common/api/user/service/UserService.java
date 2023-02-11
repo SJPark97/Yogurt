@@ -2,6 +2,8 @@ package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.domain.UserStatus;
+import com.ssafy.common.api.user.dto.UserLoginResponse;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.dto.UserSellerResponse;
@@ -31,8 +33,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User findByUserId(String userId){
-        return userRepository.findByUserId(userId);
+    public UserLoginResponse findByUserId(String userId){
+        User user = userRepository.findByUserId(userId);
+        UserLoginResponse res = new UserLoginResponse(user.getId(), user.getUserId(), user.getRole(),user.getNickName());
+        return res;
     }
     public UserSellerResponse findById(Long id){
         User user = userRepository.findById(id).get();
@@ -40,17 +44,21 @@ public class UserService {
         return userSellerResponse;
     }
 
-    public List<UserResponseForm> findByRole(UserRole role) {
+    public List<UserSellerResponse> findByRole(UserRole role) {
         List<User> user = userRepository.findAllByRole(role);
-        List<UserResponseForm> formList = new ArrayList<>();
+        List<UserSellerResponse> formList = new ArrayList<>();
         user.forEach(u ->{
-            formList.add(UserResponseForm.builder()
-                    .description(u.getDescription())
-                    .nickName(u.getNickName())
-                    .id(u.getId())
-                    .profileImage(u.getProfileImage())
-//                .likesSize()
-                    .build());
+            // status 가 ACTIVE인 USER만 조회
+            if(u.getUserStatus()== UserStatus.ACTIVE){
+                formList.add(new UserSellerResponse(u));
+            }
+//            formList.add(UserResponseForm.builder()
+//                    .description(u.getDescription())
+//                    .nickName(u.getNickName())
+//                    .id(u.getId())
+//                    .profileImage(u.getProfileImage())
+////                .likesSize()
+//                    .build());
 
         });
         return formList;
@@ -60,13 +68,16 @@ public class UserService {
         List<User> user = userRepository.findALLByRoleAndNickNameContains(role,keyword);
         List<UserResponseForm> formList = new ArrayList<>();
         user.forEach(u ->{
-            formList.add(UserResponseForm.builder()
-                    .description(u.getDescription())
-                    .nickName(u.getNickName())
-                    .id(u.getId())
-                    .profileImage(u.getProfileImage())
+            // status 가 ACTIVE인 USER만 조회
+            if(u.getUserStatus()== UserStatus.ACTIVE){
+                formList.add(UserResponseForm.builder()
+                        .description(u.getDescription())
+                        .nickName(u.getNickName())
+                        .id(u.getId())
+                        .profileImage(u.getProfileImage())
 //                .likesSize()
-                    .build());
+                        .build());
+            }
 
         });
         return formList;
@@ -75,4 +86,5 @@ public class UserService {
     public void deleteUser(long id){
         userRepository.deleteById(id);
     }
+
 }

@@ -1,14 +1,14 @@
 package com.ssafy.common.api.kakaopay;
 
+import com.ssafy.common.api.kakaopay.dto.KakaoPayRequest;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log
 @RestController
@@ -19,17 +19,17 @@ public class KakaoController {
     @GetMapping("/kakaoPay")
     public void kakaoPayGet() {
     }
-
     @PostMapping("/kakaoPay")
-    public String kakaoPay() {
+    public String kakaoPay(@RequestBody KakaoPayRequest request) {
         log.info("kakaoPay post...............................");
-        return "redirect:" + kakaopay.kakaoPayReady();
+        return "redirect:" + kakaopay.kakaoPayReady(request);
     }
     @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+    public ResponseEntity<KakaoPayApprovalVO> kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
         log.info("kakaoPaySuccess get...............................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token));
         System.out.println(model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token)));
+        return new ResponseEntity<>(kakaopay.kakaoPayInfo(pg_token), HttpStatus.OK);
     }
 }

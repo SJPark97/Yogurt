@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto;
 
+import com.ssafy.common.api.live.domain.LiveRoomStatus;
 import com.ssafy.common.api.live.dto.response.SellerLiveroomForm;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
@@ -18,7 +19,8 @@ public class UserLiveroomResponse {
     public UserLiveroomResponse(User user) {
         id = user.getId();
         sellerLiveroomFormList = user.getLiveRooms()
-                .stream().map(liveRoom -> new SellerLiveroomForm(liveRoom))
+                .stream().filter(liveRoom -> liveRoom.getStatus()!= LiveRoomStatus.STATUS_CLOSE)
+                .map(liveRoom -> new SellerLiveroomForm(liveRoom))
                 .collect(Collectors.toList());
     }
 

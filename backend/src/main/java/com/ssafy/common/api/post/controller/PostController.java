@@ -33,6 +33,7 @@ public class PostController {
     // 전체 상품 조회 API
     @GetMapping("")
     public ResponseEntity<List<PostAllResponse>> getPostAll(){
+        //상태가 DELETE 인것들 필터링
         return new ResponseEntity<>(postService.findPostAll(), HttpStatus.OK);
     }
 
@@ -51,6 +52,7 @@ public class PostController {
     // user id로 전체 상품 찾기
     @GetMapping("/user/{user_id}")
     public ResponseEntity<List<UserPostResponse>> getUserPostAll(@PathVariable("user_id") Long user_id){
+        // Delete 상태인 것들 필터링
         return new ResponseEntity<>(postService.findByUserId(user_id), HttpStatus.OK);
     }
 }
