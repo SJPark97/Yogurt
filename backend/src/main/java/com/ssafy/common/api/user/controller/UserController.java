@@ -106,6 +106,9 @@ public class UserController {
                         .name(form.getName())
                         .nickName(form.getNickName())
                         .build();
+        System.out.println(form.getUserId() + " " + form.getRole() + " " +form.getUserStatus() + " " +form.getEmail() + " "
+        + form.getPhoneNumber()+ " " + form.getPassword() + " "+form.getName() + " " + form.getNickName()
+        );
         user.setPassword(passwordEncoder.encode(form.getPassword()));
         userService.join(user);
 
