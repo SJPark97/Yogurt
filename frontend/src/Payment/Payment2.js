@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
-import './PayMent.css';
+import './Payment.css';
 
 function Payment2() {
   const location = useLocation();
