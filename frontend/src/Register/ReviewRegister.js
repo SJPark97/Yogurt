@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Divider from '@mui/material/Divider';
 import BackToTop from '../AppBar/BackToTop';
 import './ReviewRegister.css';
@@ -7,16 +8,19 @@ import axios from 'axios';
 
 function ReviewRegister() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const postId = location.state;
+  const loginUser = useSelector(state => state.user.value);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [rate, setRate] = useState(5);
 
+  const buyerId = loginUser.loginUserPk;
+  const token = loginUser.token;
+
   const submitHandler = event => {
     event.preventDefault();
-    navigate('/profile/buyer?tab=3');
-
-    const token1 =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+    navigate(`/profile/buyer/${buyerId}?tab=3`);
 
     const data = {
       title,
@@ -25,8 +29,8 @@ function ReviewRegister() {
     };
 
     axios
-      .post(`https://i8b204.p.ssafy.io/be-api/review`, data, {
-        headers: { Authorization: token1 },
+      .post(`https://i8b204.p.ssafy.io/be-api/review/${postId}`, data, {
+        headers: { Authorization: token },
       })
       .then(res => console.log(res))
       .catch(err => console.log(err));

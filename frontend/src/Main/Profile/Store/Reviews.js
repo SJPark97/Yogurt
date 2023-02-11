@@ -30,8 +30,6 @@ function Reviews() {
     getReviews();
   }, [getReviews]);
 
-  console.log(reviews);
-
   return (
     <div>
       <div className="totalReview">리뷰 {reviews.length}개</div>

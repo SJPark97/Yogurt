@@ -18,8 +18,9 @@ function LiveRegister() {
     URL.revokeObjectURL(image);
     setImage(null);
   };
-  const token = loginUser?.token;
-  const sellerId = loginUser?.loginUserPk;
+
+  const token = loginUser.token;
+  const sellerId = loginUser.loginUserPk;
 
   useEffect(() => {
     axios

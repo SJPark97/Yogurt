@@ -33,7 +33,6 @@ export default function Ordered() {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
-        console.log('ddfdfdfdfd', res.data);
         setOrderedPosts(res.data.endPosts);
       })
       .catch(err => {
@@ -47,8 +46,8 @@ export default function Ordered() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/review/join`);
+  const handleClick = event => {
+    navigate(`/review/join`, { state: event });
   };
 
   return (
@@ -89,7 +88,7 @@ export default function Ordered() {
               sx={{
                 marginBottom: '16px',
               }}
-              onClick={handleClick}
+              onClick={() => handleClick(ordered.post.id)}
             >
               리뷰 작성
             </ColorButton>
