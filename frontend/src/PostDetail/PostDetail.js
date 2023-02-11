@@ -48,7 +48,7 @@ function PostDetail() {
   const token1 =
     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJzc2FmeTEiLCJleHAiOjE2NzYxODE0OTV9.7RfncJBF-f_0Mn3EjjHhjWNw3-g-vH1GtvYZKEeKgMg';
   const token2 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYxNzYyOTF9.lKI0WuuNy6McJEW_-R_vO1aDbbzn0LKhzH8kMD9BNt8';
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6ImRtc3dsd2xmaGQxMiIsImV4cCI6MTY3NjM2MDUxMX0._BTfYStZubxrRZ1D1TxKrPJzHBnBd5VkpAVe2h0Mdm8';
 
   useEffect(() => {
     axios
@@ -72,14 +72,13 @@ function PostDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
+  const data = {};
   const wishPost = () => {
     axios
-      .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${post?.id}`, {
-        headers: {
-          Authorization: token2,
-        },
+      .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${post?.id}`, data, {
+        headers: { Authorization: token2 },
       })
-      .then(res => setPost(res))
+      .then(res => console.log(res))
       .catch(err => console.log('wishlist', err));
   };
 

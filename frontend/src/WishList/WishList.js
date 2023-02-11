@@ -12,7 +12,7 @@ function WishList() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const token2 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw  ';
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6ImRtc3dsd2xmaGQxMiIsImV4cCI6MTY3NjM2MDUxMX0._BTfYStZubxrRZ1D1TxKrPJzHBnBd5VkpAVe2h0Mdm8';
 
   useEffect(() => {
     axios

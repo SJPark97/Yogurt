@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import BackToTop from '../AppBar/BackToTop';
 import './ReviewRegister.css';
+import axios from 'axios';
 
 function ReviewRegister() {
   const navigate = useNavigate();
@@ -12,23 +13,23 @@ function ReviewRegister() {
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(event);
     navigate('/profile/buyer?tab=3');
 
-    const body = {
+    const token1 =
+      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+
+    const data = {
       title,
       content,
       rate,
     };
 
-    // {
-    //   if (body.title === '') {
-    //     alert('제목을 입력해주세요');
-    //     return false;
-    //   }
-    // }
-
-    console.log(body);
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/review`, data, {
+        headers: { Authorization: token1 },
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   return (

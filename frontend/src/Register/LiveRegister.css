@@ -4,8 +4,7 @@
 
 .live_reg_title p,
 .live_reg_file p,
-.live_reg_date p,
-.live_reg_detail p {
+.live_reg_time p {
   display: flex;
   justify-content: flex-start;
   margin: 0px;
@@ -40,29 +39,22 @@ textarea {
 .live_reg_title,
 .live_reg_file,
 .live_reg_price,
-.live_reg_sale_price,
-.live_reg_detail {
+.live_reg_sale_price {
   margin: 8px 24px 0px 8px;
 }
 
-#live_reg_date,
 #live_reg_time {
   margin: 8px 8px 0px 8px;
   padding: 2px;
 }
 
-#live_reg_title,
-#live_reg_detail {
+#live_reg_title {
   width: 100%;
   padding: 4px 0px 4px 8px;
   margin: 8px 0px 0px 8px;
   display: flex;
   align-items: center;
   justify-content: left;
-}
-
-#live_reg_detail {
-  height: 100px;
 }
 
 #live_reg_file {
