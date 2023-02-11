@@ -36,7 +36,7 @@ function Reviews() {
     <div>
       <div className="totalReview">리뷰 {reviews.length}개</div>
       {reviews.map(review => (
-        <div key={review.reviewId}>
+        <div key={review.post.id}>
           <Box
             sx={{
               marginBottom: '8px',
