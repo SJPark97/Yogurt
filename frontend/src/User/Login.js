@@ -115,6 +115,7 @@ export default function LogInPage() {
       })
       .catch(err => {
         console.log('로그인 에러', err);
+        alert('아이디 및 비밀번호를 다시 확인해주세요!!');
       });
   };
 

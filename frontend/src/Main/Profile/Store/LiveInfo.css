@@ -1,5 +1,6 @@
 .liveinfo-info > img {
-  margin: 8px 0px;
+  margin: 1rem 0;
+  width: 87%;
 }
 
 .liveinfo-info > p {
