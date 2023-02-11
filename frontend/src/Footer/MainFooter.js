@@ -14,8 +14,8 @@ function MainFooter() {
       {useMatch('/') && <Footer />}
       {useMatch('/stores') && <Footer />}
       {useMatch('/alarms') && <Footer />}
-      {useMatch('/profile/buyer') && <Footer />}
-      {useMatch('/profile/seller') && <Footer />}
+      {useMatch('/profile/buyer/:buyerId') && <Footer />}
+      {useMatch('/profile/seller/:sellerId') && <Footer />}
     </div>
   );
 }

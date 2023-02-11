@@ -117,7 +117,6 @@ export default function LogInPage() {
         console.log('로그인 에러', err);
       });
   };
-  console.log('dddd', user);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

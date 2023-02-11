@@ -5,7 +5,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import './CustomerInfo.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Ordered from './Ordered';
 import MyReview from './MyReview';
 import LikePost from './LikePost';
@@ -13,6 +13,7 @@ import LikeStore from './LikeStore';
 
 const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
   color: #cccccc;
+  max-width: 100%;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;
@@ -31,9 +32,9 @@ const StyledMiddleNavigationAction = styled(BottomNavigationAction)`
 `;
 
 export default function CustomerInfo() {
-  const navigate = useNavigate();
+  const [searchParams, setserchParams] = useSearchParams();
 
-  const tab = Number(useLocation().search.split('=')[1]);
+  const tab = Number(searchParams.get('tab'));
   console.log(tab);
 
   // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
@@ -46,7 +47,7 @@ export default function CustomerInfo() {
             showLabels
             value={tab}
             onChange={(event, newValue) => {
-              navigate(`/profile/buyer?tab=${newValue}`);
+              setserchParams({ tab: `${newValue}` });
             }}
             sx={{ background: '#ffffff' }}
           >

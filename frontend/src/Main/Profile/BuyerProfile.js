@@ -1,4 +1,8 @@
 import '../../App.css';
+import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import BackToTop from '../../AppBar/BackToTop';
 import CustomerInfo from './Customer/CustomerInfo';
 import CustomerProfile from './Customer/CustomerProfile';
@@ -15,6 +19,31 @@ const userData2 = {
 };
 
 function BuyerProfile() {
+  const { buyerId } = useParams();
+
+  const loginUser = useSelector(state => state.user.value);
+  const [profile, setProfile] = useState([]);
+
+  const getProfile = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${buyerId}`, {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        console.log('ddd', res.data);
+        setProfile(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loginUser, buyerId]);
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
+
+  console.log('fff', profile);
+
   return (
     <div>
       <BackToTop />
