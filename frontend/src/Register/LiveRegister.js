@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import './LiveRegister.css';
@@ -7,6 +8,7 @@ import axios from 'axios';
 
 function LiveRegister() {
   const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [time, setTime] = useState(Date());
@@ -16,23 +18,24 @@ function LiveRegister() {
     URL.revokeObjectURL(image);
     setImage(null);
   };
-
-  const token1 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+  const token = loginUser?.token;
+  const sellerId = loginUser?.loginUserPk;
 
   useEffect(() => {
-    axios.get('https://i8b204.p.ssafy.io/be-api/post/user/6').then(res => {
-      const posts = res.data[0].posts.filter(
-        post => post.status === 'STATUS_LIVE_SOON',
-      );
-      const livePost = posts.map(post => post.id);
-      setPostIds(livePost);
-    });
-  }, []);
+    axios
+      .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`)
+      .then(res => {
+        const posts = res.data[0].posts.filter(
+          post => post.status === 'STATUS_LIVE_SOON',
+        );
+        const livePost = posts.map(post => post.id);
+        setPostIds(livePost);
+      });
+  }, [sellerId]);
 
   const submitHandler = event => {
     event.preventDefault();
-    navigate('/profile/seller/6?tab=1');
+    navigate(`/profile/seller/${sellerId}?tab=1`);
 
     const data = {
       title,
@@ -43,7 +46,7 @@ function LiveRegister() {
 
     axios
       .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
-        headers: { Authorization: token1 },
+        headers: { Authorization: token },
       })
       .then(res => console.log('live', res))
       .catch(err => console.log('live', err));
