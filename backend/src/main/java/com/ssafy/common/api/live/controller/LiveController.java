@@ -93,7 +93,13 @@ public class LiveController {
 
         try {
             List<SellerLiveroomForm> sellerLiveroomFormList = liveService.getSellersLiveroom(sellerId);
-            return ResponseEntity.ok(sellerLiveroomFormList);
+            if (sellerLiveroomFormList.size()==0) {
+                return ResponseEntity.ok("no live");
+            }
+            else{
+                return ResponseEntity.ok(sellerLiveroomFormList);
+
+            }
 
         }catch (NoSuchElementException e){
             log.error(e.getMessage());
