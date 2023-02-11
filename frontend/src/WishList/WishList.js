@@ -8,6 +8,8 @@ import './WishList.css';
 function WishList() {
   const navigate = useNavigate();
   const [wishlist, setWishList] = useState([]);
+  const [checkItems, setCheckItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const token2 =
     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw  ';
@@ -27,17 +29,15 @@ function WishList() {
   }, []);
 
   const allcheck = wishlist.map(el => el.wishListId);
-  const [checkItems, setCheckItems] = useState([]);
-
-  useEffect(() => {
-    setCheckItems(allcheck);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wishlist]);
 
   const totalwishprice = wishlist.map(el => el.post.sale_price);
   const priceTotal = totalwishprice.reduce((a, b) => a + b, 0);
 
-  const [totalPrice, setTotalPrice] = useState(priceTotal);
+  useEffect(() => {
+    setCheckItems(allcheck);
+    setTotalPrice(priceTotal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wishlist]);
 
   const SingleCheck = (checked, id, price) => {
     if (checked) {
