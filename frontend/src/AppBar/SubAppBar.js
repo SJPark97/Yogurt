@@ -5,8 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useLocation, useNavigate, useMatch } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 
 import { styled } from '@mui/material/styles';
@@ -72,7 +71,8 @@ export default function SubAppBar() {
           >
             {pageName && pageName.name}
           </Typography>
-          {useMatch('/stores/:storeId') && (
+          {/* 이거는 신고기능이 있을 때 쓰는 코드 */}
+          {/* {useMatch('/stores/:storeId') && (
             <IconButton
               size="large"
               edge="end"
@@ -81,7 +81,7 @@ export default function SubAppBar() {
             >
               <MoreVertIcon sx={{ color: '#ffffff' }} />
             </IconButton>
-          )}
+          )} */}
         </Toolbar>
         <Divider />
       </CustomAppBar>

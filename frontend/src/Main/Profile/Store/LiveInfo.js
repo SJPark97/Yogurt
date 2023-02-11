@@ -9,7 +9,7 @@ function LiveInfo() {
   const navigate = useNavigate();
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
-  const [live, setLive] = useState([]);
+  const [live, setLive] = useState('n');
 
   const getLive = useCallback(async () => {
     await axios

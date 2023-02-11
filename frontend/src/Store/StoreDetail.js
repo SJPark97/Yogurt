@@ -1,19 +1,44 @@
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import BackToTop from '../AppBar/BackToTop';
 import SellerInfo from '../Main/Profile/Seller/SellerInfo';
 import StoreInfo from '../Main/Profile/Store/StoreInfo';
-import dummy from '../db/list.json';
 
 import './StoreDetail.css';
 
 function StoreDetail() {
-  const { state } = useLocation();
+  const { sellerId } = useParams();
+  const loginUser = useSelector(state => state.user.value);
+  const [profile, setProfile] = useState([]);
+
+  const getProfile = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${sellerId}`, {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        setProfile(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loginUser, sellerId]);
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
 
   return (
     <div>
       <BackToTop />
-      <SellerInfo sellerData={state} loginId={2} />
-      <StoreInfo products={dummy.Goods} sellerData={state} />
+      <SellerInfo
+        profile={profile}
+        loginId={loginUser.loginUserPk}
+        token={loginUser.token}
+      />
+      <StoreInfo />
     </div>
   );
 }
