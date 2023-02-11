@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/user';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -21,12 +23,14 @@ export default function ProfileDrawer() {
     bottom: false,
   });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const url = useLocation().pathname;
+  const loginUser = useSelector(state => state.user.value);
 
   const sellerHandleClick = index => {
     if (index === 0) {
-      console.log('로그아웃');
+      dispatch(logout());
+      navigate('/');
     } else if (index === 1) {
       navigate('/post/join');
     } else if (index === 2) {
@@ -41,7 +45,8 @@ export default function ProfileDrawer() {
 
   const buyerHandleClick = index => {
     if (index === 0) {
-      console.log('로그아웃');
+      dispatch(logout());
+      navigate('/');
     } else if (index === 1) {
       navigate('/profile/modify');
     }
@@ -59,7 +64,7 @@ export default function ProfileDrawer() {
   };
 
   const list = () =>
-    url === '/profile/seller' ? (
+    loginUser.loginUserRole === 'ROLE_SELLER' ? (
       <Box
         sx={{ width: 'auto' }}
         role="presentation"

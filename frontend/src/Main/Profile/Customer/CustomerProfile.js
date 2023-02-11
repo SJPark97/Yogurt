@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import './CustomerProfile.css';
+import Logo from '../../../Images/Yogurt_Logo.png';
 
-function CustomerProfile({ customerData }) {
+function CustomerProfile({ profile }) {
   const navigate = useNavigate();
 
   return (
@@ -14,26 +15,29 @@ function CustomerProfile({ customerData }) {
           margin: '16px',
           marginBottom: '8px',
           display: 'grid',
-          gridTemplateColumns: '2fr 5fr 4fr',
+          gridTemplateColumns: '1fr 8fr 1fr',
           height: '100%',
-          maxWidth: '360px',
           alignItems: 'center',
-          justifyContent: 'start',
+          justifyContent: 'space-between',
         }}
       >
-        <img src={customerData.img} alt="#" className="profileImg" />
+        <img
+          src={profile.profileImage ? profile.profileImage : Logo}
+          alt="스토어 프로필 사진"
+          className="profileImg"
+        />
         <div className="profile-text">
-          <div className="profile-nickname">{customerData.nickname}</div>
+          <div className="profile-nickname">{profile.nickName}</div>
         </div>
         <Button
           variant="outlined"
-          startIcon={<ShoppingBagOutlinedIcon fontSize="small" />}
-          sx={{ fontSize: '12px' }}
+          // startIcon={<ShoppingBagOutlinedIcon fontSize="small" />}
+          sx={{ padding: '8px', color: '#deb887', border: '1px solid #deb887' }}
           onClick={() => {
             navigate('/wishlist');
           }}
         >
-          장바구니
+          <ShoppingBagOutlinedIcon fontSize="medium" />
         </Button>
       </Box>
     </div>
