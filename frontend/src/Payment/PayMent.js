@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
-import './PayMent.css';
+import './Payment.css';
 
 function Payment() {
   const location = useLocation();
