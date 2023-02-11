@@ -1,4 +1,4 @@
-package com.ssafy.common.api.user.domain;
+package com.ssafy.common.api.user.dto;
 
 
 import io.swagger.annotations.ApiModelProperty;
