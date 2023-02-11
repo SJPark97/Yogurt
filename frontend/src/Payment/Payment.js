@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
@@ -7,16 +8,16 @@ import './Payment.css';
 
 function Payment() {
   const location = useLocation();
+  const loginUser = useSelector(state => state.user.value);
   const { checkItems, totalPrice } = location.state;
   const [post, setPost] = useState([]);
 
-  const token2 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw  ';
+  const token = loginUser.token;
 
   useEffect(() => {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/wishlist', {
-        headers: { Authorization: token2 },
+        headers: { Authorization: token },
       })
       .then(res => {
         const wishpost = res.data.wishLists.filter(wish => {

@@ -1,14 +1,15 @@
 // import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Divider from '@mui/material/Divider';
-
 import BackToTop from '../AppBar/BackToTop';
 import './NotedRegister.css';
 import axios from 'axios';
 
 function PostRegister() {
   const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -18,12 +19,12 @@ function PostRegister() {
     setContent(enterContent);
   };
 
-  const token1 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+  const token = loginUser.token;
+  const sellerId = loginUser.token;
 
   const submitHandler = event => {
     event.preventDefault();
-    navigate('/profile/seller/6?tab=2');
+    navigate(`/profile/seller/${sellerId}?tab=2`);
 
     const data = {
       title,
@@ -32,7 +33,7 @@ function PostRegister() {
 
     axios
       .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
-        headers: { Authorization: token1 },
+        headers: { Authorization: token },
       })
       .then(res => console.log(res))
       .catch(err => console.log(err));
