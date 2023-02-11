@@ -90,6 +90,7 @@ public class PostService {
     // 로그인 유저 정보
     public User getLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("authentication.getPrincipal() : " + authentication.getPrincipal());
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         return principal.getUser();
     }
