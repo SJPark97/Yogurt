@@ -1,8 +1,8 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserLoginForm;
 import com.ssafy.common.api.user.dto.UserLoginResponse;
+import com.ssafy.common.api.user.dto.UserRequestJoinForm;
 import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.dto.UserSellerResponse;
 import com.ssafy.common.api.user.service.UserService;
@@ -12,12 +12,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Content;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
@@ -95,14 +92,24 @@ public class UserController {
             @ApiResponse(code = 400, message = "입력 오류"),
             @ApiResponse(code = 500, message = "서버에러")
     })
-    public ResponseEntity<?> join(@Valid User user, BindingResult bindingResult){
+    public ResponseEntity<?> join(@Valid @RequestBody UserRequestJoinForm form, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user = User.builder()
+                        .userId(form.getUserId())
+                        .role(form.getRole())
+                        .userStatus(form.getUserStatus())
+                        .email(form.getEmail())
+                        .phoneNumber(form.getPhoneNumber())
+                        .password(form.getPassword())
+                        .name(form.getName())
+                        .nickName(form.getNickName())
+                        .build();
+        user.setPassword(passwordEncoder.encode(form.getPassword()));
         userService.join(user);
 
-        return ResponseEntity.ok(user);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     @GetMapping("/seller")
