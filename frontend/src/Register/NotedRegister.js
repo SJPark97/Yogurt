@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 
 import BackToTop from '../AppBar/BackToTop';
 import './NotedRegister.css';
+import axios from 'axios';
 
 function PostRegister() {
   const navigate = useNavigate();
@@ -12,17 +13,29 @@ function PostRegister() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
+  const onClick = event => {
+    const enterContent = event.replace(/(\n|\r\n)/g, '<br />');
+    setContent(enterContent);
+  };
+
+  const token1 =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+
   const submitHandler = event => {
     event.preventDefault();
-    navigate('/profile/seller');
+    navigate('/profile/seller/6?tab=2');
 
-    const body = {
+    const data = {
       title,
       content,
-      status: 1,
     };
 
-    console.log(body);
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
+        headers: { Authorization: token1 },
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
 
     return false;
   };
@@ -48,7 +61,7 @@ function PostRegister() {
             id="noted_reg_detail"
             name="size"
             placeholder="공지사항을 적어주세요&#13;&#10;알아둬야 될 사항을 적어주세요"
-            onChange={event => setContent(event.target.value)}
+            onChange={event => onClick(event.target.value)}
           />
         </div>
         <div className="submit_btn">

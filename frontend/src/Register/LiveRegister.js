@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import './LiveRegister.css';
+import axios from 'axios';
 
 function LiveRegister() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
-  const [date, setDate] = useState(Date());
   const [time, setTime] = useState(Date());
-  const [content, setContent] = useState('');
 
   const handleDeleteIamge = () => {
     URL.revokeObjectURL(image);
@@ -19,18 +18,23 @@ function LiveRegister() {
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(event);
-    navigate('/profile/seller');
+    navigate('/profile/seller/6?tab=1');
 
-    const body = {
+    const token1 =
+      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+
+    const data = {
       title,
-      image,
-      date,
+      thumnail: image,
       time,
-      content,
     };
 
-    console.log(body);
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
+        headers: { Authorization: token1 },
+      })
+      .then(res => console.log('live', res))
+      .catch(err => console.log('live', err));
 
     return false;
   };
@@ -60,7 +64,7 @@ function LiveRegister() {
               setImage(URL.createObjectURL(event.target.files[0]))
             }
           />
-          <label htmlFor="live_reg_file">+</label>
+          {!image && <label htmlFor="live_reg_file">+</label>}
           <div>
             {image && (
               <div>
@@ -73,32 +77,15 @@ function LiveRegister() {
           </div>
         </div>
         <Divider sx={{ marginY: '1rem' }} />
-        <div className="live_reg_date">
+        <div className="live_reg_time">
           <p>라이브 예정 시간</p>
           <input
-            type="date"
-            id="live_reg_date"
-            name="date"
-            onClick={event => setDate(event.target.value)}
-          />
-          <input
-            type="time"
+            type="datetime-local"
             id="live_reg_time"
             name="time"
             onClick={event => setTime(event.target.value)}
           />
         </div>
-        <Divider sx={{ marginY: '1rem' }} />
-        <div className="live_reg_detail">
-          <p>라이브 상세정보</p>
-          <textarea
-            id="live_reg_detail"
-            name="detail"
-            placeholder="상세내용에 대해 기입해주세요&#13;&#10;ex) 라이브의 특징 및 진행상황에 대해 기재해주면 더 좋아요!"
-            onClick={event => setContent(event.target.value)}
-          />
-        </div>
-        <Divider sx={{ marginY: '1rem' }} />
         <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
