@@ -23,9 +23,9 @@ function CardList({ data }) {
         [{data.brCateName}] {data.title}
       </div>
       {discount ? <div className="CardDiscount">{discount}%</div> : null}
-      <div style={{ display: 'flex' }}>
-        <div className="CardPrice">{data.sale_price.toLocaleString()}</div>
-        <div className="CardSalePrice">{data.price.toLocaleString()}</div>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <div className="CardPrice">{data.sale_price.toLocaleString()}원</div>
+        <div className="CardSalePrice">{data.price.toLocaleString()}원</div>
       </div>
     </div>
   );
