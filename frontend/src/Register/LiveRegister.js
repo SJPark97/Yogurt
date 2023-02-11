@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
@@ -10,23 +10,35 @@ function LiveRegister() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [time, setTime] = useState(Date());
+  const [postIds, setPostIds] = useState([]);
 
   const handleDeleteIamge = () => {
     URL.revokeObjectURL(image);
     setImage(null);
   };
 
+  const token1 =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
+
+  useEffect(() => {
+    axios.get('https://i8b204.p.ssafy.io/be-api/post/user/6').then(res => {
+      const posts = res.data[0].posts.filter(
+        post => post.status === 'STATUS_LIVE_SOON',
+      );
+      const livePost = posts.map(post => post.id);
+      setPostIds(livePost);
+    });
+  }, []);
+
   const submitHandler = event => {
     event.preventDefault();
     navigate('/profile/seller/6?tab=1');
-
-    const token1 =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJtb29uMTIzIiwiZXhwIjoxNjc2MzYyNDU2fQ.xgiO48lLc2LPWxiXnSWKrJVeFRvfERhahIdKnN266m4';
 
     const data = {
       title,
       thumnail: image,
       time,
+      postIds,
     };
 
     axios
@@ -50,7 +62,7 @@ function LiveRegister() {
             id="live_reg_title"
             name="title"
             placeholder="라이브 제목을 입력해주세요"
-            onClick={event => setTitle(event.target.value)}
+            onChange={event => setTitle(event.target.value)}
           />
         </div>
         <Divider sx={{ marginY: '1rem' }} />
@@ -83,7 +95,7 @@ function LiveRegister() {
             type="datetime-local"
             id="live_reg_time"
             name="time"
-            onClick={event => setTime(event.target.value)}
+            onChange={event => setTime(event.target.value)}
           />
         </div>
         <div className="submit_btn">
