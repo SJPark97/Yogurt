@@ -55,8 +55,7 @@ function StoreItem({ store }) {
 
   const handleClick = () => {
     console.log('디테일 페이지 스토어 아이디', storeId);
-    // navigate(`/stores/${storeId}?tab=0`, { state: sellerData });
-    navigate(`/stores/${storeId}?tab=0`);
+    navigate(`/profile/seller/${storeId}?tab=0`);
   };
   // 상품 라이브 공지사항 리뷰 선택된 것
 

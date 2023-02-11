@@ -1,4 +1,5 @@
-import { useLocation, useMatch } from 'react-router-dom';
+import { useLocation, useMatch, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ButtonAppBar from './ButtonAppBar';
 import SubAppBar from './SubAppBar';
 import ProfileAppBar from './ProfileAppBar';
@@ -12,13 +13,21 @@ function MainAppBar() {
   // }, [pageUrl]);
   console.log('이거다!', pageUrl);
 
+  const { buyerId } = useParams();
+  const loginUser = useSelector(state => state.user.value);
+
   return (
     <div>
       {useMatch('/') && <ButtonAppBar />}
       {useMatch('/stores') && <ButtonAppBar />}
       {useMatch('/stores/:storeId') && <SubAppBar />}
       {useMatch('/alarms') && <ButtonAppBar />}
-      {useMatch('/profile/buyer/:buyerId') && <ProfileAppBar />}
+      {useMatch('/profile/buyer/:buyerId') &&
+      buyerId === loginUser.loginUserPk ? (
+        <ProfileAppBar />
+      ) : (
+        <SubAppBar />
+      )}
       {useMatch('/profile/seller/:sellerId') && <ProfileAppBar />}
       {useMatch('/category') && <SubAppBar />}
       {/** 아니 아래꺼 두개가 겹쳐서 join이라는 :storeId가 설정된다 */}

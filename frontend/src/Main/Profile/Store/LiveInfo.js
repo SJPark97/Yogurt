@@ -33,11 +33,14 @@ function LiveInfo() {
   return (
     <div>
       {live === 'n' ? (
-        <div className="liveinfo-info">
+        <div className="totalLive">
           <p>등록된 라이브가 없습니다.</p>
         </div>
       ) : (
         <div>
+          <div className="totalLive">
+            <p>라이브 1개</p>
+          </div>
           <div className="liveinfo-info">
             <img
               src={live?.thumbnail}
