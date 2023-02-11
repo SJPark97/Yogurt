@@ -18,7 +18,8 @@ import PostRegister from './Register/PostRegister';
 import NotedRegister from './Register/NotedRegister';
 import ReviewRegister from './Register/ReviewRegister';
 import WishList from './WishList/WishList';
-import PayMent from './Payment/PayMent';
+import Payment from './Payment/Payment';
+import Payment2 from './Payment/Payment2';
 import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
 // import PayResult from './Payment/PayResult';
@@ -65,7 +66,8 @@ function App() {
         <Route path="/review/join" element={<ReviewRegister />} />
         <Route path="/live/join" element={<LiveRegister />} />
         <Route path="/wishlist" element={<WishList />} />
-        <Route path="/payment" element={<PayMent />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment2" element={<Payment2 />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/search" element={<Search />} />
