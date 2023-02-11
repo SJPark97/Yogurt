@@ -31,4 +31,6 @@ public class ReviewController {
     public ResponseEntity<UserReviewResponse> userReview(@PathVariable("sellerId") Long sellerId){
         return new ResponseEntity<>(reviewService.userReview(sellerId),HttpStatus.OK);
     }
+
+
 }
