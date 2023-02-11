@@ -1,7 +1,7 @@
 package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.domain.UserLoginForm;
+import com.ssafy.common.api.user.dto.UserLoginForm;
 import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserLoginResponse;
 import com.ssafy.common.api.user.dto.UserResponseForm;
@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class UserService {
     }
 
     public void join(User user) {
+        user.setCreate_date(new Timestamp(System.currentTimeMillis()));
+        user.setUpdate_date(new Timestamp(System.currentTimeMillis()));
         userRepository.save(user);
     }
 
