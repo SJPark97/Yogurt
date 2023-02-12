@@ -18,7 +18,6 @@ function LiveInfo() {
       })
       .then(res => {
         setLive(res.data[0]);
-        console.log('라이브데이터', res.data);
       })
       .catch(err => {
         console.log(err);

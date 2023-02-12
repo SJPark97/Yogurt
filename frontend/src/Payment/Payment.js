@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
@@ -7,12 +7,29 @@ import axios from 'axios';
 import './Payment.css';
 
 function Payment() {
+  // const navigate = useNavigate();
   const location = useLocation();
   const loginUser = useSelector(state => state.user.value);
   const { checkItems, totalPrice } = location.state;
   const [post, setPost] = useState([]);
+  const [postIdList, setPostIdList] = useState([]);
+  const [address, setAddress] = useState('');
 
   const token = loginUser.token;
+
+  const data = {
+    totalAmount: String(totalPrice),
+    address,
+    postIdList,
+  };
+
+  const handleClick = () => {
+    console.log(data);
+    axios
+      .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err.data));
+  };
 
   useEffect(() => {
     axios
@@ -20,11 +37,15 @@ function Payment() {
         headers: { Authorization: token },
       })
       .then(res => {
-        const wishpost = res.data.wishLists.filter(wish => {
-          return checkItems.includes(wish.wishListId);
-        });
+        const wishpost = res.data.wishLists.filter(wish =>
+          checkItems.includes(wish.wishListId),
+        );
         const postData = wishpost.map(item => item.post);
         setPost(postData);
+        console.log(postData);
+
+        const postIdData = postData.map(item => ({ id: item.id }));
+        setPostIdList(postIdData);
       })
       .catch(err => {
         console.log(err);
@@ -67,6 +88,7 @@ function Payment() {
           name="배송지정보"
           id="deilver"
           placeholder="주소를 입력하세요"
+          onChange={event => setAddress(event.target.value)}
         />
       </div>
       <Divider sx={{ marginY: '1rem' }} />
@@ -81,6 +103,7 @@ function Payment() {
           src="https://img.etoday.co.kr/pto_db/2020/10/600/20201023101423_1528745_1200_738.jpg"
           alt="카카오페이로 결제하기"
           height="100px"
+          onClick={() => handleClick()}
         />
       </div>
     </div>
