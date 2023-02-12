@@ -139,6 +139,8 @@ function SignUp() {
       } else {
         setError({ ...error, [handling]: '' });
       }
+    } else if (handling === 'password1') {
+      setForm({ ...form, [handling]: e.target.value });
     } else if (handling === 'password2') {
       if (form.password1 !== value) {
         setError({ ...error, password2: '비밀번호가 일치하지 않습니다.' });
@@ -214,6 +216,11 @@ function SignUp() {
       setError({
         ...error,
         password1: '숫자+영문자+특수문자 8자리 이상 입력해주세요.',
+      });
+    } else if (passwordRegex.test(form.password1)) {
+      setError({
+        ...error,
+        password1: '',
       });
     }
   };

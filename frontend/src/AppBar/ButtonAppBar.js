@@ -60,7 +60,7 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="search"
             onClick={() => {
-              navigate('/search');
+              navigate('/search?searching=');
             }}
           >
             <SearchOutlinedIcon />
