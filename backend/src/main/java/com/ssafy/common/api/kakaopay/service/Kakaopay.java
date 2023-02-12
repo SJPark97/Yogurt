@@ -12,7 +12,11 @@ import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.domain.Wishlist;
+import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
+import com.ssafy.common.api.relation.repository.WishListRepository;
+import com.ssafy.common.api.relation.service.WishListService;
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.UserWishListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
@@ -41,6 +45,8 @@ public class Kakaopay {
     private final PostRepository postRepository;
     private final PostService postService;
     private final EndPostService endPostService;
+    private final WishListService wishListService;
+    private final WishListRepository wishListRepository;
 
 
     public String kakaoPayReady(KakaoPayRequest request){
@@ -147,14 +153,15 @@ public class Kakaopay {
     public void KakaoPayEnd(User buyer, Long orderId){
         KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findById(orderId).get();
         List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
+        List<WishListUserPostResponse> userWishLists = wishListService.userWishList(buyer).getWishLists();
         String address = kakaoPayEntity.getAddress();
-        List<Wishlist> wishListList= buyer.getWishlists();
         for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
             Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
             endPostService.createEndPost(post, buyer, address);
-            for (Wishlist wishList : wishListList){
+            for (WishListUserPostResponse wishList : userWishLists ){
                 if (post.getId() == wishList.getPost().getId()) {
-                    wishList.delete();
+                    Wishlist wish= wishListRepository.findById(wishList.getWishListId()).get();
+                    wish.delete();
                 }
             }
         }
