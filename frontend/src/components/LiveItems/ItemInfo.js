@@ -1,10 +1,16 @@
 import * as React from 'react';
 import axios from 'axios';
 import './ItemInfo.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function ItemInfo(props) {
-  const { item, owner } = props;
-  const percent = Math.floor(((item.price - item.sale_price) / item.price) * 100);
+  const navigate = useNavigate();
+  const { item, num, owner } = props;
+  const [itemState, setItemState] = React.useState(item.status);
+
+  const percent = Math.floor(
+    ((item.price - item.sale_price) / item.price) * 100,
+  );
   const token =
     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw';
 
@@ -19,9 +25,16 @@ export default function ItemInfo(props) {
       .catch(err => alert('상품이 이미 장바구니에 있습니다.'));
   };
 
+  const sellOrNotSell = () => {
+    axios
+      .patch(`https://i8b204.p.ssafy.io/be-api/post/live/${item.id}`)
+      .then(res => setItemState(res.data.status))
+      .catch(err => console.log(err.data));
+  };
+
   return (
     <div>
-      <h2 id="item-number">상품 {item.id}</h2>
+      <h2 id="item-number">상품 {num}</h2>
       <div id="live-item-info">
         {console.log(item.postImages[0].url)}
         <img id="item-thumbnail" src={item.postImages[0].url} alt="#" />
@@ -34,12 +47,43 @@ export default function ItemInfo(props) {
           </div>
         </div>
       </div>
-      {owner && item.status === 'STATUS_LIVE_SOON' ? <button id="button-sell-start">판매시작</button> : null}
-      {owner && item.status === 'STATUS_SELL' ? <button id="button-sell-ing">판매중</button> : null}
-      {item.status === 'STATUS_END' ? <button id="button-sell-end">판매완료</button> : null}
-      {!owner && item.status === 'STATUS_LIVE_SOON' ? <button id="button-sell-waitting">라이브 대기중</button> : null}
-      {!owner && item.status === 'STATUS_SELL' ? <button id="button-sell-buy">구매하기</button> : null}
-      {!owner && item.status === 'STATUS_SELL' ? <button id="button-sell-basket" onClick={wishPost}>장바구니</button> : null}
+      {owner && itemState === 'STATUS_LIVE_SOON' ? (
+        <button id="button-sell-start" onClick={sellOrNotSell}>
+          판매시작
+        </button>
+      ) : null}
+      {owner && itemState === 'STATUS_SELL' ? (
+        <button id="button-sell-ing" onClick={sellOrNotSell}>
+          판매중
+        </button>
+      ) : null}
+      {itemState === 'STATUS_END' ? (
+        <button id="button-sell-end">판매완료</button>
+      ) : null}
+      {!owner && itemState === 'STATUS_LIVE_SOON' ? (
+        <button id="button-sell-waitting">라이브 대기중</button>
+      ) : null}
+      {!owner && itemState === 'STATUS_SELL' ? (
+        <button
+          id="button-sell-buy"
+          onClick={() =>
+            navigate('/payment2', {
+              state: {
+                post: item,
+                checkItems: [item?.id],
+                totalPrice: item?.sale_price,
+              },
+            })
+          }
+        >
+          구매하기
+        </button>
+      ) : null}
+      {!owner && itemState === 'STATUS_SELL' ? (
+        <button id="button-sell-basket" onClick={wishPost}>
+          장바구니
+        </button>
+      ) : null}
       <hr id="live-hr-tag" />
     </div>
   );
