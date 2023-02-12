@@ -56,7 +56,6 @@ function Notice() {
       >
         {notices.map(notice => (
           <div key={notice.id}>
-            {/* {notice.status === 'STATUS_SELL' && ( */}
             <ListItem alignItems="flex-start">
               <ListItemText
                 className="noticeTitle"
@@ -77,7 +76,6 @@ function Notice() {
                     component="span"
                     variant="body2"
                     color="text.primary"
-                    className="notice-content"
                   >
                     {notice.content}
                   </Typography>
@@ -95,7 +93,6 @@ function Notice() {
               </IconButton>
             )}
             <Divider variant="middle" component="li" />
-            {/* )} */}
           </div>
         ))}
       </List>
