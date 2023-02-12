@@ -16,6 +16,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import SearchCard from './SearchCard';
+import './SearchHistory.css';
 
 const SearchBar = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState(searchParams.get('searching'));
   const [posts, setPosts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [stores, setStores] = useState([]);
@@ -188,7 +189,7 @@ function Search() {
           {brands.map(brand => (
             <SearchHistory searchData={brand} key={brand.id} />
           ))}
-          <Divider />
+          <Divider variant="middle" />
         </div>
       )}
       {text && stores.length > 0 && (
