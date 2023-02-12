@@ -131,22 +131,6 @@ public class Kakaopay {
         try {
             kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
             log.info("" + kakaoPayApprovalVO);
-            KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid());
-            List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
-            User buyer = postService.getLoginUser();
-            String address = kakaoPayEntity.getAddress();
-            List<Wishlist> wishListList= buyer.getWishlists();
-            for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
-                Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
-                endPostService.createEndPost(post, buyer, address);
-                for (Wishlist wishList : wishListList){
-                    if (post.getId() == wishList.getPost().getId()) {
-                        wishList.delete();
-                    }
-                }
-            }
-            // 장바구니에서 삭제
-            // EndPost 만들기
             return kakaoPayApprovalVO;
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
@@ -156,6 +140,25 @@ public class Kakaopay {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // 장바구니에서 삭제
+    // EndPost 만들기
+    public void KakaopayEnd(){
+        KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid());
+        List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
+        User buyer = postService.getLoginUser();
+        String address = kakaoPayEntity.getAddress();
+        List<Wishlist> wishListList= buyer.getWishlists();
+        for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
+            Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
+            endPostService.createEndPost(post, buyer, address);
+            for (Wishlist wishList : wishListList){
+                if (post.getId() == wishList.getPost().getId()) {
+                    wishList.delete();
+                }
+            }
+        }
     }
 }
 
