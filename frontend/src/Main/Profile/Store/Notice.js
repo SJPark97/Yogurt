@@ -31,15 +31,17 @@ function Notice() {
       });
   }, [loginUser, sellerId]);
 
+  console.log('notice', notices);
+
   useEffect(() => {
     getNotices();
   }, [getNotices]);
 
   const data = { status: 'STATUS_DELETE' };
 
-  const handleClick = async () => {
+  const handleClick = async event => {
     await axios
-      .patch(`https://i8b204.p.ssafy.io/be-api/notice/${sellerId}`, data)
+      .patch(`https://i8b204.p.ssafy.io/be-api/notice/${event}`, data)
       .then(res => {
         console.log(res);
       })
@@ -76,6 +78,7 @@ function Notice() {
                     component="span"
                     variant="body2"
                     color="text.primary"
+                    className="notice-content"
                   >
                     {notice.content}
                   </Typography>
@@ -87,7 +90,9 @@ function Notice() {
                 size="medium"
                 color="inherit"
                 aria-label="alarm-close"
-                onClick={handleClick}
+                onClick={() => {
+                  handleClick(notice.id);
+                }}
               >
                 <CloseIcon />
               </IconButton>
