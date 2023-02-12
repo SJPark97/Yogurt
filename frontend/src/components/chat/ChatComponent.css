@@ -59,6 +59,7 @@
   .msg-detail p {
     margin: 0;
     font-size: 16px;
+    font-weight: 1000;
   }
   
   .msg-info p {
