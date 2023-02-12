@@ -1,7 +1,5 @@
 package com.ssafy.common.api.endpost.controller;
 
-import com.ssafy.common.api.endpost.domain.EndPost;
-import com.ssafy.common.api.endpost.dto.EndPostRequest;
 import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
@@ -22,11 +20,11 @@ public class EndPostController {
     }
 
     // test 용 API, endPost 생성 -> 결제 완료시 수정 예정
-    @PostMapping("")
-    public void addEndPost(@RequestBody EndPostRequest request){
-        User user = postService.getLoginUser();
-        endPostService.createEndPost(request, user);
-    }
+//    @PostMapping("")
+//    public void addEndPost(@RequestBody EndPostRequest request){
+//        User user = postService.getLoginUser();
+//        endPostService.createEndPost(request, user);
+//    }
 
     // 유저 거래 완료 상품들 조회 API
     @GetMapping("")
