@@ -2,6 +2,7 @@ import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import axios from 'axios';
 
 import './LiveItemCarousel.css'
 import LiveItemSeller from './Seller/LiveItemSeller';
@@ -23,7 +24,7 @@ export default function ProfileDrawer(props) {
           liveId: 1
         }
       })
-      .then(res => setLiveItems(res.data), console.log(res.data))
+      .then(res => setLiveItems(res.data))
       .catch(er => console.log('에러'))
 
     if (

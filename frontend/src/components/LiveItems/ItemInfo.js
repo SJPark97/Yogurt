@@ -21,9 +21,10 @@ export default function ItemInfo(props) {
 
   return (
     <div>
-      <h2 id="item-number">상품 {num}</h2>
+      <h2 id="item-number">상품 {item.id}</h2>
       <div id="live-item-info">
-        <img id="item-thumbnail" src={item.postImages[0]} alt="#" />
+        {console.log(item.postImages[0].url)}
+        <img id="item-thumbnail" src={item.postImages[0].url} alt="#" />
         <div id="item-infomations">
           <p id="item-title">{item.title}</p>
           <div id="item-price-info">
