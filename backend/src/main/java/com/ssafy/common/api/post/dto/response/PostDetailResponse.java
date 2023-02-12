@@ -27,6 +27,7 @@ public class PostDetailResponse {
     private final List<PostImageDto> postImages;
     private final Long sellerId;
     private final String sellerName;
+    private final int likesCount;
 
     public PostDetailResponse(Post post) {
         id = post.getId();
@@ -41,9 +42,10 @@ public class PostDetailResponse {
         typeCateId = post.getTypecategory().getId();
         typeCateName = post.getTypecategory().getName();
         postImages = post.getPostImages()
-                .stream().map(postimage -> new PostImageDto(postimage))
+                .stream().map(PostImageDto::new)
                 .collect(Collectors.toList());
         sellerId = post.getSeller().getId();
         sellerName = post.getSeller().getNickName();
+        likesCount = post.getZzims().size();
     }
 }
