@@ -6,11 +6,7 @@ import SearchAppBar from './SearchAppBar';
 
 function MainAppBar() {
   const pageUrl = useLocation().pathname;
-  // const [appBar, setAppBar] = useState('/');
-  // useEffect(() => {
-  //   setAppBar(pageUrl);
-  // }, [pageUrl]);
-  console.log('이거다!', pageUrl);
+  console.log('appBar', pageUrl);
 
   return (
     <div>
@@ -18,8 +14,8 @@ function MainAppBar() {
       {useMatch('/stores') && <ButtonAppBar />}
       {useMatch('/stores/:storeId') && <SubAppBar />}
       {useMatch('/alarms') && <ButtonAppBar />}
-      {useMatch('/profile/buyer/:buyerId') && <ProfileAppBar />}
       {useMatch('/profile/seller/:sellerId') && <ProfileAppBar />}
+      {useMatch('/profile/buyer/:buyerId') && <ProfileAppBar />}
       {useMatch('/category') && <SubAppBar />}
       {/** 아니 아래꺼 두개가 겹쳐서 join이라는 :storeId가 설정된다 */}
       {/* {useMatch('/post/join') && <SubAppBar />} */}

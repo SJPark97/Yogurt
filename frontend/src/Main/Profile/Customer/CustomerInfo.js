@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles';
 import './CustomerInfo.css';
 import { useSearchParams } from 'react-router-dom';
 import Ordered from './Ordered';
-import MyReview from './MyReview';
 import LikePost from './LikePost';
 import LikeStore from './LikeStore';
 
@@ -54,7 +53,6 @@ export default function CustomerInfo() {
             <StyledMiddleNavigationAction label="구매내역" />
             <StyledMiddleNavigationAction label="찜" />
             <StyledMiddleNavigationAction label="즐겨찾기" />
-            <StyledMiddleNavigationAction label="My 리뷰" />
           </BottomNavigation>
           <Divider />
         </Box>
@@ -63,7 +61,6 @@ export default function CustomerInfo() {
         {tab === 0 && <Ordered />}
         {tab === 1 && <LikePost />}
         {tab === 2 && <LikeStore />}
-        {tab === 3 && <MyReview />}
       </main>
     </>
   );

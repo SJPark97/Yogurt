@@ -1,28 +1,42 @@
 // import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Divider from '@mui/material/Divider';
-
 import BackToTop from '../AppBar/BackToTop';
 import './NotedRegister.css';
+import axios from 'axios';
 
 function PostRegister() {
   const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
+  const onClick = event => {
+    const enterContent = event.replace(/(\n|\r\n)/g, '<br />');
+    setContent(enterContent);
+  };
+
+  const token = loginUser.token;
+  const sellerId = loginUser.token;
+
   const submitHandler = event => {
     event.preventDefault();
-    navigate('/profile/seller');
+    navigate(`/profile/seller/${sellerId}?tab=2`);
 
-    const body = {
+    const data = {
       title,
       content,
-      status: 1,
     };
 
-    console.log(body);
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
+        headers: { Authorization: token },
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
 
     return false;
   };
@@ -48,7 +62,7 @@ function PostRegister() {
             id="noted_reg_detail"
             name="size"
             placeholder="공지사항을 적어주세요&#13;&#10;알아둬야 될 사항을 적어주세요"
-            onChange={event => setContent(event.target.value)}
+            onChange={event => onClick(event.target.value)}
           />
         </div>
         <div className="submit_btn">

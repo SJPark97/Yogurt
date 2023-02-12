@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
@@ -14,8 +15,9 @@ import { styled } from '@mui/material/styles';
 import './PostDetail.css';
 
 function PostDetail() {
-  const { postId } = useParams();
   const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
+  const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [seller, setSeller] = useState(null);
   // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
@@ -45,10 +47,7 @@ function PostDetail() {
     },
   }));
 
-  const token1 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TRUxMRVIiLCJ1c2VySWQiOiJzc2FmeTEiLCJleHAiOjE2NzYxODE0OTV9.7RfncJBF-f_0Mn3EjjHhjWNw3-g-vH1GtvYZKEeKgMg';
-  const token2 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYxNzYyOTF9.lKI0WuuNy6McJEW_-R_vO1aDbbzn0LKhzH8kMD9BNt8';
+  const token = loginUser.token;
 
   useEffect(() => {
     axios
@@ -65,21 +64,20 @@ function PostDetail() {
   useEffect(() => {
     axios
       .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${post?.sellerId}`, {
-        headers: { Authorization: token1 },
+        headers: { Authorization: token },
       })
       .then(res => setSeller(res.data))
       .catch(err => console.log('seller', err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
+  const data = {};
   const wishPost = () => {
     axios
-      .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${post?.id}`, {
-        headers: {
-          Authorization: token2,
-        },
+      .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${postId}`, data, {
+        headers: { Authorization: token },
       })
-      .then(res => setPost(res))
+      .then(res => console.log(res))
       .catch(err => console.log('wishlist', err));
   };
 

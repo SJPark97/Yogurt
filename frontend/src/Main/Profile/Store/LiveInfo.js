@@ -9,8 +9,7 @@ function LiveInfo() {
   const navigate = useNavigate();
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
-
-  const [live, setLive] = useState([]);
+  const [live, setLive] = useState('n');
 
   const getLive = useCallback(async () => {
     await axios
@@ -33,11 +32,14 @@ function LiveInfo() {
   return (
     <div>
       {live === 'n' ? (
-        <div className="liveinfo-info">
+        <div className="totalLive">
           <p>등록된 라이브가 없습니다.</p>
         </div>
       ) : (
         <div>
+          <div className="totalLive">
+            <p>라이브 1개</p>
+          </div>
           <div className="liveinfo-info">
             <img
               src={live?.thumbnail}

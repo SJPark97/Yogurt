@@ -1,13 +1,13 @@
 import { useLocation, useMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Footer from './Footer';
 
 function MainFooter() {
   const pageUrl = useLocation().pathname;
-  // const [appBar, setAppBar] = useState('/');
-  // useEffect(() => {
-  //   setAppBar(pageUrl);
-  // }, [pageUrl]);
-  console.log('푸터에서 이동한 페이지 주소', pageUrl);
+  console.log('footer', pageUrl);
+
+  const loginUser = useSelector(state => state.user.value);
+  const sellerId = useMatch('/profile/seller/:sellerId')?.params.sellerId;
 
   return (
     <div>
@@ -15,7 +15,12 @@ function MainFooter() {
       {useMatch('/stores') && <Footer />}
       {useMatch('/alarms') && <Footer />}
       {useMatch('/profile/buyer/:buyerId') && <Footer />}
-      {useMatch('/profile/seller/:sellerId') && <Footer />}
+      {useMatch('/profile/seller/:sellerId') &&
+      Number(sellerId) === loginUser.loginUserPk ? (
+        <Footer />
+      ) : (
+        ''
+      )}
     </div>
   );
 }

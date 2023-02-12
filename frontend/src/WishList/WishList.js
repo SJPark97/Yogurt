@@ -1,23 +1,24 @@
 import { Divider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import axios from 'axios';
 import './WishList.css';
 
 function WishList() {
   const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
   const [wishlist, setWishList] = useState([]);
   const [checkItems, setCheckItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const token2 =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw  ';
+  const token = loginUser.token;
 
   useEffect(() => {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/wishlist', {
-        headers: { Authorization: token2 },
+        headers: { Authorization: token },
       })
       .then(res => {
         setWishList(res.data.wishLists);
