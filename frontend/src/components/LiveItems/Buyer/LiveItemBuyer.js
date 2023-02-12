@@ -1,15 +1,19 @@
 import * as React from 'react';
-import dummy from '../../../db/SJ.json'
 import ItemInfo from '../ItemInfo'
 import './LiveItemBuyer.css'
 
-export default function LiveItemBuyer() {
-  const liveItems = dummy.liveItems
+export default function LiveItemBuyer(props) {
+  const { liveItems } = props
 
   return (
     <div id="live-item">
-      {liveItems.map((item, num) => {
-        return <ItemInfo item={item} num={num} key={num} owner={false}/>
+      {liveItems === undefined ? null : liveItems.map((item, num) => {
+        return <ItemInfo
+          item={item.postDetailResponse}
+          num={item.id}
+          key={item.id}
+          owner={false}
+        />
       })}
     </div>
   );

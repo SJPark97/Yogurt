@@ -33,9 +33,6 @@ export default class ToolbarBuyerComponent extends Component {
     setTimeout(() => {
       this.props.micStatusChanged();
     }, 1000);
-    setTimeout(() => {
-      this.props.toggleChat();
-    }, 1200);
   }
 
   leaveSession() {
