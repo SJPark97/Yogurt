@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
+import FormData from 'form-data';
 import './LiveRegister.css';
 import axios from 'axios';
 
@@ -13,6 +14,7 @@ function LiveRegister() {
   const [image, setImage] = useState(null);
   const [time, setTime] = useState(Date());
   const [postIds, setPostIds] = useState([]);
+  const [imageUpload, setImageUpload] = useState('');
 
   const handleDeleteIamge = () => {
     URL.revokeObjectURL(image);
@@ -21,6 +23,12 @@ function LiveRegister() {
 
   const token = loginUser.token;
   const sellerId = loginUser.loginUserPk;
+
+  const handleFormData = event => {
+    const formData = new FormData();
+    formData.append('images', event);
+    setImageUpload(formData);
+  };
 
   useEffect(() => {
     axios
@@ -38,19 +46,33 @@ function LiveRegister() {
     event.preventDefault();
     navigate(`/profile/seller/${sellerId}?tab=1`);
 
-    const data = {
-      title,
-      thumnail: image,
-      time,
-      postIds,
-    };
-
     axios
-      .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
-        headers: { Authorization: token },
+      .post('https://i8b204.p.ssafy.io/be-api/upload', imageUpload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Access-Control-Allow-Origin': '*',
+        },
       })
-      .then(res => console.log('live', res))
-      .catch(err => console.log('live', err));
+      .then(res => {
+        const data = {
+          title,
+          thumbnail: res.data,
+          time,
+          postIds,
+        };
+        axios
+          .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
+            headers: { Authorization: token },
+          })
+          .then(
+            res => axios.post('https://i8b204.p.ssafy.io/be-api/buyer_alarm'),
+            {
+              headers: { Authorization: token },
+            },
+          )
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
 
     return false;
   };
@@ -76,9 +98,10 @@ function LiveRegister() {
             type="file"
             id="live_reg_file"
             accept="image/*"
-            onChange={event =>
-              setImage(URL.createObjectURL(event.target.files[0]))
-            }
+            onChange={event => {
+              handleFormData(event.target.files[0]);
+              setImage(URL.createObjectURL(event.target.files[0]));
+            }}
           />
           {!image && <label htmlFor="live_reg_file">+</label>}
           <div>
