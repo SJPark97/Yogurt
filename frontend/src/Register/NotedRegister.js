@@ -14,18 +14,12 @@ function PostRegister() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const onClick = event => {
-    const enterContent = event.replace(/(\n|\r\n)/g, '<br />');
-    setContent(enterContent);
-  };
-
   const token = loginUser.token;
-  const sellerId = loginUser.token;
+  const sellerId = loginUser.loginUserpk;
 
   const submitHandler = event => {
     event.preventDefault();
     navigate(`/profile/seller/${sellerId}?tab=2`);
-
     const data = {
       title,
       content,
@@ -62,7 +56,7 @@ function PostRegister() {
             id="noted_reg_detail"
             name="size"
             placeholder="공지사항을 적어주세요&#13;&#10;알아둬야 될 사항을 적어주세요"
-            onChange={event => onClick(event.target.value)}
+            onChange={event => setContent(event.target.value)}
           />
         </div>
         <div className="submit_btn">

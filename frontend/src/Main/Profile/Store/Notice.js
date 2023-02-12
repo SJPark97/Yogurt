@@ -6,15 +6,16 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
-
+import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import './Notice.css';
 
 function Notice() {
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
-
   const [notices, setNotices] = useState([]);
+  const [owner, setOwner] = useState(0);
 
   const getNotices = useCallback(async () => {
     await axios
@@ -22,6 +23,7 @@ function Notice() {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
+        setOwner(res.data.id);
         setNotices(res.data.notices);
       })
       .catch(err => {
@@ -33,6 +35,19 @@ function Notice() {
     getNotices();
   }, [getNotices]);
 
+  const data = { status: 'STATUS_DELETE' };
+
+  const handleClick = async () => {
+    await axios
+      .patch(`https://i8b204.p.ssafy.io/be-api/notice/${sellerId}`, data)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="notices">
       <div className="totalNotice">공지사항 {notices.length}개</div>
@@ -41,6 +56,7 @@ function Notice() {
       >
         {notices.map(notice => (
           <div key={notice.id}>
+            {/* {notice.status === 'STATUS_SELL' && ( */}
             <ListItem alignItems="flex-start">
               <ListItemText
                 className="noticeTitle"
@@ -61,13 +77,25 @@ function Notice() {
                     component="span"
                     variant="body2"
                     color="text.primary"
+                    className="notice-content"
                   >
                     {notice.content}
                   </Typography>
                 }
               />
             </ListItem>
+            {owner === Number(sellerId) && (
+              <IconButton
+                size="medium"
+                color="inherit"
+                aria-label="alarm-close"
+                onClick={handleClick}
+              >
+                <CloseIcon />
+              </IconButton>
+            )}
             <Divider variant="middle" component="li" />
+            {/* )} */}
           </div>
         ))}
       </List>
