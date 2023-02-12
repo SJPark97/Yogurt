@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class EndPostConverter {
-    public EndPost createEndPostRequestDtoToEntity(Post post, User buyer,String buyerAddress){
+    public EndPost createEndPostRequestDtoToEntity(Post post, User buyer,String address){
         return EndPost.builder()
                 .id(post.getId())
                 .buyer(buyer)
-                .buyerAddress(buyerAddress)
+                .buyerAddress(address)
                 .build();
     }
 }
