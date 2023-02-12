@@ -1,18 +1,33 @@
 import React from 'react';
 import './LiveCardList.css';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function LiveCardList(props) {
-  const { data } = props;
-  console.log(data)
+function LiveCardList({ live }) {
+  const navigate = useNavigate();
+  const loginUser = useSelector(state => state.user.value);
+  const handleClick = () => {
+    if (loginUser.token) {
+      navigate(`/video/${live.id}`, {
+        state: {
+          sellerNickname: live.sellerName,
+          userNickname: loginUser.loginId,
+        },
+      });
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
-    <div className="LiveCard">
+    <div className="LiveCard" role="presentation" onClick={handleClick}>
       <div className="LiveCardLiveTag">
         <div>LIVE</div>
       </div>
 
-      <img className="LiveCardImg" src={data.liveroom_thumbnail} alt="#" />
-      <div className="LiveCardStoreName">{data.liveroom_shop_name}</div>
-      <div className="LiveCardStoreTitle">{data.liveroom_title}</div>
+      <img className="LiveCardImg" src={live.thumbnail} alt="#" />
+      <div className="LiveCardStoreName">{live.sellerName}</div>
+      <div className="LiveCardStoreTitle">{live.title}</div>
     </div>
   );
 }

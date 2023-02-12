@@ -1,12 +1,15 @@
 import React from 'react';
 // import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import VideoRoomComponent from './VideoRoomComponent';
 
 export default function Room() {
   // const navigate = useNavigate();
-  const [sessionId, setSessionId] = useState();
-  const [userId, setUserId] = useState();
+
+  const { state } = useLocation();
+  const [sessionId, setSessionId] = useState(state.sellerNickname);
+  const [userId, setUserId] = useState(state.userNickname);
   const [owner, setOwner] = useState(false);
   const [go, setGo] = useState(false);
 
@@ -51,10 +54,13 @@ export default function Room() {
         </div>
         <button type="submit">입장</button>
       </form>
-      {go ?
-      <VideoRoomComponent sessionName={sessionId} user={userId} owner={owner} />
-      : null
-      }
+      {go ? (
+        <VideoRoomComponent
+          sessionName={sessionId}
+          user={userId}
+          owner={owner}
+        />
+      ) : null}
     </div>
   );
 }
