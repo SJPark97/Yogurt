@@ -3,15 +3,16 @@ import './Home.css';
 import BackToTop from '../../AppBar/BackToTop';
 import LiveCarousel from './LiveCarousel';
 import Carousel from '../../Common/Carousel';
+import dummy from '../../db/SJ.json';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import HomeCarousel from './HomeCarousel';
 
 function Home() {
-  const [lives, setLives] = useState([]);
   const [populars, setPopulars] = useState([]);
   const [latests, setLatests] = useState([]);
+  // const [lives, setLives] = useState([]);
 
   const getPopularList = async () => {
     await axios
@@ -26,7 +27,7 @@ function Home() {
 
   const getLatestList = async () => {
     await axios
-      .get('https://i8b204.p.ssafy.io/be-api/live/detail')
+      .get('https://i8b204.p.ssafy.io/be-api/post')
       .then(res => {
         setLatests(res.data);
       })
@@ -39,8 +40,7 @@ function Home() {
     await axios
       .get('https://i8b204.p.ssafy.io/be-api/live/getall')
       .then(res => {
-        console.log(res.data, "sjpark");
-        setLives(res.data);
+        console.log('라이브중인게 없어요', res);
       })
       .catch(err => {
         console.log(err);
@@ -48,10 +48,12 @@ function Home() {
   };
 
   useEffect(() => {
-    getLiveList();
     getPopularList();
     getLatestList();
+    getLiveList();
   }, []);
+
+  const live = dummy.Live;
 
   return (
     <div>
@@ -61,7 +63,7 @@ function Home() {
       </Box>
       <div className="mainpage">
         <p className="mainpageTitle">라이브</p>
-        <LiveCarousel card={lives} />
+        <LiveCarousel card={live} />
         <Divider variant="middle" />
         <p className="mainpageTitle">이번 주 주목해야 될 상품</p>
         <Carousel list={populars} />

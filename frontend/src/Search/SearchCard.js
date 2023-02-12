@@ -2,27 +2,29 @@ import React from 'react';
 
 function SearchCard({ result, navigate }) {
   const discount = Math.floor(
-    ((result.post_price - result.post_sale_price) / result.post_price) * 100,
+    ((result.price - result.sale_price) / result.price) * 100,
   );
 
   const handleClick = () => {
-    navigate(`/post/${result.postId}`);
+    navigate(`/post/${result.id}`);
   };
 
   return (
     <div className="searchCard" role="presentation" onClick={handleClick}>
-      <img className="searchCardImg" src={result.image} alt="#" />
-      <div className="searchCardStore">{result.post_store}</div>
-      <div className="searchCardName">[브랜드]{result.post_title}</div>
+      <img className="searchCardImg" src={result.postImages[0].url} alt="#" />
+      <div className="searchCardStore">{result.sellerName}</div>
+      <div className="searchCardName">
+        [{result.brCateName}]{result.title}
+      </div>
       <div className="searchCardTag">
         {discount ? (
           <div className="searchCardDiscount">{discount}%</div>
         ) : null}
         <div className="searchCardPrice">
-          {result.post_sale_price.toLocaleString()}
+          {result.sale_price.toLocaleString()}
         </div>
         <div className="searchCardBeforePrice">
-          {result.post_price.toLocaleString()}
+          {result.price.toLocaleString()}
         </div>
       </div>
     </div>

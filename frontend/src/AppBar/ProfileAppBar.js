@@ -52,7 +52,7 @@ export default function ProfileAppBar() {
             color="inherit"
             aria-label="search"
             onClick={() => {
-              navigate('/search');
+              navigate('/search?searching=');
             }}
           >
             <SearchOutlinedIcon />
