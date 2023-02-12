@@ -78,7 +78,6 @@ function Notice() {
                     component="span"
                     variant="body2"
                     color="text.primary"
-                    className="notice-content"
                   >
                     {notice.content}
                   </Typography>
