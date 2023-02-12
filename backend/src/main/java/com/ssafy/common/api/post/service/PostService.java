@@ -15,10 +15,14 @@ import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.UserPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.auth.PrincipalDetails;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,6 +54,18 @@ public class PostService {
     // 상품 전체 조회
     public List<PostAllResponse> findPostAll() {
         return postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+    }
+
+    // 상품 최신 조회
+    public List<PostAllResponse> findNewPostAll() {
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC,"id")).stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+    }
+
+    // 상품 인기 조회
+    public List<PostAllResponse> findLikesPostAll(){
+        List<PostAllResponse> postList = postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+        Collections.sort(postList, ((o1, o2) -> o2.getLikesCount() - o1.getLikesCount()));
+        return postList;
     }
 
     // user id 상품 전체 조회
