@@ -3,13 +3,13 @@ import './Home.css';
 import BackToTop from '../../AppBar/BackToTop';
 import LiveCarousel from './LiveCarousel';
 import Carousel from '../../Common/Carousel';
-import dummy from '../../db/SJ.json';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import HomeCarousel from './HomeCarousel';
 
 function Home() {
+  const [lives, setLives] = useState([]);
   const [populars, setPopulars] = useState([]);
   const [latests, setLatests] = useState([]);
 
@@ -26,7 +26,7 @@ function Home() {
 
   const getLatestList = async () => {
     await axios
-      .get('https://i8b204.p.ssafy.io/be-api/post')
+      .get('https://i8b204.p.ssafy.io/be-api/live/detail')
       .then(res => {
         setLatests(res.data);
       })
@@ -35,12 +35,23 @@ function Home() {
       });
   };
 
+  const getLiveList = async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/live/getall')
+      .then(res => {
+        console.log(res.data, "sjpark");
+        setLives(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    getLiveList();
     getPopularList();
     getLatestList();
   }, []);
-
-  const live = dummy.Live;
 
   return (
     <div>
@@ -50,7 +61,7 @@ function Home() {
       </Box>
       <div className="mainpage">
         <p className="mainpageTitle">라이브</p>
-        <LiveCarousel card={live} />
+        <LiveCarousel card={lives} />
         <Divider variant="middle" />
         <p className="mainpageTitle">이번 주 주목해야 될 상품</p>
         <Carousel list={populars} />
