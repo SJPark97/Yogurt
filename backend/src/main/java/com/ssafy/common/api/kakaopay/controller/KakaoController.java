@@ -3,6 +3,9 @@ package com.ssafy.common.api.kakaopay.controller;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayApprovalVO;
 import com.ssafy.common.api.kakaopay.service.Kakaopay;
 import com.ssafy.common.api.kakaopay.dto.KakaoPayRequest;
+import com.ssafy.common.api.post.service.PostService;
+import com.ssafy.common.api.user.domain.User;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Log
 @RestController
+@RequiredArgsConstructor
 public class KakaoController {
+    private final PostService postService;
     @Setter(onMethod_ = @Autowired)
     private Kakaopay kakaopay;
 
@@ -31,8 +36,9 @@ public class KakaoController {
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         return new ResponseEntity<>(kakaopay.kakaoPayInfo(pg_token), HttpStatus.OK);
     }
-    @GetMapping("/kakaoPayEnd")
-    public void kakaoPayEnd(){
-        kakaopay.KakaopayEnd();
+    @GetMapping("/kakaoPayEnd/{orderId}")
+    public void kakaoPayEnd(@PathVariable("orderId") Long orderId){
+        User buyer = postService.getLoginUser();
+        kakaopay.KakaoPayEnd(buyer, orderId);
     }
 }
