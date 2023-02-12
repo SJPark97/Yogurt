@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
@@ -7,7 +7,6 @@ import axios from 'axios';
 import './Payment.css';
 
 function Payment() {
-  // const navigate = useNavigate();
   const location = useLocation();
   const loginUser = useSelector(state => state.user.value);
   const { checkItems, totalPrice } = location.state;
