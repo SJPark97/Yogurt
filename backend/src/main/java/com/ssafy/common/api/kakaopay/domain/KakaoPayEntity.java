@@ -5,10 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Builder
@@ -20,4 +20,15 @@ public class KakaoPayEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String totalAmount;
+    private String address;
+    private String tid;
+
+    @OneToMany(mappedBy = "kakaoPayEntity")
+    private List<KakaoPayPost> kakaoPayPosts = new ArrayList<>();
+
+    public void put (String tid) {
+        this.tid = tid;
+    }
+
+
 }
