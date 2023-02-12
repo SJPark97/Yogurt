@@ -48,9 +48,6 @@ export default class ToolbarSellerComponent extends Component {
     setTimeout(() => {
       this.props.micStatusChanged();
     }, 1200);
-    setTimeout(() => {
-      this.props.toggleChat();
-    }, 1400);
   }
 
   toggleChat() {

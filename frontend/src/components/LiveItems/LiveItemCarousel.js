@@ -2,6 +2,7 @@ import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import axios from 'axios';
 
 import './LiveItemCarousel.css'
 import LiveItemSeller from './Seller/LiveItemSeller';
@@ -13,9 +14,19 @@ export default function ProfileDrawer(props) {
     bottom: false,
   });
 
+  const [liveItems, setLiveItems] = React.useState(undefined)
   const owner = props.owner
 
   const toggleDrawer = open => event => {
+    axios
+      .get('https://i8b204.p.ssafy.io/be-api/live/item', {
+        params: {
+          liveId: 1
+        }
+      })
+      .then(res => setLiveItems(res.data))
+      .catch(er => console.log('에러'))
+
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
@@ -36,7 +47,7 @@ export default function ProfileDrawer(props) {
           onClick={toggleDrawer(true)}
           id="LiveItemBox"
         >
-          <MoreVertIcon/>
+          <MoreVertIcon />
         </IconButton>
         <Drawer
           anchor="bottom"
@@ -45,8 +56,8 @@ export default function ProfileDrawer(props) {
           className="drop-up"
         >
           <div id="box-3"></div>
-          <CloseIcon id="drop-up-close" onClick={toggleDrawer(false)}/>
-          {owner ? <LiveItemSeller /> : <LiveItemBuyer />}
+          <CloseIcon id="drop-up-close" onClick={toggleDrawer(false)} />
+          {owner ? <LiveItemSeller liveItems={liveItems} /> : <LiveItemBuyer liveItems={liveItems} />}
         </Drawer>
       </React.Fragment>
     </div>
