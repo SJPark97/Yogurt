@@ -64,12 +64,11 @@ function LiveRegister() {
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
           })
-          .then(
-            res => axios.post('https://i8b204.p.ssafy.io/be-api/buyer_alarm'),
-            {
+          .then(res => {
+            axios.post('https://i8b204.p.ssafy.io/be-api/buyer_alarm', {
               headers: { Authorization: token },
-            },
-          )
+            });
+          })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
