@@ -1,15 +1,16 @@
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import './SearchHistory.css';
 import { useNavigate } from 'react-router-dom';
-
-function SearchHistory({ content }) {
-  // console.log('f', navigate);
+import SearchIcon from '@mui/icons-material/Search';
+import './SearchHistory.css';
+function SearchHistory({ searchData }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate({ pathname: '/search/result', search: `?search=${content}` });
+    navigate({
+      pathname: '/search/result',
+      search: `?search=${searchData.name}`,
+    });
   };
 
   return (
@@ -17,31 +18,29 @@ function SearchHistory({ content }) {
       sx={{
         marginBottom: '8px',
         margin: '16px',
-        display: 'grid',
-        gridTemplateColumns: '7fr 1fr',
+        display: 'flex',
         height: '100%',
         maxWidth: '100%',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
+        fontSize: '1rem',
+        paddingY: '8px',
       }}
     >
+      <SearchIcon
+        sx={{
+          color: 'gray',
+        }}
+      />
       <Typography
         variant="p"
         component="div"
         role="presentation"
-        sx={{ textAlign: 'start' }}
+        sx={{ textAlign: 'start', marginLeft: '1rem' }}
         onClick={handleClick}
       >
-        {content}
+        {searchData.name || searchData.title || searchData.nickName}
       </Typography>
-      <IconButton
-        size="medium"
-        color="inherit"
-        aria-label="alarm-close"
-        onClick={() => console.log('삭제하기!')}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
     </Box>
   );
 }

@@ -1,69 +1,177 @@
 // 유저정보 받아와서 기존에 검색히스토리 가져와서 컴포넌트에 내려주기
 // 검색 시 검색 히스토리 사라지고 그부분에 검색 내용 찾아주기
-import { useState } from 'react';
-
+import { useState, useEffect, useCallback } from 'react';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import BackToTop from '../AppBar/BackToTop';
 import SearchHistory from './SearchHistory';
+import axios from 'axios';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { styled, alpha } from '@mui/material/styles';
+import SearchCard from './SearchCard';
 
-const histories = [
-  { id: 0, content: '프라다' },
-  { id: 1, content: '봄옷' },
-  { id: 2, content: '남친룩' },
-  { id: 3, content: '선물하기 좋은 옷' },
-];
+const SearchBar = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.black, 0.125),
 
-const response1 = {
-  brands: [
-    { id: 0, name: '가까이 유니언즈' },
-    { id: 1, name: '꼼데가르송 플레이' },
-    { id: 2, name: '발렌시아가' },
-  ],
-  keywords: [
-    { id: 0, name: '가디건' },
-    { id: 1, name: '가방' },
-    { id: 2, name: '가죽자켓' },
-  ],
-};
+  marginRight: 0,
+  marginLeft: 0,
+  width: '100%',
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    // transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('lg')]: {
+      width: '100%',
+    },
+  },
+}));
 
 function Search() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [text, setText] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [stores, setStores] = useState([]);
+  const [results, setResults] = useState([]);
+
+  const getPosts = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/search/post/${text}`)
+      .then(res => {
+        setPosts(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [text]);
+
+  const getBrands = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/search/brand/${text}`)
+      .then(res => {
+        console.log('브랜브랜드', res.data);
+        setBrands(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [text]);
+
+  const getStores = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/search/seller/${text}`)
+      .then(res => {
+        setStores(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [text]);
+
+  useEffect(() => {
+    if (text) {
+      getPosts();
+      getBrands();
+      getStores();
+    }
+  }, [text, getPosts, getBrands, getStores]);
+
+  const handleClick = () => {
+    if (searchParams.get('searching').length === 0) {
+      navigate(-1);
+    } else {
+      navigate(-2);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleKeyUp = e => {
+    console.log('keyup', e.target.value);
+    setText(e.target.value);
+  };
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      console.log('엔터', e.target.value, '검색결과 창으로 이동');
+      setResults(posts);
+      setPosts([]);
+      setStores([]);
+      setBrands([]);
+      // 쿼리로 보내기
+      searchParams.set('searching', e.target.value);
+      setSearchParams(searchParams);
+    }
+  };
+  console.log('ff', results);
+  console.log('ddd', posts);
 
   return (
     <div>
       <BackToTop />
-      {text === '' ? (
-        <div>
-          <Typography
-            variant="p"
-            component="div"
-            sx={{
-              fontWeight: '800',
-              margin: '1rem',
-              textAlign: 'start',
-              fontSize: '1.2rem',
-            }}
-          >
-            최근 검색
-          </Typography>
-          {histories.map(history => (
-            <SearchHistory content={history.content} key={history.id} />
-          ))}
-        </div>
-      ) : (
-        ''
-      )}
-      <div>버튼은 입력되는 글자를 대신하고, 리덕스 적용하면 고칠게요 </div>
-      <button
-        type="button"
-        onClick={() => {
-          setText('가');
-        }}
-      >
-        가
-      </button>
-      {text === '가' && (
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="fixed"
+          color="inherit"
+          elevation={0}
+          sx={{ textAlign: 'start' }}
+        >
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="back"
+              sx={{ mr: 2 }}
+              onClick={handleClick}
+            >
+              <ArrowBackIosNewIcon />
+            </IconButton>
+            <SearchBar>
+              <SearchIconWrapper>
+                <SearchIcon htmlColor="#6F6F6F" />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="브랜드 또는 상품 검색"
+                inputProps={{ 'aria-label': 'search' }}
+                fullWidth
+                autoFocus
+                onKeyUp={handleKeyUp}
+                onKeyPress={handleKeyPress}
+                id="searchText"
+                name="searchText"
+              />
+            </SearchBar>
+          </Toolbar>
+          <Divider />
+        </AppBar>
+      </Box>
+      {text && brands.length > 0 && (
         <div>
           <Typography
             variant="p"
@@ -77,11 +185,14 @@ function Search() {
           >
             브랜드
           </Typography>
-          {response1.brands &&
-            response1.brands.map(brand => (
-              <SearchHistory content={brand.name} key={brand.id} />
-            ))}
+          {brands.map(brand => (
+            <SearchHistory searchData={brand} key={brand.id} />
+          ))}
           <Divider />
+        </div>
+      )}
+      {text && stores.length > 0 && (
+        <div>
           <Typography
             variant="p"
             component="div"
@@ -92,12 +203,41 @@ function Search() {
               fontSize: '1.2rem',
             }}
           >
-            검색
+            스토어
           </Typography>
-          {response1.keywords &&
-            response1.keywords.map(keyword => (
-              <SearchHistory content={keyword.name} key={keyword.id} />
-            ))}
+          {stores.map(store => (
+            <SearchHistory searchData={store} key={store.id} />
+          ))}
+          <Divider variant="middle" />
+        </div>
+      )}
+      {text && posts.length > 0 && (
+        <div>
+          <Typography
+            variant="p"
+            component="div"
+            sx={{
+              fontWeight: '800',
+              margin: '1rem',
+              textAlign: 'start',
+              fontSize: '1.2rem',
+            }}
+          >
+            상품
+          </Typography>
+          {posts.map(post => (
+            <SearchHistory searchData={post} key={post.id} />
+          ))}
+          <Divider variant="middle" />
+        </div>
+      )}
+      {results.length > 0 && (
+        <div className="searchCardList">
+          {results.map(result => {
+            return (
+              <SearchCard result={result} key={result.id} navigate={navigate} />
+            );
+          })}
         </div>
       )}
     </div>
