@@ -1,5 +1,6 @@
 package com.ssafy.common.api.kakaopay.service;
 
+import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayApprovalVO;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayReadyVO;
 import com.ssafy.common.api.kakaopay.domain.KakaoPayEntity;
@@ -7,6 +8,11 @@ import com.ssafy.common.api.kakaopay.domain.KakaoPayPost;
 import com.ssafy.common.api.kakaopay.dto.KakaoPayRequest;
 import com.ssafy.common.api.kakaopay.repository.KakaoPayPostRepository;
 import com.ssafy.common.api.kakaopay.repository.KakaoPayRepository;
+import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.repository.PostRepository;
+import com.ssafy.common.api.post.service.PostService;
+import com.ssafy.common.api.relation.domain.Wishlist;
+import com.ssafy.common.api.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
@@ -32,6 +38,10 @@ public class Kakaopay {
     private KakaoPayApprovalVO kakaoPayApprovalVO;
     private final KakaoPayRepository kakaoPayRepository;
     private final KakaoPayPostRepository kakaoPayPostRepository;
+    private final PostRepository postRepository;
+    private final PostService postService;
+    private final EndPostService endPostService;
+
 
     public String kakaoPayReady(KakaoPayRequest request){
         // 구매 요청 내용 DB 저장
@@ -70,14 +80,14 @@ public class Kakaopay {
         params.add("tax_free_amount", "100");
 
         // 로컬
-        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
-        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
-        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
+//        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
+//        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
+//        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 
 //        서버
-//        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccess");
-//        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api//kakaoPayCancel");
-//        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccessFail");
+        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
+        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api/kakaoPayCancel");
+        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccessFail");
 
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -113,7 +123,6 @@ public class Kakaopay {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyVO.getTid());
-        System.out.println(kakaoPayReadyVO.getTid());
         params.add("partner_order_id", String.valueOf(kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid()).getId()));
         params.add("partner_user_id", "yogurt");
         params.add("pg_token", pg_token);
@@ -122,7 +131,20 @@ public class Kakaopay {
         try {
             kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
             log.info("" + kakaoPayApprovalVO);
-            // POST Status SELL --> END
+            KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid());
+            List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
+            User buyer = postService.getLoginUser();
+            String address = kakaoPayEntity.getAddress();
+            List<Wishlist> wishListList= buyer.getWishlists();
+            for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
+                Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
+                endPostService.createEndPost(post, buyer, address);
+                for (Wishlist wishList : wishListList){
+                    if (post.getId() == wishList.getPost().getId()) {
+                        wishList.delete();
+                    }
+                }
+            }
             // 장바구니에서 삭제
             // EndPost 만들기
             return kakaoPayApprovalVO;

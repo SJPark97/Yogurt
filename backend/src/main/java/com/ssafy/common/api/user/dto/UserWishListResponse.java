@@ -19,5 +19,4 @@ public class UserWishListResponse {
                 .stream().map(wishlist -> new WishListUserPostResponse(wishlist))
                 .collect(Collectors.toList());
     }
-
 }
