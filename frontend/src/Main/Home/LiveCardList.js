@@ -3,6 +3,7 @@ import './LiveCardList.css';
 
 function LiveCardList(props) {
   const { data } = props;
+  console.log(data)
   return (
     <div className="LiveCard">
       <div className="LiveCardLiveTag">
