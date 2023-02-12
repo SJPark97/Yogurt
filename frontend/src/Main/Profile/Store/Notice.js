@@ -31,8 +31,6 @@ function Notice() {
       });
   }, [loginUser, sellerId]);
 
-  console.log('notice', notices);
-
   useEffect(() => {
     getNotices();
   }, [getNotices]);
@@ -46,7 +44,6 @@ function Notice() {
         console.log(res);
       })
       .catch(err => {
-        console.log(event);
         console.log(err);
       });
   };
@@ -79,14 +76,13 @@ function Notice() {
                     component="span"
                     variant="body2"
                     color="text.primary"
+                    className="notice-content"
                   >
                     {notice.content}
                   </Typography>
                 }
               />
             </ListItem>
-            {console.log(owner)}
-            {console.log(sellerId)}
             {owner === Number(sellerId) && (
               <IconButton
                 size="medium"

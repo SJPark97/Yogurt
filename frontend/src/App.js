@@ -22,7 +22,7 @@ import Payment from './Payment/Payment';
 import Payment2 from './Payment/Payment2';
 import VideoRoomComponent from './components/VideoRoomComponent';
 import ProfileModify from './Main/Profile/ProfileModify';
-// import PayResult from './Payment/PayResult';
+import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
 import ScrollToTop from './ScrollToTop';
 import Room from './components/Room';
@@ -73,7 +73,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/search/result" element={<SearchResult />} />
         <Route path="/profile/modify" element={<ProfileModify />} />
-        {/* <Route path="/kakaopay" element={<PayResult />} /> */}
+        <Route path="/payresult" element={<PayResult />} />
       </Routes>
       <footer>
         <MainFooter />
