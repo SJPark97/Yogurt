@@ -1,4 +1,4 @@
-package com.ssafy.common.api.kakaopay;
+package com.ssafy.common.api.kakaopay.VO;
 
 import lombok.Data;
 

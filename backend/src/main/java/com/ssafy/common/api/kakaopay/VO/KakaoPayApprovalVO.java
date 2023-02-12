@@ -1,5 +1,7 @@
-package com.ssafy.common.api.kakaopay;
+package com.ssafy.common.api.kakaopay.VO;
 
+import com.ssafy.common.api.kakaopay.VO.AmountVO;
+import com.ssafy.common.api.kakaopay.VO.CardVO;
 import lombok.Data;
 
 import java.util.Date;
