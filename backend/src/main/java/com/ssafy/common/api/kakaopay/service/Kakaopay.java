@@ -142,12 +142,11 @@ public class Kakaopay {
         return null;
     }
 
-    // 장바구니에서 삭제
-    // EndPost 만들기
-    public void KakaopayEnd(){
-        KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid());
+
+    // EndPost 만들기 / 장바수니 삭제
+    public void KakaoPayEnd(User buyer, Long orderId){
+        KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findById(orderId).get();
         List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
-        User buyer = postService.getLoginUser();
         String address = kakaoPayEntity.getAddress();
         List<Wishlist> wishListList= buyer.getWishlists();
         for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
