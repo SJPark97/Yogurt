@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchCard.css';
 
 function SearchCard({ result, navigate }) {
   const discount = Math.floor(

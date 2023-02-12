@@ -10,7 +10,6 @@ import MainAppBar from './AppBar/MainAppBar';
 import SignUp from './User/Singup';
 import LogInPage from './User/Login';
 import Search from './Search/Search';
-import SearchResult from './Search/SearchResult';
 // import BackToTop from "./AppBar/BackToTop";
 import MainFooter from './Footer/MainFooter';
 import PostDetail from './PostDetail/PostDetail';
@@ -71,7 +70,6 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/search/result" element={<SearchResult />} />
         <Route path="/profile/modify" element={<ProfileModify />} />
         {/* <Route path="/kakaopay" element={<PayResult />} /> */}
       </Routes>
