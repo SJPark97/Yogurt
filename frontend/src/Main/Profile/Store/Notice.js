@@ -46,6 +46,7 @@ function Notice() {
         console.log(res);
       })
       .catch(err => {
+        console.log(event);
         console.log(err);
       });
   };
@@ -84,6 +85,8 @@ function Notice() {
                 }
               />
             </ListItem>
+            {console.log(owner)}
+            {console.log(sellerId)}
             {owner === Number(sellerId) && (
               <IconButton
                 size="medium"
