@@ -84,8 +84,6 @@ function Notice() {
                 }
               />
             </ListItem>
-            {console.log(owner)}
-            {console.log(sellerId)}
             {owner === Number(sellerId) && (
               <IconButton
                 size="medium"

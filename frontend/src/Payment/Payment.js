@@ -23,11 +23,10 @@ function Payment() {
   };
 
   const handleClick = () => {
-    console.log(data);
     axios
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
       .then(res => console.log(res))
-      .catch(err => console.log(err.data));
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -41,8 +40,6 @@ function Payment() {
         );
         const postData = wishpost.map(item => item.post);
         setPost(postData);
-        console.log(postData);
-
         const postIdData = postData.map(item => ({ id: item.id }));
         setPostIdList(postIdData);
       })

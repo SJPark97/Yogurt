@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
+import axios from 'axios';
 import './Payment.css';
 
 function Payment2() {
   const location = useLocation();
-  const { checkItems } = location.state;
-  const { totalPrice } = location.state;
-  const { post } = location.state;
+  const { checkItems, totalPrice, post } = location.state;
 
+  const [address, setAddress] = useState('');
+  const [postIdList, setPostIdList] = useState([]);
+
+  useEffect(() => {
+    setPostIdList([{ id: post.id }]);
+  }, [post]);
+
+  const data = {
+    totalAmount: String(totalPrice),
+    address,
+    postIdList,
+  };
+
+  const handleClick = () => {
+    axios
+      .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err.data));
+  };
   return (
     <div className="payment-wrap">
       <BackToTop />
@@ -42,6 +60,7 @@ function Payment2() {
           name="배송지정보"
           id="deilver"
           placeholder="주소를 입력하세요"
+          onChange={event => setAddress(event.target.value)}
         />
       </div>
       <Divider sx={{ marginY: '1rem' }} />
@@ -56,6 +75,7 @@ function Payment2() {
           src="https://img.etoday.co.kr/pto_db/2020/10/600/20201023101423_1528745_1200_738.jpg"
           alt="카카오페이로 결제하기"
           height="100px"
+          onClick={() => handleClick()}
         />
       </div>
     </div>
