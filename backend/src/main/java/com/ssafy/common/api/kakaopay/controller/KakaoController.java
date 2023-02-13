@@ -28,7 +28,7 @@ public class KakaoController {
     @PostMapping("/kakaoPay")
     public String kakaoPay(@RequestBody KakaoPayRequest request) {
         log.info("kakaoPay post...............................");
-        return "redirect:" + kakaopay.kakaoPayReady(request);
+        return kakaopay.kakaoPayReady(request);
     }
     @GetMapping("/kakaoPaySuccess")
     public ResponseEntity<KakaoPayApprovalVO> kakaoPaySuccess(@RequestParam("pg_token") String pg_token) {
