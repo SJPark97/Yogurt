@@ -141,5 +141,4 @@ public class LiveController {
         }
         return ResponseEntity.ok(STATUS_CLOSE);
     }
-
 }

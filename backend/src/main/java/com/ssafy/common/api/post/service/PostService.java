@@ -12,7 +12,7 @@ import com.ssafy.common.api.post.postimage.repository.PostimageRepository;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserPostResponse;
+import com.ssafy.common.api.user.dto.response.UserPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import org.springframework.data.domain.Sort;

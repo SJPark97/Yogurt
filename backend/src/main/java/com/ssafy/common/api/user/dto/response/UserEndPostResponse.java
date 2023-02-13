@@ -1,4 +1,4 @@
-package com.ssafy.common.api.user.dto;
+package com.ssafy.common.api.user.dto.response;
 
 import com.ssafy.common.api.endpost.dto.EndPostUserPostResponse;
 import com.ssafy.common.api.post.repository.PostRepository;

@@ -9,7 +9,7 @@ import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.repository.ZzimRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserZzimResponse;
+import com.ssafy.common.api.user.dto.response.UserZzimResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

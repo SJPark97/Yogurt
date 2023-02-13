@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -18,14 +20,22 @@ public class S3Upload {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
     private final AmazonS3 amazonS3;
-    public String upload(MultipartFile multipartFile) throws IOException {
-        String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
 
-        ObjectMetadata objMeta = new ObjectMetadata();
-        objMeta.setContentLength(multipartFile.getInputStream().available());
+    public List<String> upload1(List<MultipartFile> list) throws IOException {
 
-        amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
+        List<String> urls = new ArrayList<>();
 
-        return amazonS3.getUrl(bucket, s3FileName).toString();
+        for(MultipartFile file : list) {
+            String s3FileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
+
+            ObjectMetadata objMeta = new ObjectMetadata();
+            objMeta.setContentLength(file.getInputStream().available());
+
+            amazonS3.putObject(bucket, s3FileName, file.getInputStream(), objMeta);
+
+            urls.add(amazonS3.getUrl(bucket, s3FileName).toString());
+        }
+
+        return urls;
     }
 }

@@ -1,18 +1,17 @@
 package com.ssafy.common.api.user.service;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLoginForm;
-import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserLoginResponse;
-import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
-import com.ssafy.common.api.user.dto.UserSellerResponse;
+import com.ssafy.common.api.user.domain.UserStatus;
+import com.ssafy.common.api.user.dto.request.UserLoginRequest;
+import com.ssafy.common.api.user.dto.response.UserLoginResponse;
+import com.ssafy.common.api.user.dto.response.UserResponseForm;
+import com.ssafy.common.api.user.dto.response.UserSellerResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +22,9 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserLoginForm login (UserLoginForm userLoginForm){
-        User userInfo = userRepository.findByUserId(userLoginForm.getUserId());
-        if(!userLoginForm.equals(userInfo.getPassword())){
+    public UserLoginRequest login (UserLoginRequest userLoginRequest){
+        User userInfo = userRepository.findByUserId(userLoginRequest.getUserId());
+        if(!userLoginRequest.equals(userInfo.getPassword())){
             throw new IllegalArgumentException(("잘못된 비밀번호 입니다."));
         }
         return null;

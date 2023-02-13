@@ -1,4 +1,4 @@
-package com.ssafy.common.api.user.dto;
+package com.ssafy.common.api.user.dto.response;
 
 import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.dto.Likes.LikesUserBuyerResponse;
