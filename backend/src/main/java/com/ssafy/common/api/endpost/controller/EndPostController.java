@@ -1,6 +1,5 @@
 package com.ssafy.common.api.endpost.controller;
 
-import com.ssafy.common.api.endpost.dto.EndPostRequest;
 import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
