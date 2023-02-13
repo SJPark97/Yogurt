@@ -22,4 +22,9 @@ public class FileUploadController {
     public ResponseEntity<?> uploadFile(@ModelAttribute List<MultipartFile> images) throws IOException {
         return new ResponseEntity<>(s3Upload.upload1(images),HttpStatus.CREATED);
     }
+
+    @PostMapping("/upload1")
+    public ResponseEntity<?> uploadFile1(@RequestParam("images") List<MultipartFile> images) throws IOException {
+        return new ResponseEntity<>(s3Upload.upload1(images),HttpStatus.CREATED);
+    }
 }
