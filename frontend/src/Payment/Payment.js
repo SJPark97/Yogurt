@@ -25,7 +25,7 @@ function Payment() {
   const handleClick = () => {
     axios
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
-      .then(res => console.log(res))
+      .then(res => window.open(res.data))
       .catch(err => console.log(err));
   };
 
