@@ -3,7 +3,7 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios';
-
+import { useParams } from 'react-router-dom';
 import './LiveItemCarousel.css'
 import LiveItemSeller from './Seller/LiveItemSeller';
 import LiveItemBuyer from './Buyer/LiveItemBuyer';
@@ -13,6 +13,7 @@ export default function ProfileDrawer(props) {
   const [state, setState] = React.useState({
     bottom: false,
   });
+  const { liveId } = useParams();
 
   const [liveItems, setLiveItems] = React.useState(undefined)
   const owner = props.owner
@@ -21,7 +22,7 @@ export default function ProfileDrawer(props) {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/live/item', {
         params: {
-          liveId: 1
+          liveId: liveId
         }
       })
       .then(res => setLiveItems(res.data))
