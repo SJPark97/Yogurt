@@ -21,7 +21,7 @@ public class PostController {
 
     // 상품 생성 API
     @PostMapping("")
-    public ResponseEntity<String> create(@RequestBody PostInsertRequest request){
+    public ResponseEntity<PostDetailResponse> create(@RequestBody PostInsertRequest request){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.createPost(request,user), HttpStatus.CREATED);
     }
@@ -35,6 +35,18 @@ public class PostController {
     public ResponseEntity<List<PostAllResponse>> getPostAll(){
         //상태가 DELETE 인것들 필터링
         return new ResponseEntity<>(postService.findPostAll(), HttpStatus.OK);
+    }
+    // 전체 상품 최신순 조회
+    @GetMapping("/new")
+    public ResponseEntity<List<PostAllResponse>> getPostNewAll(){
+        //상태가 DELETE 인것들 필터링
+        return new ResponseEntity<>(postService.findNewPostAll(), HttpStatus.OK);
+    }
+    // 전체 상품 인기순 조회
+    @GetMapping("/popular")
+    public ResponseEntity<List<PostAllResponse>> getPostLikesAll(){
+        //상태가 DELETE 인것들 필터링
+        return new ResponseEntity<>(postService.findLikesPostAll(), HttpStatus.OK);
     }
 
     // 상품 라이브 여부 수정 API

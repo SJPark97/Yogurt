@@ -10,6 +10,7 @@ import com.ssafy.common.api.relation.service.LikesService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.response.UserBuyerAlarmResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 @Transactional(readOnly = true)
 public class BuyerAlarmService {
 
@@ -41,14 +43,22 @@ public class BuyerAlarmService {
     @Transactional
     public  void saveAlarm(User seller) {
         // 1. 현재 seller 를 likes한 유저(buyer)들을 모두 구한다.
+        log.info("---------------before get likes !!!!!!  -------------------------");
         List<LikesUserBuyerResponse> likesUserResponses = likesService.buyerLikesList(seller);
+        log.info("---------------after get likes !!!!!!  -------------------------");
         // 2. 구한 buyer들과  ,seller 를 이용해 BuyerAlarm 으로 이용해 alarm 저장
         List<BuyerAlarm> buyerAlarmList = new ArrayList<>();
+        log.info("---------------before enter for moon !!!!!!  -------------------------");
         for (LikesUserBuyerResponse likesUserResponse: likesUserResponses) {
+            log.info("---------------before get buyer  {}!!!!!!  -------------------------",likesUserResponse.getBuyer().getId());
             User buyer = userRepository.findById(likesUserResponse.getBuyer().getId()).get();
+            log.info("---------------after get buyer  {}!!!!!!  -------------------------",likesUserResponse.getBuyer().getId());
             BuyerAlarm buyerAlarm = buyerAlarmConverter.ConvertUserBuyerSellerAlarm(buyer, seller, new Timestamp(System.currentTimeMillis()));
+            log.info("---------------before save buyer alarm  {}!!!!!!  -------------------------",buyerAlarm.getId());
             buyerAlarmRepository.save(buyerAlarm);
+            log.info("---------------after save buyer alarm  {}!!!!!!  -------------------------",buyerAlarm.getId());
         }
+        log.info("---------------after enter for moon !!!!!!  -------------------------");
     }
 
 

@@ -1,5 +1,6 @@
 package com.ssafy.common.api.kakaopay.service;
 
+import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayApprovalVO;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayReadyVO;
 import com.ssafy.common.api.kakaopay.domain.KakaoPayEntity;
@@ -7,6 +8,15 @@ import com.ssafy.common.api.kakaopay.domain.KakaoPayPost;
 import com.ssafy.common.api.kakaopay.dto.KakaoPayRequest;
 import com.ssafy.common.api.kakaopay.repository.KakaoPayPostRepository;
 import com.ssafy.common.api.kakaopay.repository.KakaoPayRepository;
+import com.ssafy.common.api.post.domain.Post;
+import com.ssafy.common.api.post.repository.PostRepository;
+import com.ssafy.common.api.post.service.PostService;
+import com.ssafy.common.api.relation.domain.Wishlist;
+import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
+import com.ssafy.common.api.relation.repository.WishListRepository;
+import com.ssafy.common.api.relation.service.WishListService;
+import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.UserWishListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
@@ -32,6 +42,12 @@ public class Kakaopay {
     private KakaoPayApprovalVO kakaoPayApprovalVO;
     private final KakaoPayRepository kakaoPayRepository;
     private final KakaoPayPostRepository kakaoPayPostRepository;
+    private final PostRepository postRepository;
+    private final PostService postService;
+    private final EndPostService endPostService;
+    private final WishListService wishListService;
+    private final WishListRepository wishListRepository;
+
 
     public String kakaoPayReady(KakaoPayRequest request){
         // 구매 요청 내용 DB 저장
@@ -75,9 +91,9 @@ public class Kakaopay {
         params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 
 //        서버
-//        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccess");
-//        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api//kakaoPayCancel");
-//        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api//kakaoPaySuccessFail");
+//        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
+//        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api/kakaoPayCancel");
+//        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccessFail");
 
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -85,7 +101,7 @@ public class Kakaopay {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
             createKakaoPay.put(kakaoPayReadyVO.getTid());
             kakaoPayRepository.save(createKakaoPay);
-            return kakaoPayReadyVO.getNext_redirect_pc_url();
+            return kakaoPayReadyVO.getNext_redirect_app_url();
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -113,7 +129,6 @@ public class Kakaopay {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyVO.getTid());
-        System.out.println(kakaoPayReadyVO.getTid());
         params.add("partner_order_id", String.valueOf(kakaoPayRepository.findByTid(kakaoPayReadyVO.getTid()).getId()));
         params.add("partner_user_id", "yogurt");
         params.add("pg_token", pg_token);
@@ -122,9 +137,6 @@ public class Kakaopay {
         try {
             kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
             log.info("" + kakaoPayApprovalVO);
-            // POST Status SELL --> END
-            // 장바구니에서 삭제
-            // EndPost 만들기
             return kakaoPayApprovalVO;
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
@@ -134,6 +146,25 @@ public class Kakaopay {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    // EndPost 만들기 / 장바수니 삭제
+    public void KakaoPayEnd(User buyer, Long orderId){
+        KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findById(orderId).get();
+        List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
+        List<WishListUserPostResponse> userWishLists = wishListService.userWishList(buyer).getWishLists();
+        String address = kakaoPayEntity.getAddress();
+        for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
+            Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
+            endPostService.createEndPost(post, buyer, address);
+            for (WishListUserPostResponse wishList : userWishLists ){
+                if (post.getId() == wishList.getPost().getId()) {
+                    Wishlist wish= wishListRepository.findById(wishList.getWishListId()).get();
+                    wish.delete();
+                }
+            }
+        }
     }
 }
 

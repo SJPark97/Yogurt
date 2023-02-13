@@ -6,6 +6,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.response.UserBuyerAlarmResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/buyer_alarm")
 @RequiredArgsConstructor
+@Slf4j
 public class BuyerAlarmController {
     public final BuyerAlarmService buyerAlarmService;
 
@@ -25,8 +27,11 @@ public class BuyerAlarmController {
      */
     @PostMapping
     public ResponseEntity<?> addBuyerAlarmList(){
+        log.info("---------------before get loginuser !!!!!!  -------------------------");
         User seller = postService.getLoginUser();
+        log.info("---------------after get loginuser !!!!!!  -------------------------");
         buyerAlarmService.saveAlarm(seller);
+        log.info("---------------after save alarm !!!!!!  -------------------------");
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
 

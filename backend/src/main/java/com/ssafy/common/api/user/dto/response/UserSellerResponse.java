@@ -16,6 +16,6 @@ public class UserSellerResponse {
         NickName = user.getNickName();
         description= user.getDescription();
         profileImage = user.getProfileImage();
-        likesCount = user.getLikess_Seller().stream().count();
+        likesCount = (long) user.getLikess_Seller().size();
     }
 }

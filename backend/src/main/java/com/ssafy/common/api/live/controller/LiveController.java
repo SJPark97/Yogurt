@@ -48,7 +48,7 @@ public class LiveController {
             log.error(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(liveRoom);
+        return ResponseEntity.ok("succes");
     }
 
 

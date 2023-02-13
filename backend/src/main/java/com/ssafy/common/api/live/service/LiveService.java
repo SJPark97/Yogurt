@@ -76,13 +76,18 @@ public class LiveService {
         /*
            request로 받은 postId들을 이용해 LiveList 등록
          */
-        Long curLiveId = liveRoom.getId();
+        log.info("--------------- before enter for !!!!!!  -------------------------");
         for (Long postId: request.getPostIds()) {
+            log.info("--------------- before get  {} s !!!!!!  -------------------------", postId);
             Post post = postRepository.findById(postId).get();
+            log.info("--------------- finded  {} s !!!!!!  -------------------------", post.getId());
             liveItemRepository.save( liveitemConverter.MakeLiveItem( post , liveRoom ) );
+            log.info("--------------- after saved ItemList {} 's !!!!!!  -------------------------", postId);
             // postId를 이용해 Livelist로 등록 했다면 Post의 상태 변경.
             post.updateStatus(post);
+            log.info("--------------- end update !!!!!!  -------------------------");
         }
+        log.info("--------------- ended for mooon !!!!!!  -------------------------");
         //
         return liveRepository.save(liveRoom);
     }

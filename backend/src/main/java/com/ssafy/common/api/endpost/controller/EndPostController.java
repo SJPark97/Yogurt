@@ -21,11 +21,11 @@ public class EndPostController {
     }
 
     // test 용 API, endPost 생성 -> 결제 완료시 수정 예정
-    @PostMapping("")
-    public void addEndPost(@RequestBody EndPostRequest request){
-        User user = postService.getLoginUser();
-        endPostService.createEndPost(request, user);
-    }
+//    @PostMapping("")
+//    public void addEndPost(@RequestBody EndPostRequest request){
+//        User user = postService.getLoginUser();
+//        endPostService.createEndPost(request, user);
+//    }
 
     // 유저 거래 완료 상품들 조회 API
     @GetMapping("")
