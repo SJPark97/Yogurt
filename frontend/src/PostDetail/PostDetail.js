@@ -18,10 +18,8 @@ function PostDetail() {
   const navigate = useNavigate();
   const loginUser = useSelector(state => state.user.value);
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
-  const [seller, setSeller] = useState(null);
-  // 스토어 좋아요 여부 이거는 DB에서 불린으로 줌
-  // 눌리면 axios 보내서 바꾸기 + 좋아요 숫자 불러오기
+  const [post, setPost] = useState([]);
+  const [seller, setSeller] = useState(0);
   const [isLiked, setIsLiked] = useState(true);
 
   const ColorButton = styled(Button)(() => ({
