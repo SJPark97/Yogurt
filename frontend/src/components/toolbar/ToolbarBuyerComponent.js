@@ -3,12 +3,11 @@ import './ToolbarComponent.css';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Navigate } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
-import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 
 import IconButton from '@material-ui/core/IconButton';
+import CloseLive from './CloseLive';
 
 export default class ToolbarBuyerComponent extends Component {
   constructor(props) {
@@ -18,8 +17,6 @@ export default class ToolbarBuyerComponent extends Component {
     this.leaveSession = this.leaveSession.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
   }
-
-  state = { user: false };
 
   micStatusChanged() {
     this.props.micStatusChanged();
@@ -37,9 +34,6 @@ export default class ToolbarBuyerComponent extends Component {
 
   leaveSession() {
     this.props.leaveSession();
-    this.setState(state => {
-      return { user: !state.user };
-    });
   }
 
   toggleChat() {
@@ -47,21 +41,21 @@ export default class ToolbarBuyerComponent extends Component {
   }
 
   render() {
-    let { user } = this.state;
     return (
       <AppBar className="toolbar" id="header">
         <Toolbar className="toolbar">
           <div className="buttonsContent">
-            {user && <Navigate to="/" replace={true} />}
             <IconButton
               color="secondary"
               className="navButton"
               onClick={this.leaveSession}
               id="navLeaveButton"
             >
-              <PowerSettingsNew />
+              <div>
+                <CloseLive />
+              </div>
             </IconButton>
-            <div id='box-2'></div>
+            <div id="box-2"></div>
             <IconButton
               color="inherit"
               onClick={this.toggleChat}
