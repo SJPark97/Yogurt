@@ -34,6 +34,9 @@ const ColorButton = styled(Button)(({ theme }) => ({
 function SellerInfo({ profile, loginId, token }) {
   // 상점 좋아요
   const [isLiked, setIsLiked] = useState(false);
+  const [live, setLive] = useState({
+    status: 0,
+  });
   // const [likeCnt, setLikeCnt] = useState([]);
 
   const getLikes = useCallback(async () => {
@@ -51,9 +54,47 @@ function SellerInfo({ profile, loginId, token }) {
       });
   }, [isLiked, token, loginId]);
 
+  const getLiveInfo = useCallback(async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/live', {
+        params: { sellerId: profile.id },
+      })
+      .then(res => {
+        if (res.data[0].status === 'STATUS_ONAIR') {
+          setLive({
+            status: 1,
+            liveRoomId: res.data[0].liveroomId,
+            sellerNickName: profile.nickName,
+          });
+        } else if (res.data[0].status === 'STATUS_READY') {
+          setLive({
+            status: 2,
+            liveRoomId: res.data[0].liveroomId,
+            liveTime: res.data[0].time,
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [profile, setLive]);
+
+  const goLiveRoomSeller = () => {
+    if (live.status === 2) {
+      //방장 라이브 이동
+    } else {
+      alert('라이브 등록이 필요합니다.');
+    }
+  };
+
+  const goLiveRoomBuyer = () => {
+    //참여자 라이브 이동
+  }
+
   useEffect(() => {
     getLikes();
-  }, [getLikes]);
+    getLiveInfo();
+  }, [getLikes, getLiveInfo]);
 
   // let likeCnt = '';
   // if (sellerData.Store_likes >= 10000) {
@@ -72,6 +113,7 @@ function SellerInfo({ profile, loginId, token }) {
 
   return (
     <div>
+      {console.log(profile)}
       <Box
         sx={{
           margin: '16px',
@@ -131,11 +173,37 @@ function SellerInfo({ profile, loginId, token }) {
             fullWidth
             variant="contained"
             startIcon={<LiveTvIcon />}
-            onClick={() => navigate('/room')}
+            onClick={goLiveRoomSeller}
           >
             라이브 시작
           </ColorButton>
         </Stack>
+      )}
+      {loginId !== profile.id && live.status === 1 && (
+        <ColorButton
+          fullWidth
+          variant="contained"
+          sx={{ color: 'red', width: '90%' }}
+          // startIcon={<LiveTvIcon />}
+          onClick={goLiveRoomBuyer} // 라이브 중이니 참여하기
+        >
+          라이브 참여
+        </ColorButton>
+      )}
+      {loginId !== profile.id && live.status === 2 && (
+        <ColorButton
+          fullWidth
+          variant="contained"
+          sx={{ color: '#CC3300', border: 'red', width: '90%'}} // 라이브 대기중
+          // startIcon={<LiveTvIcon />}
+        >
+          {live.liveTime.slice(8, 10) +
+            '일 ' +
+            live.liveTime.slice(11, 13) +
+            '시 ' +
+            live.liveTime.slice(14, 16) +
+            '분 방송 예정'}
+        </ColorButton>
       )}
     </div>
   );
