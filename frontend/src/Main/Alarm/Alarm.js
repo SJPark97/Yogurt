@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
@@ -9,9 +10,12 @@ import axios from 'axios';
 import './Alarm.css';
 
 function Alarm({ alarm, role, token }) {
+  const [isDelete, setIsDelete] = useState(false);
+
   const navigate = useNavigate();
   const loginUser = useSelector(state => state.user.value);
   const handleClick = async () => {
+    setIsDelete(!isDelete);
     await axios
       .patch(`https://i8b204.p.ssafy.io/be-api/seller_alarm/${alarm.id}`, {
         headers: { Authorization: token },
@@ -26,7 +30,7 @@ function Alarm({ alarm, role, token }) {
   console.log(alarm, '알람');
 
   return (
-    <div>
+    <div style={{ display: isDelete ? 'none' : '' }}>
       <Box
         sx={{
           marginBottom: '8px',
