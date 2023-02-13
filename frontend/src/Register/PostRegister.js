@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import axios from 'axios';
 import Divider from '@mui/material/Divider';
 import BackToTop from '../AppBar/BackToTop';
 import './PostRegister.css';
@@ -12,7 +12,6 @@ function PostRegister() {
   const [price, setPrice] = useState(0);
   const [sale, setSale] = useState(true);
   const [saleprice, setSalePrice] = useState(0);
-  const [postState, setPostState] = useState(0);
   const [catecloth, setCateCloth] = useState('');
   const [catebrand, setBrand] = useState('');
   const [content, setContent] = useState('');
@@ -41,49 +40,22 @@ function PostRegister() {
     event.preventDefault();
     console.log(event);
     navigate(`/post/2`);
-    // navigate(`/post/${postId}`);
 
-    const body = {
+    const data = {
       title,
       price,
       sale,
       saleprice,
-      postState,
       catecloth,
       catebrand,
       content,
     };
-
-    console.log(body);
+    axios
+      .post(`https://i8b204.p.ssafy.io/be-api/post`, data)
+      .catch(err => console.log(err));
 
     return false;
   };
-
-  // const handleDeleteIamge = event => {
-  // const imageLists = event.target.files;
-  // const imageUrls = [...images];
-
-  // for (let i = 0; i < imageLists.lenth; i++) {
-  //   const currentImageUrls = URL.createObjectURL(imageUrls[i])
-  //   imageUrls.push(currentImageUrls)
-  // }
-
-  // if(imageUrls.length > )
-
-  const States = [
-    {
-      type: 1,
-      title: '판매 중',
-    },
-    {
-      type: 2,
-      title: '라이브 예정',
-    },
-    {
-      type: 3,
-      title: '판매 완료',
-    },
-  ];
 
   const saleStates = [
     {
@@ -175,26 +147,6 @@ function PostRegister() {
               />
             </div>
           )}
-        </div>
-        <Divider sx={{ marginY: '1rem' }} />
-        <div className="post_reg_state">
-          <p>제품상태</p>
-          <div className="post_reg_state_div">
-            {States.map(state => (
-              <button
-                key={state.type}
-                type="button"
-                onClick={() => setPostState(state.type)}
-                className={`${
-                  postState === state.type
-                    ? 'post_reg_state_btn'
-                    : 'post_reg_state_state_btn'
-                }`}
-              >
-                {state.title}
-              </button>
-            ))}
-          </div>
         </div>
         <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_category">
