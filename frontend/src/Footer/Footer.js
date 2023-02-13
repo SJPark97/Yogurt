@@ -78,7 +78,6 @@ export default function Footer() {
             onClick={() => {
               navigate('/');
             }}
-            // onClick={() => navigate("/")} 바로 이동할때는 Link쓰기
           />
           <CustomBottomNavigationAction
             label="상점"

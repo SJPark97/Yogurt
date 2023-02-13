@@ -15,7 +15,7 @@ function Home() {
 
   const getPopularList = async () => {
     await axios
-      .get('https://i8b204.p.ssafy.io/be-api/post')
+      .get('https://i8b204.p.ssafy.io/be-api/post/popular')
       .then(res => {
         setPopulars(res.data);
       })
@@ -26,7 +26,7 @@ function Home() {
 
   const getLatestList = async () => {
     await axios
-      .get('https://i8b204.p.ssafy.io/be-api/post')
+      .get('https://i8b204.p.ssafy.io/be-api/post/new')
       .then(res => {
         setLatests(res.data);
       })
