@@ -30,5 +30,4 @@ public class KakaoPayEntity {
         this.tid = tid;
     }
 
-
 }
