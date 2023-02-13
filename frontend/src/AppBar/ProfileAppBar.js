@@ -48,7 +48,6 @@ export default function ProfileAppBar() {
           </Typography>
           <IconButton
             size="large"
-            edge="start"
             color="inherit"
             aria-label="search"
             onClick={() => {
