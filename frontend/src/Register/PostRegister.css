@@ -50,7 +50,6 @@
   align-items: center;
 }
 
-.post_reg_state,
 .post_reg_category {
   margin: 8px 0px 0px 0px;
 }
@@ -63,7 +62,6 @@
 .post_reg_title p,
 .post_reg_price p,
 .post_reg_sale_price p,
-.post_reg_state p,
 .post_reg_category p,
 .post_reg_detail p,
 .post_reg_size p {
@@ -84,6 +82,8 @@ textarea {
 #post_reg_size {
   width: 100%;
   padding: 8px 0px 4px 8px;
+  border-radius: 8px;
+  border: 0px;
   /* margin: 16px 0px 0px 0px; */
 }
 
@@ -97,15 +97,14 @@ textarea {
   align-items: center;
 }
 
-.post_reg_sale_state_btn,
-.post_reg_state_state_btn {
+.post_reg_sale_state_btn {
   margin: 0px 0px 0px 8px;
   padding: 2px 6px;
   background-color: white;
   border: 1px solid burlywood;
   color: burlywood;
 }
-.post_reg_state_btn,
+
 .post_reg_sale_btn {
   margin: 0px 0px 0px 8px;
   padding: 2px 6px;
@@ -114,7 +113,6 @@ textarea {
   color: white;
 }
 
-.post_reg_state_div,
 .post_reg_category_cloth,
 .post_reg_category_brand {
   margin: 8px 0px 0px 0px;
