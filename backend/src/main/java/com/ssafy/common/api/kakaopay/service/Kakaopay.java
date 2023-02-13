@@ -86,14 +86,14 @@ public class Kakaopay {
         params.add("tax_free_amount", "100");
 
         // 로컬
-//        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
-//        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
-//        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
+        params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
+        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
+        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 
 //        서버
-        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
-        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api/kakaoPayCancel");
-        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccessFail");
+//        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
+//        params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api/kakaoPayCancel");
+//        params.add("fail_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccessFail");
 
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -101,7 +101,7 @@ public class Kakaopay {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
             createKakaoPay.put(kakaoPayReadyVO.getTid());
             kakaoPayRepository.save(createKakaoPay);
-            return kakaoPayReadyVO.getNext_redirect_pc_url();
+            return kakaoPayReadyVO.getNext_redirect_app_url();
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
