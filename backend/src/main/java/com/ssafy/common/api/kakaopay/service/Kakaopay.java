@@ -16,7 +16,7 @@ import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
 import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.relation.service.WishListService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserWishListResponse;
+import com.ssafy.common.api.user.dto.response.UserWishListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
