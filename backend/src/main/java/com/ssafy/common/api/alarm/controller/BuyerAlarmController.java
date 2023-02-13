@@ -1,21 +1,14 @@
 package com.ssafy.common.api.alarm.controller;
 
-import com.ssafy.common.api.alarm.domain.BuyerAlarm;
-import com.ssafy.common.api.alarm.domain.SellerAlarm;
 import com.ssafy.common.api.alarm.dto.response.BuyerAlarmResponse;
-import com.ssafy.common.api.alarm.dto.response.SellerAlarmResponse;
 import com.ssafy.common.api.alarm.service.BuyerAlarmService;
-import com.ssafy.common.api.alarm.service.SellerAlarmService;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserBuyerAlarmResponse;
-import com.ssafy.common.api.user.dto.UserSellerAlarmResponse;
+import com.ssafy.common.api.user.dto.response.UserBuyerAlarmResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/buyer_alarm")

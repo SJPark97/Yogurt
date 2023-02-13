@@ -1,11 +1,11 @@
-package com.ssafy.common.api.user.dto;
+package com.ssafy.common.api.user.dto.request;
 
 import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.domain.UserStatus;
 import lombok.Getter;
 
 @Getter
-public class UserRequestJoinForm {
+public class UserJoinRequest {
     private String userId;
     private String password;
     private String name;

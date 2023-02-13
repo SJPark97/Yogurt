@@ -1,4 +1,4 @@
-package com.ssafy.common.api.user.dto;
+package com.ssafy.common.api.user.dto.response;
 
 import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.user.domain.User;

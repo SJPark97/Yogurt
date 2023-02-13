@@ -1,13 +1,12 @@
 package com.ssafy.common.api.search.service;
 
-import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.dto.CategoryBrandResponse;
 import com.ssafy.common.api.category.repository.BrandCategoryRepository;
 import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserSellerResponse;
+import com.ssafy.common.api.user.dto.response.UserSellerResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

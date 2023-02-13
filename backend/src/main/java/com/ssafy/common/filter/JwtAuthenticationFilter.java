@@ -3,7 +3,7 @@ package com.ssafy.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLoginForm;
+import com.ssafy.common.api.user.dto.request.UserLoginRequest;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 6. JWT토큰을 만들어서 응답해주면 됨.
         try {
             ObjectMapper om = new ObjectMapper();   //json Parsing 해줌
-            UserLoginForm user = om.readValue(request.getInputStream(), UserLoginForm.class);
+            UserLoginRequest user = om.readValue(request.getInputStream(), UserLoginRequest.class);
 
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(user.getUserId(),user.getPassword());

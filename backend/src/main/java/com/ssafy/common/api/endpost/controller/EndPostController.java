@@ -1,11 +1,10 @@
 package com.ssafy.common.api.endpost.controller;
 
-import com.ssafy.common.api.endpost.domain.EndPost;
 import com.ssafy.common.api.endpost.dto.EndPostRequest;
 import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserEndPostResponse;
+import com.ssafy.common.api.user.dto.response.UserEndPostResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

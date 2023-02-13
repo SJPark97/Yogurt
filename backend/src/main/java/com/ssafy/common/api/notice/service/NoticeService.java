@@ -7,7 +7,7 @@ import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.notice.repository.NoticeRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserNoticeResponse;
+import com.ssafy.common.api.user.dto.response.UserNoticeResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

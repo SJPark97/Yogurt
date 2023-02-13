@@ -1,10 +1,8 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserResponseForm;
 import com.ssafy.common.api.user.domain.UserRole;
 import com.ssafy.common.api.user.service.UserService;
-import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
