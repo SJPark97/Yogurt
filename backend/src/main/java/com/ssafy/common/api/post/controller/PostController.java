@@ -21,7 +21,7 @@ public class PostController {
 
     // 상품 생성 API
     @PostMapping("")
-    public ResponseEntity<PostDetailResponse> create(@RequestBody PostInsertRequest request){
+    public ResponseEntity<String> create(@RequestBody PostInsertRequest request){
         User user = postService.getLoginUser();
         return new ResponseEntity<>(postService.createPost(request,user), HttpStatus.CREATED);
     }
