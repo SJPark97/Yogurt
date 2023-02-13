@@ -92,7 +92,7 @@ function PostDetail() {
             className="detail_img"
             src={image.url}
             alt="이미지사진"
-            key={image.url}
+            key={image.id}
           />
         ))}
       <div>
