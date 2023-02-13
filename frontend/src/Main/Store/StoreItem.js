@@ -19,7 +19,6 @@ function StoreItem({ store }) {
   const loginUser = useSelector(state => state.user.value);
 
   const [isLiked, setIsLiked] = useState(false);
-  // const [likeCnt, setLikeCnt] = useState([]);
 
   const getLikes = useCallback(async () => {
     await axios
@@ -27,27 +26,27 @@ function StoreItem({ store }) {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
-        if (res.data.includes(Number(loginUser.loginUserPk))) {
-          setIsLiked(!isLiked);
+        if (res.data.filter(item => item.seller.id === store.id).length > 0) {
+          setIsLiked(true);
         }
       })
       .catch(err => {
         console.log(err);
       });
-  }, [loginUser, isLiked]);
+  }, [loginUser, store]);
 
   useEffect(() => {
     getLikes();
   }, [getLikes]);
 
-  // let likeCnt = '';
-  // if (sellerData.Store_likes >= 10000) {
-  //   likeCnt = `${(sellerData.Store_likes / 10000).toFixed(1)} 만`;
-  // } else if (sellerData.Store_likes >= 1000) {
-  //   likeCnt = `${(sellerData.Store_likes / 1000).toFixed(1)} 천`;
-  // } else {
-  //   likeCnt = `${sellerData.Store_likes}`;
-  // }
+  let likeCnt;
+  if (store.likesCount >= 10000) {
+    likeCnt = `${(store.likesCount / 10000).toFixed(1)} 만`;
+  } else if (store.likesCount >= 1000) {
+    likeCnt = `${(store.likesCount / 1000).toFixed(1)} 천`;
+  } else {
+    likeCnt = `${store.likesCount}`;
+  }
 
   // 상점 디테일 이동위해 naviate 사용
   const navigate = useNavigate();
@@ -95,7 +94,7 @@ function StoreItem({ store }) {
                   <FavoriteBorderIcon fontSize="small" />
                 )}
               </IconButton>
-              <div className="store-cnt">{store.likesCount}</div>
+              <div className="store-cnt">{likeCnt}</div>
             </div>
           </div>
           <div className="store-introduce">
