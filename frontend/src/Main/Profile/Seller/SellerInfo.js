@@ -89,7 +89,7 @@ function SellerInfo({ profile, loginId, token }) {
 
   const goLiveRoomBuyer = () => {
     //참여자 라이브 이동
-  }
+  };
 
   useEffect(() => {
     getLikes();
@@ -194,7 +194,7 @@ function SellerInfo({ profile, loginId, token }) {
         <ColorButton
           fullWidth
           variant="contained"
-          sx={{ color: '#CC3300', border: 'red', width: '90%'}} // 라이브 대기중
+          sx={{ color: '#CC3300', border: 'red', width: '90%' }} // 라이브 대기중
           // startIcon={<LiveTvIcon />}
         >
           {live.liveTime.slice(8, 10) +
