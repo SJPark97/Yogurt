@@ -7,7 +7,7 @@ import com.ssafy.common.api.relation.dto.Likes.LikesUserBuyerResponse;
 import com.ssafy.common.api.relation.dto.Likes.LikesUserSellerResponse;
 import com.ssafy.common.api.relation.repository.LikesRepository;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLikesResponse;
+import com.ssafy.common.api.user.dto.response.UserLikesResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

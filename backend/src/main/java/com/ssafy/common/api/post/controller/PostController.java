@@ -4,7 +4,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.post.dto.request.PostInsertRequest;
 import com.ssafy.common.api.post.dto.response.PostDetailResponse;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserPostResponse;
+import com.ssafy.common.api.user.dto.response.UserPostResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

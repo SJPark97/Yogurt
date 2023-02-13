@@ -1,4 +1,4 @@
-package com.ssafy.common.api.user.dto;
+package com.ssafy.common.api.user.dto.request;
 
 
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserLoginForm {
+public class UserLoginRequest {
 
     @ApiParam(value = "사용자 ID", required = true)
     @ApiModelProperty(example = "ABCD1234")

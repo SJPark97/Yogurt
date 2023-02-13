@@ -5,7 +5,7 @@ import com.ssafy.common.api.notice.dto.NoticeResponse;
 import com.ssafy.common.api.notice.service.NoticeService;
 import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserNoticeResponse;
+import com.ssafy.common.api.user.dto.response.UserNoticeResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

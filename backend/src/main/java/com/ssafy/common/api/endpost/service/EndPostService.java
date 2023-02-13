@@ -6,7 +6,7 @@ import com.ssafy.common.api.endpost.repository.EndPostRepository;
 import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserEndPostResponse;
+import com.ssafy.common.api.user.dto.response.UserEndPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

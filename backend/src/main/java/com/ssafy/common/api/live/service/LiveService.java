@@ -12,27 +12,20 @@ import com.ssafy.common.api.live.dto.response.SellerLiveroomForm;
 import com.ssafy.common.api.live.repository.LiveItemRepository;
 import com.ssafy.common.api.live.repository.LiveRepository;
 import com.ssafy.common.api.post.domain.Post;
-import com.ssafy.common.api.post.dto.response.PostAllResponse;
 import com.ssafy.common.api.post.repository.PostRepository;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLiveroomResponse;
-import com.ssafy.common.api.user.dto.UserPostResponse;
+import com.ssafy.common.api.user.dto.response.UserLiveroomResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.ssafy.common.api.live.domain.LiveRoomStatus.*;

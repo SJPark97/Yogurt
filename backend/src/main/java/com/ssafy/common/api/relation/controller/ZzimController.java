@@ -4,7 +4,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.service.ZzimService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserZzimResponse;
+import com.ssafy.common.api.user.dto.response.UserZzimResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

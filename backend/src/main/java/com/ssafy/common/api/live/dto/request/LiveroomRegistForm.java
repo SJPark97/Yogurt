@@ -17,5 +17,4 @@ public class LiveroomRegistForm {
     private Timestamp time ;
 
     private List<Long> postIds;
-
 }

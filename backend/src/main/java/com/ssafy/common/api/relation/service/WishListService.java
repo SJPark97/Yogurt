@@ -9,7 +9,7 @@ import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
 import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
-import com.ssafy.common.api.user.dto.UserWishListResponse;
+import com.ssafy.common.api.user.dto.response.UserWishListResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

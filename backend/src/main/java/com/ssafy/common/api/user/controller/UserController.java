@@ -1,10 +1,10 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserLoginResponse;
-import com.ssafy.common.api.user.dto.UserRequestJoinForm;
-import com.ssafy.common.api.user.dto.UserResponseForm;
-import com.ssafy.common.api.user.dto.UserSellerResponse;
+import com.ssafy.common.api.user.dto.response.UserLoginResponse;
+import com.ssafy.common.api.user.dto.request.UserJoinRequest;
+import com.ssafy.common.api.user.dto.response.UserResponseForm;
+import com.ssafy.common.api.user.dto.response.UserSellerResponse;
 import com.ssafy.common.api.user.service.UserService;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
@@ -92,7 +92,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "입력 오류"),
             @ApiResponse(code = 500, message = "서버에러")
     })
-    public ResponseEntity<?> join(@Valid @RequestBody UserRequestJoinForm form, BindingResult bindingResult){
+    public ResponseEntity<?> join(@Valid @RequestBody UserJoinRequest form, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
         }

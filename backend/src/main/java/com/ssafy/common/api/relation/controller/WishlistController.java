@@ -4,7 +4,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.dto.wishList.WishListResponse;
 import com.ssafy.common.api.relation.service.WishListService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserWishListResponse;
+import com.ssafy.common.api.user.dto.response.UserWishListResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
