@@ -62,17 +62,28 @@ function PostRegister() {
     axios.get('https://i8b204.p.ssafy.io/be-api/cate/brand')
       .then(res => setBrandCate(res.data))
       .catch(err => console.log(err))
-  }, [])
-
-  useEffect(() => {
-    axios.get('https://i8b204.p.ssafy.io/be-api/cate/type')
+    }, [])
+    
+    useEffect(() => {
+      axios.get('https://i8b204.p.ssafy.io/be-api/cate/type')
       .then(res => setTypeCate(res.data))
       .catch(err => console.log(err))
-  }, [])
+    }, [])
+    
+    const saleStates = [
+      {
+        type: false,
+        title: '할인 안 함',
+      },
+      {
+        type: true,
+        title: '할인',
+      },
+    ];
 
-  const submitHandler = event => {
-    event.preventDefault();
-    const formData = new FormData()
+    const submitHandler = event => {
+      event.preventDefault();
+      const formData = new FormData()
 
     for (let i = 0; i < imageupload.length; i += 1) {
       formData.append('images', imageupload[i])
@@ -91,7 +102,7 @@ function PostRegister() {
           title,
           content,
           price,
-          saleprice,
+          sale_price:saleprice,
           size,
           brandcategoryId,
           typecategoryId,
@@ -103,8 +114,8 @@ function PostRegister() {
             headers: { Authorization: token },
           })
           .then(res => {
-            console.log(res.data)
-            navigate(`/post/${res.data.id}`);
+            console.log(res)
+            navigate(`/post/${res.data}`);
           })
           .catch(err => console.log(err))
       }).catch(err => console.log(err.data))
@@ -112,16 +123,6 @@ function PostRegister() {
     return false;
   };
 
-  const saleStates = [
-    {
-      type: false,
-      title: '할인 안 함',
-    },
-    {
-      type: true,
-      title: '할인',
-    },
-  ];
 
   return (
     <div className="postregister">
