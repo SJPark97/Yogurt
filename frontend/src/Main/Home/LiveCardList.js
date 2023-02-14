@@ -8,10 +8,11 @@ function LiveCardList({ live }) {
   const loginUser = useSelector(state => state.user.value);
   const handleClick = () => {
     if (loginUser.token) {
-      navigate(`/video/${live.id}`, {
+      navigate(`/video/${live.liveroomId}`, {
         state: {
+          sellerId: live.sellerId,
           sellerNickname: live.sellerName,
-          userNickname: loginUser.loginId,
+          userNickname: loginUser.loginUserNickname,
         },
       });
     } else {
@@ -24,7 +25,6 @@ function LiveCardList({ live }) {
       <div className="LiveCardLiveTag">
         <div>LIVE</div>
       </div>
-
       <img className="LiveCardImg" src={live.thumbnail} alt="#" />
       <div className="LiveCardStoreName">{live.sellerName}</div>
       <div className="LiveCardStoreTitle">{live.title}</div>

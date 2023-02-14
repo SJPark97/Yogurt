@@ -19,6 +19,7 @@ export default function LikeStore() {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
+        console.log('ffff', res.data);
         setLikeStores(res.data);
       })
       .catch(err => {

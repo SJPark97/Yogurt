@@ -45,14 +45,14 @@ function SellerInfo({ profile, loginId, token }) {
         headers: { Authorization: token },
       })
       .then(res => {
-        if (res.data.includes(loginId)) {
-          setIsLiked(!isLiked);
+        if (res.data.filter(item => item.seller.id === profile.id).length > 0) {
+          setIsLiked(true);
         }
       })
       .catch(err => {
         console.log(err);
       });
-  }, [isLiked, token, loginId]);
+  }, [token, profile]);
 
   const getLiveInfo = useCallback(async () => {
     await axios
@@ -89,7 +89,7 @@ function SellerInfo({ profile, loginId, token }) {
 
   const goLiveRoomBuyer = () => {
     //참여자 라이브 이동
-  }
+  };
 
   useEffect(() => {
     getLikes();
@@ -104,7 +104,20 @@ function SellerInfo({ profile, loginId, token }) {
   // } else {
   //   likeCnt = `${sellerData.Store_likes}`;
   // }
-  const toggleLike = () => {
+  const toggleLike = async () => {
+    setIsLiked(!isLiked);
+    await axios
+      .post(`https://i8b204.p.ssafy.io/be-api/likes/${profile.id}`, {
+        headers: { Authorization: token },
+      })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  const toggleUnLike = () => {
     setIsLiked(!isLiked);
   };
   // navigate
@@ -113,7 +126,6 @@ function SellerInfo({ profile, loginId, token }) {
 
   return (
     <div>
-      {console.log(profile)}
       <Box
         sx={{
           margin: '16px',
@@ -139,16 +151,28 @@ function SellerInfo({ profile, loginId, token }) {
           </div>
         </div>
         <div>
-          <IconButton
-            size="large"
-            color="inherit"
-            aria-label="like"
-            onClick={() => toggleLike()}
-            sx={{ color: 'red' }}
-          >
-            {isLiked && <FavoriteIcon />}
-            {!isLiked && <FavoriteBorderIcon />}
-          </IconButton>
+          {isLiked && (
+            <IconButton
+              size="large"
+              color="inherit"
+              aria-label="like"
+              onClick={toggleLike}
+              sx={{ color: 'red' }}
+            >
+              <FavoriteIcon />
+            </IconButton>
+          )}
+          {!isLiked && (
+            <IconButton
+              size="large"
+              color="inherit"
+              aria-label="like"
+              onClick={toggleUnLike}
+              sx={{ color: 'red' }}
+            >
+              <FavoriteBorderIcon />
+            </IconButton>
+          )}
           <div className="profile-cnt">{profile.likesCount}</div>
         </div>
       </Box>
@@ -194,7 +218,7 @@ function SellerInfo({ profile, loginId, token }) {
         <ColorButton
           fullWidth
           variant="contained"
-          sx={{ color: '#CC3300', border: 'red', width: '90%'}} // 라이브 대기중
+          sx={{ color: '#CC3300', border: 'red', width: '90%' }} // 라이브 대기중
           // startIcon={<LiveTvIcon />}
         >
           {live.liveTime.slice(8, 10) +

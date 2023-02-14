@@ -2,6 +2,9 @@
   display: inline-flex;
   width: 100vw;
   overflow: auto;
+  margin: 0;
+  padding-left: 1rem;
+  padding-bottom: 16px;
 }
 
 .Carousel::-webkit-scrollbar {
@@ -9,6 +12,6 @@
 }
 
 .Card {
-  margin-left: 4px;
-  margin-right: 4px;
+  /* margin-left: 4px; */
+  margin-right: 16px;
 }

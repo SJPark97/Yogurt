@@ -29,6 +29,7 @@ function MainAppBar() {
       {useMatch('/wishlist') && <SubAppBar />}
       {useMatch('/live/join') && <SubAppBar />}
       {useMatch('/payment') && <SubAppBar />}
+      {useMatch('/payment/result') && <SubAppBar />}
       {useMatch('/profile/modify') && <SubAppBar />}
     </div>
   );

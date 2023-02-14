@@ -3,6 +3,11 @@
   font-size: 100px;
   font-weight: 700;
 }
+.noticeFirst {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .totalNotice {
   margin: 1rem;

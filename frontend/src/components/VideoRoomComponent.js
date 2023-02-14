@@ -31,6 +31,7 @@ class VideoRoomComponent extends Component {
     let userName = this.props.user
       ? this.props.user
       : `${Math.floor(Math.random() * 5)} ++++++`;
+    this.liveId = this.props.liveId
     this.owner = this.props.owner;
     this.remotes = [];
     this.localUserAccessAllowed = false;
@@ -553,6 +554,7 @@ class VideoRoomComponent extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const localUser = this.state.localUser;
+    const liveId = this.liveId
     // var chatDisplay = { display: this.state.chatDisplay };
 
     return (
@@ -566,6 +568,7 @@ class VideoRoomComponent extends Component {
             micStatusChanged={this.micStatusChanged}
             leaveSession={this.leaveSession}
             toggleChat={this.toggleChat}
+            liveId={liveId}
           />
         ) : (
           <ToolbarBuyerComponent

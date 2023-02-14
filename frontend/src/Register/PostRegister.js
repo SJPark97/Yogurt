@@ -25,6 +25,7 @@ function PostRegister() {
   const [brandcategoryId, setBrandCategoryId] = useState(0);
   const [content, setContent] = useState('');
   const [imageUrlList, setImageUrlList] = useState([])
+  const [brandcate, setBrandCate] = useState([])
 
   const token = loginUser.token;
 
@@ -56,7 +57,7 @@ function PostRegister() {
 
   useEffect(() =>{
     axios.get('https://i8b204.p.ssafy.io/be-api/cate/brand')
-    .then(res => console.log(res))
+    .then(res => setBrandCate(res.data))
     .catch(err => console.log(err))
   },[])
 
