@@ -1,28 +1,51 @@
 package com.ssafy.common.api.category.dto;
 
-import com.ssafy.common.api.category.dto.detail.*;
 import com.ssafy.common.api.category.typecategory.Typecategory;
 import lombok.Getter;
 
 @Getter
 public class CateTypeDetailResponse {
-    public final CateDetail1 cateDetail1;
-    public final CateDetail2 cateDetail2;
-    public final CateDetail3 cateDetail3;
-    public final CateDetail4 cateDetail4;
-    public final CateDetail5 cateDetail5;
-    public final CateDetail6 cateDetail6;
-    public final CateDetail7 cateDetail7;
-    public final CateDetail8 cateDetail8;
+    private final Long detail;
+    private final String detail_image;
 
-    public CateTypeDetailResponse(Typecategory typecategory){
-        cateDetail1 = new CateDetail1(typecategory);
-        cateDetail2 = new CateDetail2(typecategory);
-        cateDetail3 = new CateDetail3(typecategory);
-        cateDetail4 = new CateDetail4(typecategory);
-        cateDetail5 = new CateDetail5(typecategory);
-        cateDetail6 = new CateDetail6(typecategory);
-        cateDetail7 = new CateDetail7(typecategory);
-        cateDetail8 = new CateDetail8(typecategory);
+    public CateTypeDetailResponse(Typecategory typecategory, int method_num){
+        switch (method_num) {
+            case 1:
+                detail = typecategory.getDetail1();
+                detail_image = typecategory.getDetail1_image();
+                break;
+            case 2:
+                detail = typecategory.getDetail2();
+                detail_image = typecategory.getDetail2_image();
+                break;
+            case 3:
+                detail = typecategory.getDetail3();
+                detail_image = typecategory.getDetail3_image();
+                break;
+            case 4:
+                detail = typecategory.getDetail4();
+                detail_image = typecategory.getDetail4_image();
+                break;
+            case 5:
+                detail = typecategory.getDetail5();
+                detail_image = typecategory.getDetail5_image();
+                break;
+            case 6:
+                detail = typecategory.getDetail6();
+                detail_image = typecategory.getDetail6_image();
+                break;
+            case 7:
+                detail = typecategory.getDetail7();
+                detail_image = typecategory.getDetail7_image();
+                break;
+            case 8:
+                detail = typecategory.getDetail8();
+                detail_image = typecategory.getDetail8_image();
+                break;
+            default:
+                detail = null;
+                detail_image = null;
+                break;
+        }
     }
 }
