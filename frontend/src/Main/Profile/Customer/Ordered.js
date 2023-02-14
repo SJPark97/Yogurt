@@ -57,8 +57,7 @@ export default function Ordered() {
         <div key={ordered.post.id}>
           <Box
             sx={{
-              marginBottom: '8px',
-              margin: '16px',
+              marginY: '16px',
               display: 'flex',
               height: '100%',
               maxWidth: '100%',
@@ -93,7 +92,7 @@ export default function Ordered() {
               리뷰 작성
             </ColorButton>
           </div>
-          <Divider variant="middle" />
+          <Divider variant="middle" sx={{ marginX: 0 }} />
         </div>
       ))}
     </div>

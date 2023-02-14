@@ -97,7 +97,7 @@ export default function LikeStore() {
               </div>
             </div>
           </Box>
-          <Divider variant="middle" />
+          <Divider variant="middle" sx={{ marginX: '1rem' }} />
         </div>
       ))}
     </div>
