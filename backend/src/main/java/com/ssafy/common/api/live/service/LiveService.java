@@ -50,7 +50,7 @@ public class LiveService {
     // status , created , sellerId는 내가 만들어서 생성
     public LiveRoom saveLiveroom ( LiveroomRegistForm request ) throws Exception {
         LiveRoom liveRoom = new LiveRoom();
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        Timestamp ts = new Timestamp(System.currentTimeMillis()+32400000);
         // DB에 해당 유저(판매자)가 이미 개설한 라이브 룸(liveroom)이 있는지 확인
 //        List<LiveRoom> liveRooms = liveRepository.findAllBySeller(getLoginUser());
 //        for (LiveRoom liveRoom1: liveRooms) {
@@ -64,7 +64,7 @@ public class LiveService {
         liveRoom= liveRoom.builder()
                 .thumbnail(request.getThumbnail())
                 .title(request.getTitle())
-                .time(request.getTime())
+                .time(new Timestamp(request.getTime().getTime()+32400000))
                 .status(STATUS_READY)
                 .created(ts)
                 .seller(getLoginUser())
