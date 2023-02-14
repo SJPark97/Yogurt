@@ -41,12 +41,16 @@ public class UserService {
         UserLoginResponse res = new UserLoginResponse(user.getId(), user.getUserId(), user.getRole(),user.getNickName());
         return res;
     }
-    public UserSellerResponse findById(Long id){
+    public UserSellerResponse findBySellerId(Long id){
         User user = userRepository.findById(id).get();
         UserSellerResponse userSellerResponse = new UserSellerResponse(user);
         return userSellerResponse;
     }
 
+    public User findById(Long id){
+        User user = userRepository.findById(id).get();
+        return user;
+    }
     public List<UserSellerResponse> findByRole(UserRole role) {
         List<User> user = userRepository.findAllByRole(role);
         List<UserSellerResponse> formList = new ArrayList<>();

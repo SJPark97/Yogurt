@@ -1,6 +1,8 @@
 package com.ssafy.common.api.user.controller;
 
 import com.ssafy.common.api.user.domain.User;
+import com.ssafy.common.api.user.dto.request.BuyerUpdateRequest;
+import com.ssafy.common.api.user.dto.request.SellerUpdateRequest;
 import com.ssafy.common.api.user.dto.response.UserLoginResponse;
 import com.ssafy.common.api.user.dto.request.UserJoinRequest;
 import com.ssafy.common.api.user.dto.response.UserResponseForm;
@@ -145,7 +147,7 @@ public class UserController {
     })
     public ResponseEntity<?> getSeller(@PathVariable("id")Long id){
         try {
-            UserSellerResponse userResponse = userService.findById(id);
+            UserSellerResponse userResponse = userService.findBySellerId(id);
             return new ResponseEntity<>(userResponse, HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
@@ -174,6 +176,46 @@ public class UserController {
         }
     }
 
+    //사진 설명 닉네임
+    @PutMapping("/user/seller/{id}")
+    @ApiOperation(value = "판매자 수정")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "판매자 수정 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody SellerUpdateRequest request){
+        try{
+            User user = userService.findById(id);
+            user.setNickName(request.getNickName());
+            user.setDescription(request.getDescription());
+            user.setProfileImage(request.getProfileImage());
+            userService.join(user);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
+        }
+    }
+
+    @PutMapping("/user/buyer/{id}")
+    @ApiOperation(value = "구매자 수정")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "구매자 수정 완료"),
+            @ApiResponse(code = 400, message = "입력 오류"),
+            @ApiResponse(code = 500, message = "서버에러")
+    })
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody BuyerUpdateRequest request){
+        try{
+            User user = userService.findById(id);
+            user.setNickName(request.getNickName());
+            user.setProfileImage(request.getProfileImage());
+            userService.join(user);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(e);
+        }
+    }
+
     @PatchMapping("/user/{id}")
     @ApiOperation(value = "탈퇴")
     @ApiResponses(value = {
@@ -181,7 +223,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "입력 오류"),
             @ApiResponse(code = 500, message = "서버에러")
     })
-    public ResponseEntity<?> deleteUser(@PathVariable long id){
+    public ResponseEntity<?> deleteUser(@PathVariable("id") long id){
         try{
             userService.deleteUser(id);
             return ResponseEntity.status(HttpStatus.OK).body("유저가 정상적으로 삭제되었습니다");
