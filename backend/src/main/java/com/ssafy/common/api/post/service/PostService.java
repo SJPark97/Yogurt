@@ -77,16 +77,14 @@ public class PostService {
 
     // 상품 저장
     @Transactional
-    public String createPost(PostInsertRequest request, User user) {
+    public void createPost(PostInsertRequest request, User user) {
         Post post = postConverter.createRequestDtoToEntity(request, user);
         Post createPost = postRepository.save(post);
-        List<Map<String,String>> images = request.getPostImages();
-        for (Map map : images) {
-            String url = (String) map.get("url");
-            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(url, createPost);
+        List<String> images = request.getPostImages();
+        for (String image : images) {
+            Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image, createPost);
             postimageRepository.save(postimage);
         }
-        return null;
     }
 
     // 상품 라이브 status 변환
