@@ -177,7 +177,7 @@ public class UserController {
     }
 
     //사진 설명 닉네임
-    @PutMapping("/user/seller/{id}")
+    @PutMapping("/seller/{id}")
     @ApiOperation(value = "판매자 수정")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "판매자 수정 완료"),
@@ -197,7 +197,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/user/buyer/{id}")
+    @PutMapping("/buyer/{id}")
     @ApiOperation(value = "구매자 수정")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "구매자 수정 완료"),
