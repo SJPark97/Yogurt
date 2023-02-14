@@ -10,16 +10,14 @@ import Divider from '@mui/material/Divider';
 import Category from './Category';
 import './Category.css';
 
-
 export default function CategoryList() {
   const [categoryId, setCategoryId] = useState(1);
-
   const [categoryData, setCategoryData] = useState([]);
+
   const getCategoryData = useCallback(async () => {
-    await axios
-      .get('https://i8b204.p.ssafy.io/be-api/cate/type')
-      .then(res => {setCategoryData(res.data)
-      console.log(res.data)});
+    await axios.get('https://i8b204.p.ssafy.io/be-api/cate/type').then(res => {
+      setCategoryData(res.data);
+    });
   }, [setCategoryData]);
 
   useEffect(() => {
@@ -46,7 +44,6 @@ export default function CategoryList() {
         key={category.id}
         onClick={() => {
           setCategoryId(category.id);
-          console.log( categoryData.find(category => category.id === categoryId))
         }}
       >
         <ListItemButton>
@@ -56,9 +53,15 @@ export default function CategoryList() {
     ),
   );
   // map 할때 키값 index 불가능해서 id 값 받기
-  // const subCategory = categoryData
-  //   .find(category => category.id === categoryId)
-  //   .sub.map(sub => <Category sub={sub} key={sub.id} />);
+  const subCategory = categoryData
+    ?.find(category => category.id === categoryId)
+    ?.detail.map((sub, index) => {
+      return sub.detail && sub.detail_image ? (
+        <Category sub={sub} key={sub.detail} />
+      ) : (
+        <div key={index}></div>
+      );
+    });
 
   return (
     <div>
@@ -66,7 +69,7 @@ export default function CategoryList() {
       <div style={{ display: 'flex', height: '100vh' }}>
         <Box
           sx={{
-            width: '26.66666%',
+            width: '30%',
             maxWidth: 360,
             bgcolor: 'background.paper',
           }}
@@ -77,13 +80,13 @@ export default function CategoryList() {
         </Box>
         <Box
           sx={{
-            width: '73.33334%',
+            width: '70%',
             maxWidth: '100%',
             bgcolor: '#D9D9D9',
           }}
         >
           <nav aria-label="sub-category">
-            {/* <div className="categories">{subCategory}</div> */}
+            {categoryData && <div className="categories">{subCategory}</div>}
           </nav>
         </Box>
       </div>

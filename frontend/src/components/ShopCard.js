@@ -6,8 +6,8 @@ import './ShopCard.css';
 import Logo from '../Images/Yogurt_Logo.png';
 
 function ShopCard(props) {
-  const { data } = props
-  const [shopInfo, setShopInfo] = useState(undefined)
+  const { data } = props;
+  const [shopInfo, setShopInfo] = useState(undefined);
   const loginUser = useSelector(state => state.user.value);
   const getProfile = useCallback(async () => {
     await axios
@@ -16,7 +16,7 @@ function ShopCard(props) {
       })
       .then(res => {
         setShopInfo(res.data);
-      })
+      });
   }, [loginUser, data, setShopInfo]);
 
   useEffect(() => {
@@ -29,8 +29,16 @@ function ShopCard(props) {
   };
   return (
     <div onClick={() => goToStoreDetail()}>
-      {shopInfo === undefined ? null : <img className="shop-img" src={shopInfo.profileImage === null ? Logo : shopInfo.profileImage} alt="#" />}
-      {shopInfo === undefined ? null : <p className="shop-name">{shopInfo.nickName}</p>}
+      {shopInfo === undefined ? null : (
+        <img
+          className="shop-img"
+          src={shopInfo.profileImage === null ? Logo : shopInfo.profileImage}
+          alt="#"
+        />
+      )}
+      {shopInfo === undefined ? null : (
+        <p className="shop-name">{shopInfo.nickName}</p>
+      )}
     </div>
   );
 }

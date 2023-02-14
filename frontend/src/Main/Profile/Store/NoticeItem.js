@@ -20,7 +20,6 @@ export default function NoticeItem({ notice, owner, sellerId }) {
         console.log(res);
       })
       .catch(err => {
-        console.log(event);
         console.log(err);
       });
   };
