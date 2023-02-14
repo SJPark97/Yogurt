@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import DetailCarousel from './DetailCarousel';
 import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -88,9 +89,10 @@ function PostDetail() {
   return (
     <div>
       <BackToTop />
-      {post && post.postImages.map(image => (
-            <img className="detail_img" src={image.url} alt="이미지사진" />
-          ))}
+      {post && <Box sx={{ width: '100%' }}>
+        <DetailCarousel image={post.postImages} />
+      </Box>
+      }
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
