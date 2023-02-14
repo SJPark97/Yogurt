@@ -11,7 +11,7 @@ import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarSellerComponent from './toolbar/ToolbarSellerComponent';
 import ToolbarBuyerComponent from './toolbar/ToolbarBuyerComponent';
-import LiveItemCarousel from './LiveItems/LiveItemCarousel'
+import LiveItemCarousel from './LiveItems/LiveItemCarousel';
 // import IconButton from '@material-ui/core/IconButton';
 // import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 // import Tooltip from '@material-ui/core/Tooltip';
@@ -31,7 +31,7 @@ class VideoRoomComponent extends Component {
     let userName = this.props.user
       ? this.props.user
       : `${Math.floor(Math.random() * 5)} ++++++`;
-    this.liveId = this.props.liveId
+    this.liveId = this.props.liveId;
     this.owner = this.props.owner;
     this.remotes = [];
     this.localUserAccessAllowed = false;
@@ -554,7 +554,7 @@ class VideoRoomComponent extends Component {
   render() {
     const mySessionId = this.state.mySessionId;
     const localUser = this.state.localUser;
-    const liveId = this.liveId
+    const liveId = this.liveId;
     // var chatDisplay = { display: this.state.chatDisplay };
 
     return (
@@ -614,10 +614,8 @@ class VideoRoomComponent extends Component {
                   </div>
                 ) : null,
               )}
-          <div
-            className="OT_root OT_publisher custom-class"
-          >
-            <LiveItemCarousel owner={this.owner}/>
+          <div className="OT_root OT_publisher custom-class">
+            <LiveItemCarousel owner={this.owner} />
             <div className="shop-card">
               <ShopCard data={mySessionId} />
             </div>
