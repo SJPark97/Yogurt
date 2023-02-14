@@ -24,64 +24,59 @@ function PostRegister() {
   const [size, setSize] = useState('');
   const [brandcategoryId, setBrandCategoryId] = useState(0);
   const [content, setContent] = useState('');
-  const [imageupload, setImageUpload] = useState([]);
-  const [brandcate, setBrandCate] = useState([]);
-  const [typecate, setTypeCate] = useState([]);
+  const [imageupload, setImageUpload] = useState([])
+  const [brandcate, setBrandCate] = useState([])
+  const [typecate, setTypeCate] = useState([])
 
   const token = loginUser.token;
 
-  const formData = new FormData();
 
   const handleAddImages = event => {
     const imageLists = event;
     let imageUrlLists = [...images];
     let imageUploadLists = [...imageupload];
-    imageUploadLists.push(event[0].name);
+
+    imageUploadLists.push(event[0])
+
 
     for (let i = 0; i < imageLists.length; i += 1) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-      formData.append('images', imageUploadLists[i]);
-      console.log('image', imageUploadLists[i]);
+      imageUrlLists.push(currentImageUrl)
     }
 
     if (imageUrlLists.length > 10) {
       imageUrlLists = imageUrlLists.slice(0, 10);
     }
 
-    console.log(imageUploadLists);
     setImages(imageUrlLists);
-    setImageUpload(imageUploadLists);
-
-    for (let value of formData.values()) {
-      console.log('value', value);
-    }
-
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
+    setImageUpload(imageUploadLists)
   };
 
   const handleDeleteImage = id => {
     setImages(images.filter((_, index) => index !== id));
+    setImageUpload(images.filter((_, index) => index !== id));
   };
 
+
   useEffect(() => {
-    axios
-      .get('https://i8b204.p.ssafy.io/be-api/cate/brand')
+    axios.get('https://i8b204.p.ssafy.io/be-api/cate/brand')
       .then(res => setBrandCate(res.data))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+  }, [])
 
-    axios
-      .get('https://i8b204.p.ssafy.io/be-api/cate/type')
+  useEffect(() => {
+    axios.get('https://i8b204.p.ssafy.io/be-api/cate/type')
       .then(res => setTypeCate(res.data))
-      .catch(err => console.log(err));
-  }, []);
-
-  console.log(typecate);
+      .catch(err => console.log(err))
+  }, [])
 
   const submitHandler = event => {
     event.preventDefault();
+    const formData = new FormData()
+
+    for (let i = 0; i < imageupload.length; i += 1) {
+      formData.append('images', imageupload[i])
+    }
 
     axios
       .post('https://i8b204.p.ssafy.io/be-api/upload', formData, {
@@ -92,7 +87,7 @@ function PostRegister() {
       })
       .then(res => {
         const data = {
-          postimages: res.data,
+          postImages: res.data,
           title,
           content,
           price,
@@ -100,20 +95,19 @@ function PostRegister() {
           size,
           brandcategoryId,
           typecategoryId,
-          typeDetailId,
-        };
-        console.log(data);
+          typeDetailId
+        }
+        console.log(data)
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/post`, data, {
             headers: { Authorization: token },
           })
           .then(res => {
-            console.log(res);
+            console.log(res.data)
             navigate(`/post/${res.data.id}`);
           })
-          .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err));
+          .catch(err => console.log(err))
+      }).catch(err => console.log(err.data))
 
     return false;
   };
@@ -142,7 +136,7 @@ function PostRegister() {
                   <img src={image} alt="메인사진" />
                 </div>
                 <div>
-                  <button type="button" onChange={() => handleDeleteImage(id)}>
+                  <button type="button" onClick={() => handleDeleteImage(id)}>
                     X
                   </button>
                 </div>
@@ -155,7 +149,7 @@ function PostRegister() {
             id="post_reg_file"
             multiple
             accept="image/*"
-            onChange={event => handleAddImages(event.target.files)}
+            onChange={(event) => handleAddImages(event.target.files)}
           />
         </div>
         <Divider sx={{ marginY: '1rem' }} />
@@ -186,11 +180,10 @@ function PostRegister() {
                 key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
-                className={`${
-                  sale === state.type
-                    ? 'post_reg_sale_btn'
-                    : 'post_reg_sale_state_btn'
-                }`}
+                className={`${sale === state.type
+                  ? 'post_reg_sale_btn'
+                  : 'post_reg_sale_state_btn'
+                  }`}
               >
                 {state.title}
               </button>
@@ -223,25 +216,86 @@ function PostRegister() {
                   label="category"
                   onChange={event => setTypeCategoryId(event.target.value)}
                 >
-                  {/* {typecate.map((type) => {
+                  <MenuItem value='0' >선택해주세요</MenuItem>
+                  {typecate.map((type) =>
                     <MenuItem value={type.id} key={type.id}>{type.name}</MenuItem>
-                  })} */}
+                  )}
                 </Select>
               </FormControl>
-              <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel id="demo-select-small">category</InputLabel>
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={typeDetailId}
-                  label="category"
-                  onChange={event => setTypeDetailId(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
+              {typecategoryId === 1 &&
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-select-small">category</InputLabel>
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={typeDetailId}
+                    label="category"
+                    onChange={event => setTypeDetailId(event.target.value)}
+                  >
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='11' >티셔츠</MenuItem>
+                    <MenuItem value='12' >맨투맨</MenuItem>
+                    <MenuItem value='13' >니트</MenuItem>
+                    <MenuItem value='14' >셔츠</MenuItem>
+                    <MenuItem value='15' >기타 상의</MenuItem>
+                  </Select>
+                </FormControl>
+              }
+              {typecategoryId === 2 &&
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-select-small">category</InputLabel>
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={typeDetailId}
+                    label="category"
+                    onChange={event => setTypeDetailId(event.target.value)}
+                  >
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='21' >후드 집업</MenuItem>
+                    <MenuItem value='22' >자켓</MenuItem>
+                    <MenuItem value='23' >카디건</MenuItem>
+                    <MenuItem value='24' >기타 아우터</MenuItem>
+                  </Select>
+                </FormControl>
+              }
+              {typecategoryId === 3 &&
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-select-small">category</InputLabel>
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={typeDetailId}
+                    label="category"
+                    onChange={event => setTypeDetailId(event.target.value)}
+                  >
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='31' >데님</MenuItem>
+                    <MenuItem value='32' >치마</MenuItem>
+                    <MenuItem value='33' >트레이닝</MenuItem>
+                    <MenuItem value='34' >숏 팬츠</MenuItem>
+                    <MenuItem value='35' >기타 바지</MenuItem>
+                  </Select>
+                </FormControl>
+              }
+              {typecategoryId === 4 &&
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-select-small">category</InputLabel>
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={typeDetailId}
+                    label="category"
+                    onChange={event => setTypeDetailId(event.target.value)}
+                  >
+                    <MenuItem value='0' >선택해주세요 </MenuItem>
+                    <MenuItem value='41' >신발</MenuItem>
+                    <MenuItem value='42' >가방</MenuItem>
+                    <MenuItem value='43' >목걸이</MenuItem>
+                    <MenuItem value='44' >기타</MenuItem>
+                  </Select>
+                </FormControl>
+              }
             </div>
             <div className="post_reg_category_brand">
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -253,11 +307,10 @@ function PostRegister() {
                   label="brand"
                   onChange={event => setBrandCategoryId(event.target.value)}
                 >
-                  {brandcate.map(brand => [
-                    <MenuItem value={brand.id} key={brand.id}>
-                      {brand.name}
-                    </MenuItem>,
-                  ])}
+                  <MenuItem value='0' >선택해주세요 </MenuItem>
+                  {brandcate.map((brand) =>
+                    <MenuItem value={brand.id} key={brand.id}>{brand.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
             </div>
@@ -286,8 +339,8 @@ function PostRegister() {
         <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 }
 
