@@ -7,8 +7,9 @@ function Category({ sub }) {
 
   return (
     <div role="presentation" className="category" onClick={handleClick}>
-      <img src={sub.image} alt="#" className="categoryImg" />
-      <div className="subName">{sub.name}</div>
+      <img src={sub.detail_image} alt="#" className="categoryImg" />
+      {}
+      {/* <div className="subName">{sub}</div> */}
     </div>
   );
 }
