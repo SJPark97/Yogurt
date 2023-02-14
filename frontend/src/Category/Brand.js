@@ -10,7 +10,7 @@ function Brand({ brand }) {
         console.log(brand.name);
       }}
     >
-      <img src={brand.image} alt="#" className="brandImg" />
+      <img src={brand.img} alt="#" className="brandImg" />
       <p className="brandName">{brand.name}</p>
     </div>
   );
