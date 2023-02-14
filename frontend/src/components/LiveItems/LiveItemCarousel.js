@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './LiveItemCarousel.css'
+import './LiveItemCarousel.css';
 import LiveItemSeller from './Seller/LiveItemSeller';
 import LiveItemBuyer from './Buyer/LiveItemBuyer';
 import CloseIcon from '@mui/icons-material/Close';
+import LiveButtonIcon from './LiveButtonIcon';
 
 export default function ProfileDrawer(props) {
   const [state, setState] = React.useState({
@@ -15,18 +15,18 @@ export default function ProfileDrawer(props) {
   });
   const { liveId } = useParams();
 
-  const [liveItems, setLiveItems] = React.useState(undefined)
-  const owner = props.owner
+  const [liveItems, setLiveItems] = React.useState(undefined);
+  const owner = props.owner;
 
   const toggleDrawer = open => event => {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/live/item', {
         params: {
-          liveId: liveId
-        }
+          liveId: liveId,
+        },
       })
       .then(res => setLiveItems(res.data))
-      .catch(er => console.log('에러'))
+      .catch(er => console.log('에러'));
 
     if (
       event.type === 'keydown' &&
@@ -48,7 +48,7 @@ export default function ProfileDrawer(props) {
           onClick={toggleDrawer(true)}
           id="LiveItemBox"
         >
-          <MoreVertIcon />  {/*여기에 아이콘 제작해서 넣기*/}
+          <LiveButtonIcon />
         </IconButton>
         <Drawer
           anchor="bottom"
@@ -58,7 +58,11 @@ export default function ProfileDrawer(props) {
         >
           <div id="box-3"></div>
           <CloseIcon id="drop-up-close" onClick={toggleDrawer(false)} />
-          {owner ? <LiveItemSeller liveItems={liveItems} /> : <LiveItemBuyer liveItems={liveItems} />}
+          {owner ? (
+            <LiveItemSeller liveItems={liveItems} />
+          ) : (
+            <LiveItemBuyer liveItems={liveItems} />
+          )}
         </Drawer>
       </React.Fragment>
     </div>
