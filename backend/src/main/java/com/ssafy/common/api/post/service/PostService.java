@@ -16,6 +16,7 @@ import com.ssafy.common.api.user.dto.response.UserPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
 import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
+@Slf4j
 public class PostService {
     private final PostRepository postRepository;
     private final PostimageRepository postimageRepository;
@@ -81,6 +83,7 @@ public class PostService {
         Post post = postConverter.createRequestDtoToEntity(request, user);
         Post createPost = postRepository.save(post);
         List<String> images = request.getPostImages();
+        log.info("이미지 갯수 {}",images.size());
         for (String image : images) {
             Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image, createPost);
             postimageRepository.save(postimage);
