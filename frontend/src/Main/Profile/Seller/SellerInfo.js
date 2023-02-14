@@ -1,6 +1,7 @@
 // 로그인 한 유저id를 가지고 구매자인지, 판매자인지 구분
 // 판매자라면 상품등록, 라이브 시작하기 버튼이 따로 있음
 import { useState, useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -29,9 +30,20 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const LiveButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'red',
+  '&:hover': {
+    backgroundColor: 'red',
+  },
+  '&:active': {
+    backgroundColor: 'red',
+  },
+}));
+
 // const StyledLink = styled(Link)``;
 
 function SellerInfo({ profile, loginId, token }) {
+  const loginUser = useSelector(state => state.user.value);
   // 상점 좋아요
   const [isLiked, setIsLiked] = useState(false);
   const [live, setLive] = useState({
@@ -104,11 +116,11 @@ function SellerInfo({ profile, loginId, token }) {
   // } else {
   //   likeCnt = `${sellerData.Store_likes}`;
   // }
-  const toggleLike = async () => {
+  const toggleLike = () => {
     setIsLiked(!isLiked);
-    await axios
+    axios
       .post(`https://i8b204.p.ssafy.io/be-api/likes/${profile.id}`, {
-        headers: { Authorization: token },
+        headers: { Authorization: loginUser.token },
       })
       .then(res => {
         console.log(res.data);
@@ -156,7 +168,7 @@ function SellerInfo({ profile, loginId, token }) {
               size="large"
               color="inherit"
               aria-label="like"
-              onClick={toggleLike}
+              onClick={toggleUnLike}
               sx={{ color: 'red' }}
             >
               <FavoriteIcon />
@@ -167,7 +179,7 @@ function SellerInfo({ profile, loginId, token }) {
               size="large"
               color="inherit"
               aria-label="like"
-              onClick={toggleUnLike}
+              onClick={toggleLike}
               sx={{ color: 'red' }}
             >
               <FavoriteBorderIcon />
@@ -204,18 +216,18 @@ function SellerInfo({ profile, loginId, token }) {
         </Stack>
       )}
       {loginId !== profile.id && live.status === 1 && (
-        <ColorButton
+        <LiveButton
           fullWidth
           variant="contained"
-          sx={{ color: 'red', width: '90%' }}
-          // startIcon={<LiveTvIcon />}
+          sx={{ color: 'white', width: '90%' }}
+          startIcon={<LiveTvIcon />}
           onClick={goLiveRoomBuyer} // 라이브 중이니 참여하기
         >
           라이브 참여
-        </ColorButton>
+        </LiveButton>
       )}
       {loginId !== profile.id && live.status === 2 && (
-        <ColorButton
+        <LiveButton
           fullWidth
           variant="contained"
           sx={{ color: '#CC3300', border: 'red', width: '90%' }} // 라이브 대기중
@@ -227,7 +239,7 @@ function SellerInfo({ profile, loginId, token }) {
             '시 ' +
             live.liveTime.slice(14, 16) +
             '분 방송 예정'}
-        </ColorButton>
+        </LiveButton>
       )}
     </div>
   );
