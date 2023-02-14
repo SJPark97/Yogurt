@@ -43,12 +43,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         System.out.println("인증이나 권한이 필요한 주소 요청이 됨.");
 
         String jwtHeader = request.getHeader(HEADER_STRING);
+        System.out.println("jwtHeader : " + jwtHeader);
         if(request.getServletPath().equals("/user/login") || request.getServletPath().equals("/user/refresh")) {
             chain.doFilter(request, response);
             return;
         }
         //header가 있는지 확인
         if(jwtHeader == null || !jwtHeader.startsWith(TOKEN_PREFIX)){
+            System.out.println("jwtHeader가 제대로 들어오지 않았습니다.");
             chain.doFilter(request,response);
             return;
         }
