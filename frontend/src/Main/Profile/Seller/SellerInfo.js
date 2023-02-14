@@ -98,16 +98,30 @@ function SellerInfo({ profile, loginId, token }) {
       });
   }, [profile, sellerId]);
 
+  const goLive = () => {
+    navigate(`/video/${live.liveRoomId}`, {
+      state: {
+        sellerId: sellerId,
+        sellerNickname: profile.nickName,
+        userNickname: loginUser.loginUserNickname,
+      },
+    });
+    console.log(sellerId, profile.nickName, loginUser.loginUserNickname, 'sjp');
+  };
+
   const goLiveRoomSeller = () => {
     if (live.status === 2) {
-      //방장 라이브 이동
+      axios.patch(
+        `https://i8b204.p.ssafy.io/be-api/live/onair?liveId=${live.liveRoomId}`,
+      );
+      goLive();
     } else {
       alert('라이브 등록이 필요합니다.');
     }
   };
 
   const goLiveRoomBuyer = () => {
-    //참여자 라이브 이동
+    goLive();
   };
 
   useEffect(() => {

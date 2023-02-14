@@ -34,6 +34,11 @@
   font-weight: bold;
   width: 96;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .LiveCardStoreTitle {

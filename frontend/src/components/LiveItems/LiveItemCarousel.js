@@ -48,7 +48,7 @@ export default function ProfileDrawer(props) {
           onClick={toggleDrawer(true)}
           id="LiveItemBox"
         >
-          <MoreVertIcon />
+          <MoreVertIcon />  {/*여기에 아이콘 제작해서 넣기*/}
         </IconButton>
         <Drawer
           anchor="bottom"

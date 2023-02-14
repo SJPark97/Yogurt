@@ -29,7 +29,7 @@ export default class ToolbarBuyerComponent extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.micStatusChanged();
-    }, 1000);
+    }, 1500);
   }
 
   leaveSession() {
