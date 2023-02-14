@@ -16,6 +16,7 @@ export default function CategoryList() {
 
   const getCategoryData = useCallback(async () => {
     await axios.get('https://i8b204.p.ssafy.io/be-api/cate/type').then(res => {
+      console.log(res.data, 'd');
       setCategoryData(res.data);
     });
   }, [setCategoryData]);
