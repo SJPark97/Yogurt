@@ -23,8 +23,8 @@ public class PostController {
     @PostMapping("")
     public ResponseEntity<?> create(@RequestBody PostInsertRequest request){
         User user = postService.getLoginUser();
-        postService.createPost(request,user);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+
+        return new ResponseEntity<>(postService.createPost(request,user), HttpStatus.CREATED);
     }
     // 상품 상세 페이지 조회 API
     @GetMapping("/{id}")
