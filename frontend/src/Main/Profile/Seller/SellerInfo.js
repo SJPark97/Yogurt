@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import Logo from '../../../Images/Yogurt_Logo.png';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import './SellerInfo.css';
 
@@ -43,13 +43,16 @@ const LiveButton = styled(Button)(({ theme }) => ({
 // const StyledLink = styled(Link)``;
 
 function SellerInfo({ profile, loginId, token }) {
+  const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
   // 상점 좋아요
   const [isLiked, setIsLiked] = useState(false);
   const [live, setLive] = useState({
     status: 0,
   });
-  // const [likeCnt, setLikeCnt] = useState([]);
+  const [likeCnt, setLikeCnt] = useState();
+  console.log(likeCnt, profile.likesCount);
+  const [likeId, setLikeId] = useState();
 
   const getLikes = useCallback(async () => {
     await axios
@@ -57,8 +60,14 @@ function SellerInfo({ profile, loginId, token }) {
         headers: { Authorization: token },
       })
       .then(res => {
-        if (res.data.filter(item => item.seller.id === profile.id).length > 0) {
+        setLikeCnt(profile.likesCount);
+        if (res.data.find(item => item.seller.id === profile.id)) {
           setIsLiked(true);
+          setLikeId(
+            Number(
+              res.data.find(item => item.seller.id === profile.id).likesId,
+            ),
+          );
         }
       })
       .catch(err => {
@@ -68,9 +77,7 @@ function SellerInfo({ profile, loginId, token }) {
 
   const getLiveInfo = useCallback(async () => {
     await axios
-      .get('https://i8b204.p.ssafy.io/be-api/live', {
-        params: { sellerId: profile.id },
-      })
+      .get(`https://i8b204.p.ssafy.io/be-api/live?sellerId=${sellerId}`)
       .then(res => {
         if (res.data[0].status === 'STATUS_ONAIR') {
           setLive({
@@ -89,7 +96,7 @@ function SellerInfo({ profile, loginId, token }) {
       .catch(err => {
         console.log(err);
       });
-  }, [profile, setLive]);
+  }, [profile, sellerId]);
 
   const goLiveRoomSeller = () => {
     if (live.status === 2) {
@@ -116,26 +123,43 @@ function SellerInfo({ profile, loginId, token }) {
   // } else {
   //   likeCnt = `${sellerData.Store_likes}`;
   // }
-  const toggleLike = () => {
+  const toggleLike = async () => {
     setIsLiked(!isLiked);
-    axios
-      .post(`https://i8b204.p.ssafy.io/be-api/likes/${profile.id}`, {
-        headers: { Authorization: loginUser.token },
-      })
+    await axios
+      .post(
+        `https://i8b204.p.ssafy.io/be-api/likes/${profile.id}`,
+        {},
+        {
+          headers: { Authorization: loginUser.token },
+        },
+      )
       .then(res => {
-        console.log(res.data);
+        console.log('좋아요 누르기', res.data);
+        setLikeCnt(likeCnt + 1);
+        setLikeId(res.data.id);
       })
       .catch(err => {
         console.log(err);
       });
   };
-  const toggleUnLike = () => {
+  const toggleUnLike = async () => {
     setIsLiked(!isLiked);
+    await axios
+      .patch(`https://i8b204.p.ssafy.io/be-api/likes/${likeId}`, {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        console.log('좋아요 취소', res.data);
+
+        setLikeCnt(likeCnt - 1);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   // navigate
   const navigate = useNavigate();
   // 상품 라이브 공지사항 리뷰 선택된 것
-
   return (
     <div>
       <Box
@@ -185,7 +209,9 @@ function SellerInfo({ profile, loginId, token }) {
               <FavoriteBorderIcon />
             </IconButton>
           )}
-          <div className="profile-cnt">{profile.likesCount}</div>
+          <div className="profile-cnt">
+            {likeCnt ? likeCnt : profile.likesCount}
+          </div>
         </div>
       </Box>
       {loginId === profile.id && (

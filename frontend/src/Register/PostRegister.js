@@ -24,57 +24,64 @@ function PostRegister() {
   const [size, setSize] = useState('');
   const [brandcategoryId, setBrandCategoryId] = useState(0);
   const [content, setContent] = useState('');
-  const [imageUrlList, setImageUrlList] = useState([])
-  const [brandcate, setBrandCate] = useState([])
+  const [imageupload, setImageUpload] = useState([]);
+  const [brandcate, setBrandCate] = useState([]);
+  const [typecate, setTypeCate] = useState([]);
 
   const token = loginUser.token;
 
-  const handleAddImages = event => {
-    const imageLists = event.target.files;
-    let imageUrlLists = [...images];
-    let imageUrl = [...imageUrlList]
-    imageUrl.push(String(event.target.files[0].name))
+  const formData = new FormData();
 
+  const handleAddImages = event => {
+    const imageLists = event;
+    let imageUrlLists = [...images];
+    let imageUploadLists = [...imageupload];
+    imageUploadLists.push(event[0].name);
 
     for (let i = 0; i < imageLists.length; i += 1) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
+      formData.append('images', imageUploadLists[i]);
+      console.log('image', imageUploadLists[i]);
     }
 
     if (imageUrlLists.length > 10) {
       imageUrlLists = imageUrlLists.slice(0, 10);
     }
 
+    console.log(imageUploadLists);
     setImages(imageUrlLists);
-    setImageUrlList(imageUrl)
-  };
-  console.log(imageUrlList)
-
-  const handleDeleteImage = id => {
-    setImages(images.filter((_, index) => index !== id));
-  };
-
-
-  useEffect(() =>{
-    axios.get('https://i8b204.p.ssafy.io/be-api/cate/brand')
-    .then(res => setBrandCate(res.data))
-    .catch(err => console.log(err))
-  },[])
-
-
-  const submitHandler = event => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('images', [imageUrlList]);
+    setImageUpload(imageUploadLists);
 
     for (let value of formData.values()) {
-      console.log(value);
+      console.log('value', value);
     }
 
     for (let key of formData.keys()) {
       console.log(key);
     }
+  };
+
+  const handleDeleteImage = id => {
+    setImages(images.filter((_, index) => index !== id));
+  };
+
+  useEffect(() => {
+    axios
+      .get('https://i8b204.p.ssafy.io/be-api/cate/brand')
+      .then(res => setBrandCate(res.data))
+      .catch(err => console.log(err));
+
+    axios
+      .get('https://i8b204.p.ssafy.io/be-api/cate/type')
+      .then(res => setTypeCate(res.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  console.log(typecate);
+
+  const submitHandler = event => {
+    event.preventDefault();
 
     axios
       .post('https://i8b204.p.ssafy.io/be-api/upload', formData, {
@@ -93,19 +100,20 @@ function PostRegister() {
           size,
           brandcategoryId,
           typecategoryId,
-          typeDetailId
-        }
-        console.log(data)
+          typeDetailId,
+        };
+        console.log(data);
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/post`, data, {
             headers: { Authorization: token },
           })
           .then(res => {
-            console.log(res)
+            console.log(res);
             navigate(`/post/${res.data.id}`);
           })
-          .catch(err => console.log(err))
-      }).catch(err => console.log(err))
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
 
     return false;
   };
@@ -147,7 +155,7 @@ function PostRegister() {
             id="post_reg_file"
             multiple
             accept="image/*"
-            onChange={handleAddImages}
+            onChange={event => handleAddImages(event.target.files)}
           />
         </div>
         <Divider sx={{ marginY: '1rem' }} />
@@ -178,10 +186,11 @@ function PostRegister() {
                 key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
-                className={`${sale === state.type
-                  ? 'post_reg_sale_btn'
-                  : 'post_reg_sale_state_btn'
-                  }`}
+                className={`${
+                  sale === state.type
+                    ? 'post_reg_sale_btn'
+                    : 'post_reg_sale_state_btn'
+                }`}
               >
                 {state.title}
               </button>
@@ -214,9 +223,9 @@ function PostRegister() {
                   label="category"
                   onChange={event => setTypeCategoryId(event.target.value)}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {/* {typecate.map((type) => {
+                    <MenuItem value={type.id} key={type.id}>{type.name}</MenuItem>
+                  })} */}
                 </Select>
               </FormControl>
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -244,9 +253,11 @@ function PostRegister() {
                   label="brand"
                   onChange={event => setBrandCategoryId(event.target.value)}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {brandcate.map(brand => [
+                    <MenuItem value={brand.id} key={brand.id}>
+                      {brand.name}
+                    </MenuItem>,
+                  ])}
                 </Select>
               </FormControl>
             </div>
@@ -275,8 +286,8 @@ function PostRegister() {
         <div className="submit_btn">
           <button type="submit">저장</button>
         </div>
-      </form >
-    </div >
+      </form>
+    </div>
   );
 }
 
