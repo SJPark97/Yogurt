@@ -56,10 +56,12 @@ function LiveRegister() {
       .then(res => {
         const data = {
           title,
-          thumbnail: res.data,
+          thumbnail: res.data[0],
           time,
-          postIds,
+          postIds
         };
+
+        console.log(data)
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
