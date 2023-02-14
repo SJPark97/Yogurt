@@ -79,7 +79,7 @@ public class PostService {
 
     // 상품 저장
     @Transactional
-    public void createPost(PostInsertRequest request, User user) {
+    public Long createPost(PostInsertRequest request, User user) {
         Post post = postConverter.createRequestDtoToEntity(request, user);
         Post createPost = postRepository.save(post);
         List<String> images = request.getPostImages();
@@ -88,6 +88,7 @@ public class PostService {
             Postimage postimage = postImageConverter.createImageRequestDtoToEntity(image, createPost);
             postimageRepository.save(postimage);
         }
+        return createPost.getId();
     }
 
     // 상품 라이브 status 변환
