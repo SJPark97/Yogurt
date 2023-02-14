@@ -14,6 +14,7 @@ import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.domain.UserStatus;
 import com.ssafy.common.api.user.dto.response.UserPostResponse;
 import com.ssafy.common.api.user.repository.UserRepository;
+import com.ssafy.common.config.JwtProvider;
 import com.ssafy.common.config.auth.PrincipalDetails;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostConverter postConverter;
     private final PostImageConverter postImageConverter;
+    private JwtProvider jwtProvider;
 
     public PostService(PostRepository postRepository, PostimageRepository postimageRepository, UserRepository userRepository, PostConverter postConverter, PostImageConverter postImageConverter) {
         this.postRepository = postRepository;

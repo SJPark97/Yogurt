@@ -19,7 +19,7 @@ public class FileUploadController {
     private final S3Upload s3Upload;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@ModelAttribute List<MultipartFile> images) throws IOException {
+    public ResponseEntity<?> uploadFile(@ModelAttribute MultipartFile[] images) throws IOException {
         for(MultipartFile image : images){
             System.out.println("image : " + image);
         }
@@ -27,7 +27,7 @@ public class FileUploadController {
     }
 
     @PostMapping("/upload1")
-    public ResponseEntity<?> uploadFile1(@RequestParam("images") List<MultipartFile> images) throws IOException {
+    public ResponseEntity<?> uploadFile1(@RequestParam("images") MultipartFile[] images) throws IOException {
         for(MultipartFile image : images){
             System.out.println("image : " + image);
         }
