@@ -30,7 +30,7 @@ function MainAppBar() {
       {useMatch('/live/join') && <SubAppBar />}
       {useMatch('/payment') && <SubAppBar />}
       {useMatch('/payment/result') && <SubAppBar />}
-      {useMatch('/profile/modify') && <SubAppBar />}
+      {useMatch('/profile/modify/:id') && <SubAppBar />}
     </div>
   );
 }

@@ -100,7 +100,7 @@ export default function LogInPage() {
             },
           )
           .then(res => {
-            console.log(res.data);
+            console.log('ddfdfdfddf', res.data);
             dispatch(
               login({
                 token: accesToken,
