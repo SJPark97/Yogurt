@@ -1,7 +1,11 @@
 // 유저정보를 받아오는게 좋으려나 이전에서 props 받는게 좋으려나
 // props를 받는거면 이게 appbar에서 오는거라 가능하려나?...
 // 앞으로는 app바를 페이지 마다 넣는게 나으려나?...
-import { useState, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Logo from '../../Images/Yogurt_Logo.png';
 import {
   Button,
   TextField,
@@ -14,9 +18,9 @@ import {
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-
 import './ProfileModifiy.css';
 import BackToTop from '../../AppBar/BackToTop';
+// import Logo from '../../Images/Yogurt_Logo.png';
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -53,18 +57,40 @@ const CssTextField = styled(TextField)({
 
 export default function ProfileModify() {
   const theme = createTheme();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const loginUser = useSelector(state => state.user.value);
 
+  const [profile, setProfile] = useState([]);
+
+  const getProfile = useCallback(async () => {
+    await axios
+      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${id}`, {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        setProfile(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loginUser, id]);
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
+  console.log('유저정보', profile);
   // role state에서 불러오기
   const [form, setForm] = useState({
-    nickname: '',
+    nickname: loginUser.loginUserNickname.trim(),
     nicknameConfirm: '',
-    email: '',
-    emailConfirm: '',
+    introduce: '',
+    introduceConfirm: '',
   });
 
   const [error, setError] = useState({
     nickname: '',
-    email: '',
+    introduce: '',
   });
 
   const [onlyOne, setOnlyOne] = useState({
@@ -81,10 +107,10 @@ export default function ProfileModify() {
     }
     setForm({ ...form, [handling]: e.target.value });
     if (handling === 'nickname') {
-      if (value.length > 6) {
+      if (value.length > 8) {
         setError({
           ...error,
-          [handling]: '6글자 이하로 입력해주세요.',
+          [handling]: '8글자 이하로 입력해주세요.',
         });
       } else {
         setError({ ...error, [handling]: '' });
@@ -114,46 +140,52 @@ export default function ProfileModify() {
     setForm({ ...form, nicknameConfirm: form.nickname });
   };
 
-  // email
-  const handleBlurEmail = () => {
-    const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    if (form.email === '') {
-      setError({ ...error, email: '필수항목입니다.' });
-    } else if (!emailRegex.test(form.email)) {
-      setError({ ...error, email: '이메일 형식이 옳바르지 않습니다.' });
+  // introduce
+  const handleBlurIntroduce = () => {
+    if (form.introduce === '') {
+      setError({ ...error, introduce: '필수항목입니다.' });
     } else {
-      setForm({ ...form, emailConfirm: form.email });
-      setError({ ...error, email: '' });
+      setForm({ ...form, introduceConfirm: form.introduce });
+      setError({ ...error, introduce: '' });
     }
   };
-  const handleFocusEmail = () => {
-    setForm({ ...form, emailConfirm: '' });
+  const handleFocusIntroduce = () => {
+    setForm({ ...form, introduceConfirm: '' });
   };
 
   let allowed = true;
   if (
     error.nickname === '' &&
     form.nicknameConfirm !== '' &&
-    form.emailConfirm !== ''
+    form.introduceConfirm !== ''
   ) {
     allowed = !allowed;
   }
 
+  let buyerAllowed = true;
+  if (error.nickname === '' && form.nicknameConfirm !== '') {
+    buyerAllowed = !buyerAllowed;
+  }
+  // 기본이미지
+  const basicData = new FormData();
+  basicData.append('images', Logo);
+
+  // 사진 등록
   const [Image, setImage] = useState(
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+    profile.profileImage ? profile.profileImage : Logo,
   );
+  const [imageConfirm, setImageConfirm] = useState(basicData);
   const fileInput = useRef(null);
 
   const onChange = e => {
-    console.log(e.target.files);
     if (e.target.files[0]) {
-      //   setFile(e.target.files[0]);
+      const formData = new FormData();
+      formData.append('images', e.target.files[0]);
+      setImage(URL.createObjectURL(e.target.files[0]));
+      setImageConfirm(formData);
     } else {
       // 업로드 취소할 시
-      setImage(
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-      );
+      setImage(profile.profileImage ? profile.profileImage : Logo);
       return;
     }
     // 화면에 프로필 사진 표시
@@ -166,15 +198,76 @@ export default function ProfileModify() {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (loginUser.loginUserRole === 'ROLE_SELLER') {
+      axios
+        .post('https://i8b204.p.ssafy.io/be-api/upload', imageConfirm, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        .then(res => {
+          console.log('gg', res.data);
+          const data = {
+            profileImage: res.data[0],
+            nickName: form.nicknameConfirm,
+            description: form.introduceConfirm,
+          };
+          console.log('data', data);
+          axios
+            .put(
+              `https://i8b204.p.ssafy.io/be-api/user/user/seller/${id}`,
+              data,
+              {
+                headers: { Authorization: loginUser.token },
+              },
+            )
+            .then(res => {
+              console.log('수정 성공!', res.data);
+              navigate(`/profile/seller/${id}?tab=0`);
+            })
+            .catch(err => console.log(err));
+        });
+    } else {
+      axios
+        .post('https://i8b204.p.ssafy.io/be-api/upload', imageConfirm, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        .then(res => {
+          console.log(res.data);
+          const data = {
+            profileImage: res.data[0],
+            nickName: form.nicknameConfirm,
+          };
+          axios
+            .put(
+              `https://i8b204.p.ssafy.io/be-api/user/user/buyer/${id}`,
+              data,
+              {
+                headers: { Authorization: loginUser.token },
+              },
+            )
+            .then(res => {
+              console.log('수정 성공!', res.data);
+              navigate(`/profile/buyer/${id}?tab=0`);
+            })
+            .catch(err => console.log(err));
+        });
+    }
+  };
+
   return (
     <div>
       <BackToTop />
-      <h2>프로필 수정</h2>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <Box
             sx={{
-              marginTop: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -186,12 +279,20 @@ export default function ProfileModify() {
               // onSubmit={handleSubmit}
             >
               <FormControl component="fieldset" variant="standard">
+                <div className="modifyText">프로필 이미지 수정</div>
                 <Stack
                   spacing={1}
                   justifyContent="center"
                   alignItems="center"
-                  sx={{ marginBottom: '1rem' }}
+                  sx={{
+                    marginBottom: '1rem',
+                    border: '1px solid lightgray',
+                    borderRadius: '8px',
+                  }}
                 >
+                  <div style={{ fontSize: '12px' }}>
+                    아래 사진을 클릭해주세요
+                  </div>
                   <Avatar
                     src={Image}
                     onClick={() => {
@@ -205,12 +306,13 @@ export default function ProfileModify() {
                   <input
                     type="file"
                     style={{ display: 'none' }}
-                    accept="image/jpg,impge/png,image/jpeg"
+                    accept="image/*"
                     name="profile_img"
                     onChange={onChange}
                     ref={fileInput}
                   />
                 </Stack>
+                <div className="modifyText">닉네임 수정</div>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <CssTextField
@@ -218,12 +320,13 @@ export default function ProfileModify() {
                       fullWidth
                       id="nickname"
                       name="nickname"
-                      label="닉네임 (6글자 이하)"
+                      label="닉네임 or 스토어명(8글자 이하)"
                       error={
                         error.nickname !== '' ||
-                        form.nickname.length > 6 ||
+                        form.nickname.length > 8 ||
                         false
                       }
+                      value={form.nickname}
                       onChange={handleChange}
                       onBlur={handleBlurNickname}
                       onFocus={handleFocusNickname}
@@ -241,7 +344,7 @@ export default function ProfileModify() {
                             disabled={
                               onlyOne.nickname ||
                               form.nickname === '' ||
-                              form.nickname.length > 6 ||
+                              form.nickname.length > 8 ||
                               false
                             }
                             // 컬러 바꾸기
@@ -255,21 +358,28 @@ export default function ProfileModify() {
                     />
                     <FormHelperTexts>{error.nickname}</FormHelperTexts>
                   </Grid>
-                  <Grid item xs={12}>
-                    <CssTextField
-                      required
-                      fullWidth
-                      type="email"
-                      id="email"
-                      name="email"
-                      label="이메일 주소"
-                      onChange={handleChange}
-                      onBlur={handleBlurEmail}
-                      onFocus={handleFocusEmail}
-                      error={error.email !== '' || false}
-                    />
-                    <FormHelperTexts>{error.email}</FormHelperTexts>
-                  </Grid>
+                  {loginUser.loginUserRole === 'ROLE_SELLER' ? (
+                    <Grid item xs={12}>
+                      <div className="modifyText">스토어 한줄 소개 수정</div>
+                      <CssTextField
+                        multiline
+                        rows={3}
+                        required
+                        fullWidth
+                        type="introduce"
+                        id="introduce"
+                        name="introduce"
+                        label="스토어 한줄 소개"
+                        onChange={handleChange}
+                        onBlur={handleBlurIntroduce}
+                        onFocus={handleFocusIntroduce}
+                        error={error.introduce !== '' || false}
+                      />
+                      <FormHelperTexts>{error.introduce}</FormHelperTexts>
+                    </Grid>
+                  ) : (
+                    ''
+                  )}
                 </Grid>
                 <ColorButton
                   // type="submit"
@@ -277,12 +387,12 @@ export default function ProfileModify() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                   size="large"
-                  disabled={allowed}
-                  onClick={() => {
-                    console.log('데이터', form);
-                    console.log('에러', error);
-                    console.log('회원정보 수정 axios로 Confirm데이터 전달');
-                  }}
+                  disabled={
+                    loginUser.loginUserRole === 'ROLE_SELLER'
+                      ? allowed
+                      : buyerAllowed
+                  }
+                  onClick={handleSubmit}
                 >
                   회원정보 수정
                 </ColorButton>

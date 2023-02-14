@@ -39,7 +39,7 @@ export default function ProfileDrawer() {
     } else if (index === 3) {
       navigate('/noted/join');
     } else if (index === 4) {
-      navigate('/profile/modify');
+      navigate(`/profile/modify/${loginUser.loginUserPk}`);
     }
   };
 
@@ -48,7 +48,7 @@ export default function ProfileDrawer() {
       dispatch(logout());
       navigate('/');
     } else if (index === 1) {
-      navigate('/profile/modify');
+      navigate(`/profile/modify/${loginUser.loginUserPk}`);
     }
   };
 

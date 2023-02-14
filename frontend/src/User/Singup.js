@@ -423,7 +423,7 @@ function SignUp() {
                       fullWidth
                       id="nickname"
                       name="nickname"
-                      label="닉네임 (8글자 이하)"
+                      label="닉네임 or 스토어명(8글자 이하)"
                       error={
                         error.nickname !== '' ||
                         form.nickname.length > 8 ||
