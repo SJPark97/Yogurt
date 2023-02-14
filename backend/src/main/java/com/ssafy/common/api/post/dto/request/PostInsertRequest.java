@@ -15,7 +15,7 @@ public class PostInsertRequest {
     private Long price;
     private Long sale_price;
     private String size;
-    private List<Map<String,String>> postImages;
+    private List<String> postImages;
     private Long brandcategoryId;
     private Long typecategoryId;
     private Long typeDetailId;
