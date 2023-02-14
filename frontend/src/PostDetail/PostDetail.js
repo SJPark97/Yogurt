@@ -18,7 +18,7 @@ function PostDetail() {
   const navigate = useNavigate();
   const loginUser = useSelector(state => state.user.value);
   const { postId } = useParams();
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState('');
   const [seller, setSeller] = useState(0);
   const [isLiked, setIsLiked] = useState(true);
 
@@ -87,14 +87,13 @@ function PostDetail() {
     <div>
       <BackToTop />
       {post &&
-        post?.postImages.map(image => (
+        post?.postImages.map(image => 
           <img
             className="detail_img"
             src={image.url}
             alt="이미지사진"
-            key={image.id}
           />
-        ))}
+      )}
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
@@ -108,10 +107,10 @@ function PostDetail() {
                 <div className="detail-sale-percent">{salePercent}%</div>
               ) : null}
               <div className="detail-post-sale-price">
-                {post?.sale_price.toLocaleString()}원
+                {post?.sale_price?.toLocaleString()}원
               </div>
               <div className="detail-post-price">
-                {post?.price.toLocaleString()}
+                {post?.price?.toLocaleString()}
               </div>
             </div>
           </div>
