@@ -55,7 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [text, setText] = useState(searchParams.get('searching'));
+  const [text, setText] = useState();
+  const [replace, setReplace] = useState();
   const [posts, setPosts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [stores, setStores] = useState([]);
@@ -76,7 +77,6 @@ function Search() {
     await axios
       .get(`https://i8b204.p.ssafy.io/be-api/search/brand/${text}`)
       .then(res => {
-        console.log('브랜브랜드', res.data);
         setBrands(res.data);
       })
       .catch(err => {
@@ -113,13 +113,11 @@ function Search() {
 
   const navigate = useNavigate();
 
-  const handleKeyUp = e => {
-    console.log('keyup', e.target.value);
+  const handleChange = e => {
     setText(e.target.value);
   };
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      console.log('엔터', e.target.value, '검색결과 창으로 이동');
       setResults(posts);
       setPosts([]);
       setStores([]);
@@ -129,8 +127,6 @@ function Search() {
       setSearchParams(searchParams);
     }
   };
-  console.log('ff', results);
-  console.log('ddd', posts);
 
   return (
     <div>
@@ -162,10 +158,11 @@ function Search() {
                 inputProps={{ 'aria-label': 'search' }}
                 fullWidth
                 autoFocus
-                onKeyUp={handleKeyUp}
+                onChange={handleChange}
                 onKeyPress={handleKeyPress}
                 id="searchText"
                 name="searchText"
+                value={replace || text || ''}
               />
             </SearchBar>
           </Toolbar>
@@ -187,7 +184,39 @@ function Search() {
             브랜드
           </Typography>
           {brands.map(brand => (
-            <SearchHistory searchData={brand} key={brand.id} />
+            <Box
+              key={brand.id}
+              sx={{
+                marginBottom: '8px',
+                margin: '16px',
+                display: 'flex',
+                height: '100%',
+                maxWidth: '100%',
+                alignItems: 'center',
+                justifyContent: 'start',
+                fontSize: '1rem',
+                paddingY: '8px',
+              }}
+              onClick={() => {
+                navigate(`/brand/${brand.id}`, {
+                  state: { brandName: brand.name, brandImg: brand.img },
+                });
+              }}
+            >
+              <SearchIcon
+                sx={{
+                  color: 'gray',
+                }}
+              />
+              <Typography
+                variant="p"
+                component="div"
+                role="presentation"
+                sx={{ textAlign: 'start', marginLeft: '1rem' }}
+              >
+                {brand.name || brand.title || brand.nickName}
+              </Typography>
+            </Box>
           ))}
           <Divider variant="middle" />
         </div>
@@ -227,7 +256,67 @@ function Search() {
             상품
           </Typography>
           {posts.map(post => (
-            <SearchHistory searchData={post} key={post.id} />
+            <Box
+              key={post.id}
+              sx={{
+                marginBottom: '8px',
+                margin: '16px',
+                display: 'flex',
+                height: '100%',
+                maxWidth: '100%',
+                alignItems: 'center',
+                justifyContent: 'start',
+                fontSize: '1rem',
+                paddingY: '8px',
+              }}
+              onClick={() => {
+                if (post.name) {
+                  setReplace(post.name);
+                  setResults(
+                    posts.filter(result => {
+                      return result.title === post.name;
+                    }),
+                  );
+                } else if (post.title) {
+                  setReplace(post.title);
+                  setResults(
+                    posts.filter(result => {
+                      return result.title === post.title;
+                    }),
+                  );
+                } else if (post.nickName) {
+                  setReplace(post.nickName);
+                  setResults(
+                    posts.filter(result => {
+                      return result.title === post.nickName;
+                    }),
+                  );
+                }
+                setPosts([]);
+                setStores([]);
+                setBrands([]);
+                setText('');
+                searchParams.set(
+                  'searching',
+                  post.name || post.title || post.nickName,
+                );
+                setSearchParams(searchParams);
+              }}
+            >
+              <SearchIcon
+                sx={{
+                  color: 'gray',
+                }}
+              />
+              <Typography
+                variant="p"
+                component="div"
+                role="presentation"
+                sx={{ textAlign: 'start', marginLeft: '1rem' }}
+              >
+                {post.name || post.title || post.nickName}
+              </Typography>
+            </Box>
           ))}
           <Divider variant="middle" />
         </div>

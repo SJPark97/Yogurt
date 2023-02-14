@@ -1,13 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import './Category.css';
 
 function Brand({ brand }) {
+  const navigate = useNavigate();
   return (
     <div
       role="presentation"
       className="brand"
       onClick={() => {
-        console.log('브랜드 검색');
-        console.log(brand.name);
+        navigate(`/brand/${brand.id}`, {
+          state: { brandName: brand.name, brandImg: brand.img },
+        });
       }}
     >
       <img src={brand.img} alt="#" className="brandImg" />

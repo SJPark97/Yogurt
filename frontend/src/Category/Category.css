@@ -10,18 +10,19 @@
 
 .brand {
   display: inline-block;
-  width: 40px;
-  height: 64px;
+  width: 54px;
+  height: 72px;
   line-height: 12px;
   text-align: center;
   font-size: 10px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-bottom: 12px;
 }
 
 .brandImg {
   width: 100%;
-  height: 40px;
+  height: 54px;
   object-fit: cover;
   border-radius: 16px;
   border: 1px solid #d9d9d9;
@@ -30,6 +31,7 @@
 .brandName {
   margin: 0;
   text-align: center;
+  font-size: 12px;
 }
 
 .categories {
@@ -62,8 +64,8 @@
   margin-top: 8px;
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
-  font-size: 10px;
+  font-weight: 500;
+  font-size: 12px;
   line-height: 12px;
   /* align-items: center; */
   /* text-align: center; */
@@ -71,4 +73,24 @@
 
 .Mui-selected {
   background: #deb887;
+}
+
+.brandInfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 16px;
+}
+
+.brandDetailImg {
+  width: 80px;
+  height: 80px;
+  border: 1px solid lightgray;
+  border-radius: 16px;
+}
+
+.brandDetail {
+  margin: 1rem;
+  font-size: 22px;
+  font-weight: 700;
 }

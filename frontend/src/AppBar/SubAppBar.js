@@ -29,11 +29,27 @@ const data = {
   '/post/join': {
     name: '상품등록',
   },
+  '/noted/join': {
+    name: '공지등록',
+  },
+  '/review/join': {
+    name: '리뷰작성',
+  },
+  '/payresult': {
+    name: '결제완료',
+  },
+  '/payment': {
+    name: '결제',
+  },
+  '/payment2': {
+    name: '결제',
+  },
   // 결제도 추가하기
 };
 
 export default function SubAppBar() {
   const pageUrl = useLocation();
+  console.log(pageUrl);
   const navigate = useNavigate();
   const pageName = data[pageUrl.pathname];
 

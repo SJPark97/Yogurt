@@ -1,7 +1,7 @@
 import Brand from './Brand';
 import './Category.css';
-import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
 
 export default function BrandList() {
   const [brandData, setBrandData] = useState([]);

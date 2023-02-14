@@ -16,6 +16,7 @@ function MainAppBar() {
       {useMatch('/profile/seller/:sellerId') && <ProfileAppBar />}
       {useMatch('/profile/buyer/:buyerId') && <ProfileAppBar />}
       {useMatch('/category') && <SubAppBar />}
+      {useMatch('/category/:categoryId') && <SubAppBar />}
       {/** 아니 아래꺼 두개가 겹쳐서 join이라는 :storeId가 설정된다 */}
       {/* {useMatch('/post/join') && <SubAppBar />} */}
       {useMatch('/post/:postId') && <SubAppBar />}
@@ -29,8 +30,11 @@ function MainAppBar() {
       {useMatch('/wishlist') && <SubAppBar />}
       {useMatch('/live/join') && <SubAppBar />}
       {useMatch('/payment') && <SubAppBar />}
+      {useMatch('/payment2') && <SubAppBar />}
       {useMatch('/payment/result') && <SubAppBar />}
+      {useMatch('/payresult') && <SubAppBar />}
       {useMatch('/profile/modify/:id') && <SubAppBar />}
+      {useMatch('/brand/:brandId') && <SubAppBar />}
     </div>
   );
 }
