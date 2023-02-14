@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../Images/Yogurt_Logo.png';
 import axios from 'axios';
 
-import './Store.css';
+import './StoreItem.css';
 
 // const StyledLink = styled(Link)``;
 
@@ -53,11 +53,8 @@ function StoreItem({ store }) {
   const storeId = store.id;
 
   const handleClick = () => {
-    console.log('디테일 페이지 스토어 아이디', storeId);
-    // navigate(`/stores/${storeId}?tab=0`, { state: sellerData });
     navigate(`/stores/${storeId}?tab=0`);
   };
-  // 상품 라이브 공지사항 리뷰 선택된 것
 
   return (
     <div>
@@ -78,7 +75,7 @@ function StoreItem({ store }) {
           alt="스토어 프로필 사진"
           className="store-img"
         />
-        <div>
+        <div className='store-info'>
           <div className="store-text">
             <p className="store-name">{store.nickName}</p>
             <div className="store_like">
@@ -100,7 +97,7 @@ function StoreItem({ store }) {
           <div className="store-introduce">
             {store.description
               ? store.description
-              : `안녕하세요! 신규 입점한 ${store.nickName}입니다!`}
+              : `안녕하세요! 신규 입점한 ${store.nickName} 입니다!`}
           </div>
         </div>
       </Box>

@@ -4,9 +4,12 @@
   border: 1px solid #dfbf96;
   border-radius: 16px;
 }
+
+.store-info {
+  margin: 0px 16px 0px 8px;
+  width: 100%;
+}
 .store-text {
-  margin-left: 16px;
-  margin-right: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,8 +34,7 @@
 .store-cnt {
   font-size: 16px;
 }
-.store-introduce {
-  margin-left: 16px;
+.store-introduce { 
   font-weight: 500;
   font-size: 15px;
   text-align: left;
