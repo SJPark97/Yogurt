@@ -26,9 +26,7 @@ function StoreList() {
   useEffect(() => {
     getStores();
   }, [getStores]);
-
-  console.log('스토어 페이지 - 스토어 리스트', stores);
-
+  
   return (
     <div className="Store">
       <BackToTop />
