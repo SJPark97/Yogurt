@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -20,7 +20,7 @@ function PostDetail() {
   const { postId } = useParams();
   const [post, setPost] = useState(false);
   const [seller, setSeller] = useState(0);
-  const [isLiked, setIsLiked] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
   const [salePercent, setSalePercent] = useState(true);
 
   const ColorButton = styled(Button)(() => ({
@@ -47,15 +47,21 @@ function PostDetail() {
   }));
 
   const token = loginUser.token;
+  const [likeCnt, setLikeCnt] = useState();
+  console.log(likeCnt, seller.likesCount);
+  const [likeId, setLikeId] = useState();
 
   useEffect(() => {
     axios
       .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
       .then(res => {
+        setLikeCnt(res.data.likesCount);
         setPost(res.data);
-        setSalePercent(Math.floor(
-          ((res.data.price - res.data.sale_price) / res.data.price) * 100,
-        ))
+        setSalePercent(
+          Math.floor(
+            ((res.data.price - res.data.sale_price) / res.data.price) * 100,
+          ),
+        );
       })
       .catch(err => {
         console.log(err);
@@ -66,13 +72,15 @@ function PostDetail() {
   useEffect(() => {
     if (post) {
       axios
-      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${post.sellerId}`, {
-        headers: { Authorization: token },
+        .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${post.sellerId}`, {
+          headers: { Authorization: token },
         })
-        .then(res => setSeller(res.data))
+        .then(res => {
+          setSeller(res.data);
+        })
         .catch(err => console.log('seller', err));
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   const data = {};
@@ -85,12 +93,75 @@ function PostDetail() {
       .catch(err => console.log('wishlist', err));
   };
 
+  const getLikes = useCallback(async () => {
+    await axios
+      .get('https://i8b204.p.ssafy.io/be-api/zzim', {
+        headers: { Authorization: token },
+      })
+      .then(res => {
+        console.log('찜들 받아오기', res.data.zzims);
+        if (res.data.zzims.find(item => item.post.id === postId)) {
+          setIsLiked(true);
+          setLikeId(
+            Number(res.data.zzims.find(item => item.post.id === postId).zzimId),
+          );
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [token, postId]);
+
+  useEffect(() => {
+    getLikes();
+  }, [getLikes]);
+
+  const toggleLike = async () => {
+    setIsLiked(!isLiked);
+    await axios
+      .post(
+        `https://i8b204.p.ssafy.io/be-api/zzim/${postId}`,
+        {},
+        {
+          headers: { Authorization: loginUser.token },
+        },
+      )
+      .then(res => {
+        console.log('찜 누르기', res.data);
+        setLikeCnt(likeCnt + 1);
+        setLikeId(res.data.id);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  const toggleUnLike = async () => {
+    setIsLiked(!isLiked);
+    await axios
+      .patch(`https://i8b204.p.ssafy.io/be-api/zzim/delete/${likeId}`, {
+        headers: { Authorization: loginUser.token },
+      })
+      .then(res => {
+        console.log('좋아요 취소', res.data);
+        setLikeCnt(likeCnt - 1);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <BackToTop />
-      {post && post.postImages.map(image => (
-            <img className="detail_img" src={image.url} alt="이미지사진" />
-          ))}
+      {post &&
+        post.postImages.map(image => (
+          <img
+            className="detail_img"
+            src={image.url}
+            alt="이미지사진"
+            key={image.url}
+          />
+        ))}
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">
@@ -112,17 +183,31 @@ function PostDetail() {
             </div>
           </div>
           <div className="post-like">
-            <IconButton
-              size="small"
-              color="inherit"
-              aria-label="like"
-              sx={{ color: 'red' }}
-              onClick={() => setIsLiked(!isLiked)}
-            >
-              {isLiked && <FavoriteIcon />}
-              {!isLiked && <FavoriteBorderIcon />}
-            </IconButton>
-            <div className="post-like-cnt">4.5천</div>
+            {isLiked ? (
+              <IconButton
+                size="small"
+                color="inherit"
+                aria-label="like"
+                sx={{ color: 'red' }}
+                onClick={toggleUnLike}
+              >
+                <FavoriteIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                size="small"
+                color="inherit"
+                aria-label="like"
+                sx={{ color: 'red' }}
+                onClick={toggleLike}
+              >
+                <FavoriteBorderIcon />
+              </IconButton>
+            )}
+
+            <div className="post-like-cnt">
+              {likeCnt ? likeCnt : post.likesCount}
+            </div>
           </div>
         </div>
         <Divider variant="middle" sx={{ margin: '1rem' }} />
@@ -155,15 +240,26 @@ function PostDetail() {
           elevation={3}
         >
           <Box className="detail-footer" sx={{ height: '56px' }}>
-            <WhiteButton
-              className="like-bnt"
-              variant="contained"
-              sx={{ background: '#ffffff', color: 'red' }}
-              onClick={() => setIsLiked(!isLiked)}
-            >
-              {isLiked && <FavoriteIcon />}
-              {!isLiked && <FavoriteBorderIcon />}
-            </WhiteButton>
+            {isLiked ? (
+              <WhiteButton
+                className="like-bnt"
+                variant="contained"
+                sx={{ background: '#ffffff', color: 'red' }}
+                onClick={toggleUnLike}
+              >
+                <FavoriteIcon />
+              </WhiteButton>
+            ) : (
+              <WhiteButton
+                className="like-bnt"
+                variant="contained"
+                sx={{ background: '#ffffff', color: 'red' }}
+                onClick={toggleLike}
+              >
+                <FavoriteBorderIcon />
+              </WhiteButton>
+            )}
+
             <ColorButton
               variant="contained"
               fullWidth
