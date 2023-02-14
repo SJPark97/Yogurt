@@ -18,9 +18,10 @@ function PostDetail() {
   const navigate = useNavigate();
   const loginUser = useSelector(state => state.user.value);
   const { postId } = useParams();
-  const [post, setPost] = useState('');
+  const [post, setPost] = useState(false);
   const [seller, setSeller] = useState(0);
   const [isLiked, setIsLiked] = useState(true);
+  const [salePercent, setSalePercent] = useState(true);
 
   const ColorButton = styled(Button)(() => ({
     fontSize: '20px',
@@ -52,6 +53,9 @@ function PostDetail() {
       .get(`https://i8b204.p.ssafy.io/be-api/post/${postId}`)
       .then(res => {
         setPost(res.data);
+        setSalePercent(Math.floor(
+          ((res.data.price - res.data.sale_price) / res.data.price) * 100,
+        ))
       })
       .catch(err => {
         console.log(err);
@@ -60,13 +64,15 @@ function PostDetail() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${post?.sellerId}`, {
+    if (post) {
+      axios
+      .get(`https://i8b204.p.ssafy.io/be-api/user/seller/${post.sellerId}`, {
         headers: { Authorization: token },
-      })
-      .then(res => setSeller(res.data))
-      .catch(err => console.log('seller', err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        })
+        .then(res => setSeller(res.data))
+        .catch(err => console.log('seller', err));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   const data = {};
@@ -79,21 +85,12 @@ function PostDetail() {
       .catch(err => console.log('wishlist', err));
   };
 
-  const salePercent = Math.floor(
-    ((post?.price - post?.sale_price) / post?.price) * 100,
-  );
-
   return (
     <div>
       <BackToTop />
-      {post &&
-        post?.postImages.map(image => 
-          <img
-            className="detail_img"
-            src={image.url}
-            alt="이미지사진"
-          />
-      )}
+      {post && post.postImages.map(image => (
+            <img className="detail_img" src={image.url} alt="이미지사진" />
+          ))}
       <div>
         <div className="detail-basic">
           <div className="detail-basic-info">

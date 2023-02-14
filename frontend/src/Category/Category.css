@@ -4,6 +4,9 @@
   overflow-x: scroll;
   /* touch-action: auto; */
 }
+.brands::-webkit-scrollbar {
+  display: none;
+}
 
 .brand {
   display: inline-block;
@@ -12,7 +15,8 @@
   line-height: 12px;
   text-align: center;
   font-size: 10px;
-  margin-left: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .brandImg {
