@@ -21,7 +21,7 @@ public class S3Upload {
     private String bucket;
     private final AmazonS3 amazonS3;
 
-    public List<String> upload1(List<MultipartFile> list) throws IOException {
+    public List<String> upload1(MultipartFile[] list) throws IOException {
 
         List<String> urls = new ArrayList<>();
 
