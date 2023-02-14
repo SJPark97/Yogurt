@@ -29,8 +29,6 @@ function ProductInfo() {
     getPosts();
   }, [getPosts]);
 
-  console.log('ggg', posts);
-
   const navigate = useNavigate();
   return (
     <div>
