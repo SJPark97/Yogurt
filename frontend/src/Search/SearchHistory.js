@@ -7,10 +7,7 @@ import './SearchHistory.css';
 function SearchHistory({ searchData }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate({
-      pathname: '/search/result',
-      search: `?search=${searchData.name}`,
-    });
+    navigate(`/stores/${searchData.id}`);
   };
 
   return (
@@ -39,7 +36,7 @@ function SearchHistory({ searchData }) {
         sx={{ textAlign: 'start', marginLeft: '1rem' }}
         onClick={handleClick}
       >
-        {searchData.name || searchData.title || searchData.nickName}
+        {searchData.nickName}
       </Typography>
     </Box>
   );

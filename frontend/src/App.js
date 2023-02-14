@@ -24,6 +24,8 @@ import PayResult from './Payment/PayResult';
 import LiveRegister from './Register/LiveRegister';
 import ScrollToTop from './ScrollToTop';
 import Room from './components/Room';
+import BrandDetail from './Category/BrandDetail';
+import SubCategory from './Category/SubCategory';
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/profile/modify/:id" element={<ProfileModify />} />
         <Route path="/payresult" element={<PayResult />} />
+        <Route path="/brand/:brandId" element={<BrandDetail />} />
+        <Route path="/category/:categoryId" element={<SubCategory />} />
       </Routes>
       <footer>
         <MainFooter />
