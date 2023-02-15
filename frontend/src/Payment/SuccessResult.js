@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function Test() {
+export default function SuccessResult() {
 	const token = window.location.href.replace("https://i8b204.p.ssafy.io/kakaopay/success?pg_token=", "")
 	const navigate = useNavigate();
 	const loginUser = useSelector(state => state.user.value);
@@ -15,7 +15,7 @@ export default function Test() {
 				headers: {Authorization: loginUser.token}
       })
       .then(res => {
-        setTimeout(() => navigate('/'), 2000);
+        setTimeout(() => navigate('/'), 5000);
       });
   }, [token, navigate, loginUser]);
 	
