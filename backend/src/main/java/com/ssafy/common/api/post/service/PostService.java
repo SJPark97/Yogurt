@@ -57,17 +57,18 @@ public class PostService {
 
     // 상품 전체 조회
     public List<PostAllResponse> findPostAll() {
-        return postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+        return postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE && post.getStatus()!=PostStatus.STATUS_END).map(PostAllResponse::new).collect(Collectors.toList());
+
     }
 
     // 상품 최신 조회
     public List<PostAllResponse> findNewPostAll() {
-        return postRepository.findAll(Sort.by(Sort.Direction.DESC,"id")).stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC,"id")).stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE&& post.getStatus()!=PostStatus.STATUS_END).map(PostAllResponse::new).collect(Collectors.toList());
     }
 
     // 상품 인기 조회
     public List<PostAllResponse> findLikesPostAll(){
-        List<PostAllResponse> postList = postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE).map(PostAllResponse::new).collect(Collectors.toList());
+        List<PostAllResponse> postList = postRepository.findAll().stream().filter(post -> post.getStatus()!= PostStatus.STATUS_DELETE && post.getStatus()!=PostStatus.STATUS_END ).map(PostAllResponse::new).collect(Collectors.toList());
         Collections.sort(postList, ((o1, o2) -> o2.getLikesCount() - o1.getLikesCount()));
         return postList;
     }
