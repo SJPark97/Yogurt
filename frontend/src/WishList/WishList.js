@@ -61,7 +61,7 @@ function WishList() {
   };
 
   return (
-    <div>
+    <div className='wish'>
       <BackToTop />
       <div className="wish-select-all">
         <input
@@ -78,7 +78,6 @@ function WishList() {
         {wishlist.map(wish => (
           <div key={wish.wishListId}>
             <div className="wish-post">
-              <div className="wish-checkbox">
                 <input
                   type="checkbox"
                   onChange={event =>
@@ -90,14 +89,11 @@ function WishList() {
                   }
                   checked={checkItems.includes(wish.wishListId)}
                 />
-              </div>
-              <div className="wish-post-img-div">
                 <img
                   className="wish-post-img"
                   src={wish.post.postImages[0].url}
                   alt="이미지사진"
                 />
-              </div>
               <div className="wish-post-info">
                 <div className="wish-post-sellername">
                   {wish.post.sellerName}
@@ -119,6 +115,14 @@ function WishList() {
         <button
           className="wish-payment-btn"
           type="submit"
+          style={{
+            backgroundColor: '#deb887',
+            border: 'none',
+            width: '20vw',
+            height: '10vw',
+            borderRadius: '8px',
+            color: 'white',
+          }}
           onClick={() =>
             navigate('/payment', {
               state: { checkItems, totalPrice },
