@@ -42,7 +42,7 @@ const LiveButton = styled(Button)(({ theme }) => ({
 
 // const StyledLink = styled(Link)``;
 
-function SellerInfo({ profile, loginId, token }) {
+export default function SellerInfo({ profile, loginId, token }) {
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
   // 상점 좋아요
@@ -98,16 +98,29 @@ function SellerInfo({ profile, loginId, token }) {
       });
   }, [profile, sellerId]);
 
+  const goLive = () => {
+    navigate(`/video/${live.liveRoomId}`, {
+      state: {
+        sellerId: sellerId,
+        sellerNickname: profile.nickName,
+        userNickname: loginUser.loginUserNickname,
+      },
+    });
+  };
+
   const goLiveRoomSeller = () => {
     if (live.status === 2) {
-      //방장 라이브 이동
+      axios.patch(
+        `https://i8b204.p.ssafy.io/be-api/live/onair?liveId=${live.liveRoomId}`,
+      );
+      goLive();
     } else {
       alert('라이브 등록이 필요합니다.');
     }
   };
 
   const goLiveRoomBuyer = () => {
-    //참여자 라이브 이동
+    goLive();
   };
 
   useEffect(() => {
@@ -270,5 +283,3 @@ function SellerInfo({ profile, loginId, token }) {
     </div>
   );
 }
-
-export default SellerInfo;
