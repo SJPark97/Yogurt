@@ -15,7 +15,7 @@ export default function Test() {
 				headers: {Authorization: loginUser.token}
       })
       .then(res => {
-        setTimeout(navigate('/'), 2000);
+        setTimeout(() => navigate('/'), 2000);
       });
   }, [token, navigate, loginUser]);
 	
