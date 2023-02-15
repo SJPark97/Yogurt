@@ -21,9 +21,13 @@
 
 .detail-basic-info,
 .detail-size-info,
-.detail-detail-info,
-.detail-store-info {
+.detail-detail-info {
   margin: 0px 16px 0px 16px;
+}
+.detail-store-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 16px;
 }
 
 .detail-basic-info div,
@@ -76,15 +80,14 @@
 }
 
 .detail-size-name,
-.detail-detail-name,
-.detail-store-name {
+.detail-detail-name {
   font-size: 16px;
   font-weight: bold;
-  margin: 0px 0px 8px 0px
+  margin: 0px 0px 8px 0px;
 }
 
 .detail-store-post {
-  margin: 8px 0px 50px 0px
+  margin: 8px 0px 50px 0px;
 }
 
 .post-like {
