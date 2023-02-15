@@ -91,7 +91,8 @@ public class Kakaopay {
 //        params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 
 //        서버
-        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
+//        params.add("approval_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccess");
+        params.add("approval_url", "http://i8b204.p.ssafy.io/kakaopay/success");
         params.add("cancel_url", "http://i8b204.p.ssafy.io/be-api/kakaoPayCancel");
         params.add("fail_url", "http://i8b204.p.ssafy.io/be-api/kakaoPaySuccessFail");
 
