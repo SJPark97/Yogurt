@@ -34,9 +34,7 @@ function LiveRegister() {
     setImageUpload(formData);
   };
 
-
   // 라이브 할 상품 선택하기
-
   useEffect(() => {
     axios
       .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`, { headers: { Authorization: token } })
@@ -44,14 +42,14 @@ function LiveRegister() {
         setPosts(res.data[0].posts)
       })
       .catch(err => console.log(err))
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sellerId]);
 
   const allcheck = posts.map(el => el.id);
 
-
   useEffect(() => {
     setPostIds(allcheck);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]);
 
   const SingleCheck = (checked, id) => {
