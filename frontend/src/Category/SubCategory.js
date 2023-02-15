@@ -1,20 +1,20 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BackToTop from '../AppBar/BackToTop';
-// import SearchCard from '../Search/SearchCard';
+import SearchCard from '../Search/SearchCard';
 import { Divider } from '@mui/material';
 import './Category.css';
 
 export default function SubCategory() {
   const { categoryId } = useParams();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const state = useLocation().state;
   const [items, setItems] = useState();
 
   const getBrand = useCallback(async () => {
     await axios
-      .get(`https://i8b204.p.ssafy.io/be-api/cate/type/${categoryId}`)
+      .get(`https://i8b204.p.ssafy.io/be-api/cate/type/detail/${categoryId}`)
       .then(res => {
         console.log(res.data, 'dd');
         setItems(res.data);
@@ -33,7 +33,6 @@ export default function SubCategory() {
   return (
     <div>
       <BackToTop />
-      <h1>ddd</h1>
       <div className="brandInfo">
         <img
           src={state.cateImg}
@@ -43,7 +42,7 @@ export default function SubCategory() {
         <div className="brandDetail">{state.cateName}</div>
       </div>
       <Divider variant="middle" />
-      {/* {items && (
+      {items && (
         <div className="searchCardList">
           {items.map(result => {
             return (
@@ -51,7 +50,7 @@ export default function SubCategory() {
             );
           })}
         </div>
-      )} */}
+      )}
     </div>
   );
 }
