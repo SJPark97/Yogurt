@@ -75,7 +75,7 @@ public class PostService {
 
     // user id 상품 전체 조회
     public List<UserPostResponse> findByUserId(Long user_Id){
-        return userRepository.findById(user_Id).filter(user -> user.getUserStatus()!= UserStatus.DELETE).stream().map(UserPostResponse::new).collect(Collectors.toList());
+        return userRepository.findById(user_Id).filter(user -> user.getUserStatus()!= UserStatus.DELETE  ).stream().map(UserPostResponse::new).collect(Collectors.toList());
     }
 
     // 상품 저장
