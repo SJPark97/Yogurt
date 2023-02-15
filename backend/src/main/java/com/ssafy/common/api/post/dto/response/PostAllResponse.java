@@ -3,6 +3,7 @@ package com.ssafy.common.api.post.dto.response;
 import com.ssafy.common.api.post.domain.Post;
 import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.post.postimage.dto.PostImageDto;
+import com.ssafy.common.api.relation.domain.RelationStatus;
 import lombok.Getter;
 
 import java.util.List;
@@ -36,6 +37,6 @@ public class PostAllResponse {
         postImages = post.getPostImages()
                 .stream().map(PostImageDto::new)
                         .collect(Collectors.toList());
-        likesCount = post.getZzims().size();
+        likesCount = post.getZzims().stream().filter(zzim -> zzim.getStatus()!= RelationStatus.STATUS_DELETE) .collect(Collectors.toList()).size();
     }
 }
