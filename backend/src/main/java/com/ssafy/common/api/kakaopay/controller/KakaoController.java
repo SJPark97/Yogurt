@@ -34,11 +34,12 @@ public class KakaoController {
     public ResponseEntity<KakaoPayApprovalVO> kakaoPaySuccess(@RequestParam("pg_token") String pg_token) {
         log.info("kakaoPaySuccess get...............................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
-        return new ResponseEntity<>(kakaopay.kakaoPayInfo(pg_token), HttpStatus.OK);
-    }
-    @GetMapping("/kakaoPayEnd/{orderId}")
-    public void kakaoPayEnd(@PathVariable("orderId") Long orderId){
         User buyer = postService.getLoginUser();
-        kakaopay.KakaoPayEnd(buyer, orderId);
+        return new ResponseEntity<>(kakaopay.kakaoPayInfo(pg_token,buyer), HttpStatus.OK);
     }
+//    @GetMapping("/kakaoPayEnd/{orderId}")
+//    public void kakaoPayEnd(@PathVariable("orderId") Long orderId){
+//        User buyer = postService.getLoginUser();
+//        kakaopay.KakaoPayEnd(buyer, orderId);
+//    }
 }
