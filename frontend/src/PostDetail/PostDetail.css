@@ -29,7 +29,7 @@
 .detail-basic-info div,
 .detail-size-info div,
 .detail-detail-info div,
-.detail-store-info div {
+.detail-store-info p {
   padding: 0px;
   display: flex;
   align-items: center;
@@ -80,6 +80,11 @@
 .detail-store-name {
   font-size: 16px;
   font-weight: bold;
+  margin: 0px 0px 8px 0px
+}
+
+.detail-store-post {
+  margin: 8px 0px 50px 0px
 }
 
 .post-like {
