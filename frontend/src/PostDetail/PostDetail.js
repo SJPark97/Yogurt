@@ -49,7 +49,6 @@ function PostDetail() {
 
   const token = loginUser.token;
   const [likeCnt, setLikeCnt] = useState();
-  console.log(likeCnt, seller.likesCount);
   const [likeId, setLikeId] = useState();
 
   useEffect(() => {
@@ -155,7 +154,7 @@ function PostDetail() {
     <div>
       <BackToTop />
       {post && <Box sx={{ width: '100%' }}>
-        <DetailCarousel image={post.postImages} />
+        <DetailCarousel images={post.postImages} />
       </Box>
       }
       <div>

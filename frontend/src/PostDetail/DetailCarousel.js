@@ -9,9 +9,7 @@ import './DetailCarousel.css';
 // import required modules
 import { Pagination } from 'swiper';
 
-export default function DetailCarousel(props) {
-
-    console.log(props)
+export default function DetailCarousel({images}) {
 
     return (
         <Swiper
@@ -26,9 +24,8 @@ export default function DetailCarousel(props) {
             modules={[Pagination]}
             className="mySwiper"
         >
-            {props.forEach(image => (
+            {images && images.map(image => (
                 <SwiperSlide>
-                    {console.log(image.url)}
                     <img className="detail_img" src={image.url} alt="이미지사진" />
                 </SwiperSlide>
             ))}
