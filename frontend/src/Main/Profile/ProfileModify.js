@@ -216,13 +216,9 @@ export default function ProfileModify() {
           };
           console.log('data', data);
           axios
-            .put(
-              `https://i8b204.p.ssafy.io/be-api/user/user/seller/${id}`,
-              data,
-              {
-                headers: { Authorization: loginUser.token },
-              },
-            )
+            .put(`https://i8b204.p.ssafy.io/be-api/user/seller/${id}`, data, {
+              headers: { Authorization: loginUser.token },
+            })
             .then(res => {
               console.log('수정 성공!', res.data);
               navigate(`/profile/seller/${id}?tab=0`);
@@ -244,13 +240,9 @@ export default function ProfileModify() {
             nickName: form.nicknameConfirm,
           };
           axios
-            .put(
-              `https://i8b204.p.ssafy.io/be-api/user/user/buyer/${id}`,
-              data,
-              {
-                headers: { Authorization: loginUser.token },
-              },
-            )
+            .put(`https://i8b204.p.ssafy.io/be-api/user/buyer/${id}`, data, {
+              headers: { Authorization: loginUser.token },
+            })
             .then(res => {
               console.log('수정 성공!', res.data);
               navigate(`/profile/buyer/${id}?tab=0`);
