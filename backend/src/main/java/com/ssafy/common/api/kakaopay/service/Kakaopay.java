@@ -113,7 +113,7 @@ public class Kakaopay {
         return "/pay";
     }
 
-    public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
+    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, User user) {
 
         log.info("KakaoPayInfoVO............................................");
         log.info("-----------------------------");
@@ -138,6 +138,10 @@ public class Kakaopay {
         try {
             kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
             log.info("" + kakaoPayApprovalVO);
+
+            //endPost
+            KakaoPayEnd(user, Long.valueOf(kakaoPayApprovalVO.getPartner_order_id()));
+
             return kakaoPayApprovalVO;
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
@@ -151,7 +155,7 @@ public class Kakaopay {
 
 
     // EndPost 만들기 / 장바수니 삭제
-    public void KakaoPayEnd(User buyer, Long orderId){
+    private void KakaoPayEnd(User buyer, Long orderId){
         KakaoPayEntity kakaoPayEntity = kakaoPayRepository.findById(orderId).get();
         List<KakaoPayPost> kakaoPayPostList = kakaoPayEntity.getKakaoPayPosts();
         List<WishListUserPostResponse> userWishLists = wishListService.userWishList(buyer).getWishLists();
