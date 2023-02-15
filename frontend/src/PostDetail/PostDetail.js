@@ -62,6 +62,7 @@ function PostDetail() {
       .then(res => {
         setLikeCnt(res.data.likesCount);
         setPost(res.data);
+        console.log(res.data, "sjp1")
         setSalePercent(
           Math.floor(
             ((res.data.price - res.data.sale_price) / res.data.price) * 100,
@@ -72,7 +73,7 @@ function PostDetail() {
         console.log(err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postId]);
 
   // post정보에 맞춘 seller Id 및 정보 받아오기
   useEffect(() => {
@@ -91,7 +92,9 @@ function PostDetail() {
           headers: { Authorization: token },
         })
         .then(res => {
-          setSellerPost(res.data[0].posts);
+          const expectpost = res.data[0].posts.filter(p => p.id !== Number(postId))
+          setSellerPost(expectpost);
+
         })
         .catch(err => console.log('seller', err));
     }
@@ -103,8 +106,8 @@ function PostDetail() {
       .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${postId}`, data, {
         headers: { Authorization: token },
       })
-      .then(res => console.log(res))
-      .catch(err => console.log('wishlist', err));
+      .then(res => alert('장바구니에 상품이 등록되었습니다.'))
+      .catch(err => alert('상품이 이미 장바구니에 존재합니다.'));
   };
 
   const getLikes = useCallback(async () => {
@@ -234,7 +237,7 @@ function PostDetail() {
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-store-info">
           <p className="detail-store-name">{seller?.nickName}님의 다른 상품</p>
-          {sellerpost && <Carousel list={sellerpost} />}
+          {sellerpost && <Carousel list={sellerpost.filter(item => item !== post)} />}
         </div>
       </div>
       <footer>
