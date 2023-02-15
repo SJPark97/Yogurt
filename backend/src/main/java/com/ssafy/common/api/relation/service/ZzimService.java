@@ -49,8 +49,8 @@ public class ZzimService {
     // user로 찜 조회
     public UserZzimResponse userZzim(User user){
         return userRepository.findById(user.getId())
-                .filter(user1 -> user1.getUserStatus()!= UserStatus.DELETE)
                 .map(UserZzimResponse::new)
+
                 .orElseThrow();
     }
 }
