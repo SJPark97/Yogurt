@@ -50,6 +50,7 @@ export default function LiveButtonIcon() {
             // top: '-3vw',
             // left: '-2vw',
             position: 'absolute',
+            borderRadius: '8px',
           }}
           src={images[0]}
           alt="#"
@@ -64,6 +65,7 @@ export default function LiveButtonIcon() {
             width: '48px',
             height: '48px',
             position: 'absolute',
+            borderRadius: '8px',
           }}
           src={images[0]}
           alt="#"
@@ -78,6 +80,7 @@ export default function LiveButtonIcon() {
             width: '48px',
             height: '48px',
             position: 'absolute',
+            borderRadius: '8px',
           }}
           src={images[1]}
           alt="#"

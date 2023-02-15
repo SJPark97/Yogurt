@@ -58,10 +58,10 @@ function LiveRegister() {
           title,
           thumbnail: res.data[0],
           time,
-          postIds
+          postIds,
         };
 
-        console.log(data)
+        console.log(data);
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
@@ -114,7 +114,11 @@ function LiveRegister() {
           <div>
             {image && (
               <div>
-                <img src={image} alt="메인사진" />
+                <img
+                src={image}
+                alt="메인사진"
+                style={{width: '70vw'}}
+                />
                 <button type="button" onClick={() => handleDeleteIamge()}>
                   X
                 </button>
@@ -133,7 +137,19 @@ function LiveRegister() {
           />
         </div>
         <div className="submit_btn">
-          <button type="submit">저장</button>
+          <button
+            type="submit"
+            style={{
+              backgroundColor: '#deb887',
+              border: 'none',
+              width: '20vw',
+              height: '10vw',
+              borderRadius: '8px',
+              color: 'white',
+            }}
+          >
+            저장
+          </button>
         </div>
       </form>
     </div>
