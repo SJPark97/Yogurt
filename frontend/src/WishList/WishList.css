@@ -1,3 +1,8 @@
+.wish input {
+  /* accent-color: #deb887; */
+  accent-color: white;
+}
+
 .wish-post {
   display: flex;
   align-items: center;
@@ -19,11 +24,13 @@
 }
 
 .wish-select-all input,
-.wish-checkbox input {
+.wish-post input {
   margin: 0px 0px 0px 8px;
+  background-color: #deb887;
+  color: white;
 }
 
-.wish-post-img-div {
+.wish-post img {
   display: flex;
   justify-content: center;
   align-items: center;

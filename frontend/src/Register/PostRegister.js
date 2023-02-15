@@ -24,22 +24,24 @@ function PostRegister() {
   const [size, setSize] = useState('');
   const [brandcategoryId, setBrandCategoryId] = useState(0);
   const [content, setContent] = useState('');
-  const [imageupload, setImageUpload] = useState([]);
-  const [brandcate, setBrandCate] = useState([]);
-  const [typecate, setTypeCate] = useState([]);
+  const [imageupload, setImageUpload] = useState([])
+  const [brandcate, setBrandCate] = useState([])
+  const [typecate, setTypeCate] = useState([])
 
   const token = loginUser.token;
+
 
   const handleAddImages = event => {
     const imageLists = event;
     let imageUrlLists = [...images];
     let imageUploadLists = [...imageupload];
 
-    imageUploadLists.push(event[0]);
+    imageUploadLists.push(event[0])
+
 
     for (let i = 0; i < imageLists.length; i += 1) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
+      imageUrlLists.push(currentImageUrl)
     }
 
     if (imageUrlLists.length > 10) {
@@ -47,7 +49,7 @@ function PostRegister() {
     }
 
     setImages(imageUrlLists);
-    setImageUpload(imageUploadLists);
+    setImageUpload(imageUploadLists)
   };
 
   const handleDeleteImage = id => {
@@ -55,37 +57,36 @@ function PostRegister() {
     setImageUpload(images.filter((_, index) => index !== id));
   };
 
+
   useEffect(() => {
-    axios
-      .get('https://i8b204.p.ssafy.io/be-api/cate/brand')
+    axios.get('https://i8b204.p.ssafy.io/be-api/cate/brand')
       .then(res => setBrandCate(res.data))
-      .catch(err => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get('https://i8b204.p.ssafy.io/be-api/cate/type')
+      .catch(err => console.log(err))
+    }, [])
+    
+    useEffect(() => {
+      axios.get('https://i8b204.p.ssafy.io/be-api/cate/type')
       .then(res => setTypeCate(res.data))
-      .catch(err => console.log(err));
-  }, []);
+      .catch(err => console.log(err))
+    }, [])
+    
+    const saleStates = [
+      {
+        type: false,
+        title: '할인 안 함',
+      },
+      {
+        type: true,
+        title: '할인',
+      },
+    ];
 
-  const saleStates = [
-    {
-      type: false,
-      title: '할인 안 함',
-    },
-    {
-      type: true,
-      title: '할인',
-    },
-  ];
-
-  const submitHandler = event => {
-    event.preventDefault();
-    const formData = new FormData();
+    const submitHandler = event => {
+      event.preventDefault();
+      const formData = new FormData()
 
     for (let i = 0; i < imageupload.length; i += 1) {
-      formData.append('images', imageupload[i]);
+      formData.append('images', imageupload[i])
     }
 
     axios
@@ -101,27 +102,27 @@ function PostRegister() {
           title,
           content,
           price,
-          sale_price: saleprice,
+          sale_price:saleprice,
           size,
           brandcategoryId,
           typecategoryId,
-          typeDetailId,
-        };
-        console.log(data);
+          typeDetailId
+        }
+        console.log(data)
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/post`, data, {
             headers: { Authorization: token },
           })
           .then(res => {
-            console.log(res);
+            console.log(res)
             navigate(`/post/${res.data}`);
           })
-          .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err.data));
+          .catch(err => console.log(err))
+      }).catch(err => console.log(err.data))
 
     return false;
   };
+
 
   return (
     <div className="postregister">
@@ -130,6 +131,7 @@ function PostRegister() {
         <div className="post_reg_file">
           <p>사진 등록(10장까지 가능)</p>
           <div className="post_reg_prev">
+            {images.length < 10 && <label htmlFor="post_reg_file">+</label>}
             {images.map((image, id) => (
               <div key={id} className="post_reg_prev_img">
                 <div>
@@ -142,17 +144,16 @@ function PostRegister() {
                 </div>
               </div>
             ))}
-            {images.length < 10 && <label htmlFor="post_reg_file">+</label>}
           </div>
           <input
             type="file"
             id="post_reg_file"
             multiple
             accept="image/*"
-            onChange={event => handleAddImages(event.target.files)}
+            onChange={(event) => handleAddImages(event.target.files)}
           />
         </div>
-        <Divider sx={{ marginY: '1rem', margin: '0px 0px 8px 0' }} />
+        <Divider sx={{ marginY: '1rem' }} />
         <div className="post_reg_title">
           <p>제품제목</p>
           <input
@@ -180,11 +181,10 @@ function PostRegister() {
                 key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
-                className={`${
-                  sale === state.type
-                    ? 'post_reg_sale_btn'
-                    : 'post_reg_sale_state_btn'
-                }`}
+                className={`${sale === state.type
+                  ? 'post_reg_sale_btn'
+                  : 'post_reg_sale_state_btn'
+                  }`}
               >
                 {state.title}
               </button>
@@ -217,15 +217,13 @@ function PostRegister() {
                   label="category"
                   onChange={event => setTypeCategoryId(event.target.value)}
                 >
-                  <MenuItem value="0">선택해주세요</MenuItem>
-                  {typecate.map(type => (
-                    <MenuItem value={type.id} key={type.id}>
-                      {type.name}
-                    </MenuItem>
-                  ))}
+                  <MenuItem value='0' >선택해주세요</MenuItem>
+                  {typecate.map((type) =>
+                    <MenuItem value={type.id} key={type.id}>{type.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
-              {typecategoryId === 1 && (
+              {typecategoryId === 1 &&
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                   <InputLabel id="demo-select-small">category</InputLabel>
                   <Select
@@ -235,16 +233,16 @@ function PostRegister() {
                     label="category"
                     onChange={event => setTypeDetailId(event.target.value)}
                   >
-                    <MenuItem value="0">선택해주세요</MenuItem>
-                    <MenuItem value="11">티셔츠</MenuItem>
-                    <MenuItem value="12">맨투맨</MenuItem>
-                    <MenuItem value="13">니트</MenuItem>
-                    <MenuItem value="14">셔츠</MenuItem>
-                    <MenuItem value="15">기타 상의</MenuItem>
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='11' >티셔츠</MenuItem>
+                    <MenuItem value='12' >맨투맨</MenuItem>
+                    <MenuItem value='13' >니트</MenuItem>
+                    <MenuItem value='14' >셔츠</MenuItem>
+                    <MenuItem value='15' >기타 상의</MenuItem>
                   </Select>
                 </FormControl>
-              )}
-              {typecategoryId === 2 && (
+              }
+              {typecategoryId === 2 &&
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                   <InputLabel id="demo-select-small">category</InputLabel>
                   <Select
@@ -254,15 +252,15 @@ function PostRegister() {
                     label="category"
                     onChange={event => setTypeDetailId(event.target.value)}
                   >
-                    <MenuItem value="0">선택해주세요</MenuItem>
-                    <MenuItem value="21">후드 집업</MenuItem>
-                    <MenuItem value="22">자켓</MenuItem>
-                    <MenuItem value="23">카디건</MenuItem>
-                    <MenuItem value="24">기타 아우터</MenuItem>
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='21' >후드 집업</MenuItem>
+                    <MenuItem value='22' >자켓</MenuItem>
+                    <MenuItem value='23' >카디건</MenuItem>
+                    <MenuItem value='24' >기타 아우터</MenuItem>
                   </Select>
                 </FormControl>
-              )}
-              {typecategoryId === 3 && (
+              }
+              {typecategoryId === 3 &&
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                   <InputLabel id="demo-select-small">category</InputLabel>
                   <Select
@@ -272,16 +270,16 @@ function PostRegister() {
                     label="category"
                     onChange={event => setTypeDetailId(event.target.value)}
                   >
-                    <MenuItem value="0">선택해주세요</MenuItem>
-                    <MenuItem value="31">데님</MenuItem>
-                    <MenuItem value="32">치마</MenuItem>
-                    <MenuItem value="33">트레이닝</MenuItem>
-                    <MenuItem value="34">숏 팬츠</MenuItem>
-                    <MenuItem value="35">기타 바지</MenuItem>
+                    <MenuItem value='0' >선택해주세요</MenuItem>
+                    <MenuItem value='31' >데님</MenuItem>
+                    <MenuItem value='32' >치마</MenuItem>
+                    <MenuItem value='33' >트레이닝</MenuItem>
+                    <MenuItem value='34' >숏 팬츠</MenuItem>
+                    <MenuItem value='35' >기타 바지</MenuItem>
                   </Select>
                 </FormControl>
-              )}
-              {typecategoryId === 4 && (
+              }
+              {typecategoryId === 4 &&
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                   <InputLabel id="demo-select-small">category</InputLabel>
                   <Select
@@ -291,14 +289,14 @@ function PostRegister() {
                     label="category"
                     onChange={event => setTypeDetailId(event.target.value)}
                   >
-                    <MenuItem value="0">선택해주세요 </MenuItem>
-                    <MenuItem value="41">신발</MenuItem>
-                    <MenuItem value="42">가방</MenuItem>
-                    <MenuItem value="43">목걸이</MenuItem>
-                    <MenuItem value="44">기타</MenuItem>
+                    <MenuItem value='0' >선택해주세요 </MenuItem>
+                    <MenuItem value='41' >신발</MenuItem>
+                    <MenuItem value='42' >가방</MenuItem>
+                    <MenuItem value='43' >목걸이</MenuItem>
+                    <MenuItem value='44' >기타</MenuItem>
                   </Select>
                 </FormControl>
-              )}
+              }
             </div>
             <div className="post_reg_category_brand">
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -310,12 +308,10 @@ function PostRegister() {
                   label="brand"
                   onChange={event => setBrandCategoryId(event.target.value)}
                 >
-                  <MenuItem value="0">선택해주세요 </MenuItem>
-                  {brandcate.map(brand => (
-                    <MenuItem value={brand.id} key={brand.id}>
-                      {brand.name}
-                    </MenuItem>
-                  ))}
+                  <MenuItem value='0' >선택해주세요 </MenuItem>
+                  {brandcate.map((brand) =>
+                    <MenuItem value={brand.id} key={brand.id}>{brand.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
             </div>
@@ -342,23 +338,10 @@ function PostRegister() {
           />
         </div>
         <div className="submit_btn">
-          <button
-            type="submit"
-            className="submit_btn_style"
-            style={{
-              backgroundColor: '#deb887',
-              border: 'none',
-              width: '20vw',
-              height: '10vw',
-              borderRadius: '8px',
-              color: 'white',
-            }}
-          >
-            저장
-          </button>
+          <button type="submit">저장</button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 }
 
