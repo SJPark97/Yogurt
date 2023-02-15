@@ -26,6 +26,7 @@ import ScrollToTop from './ScrollToTop';
 import Room from './components/Room';
 import BrandDetail from './Category/BrandDetail';
 import SubCategory from './Category/SubCategory';
+import Test from './Payment/Test';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment2" element={<Payment2 />} />
+        <Route path="/kakaopay/success" element={<Test />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/search" element={<Search />} />
