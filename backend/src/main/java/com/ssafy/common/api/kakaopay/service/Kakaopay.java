@@ -96,7 +96,6 @@ public class Kakaopay {
         params.add("cancel_url", "http://i8b204.p.ssafy.io/kakaopay/fail");
         params.add("fail_url", "http://i8b204.p.ssafy.io/kakaopay/fail");
 
-
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
         try {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
