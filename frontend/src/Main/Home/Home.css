@@ -1,16 +1,7 @@
-.LiveCarousel,
-.Carousel {
-  display: flex;
-  align-content: center;
-  justify-content: left;
-  margin: 8px 0px 8px 8px;
-}
-
 .mainpageTitle {
   text-align: left;
   font-weight: bold;
   margin-left: 16px;
-  margin-right: 16px;
   margin-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom:8px
 }
