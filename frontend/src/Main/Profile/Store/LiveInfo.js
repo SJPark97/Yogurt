@@ -40,13 +40,13 @@ function LiveInfo() {
             <p>라이브 1개</p>
           </div>
           <div className="liveinfo-info">
+            <p style={{color: 'red'}}>{live?.time.slice(5, 7) + "/" + live?.time.slice(8, 10) + " " + live?.time.slice(11, 13) + ":" + live?.time.slice(14, 16) + " 라이브 예정"}</p>
             <img
               src={live?.thumbnail}
               alt="라이브대표이미지"
               className="liveinfoImg"
             />
             <p>{live?.title}</p>
-            <p>{live?.time}</p>
           </div>
           <div className="liveinfo-postinfo">
             <Divider variant="middle" sx={{ marginBottom: '1rem' }} />

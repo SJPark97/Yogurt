@@ -44,7 +44,7 @@ function LiveRegister() {
 
   const submitHandler = event => {
     event.preventDefault();
-    navigate(`/profile/seller/${sellerId}?tab=1`);
+    navigate(`/profile/seller/${sellerId}`);
 
     axios
       .post('https://i8b204.p.ssafy.io/be-api/upload', imageUpload, {
