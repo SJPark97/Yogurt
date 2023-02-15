@@ -34,7 +34,6 @@ const Boxs = styled(Box)`
 `;
 
 const ColorButton = styled(Button)(() => ({
-  // color: theme.palette.getContrastText(purple[500]),
   backgroundColor: '#deb887',
   '&:hover': {
     backgroundColor: '#deb887',

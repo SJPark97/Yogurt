@@ -541,7 +541,7 @@ function SignUp() {
             >
               환영합니다! 회원가입이 완료되었습니다!
             </Typography>
-            <Button
+            <ColorButton
               variant="contained"
               fullWidth
               sx={{ marginTop: '16px', height: '50px', fontSize: '16px' }}
@@ -550,7 +550,7 @@ function SignUp() {
               }}
             >
               로그인하러 가기
-            </Button>
+            </ColorButton>
           </Box>
         </Modal>
       </ThemeProvider>
