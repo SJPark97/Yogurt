@@ -214,7 +214,7 @@ export default function LogInPage() {
           >
             로그인 되었습니다!
           </Typography>
-          <Button
+          <ColorButton
             variant="contained"
             fullWidth
             sx={{ marginTop: '16px', height: '50px' }}
@@ -223,7 +223,7 @@ export default function LogInPage() {
             }}
           >
             홈으로 가기
-          </Button>
+          </ColorButton>
         </Box>
       </Modal>
     </ThemeProvider>

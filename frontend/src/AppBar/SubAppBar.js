@@ -49,7 +49,6 @@ const data = {
 
 export default function SubAppBar() {
   const pageUrl = useLocation();
-  console.log(pageUrl);
   const navigate = useNavigate();
   const pageName = data[pageUrl.pathname];
 
