@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import BackToTop from '../AppBar/BackToTop';
-import Divider from '@mui/material/Divider';
 import FormData from 'form-data';
-import './LiveRegister.css';
 import axios from 'axios';
+
+import BackToTop from '../AppBar/BackToTop';
+import CardList from '../Common/CardList';
+import './LiveRegister.css';
+
+import Divider from '@mui/material/Divider';
 
 function LiveRegister() {
   const navigate = useNavigate();
@@ -13,16 +16,17 @@ function LiveRegister() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [time, setTime] = useState(Date());
+  const [posts, setPosts] = useState([]);
   const [postIds, setPostIds] = useState([]);
   const [imageUpload, setImageUpload] = useState('');
+
+  const token = loginUser.token;
+  const sellerId = loginUser.loginUserPk;
 
   const handleDeleteIamge = () => {
     URL.revokeObjectURL(image);
     setImage(null);
   };
-
-  const token = loginUser.token;
-  const sellerId = loginUser.loginUserPk;
 
   const handleFormData = event => {
     const formData = new FormData();
@@ -30,17 +34,41 @@ function LiveRegister() {
     setImageUpload(formData);
   };
 
+
+  // 라이브 할 상품 선택하기
+
   useEffect(() => {
     axios
-      .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`)
+      .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`, { headers: { Authorization: token } })
       .then(res => {
-        const posts = res.data[0].posts.filter(
-          post => post.status === 'STATUS_LIVE_SOON',
-        );
-        const livePost = posts.map(post => post.id);
-        setPostIds(livePost);
-      });
+        setPosts(res.data[0].posts)
+      })
+      .catch(err => console.log(err))
+
   }, [sellerId]);
+
+  const allcheck = posts.map(el => el.id);
+
+
+  useEffect(() => {
+    setPostIds(allcheck);
+  }, [posts]);
+
+  const SingleCheck = (checked, id) => {
+    if (checked) {
+      setPostIds(prev => [...prev, id]);
+    } else {
+      setPostIds(postIds.filter(el => el !== id));
+    }
+  };
+
+  const AllCheck = checked => {
+    if (checked) {
+      setPostIds(allcheck);
+    } else {
+      setPostIds([]);
+    }
+  };
 
   const submitHandler = event => {
     event.preventDefault();
@@ -70,11 +98,8 @@ function LiveRegister() {
           .then(res => {
             axios
               .post(
-                'https://i8b204.p.ssafy.io/be-api/buyer_alarm',
-                {},
-                {
-                  headers: { Authorization: token },
-                },
+                'https://i8b204.p.ssafy.io/be-api/buyer_alarm', {},
+                { headers: { Authorization: token } },
               )
               .catch(err => console.log(err));
           });
@@ -115,9 +140,9 @@ function LiveRegister() {
             {image && (
               <div>
                 <img
-                src={image}
-                alt="메인사진"
-                style={{width: '70vw'}}
+                  src={image}
+                  alt="메인사진"
+                  style={{ width: '70vw' }}
                 />
                 <button type="button" onClick={() => handleDeleteIamge()}>
                   X
@@ -136,18 +161,49 @@ function LiveRegister() {
             onChange={event => setTime(event.target.value)}
           />
         </div>
+        <Divider sx={{ marginY: '1rem' }} />
+        <div className="live_reg_time">
+          <p>라이브 할 상품 선택</p>
+          <div className="live-select-all">
+            <input
+              type="checkbox"
+              onChange={event => AllCheck(event.target.checked)}
+              checked={postIds.length === posts.length}
+            />
+            <span>
+              {postIds.length === posts.length ? '전체 해제' : '전체 선택'}
+            </span>
+          </div>
+          <div style={{ backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
+            {posts && posts.map(post => (
+              <div className='live_reg_post'>
+                <input
+                  type="checkbox"
+                  onChange={event =>
+                    SingleCheck(
+                      event.target.checked,
+                      post.id
+                    )
+                  }
+                  checked={postIds.includes(post.id)}
+                />
+                <div style={{ justifyContent: 'center' }}>
+                  <CardList data={post} key={post.id} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="submit_btn">
-          <button
-            type="submit"
-            style={{
-              backgroundColor: '#deb887',
-              border: 'none',
-              width: '20vw',
-              height: '10vw',
-              borderRadius: '8px',
-              color: 'white',
-            }}
-          >
+          <button type="submit" style={{
+            backgroundColor: '#deb887',
+            border: 'none',
+            width: '20vw',
+            height: '10vw',
+            borderRadius: '8px',
+            color: 'white',
+            margin: '0px 0px 8px 0px'
+          }}>
             저장
           </button>
         </div>

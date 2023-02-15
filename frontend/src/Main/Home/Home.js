@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import './Home.css';
 import BackToTop from '../../AppBar/BackToTop';
 import LiveCarousel from './LiveCarousel';
 import Carousel from '../../Common/Carousel';
+import HomeCarousel from './HomeCarousel';
+
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
-import axios from 'axios';
-import HomeCarousel from './HomeCarousel';
 
 function Home() {
   const [populars, setPopulars] = useState([]);
@@ -60,7 +62,9 @@ function Home() {
       </Box>
       <div className="mainpage">
         <p className="mainpageTitle">실시간 라이브</p>
-        <LiveCarousel lives={lives} />
+        <div className={lives ? 'nolive' : 'Livecarousel'}>
+        {lives ? '진행중인 라이브가 없습니다' : <LiveCarousel lives={lives} />}
+        </div>
         <Divider variant="middle" />
         <p className="mainpageTitle">인기상품</p>
         <Carousel list={populars} />

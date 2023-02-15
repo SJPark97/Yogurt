@@ -1,7 +1,3 @@
-.live-register {
-  margin: 1rem;
-}
-
 .live_reg_title p,
 .live_reg_file p,
 .live_reg_time p {
@@ -38,12 +34,18 @@ textarea {
 
 .live_reg_title,
 .live_reg_file,
-.live_reg_price,
-.live_reg_sale_price {
-  margin: 8px 24px 0px 8px;
+.live_reg_time{
+  margin: 8px 16px 0px 8px;
 }
 
+/* .live_reg_post input{
+  margin: 0px;
+  margin-left: 4px;
+} */
+
 #live_reg_time {
+  display: flex;
+  justify-content: flex-start;
   margin: 8px 8px 0px 8px;
   padding: 2px;
 }
@@ -59,4 +61,9 @@ textarea {
 
 #live_reg_file {
   visibility: hidden;
+}
+
+.live-select-all input,
+.live_reg_post input {
+  accent-color: #cc8120;
 }
