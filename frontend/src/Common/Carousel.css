@@ -2,8 +2,8 @@
   display: inline-flex;
   width: 100vw;
   overflow: auto;
-  margin-left: 16px;
-  margin-bottom: 16px;
+  padding-left: 16px;
+  padding-bottom: 16px;
 }
 
 .Carousel::-webkit-scrollbar {
@@ -13,4 +13,8 @@
 .Card {
   /* margin-left: 4px; */
   margin-right: 16px;
+}
+
+.detail-store-info .Carousel {
+  margin-bottom: 60px;
 }

@@ -27,7 +27,7 @@ function Payment2() {
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
       .then(res => 
         {console.log(res)
-        window.open(res.data)})
+        window.open(res.data, "_self")})
       .catch(err => console.log(err.data));
   };
   return (
