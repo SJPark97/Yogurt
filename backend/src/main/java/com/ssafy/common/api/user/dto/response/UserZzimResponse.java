@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto.response;
 
+import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.dto.zzim.ZzimUserPostResponse;
 import com.ssafy.common.api.user.domain.User;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class UserZzimResponse {
         id = user.getId();
         zzims = user.getZzims()
                 .stream().map(zzim -> new ZzimUserPostResponse(zzim))
+                .filter(zzimUserPostResponse -> zzimUserPostResponse.getStatus()!= RelationStatus.STATUS_DELETE)
                 .collect(Collectors.toList());
     }
 }
