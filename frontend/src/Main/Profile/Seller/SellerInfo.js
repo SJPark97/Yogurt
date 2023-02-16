@@ -109,7 +109,7 @@ export default function SellerInfo({ profile, loginId, token }) {
   };
 
   const goLiveRoomSeller = () => {
-    if (live.status === 2) {
+    if (live.status === 1 || live.status === 2) {
       axios.patch(
         `https://i8b204.p.ssafy.io/be-api/live/onair?liveId=${live.liveRoomId}`,
       );
