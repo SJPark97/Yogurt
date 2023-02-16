@@ -40,6 +40,8 @@
   }
   
   .message-wrap {
+    border-radius: 8px;
+    background-color: #d9d0d088;
     padding: 0 15px;
     height: calc(100% - 38px);
     overflow: auto;
