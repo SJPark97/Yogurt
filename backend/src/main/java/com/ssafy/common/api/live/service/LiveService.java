@@ -137,15 +137,15 @@ public class LiveService {
             }
             else{
 
-                return false;
+                return true;
             }
 
         }
         else if(endStatus==STATUS_ONAIR) {
-            return  (reqStatus==STATUS_READY)? true :false ;
+            return true;
         }
         else{
-            return false;
+            return true;
         }
     }
 
