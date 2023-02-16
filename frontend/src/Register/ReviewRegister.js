@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Divider from '@mui/material/Divider';
+import axios from 'axios';
+
 import BackToTop from '../AppBar/BackToTop';
 import './ReviewRegister.css';
-import axios from 'axios';
+
+import Divider from '@mui/material/Divider';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function ReviewRegister() {
   const navigate = useNavigate();
@@ -53,18 +59,22 @@ function ReviewRegister() {
         <Divider variant="middle" />
         <div className="review_reg_star">
           <p> 별점</p>
-          <select
-            name="rate"
-            onChange={event => setRate(event.target.value)}
-            value={rate}
-            className="review_reg_num"
-          >
-            <option value="1">1 </option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <FormControl sx={{ m: 1, minWidth: 150}} size="small">
+            <InputLabel id="demo-select-small">별점</InputLabel>
+            <Select
+              name="rate"
+              onChange={event => setRate(event.target.value)}
+              value={rate}
+              label="별점"
+              className="review_reg_num"
+            >
+              <MenuItem value={1}>1점</MenuItem>
+              <MenuItem value={2}>2점</MenuItem>
+              <MenuItem value={3}>3점</MenuItem>
+              <MenuItem value={4}>4점</MenuItem>
+              <MenuItem value={5}>5점</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <Divider variant="middle" />
         <div className="review_reg_detail">
@@ -79,14 +89,6 @@ function ReviewRegister() {
         <div id="submit_btn">
           <button
             type="submit"
-            style={{
-              backgroundColor: '#deb887',
-              border: 'none',
-              width: '20vw',
-              height: '10vw',
-              borderRadius: '8px',
-              color: 'white',
-            }}
           >
             저장
           </button>

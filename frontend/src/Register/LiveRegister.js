@@ -186,22 +186,14 @@ function LiveRegister() {
                   checked={postIds.includes(post.id)}
                 />
                 <div style={{ justifyContent: 'center' }}>
-                  <CardList data={post} key={post.id} />
+                  <CardList data={post} key={post.id} onClick={(event) => event.stopPropagation()} />
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="submit_btn">
-          <button type="submit" style={{
-            backgroundColor: '#deb887',
-            border: 'none',
-            width: '20vw',
-            height: '10vw',
-            borderRadius: '8px',
-            color: 'white',
-            margin: '0px 0px 8px 0px'
-          }}>
+          <button type="submit">
             저장
           </button>
         </div>

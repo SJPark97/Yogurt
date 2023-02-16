@@ -39,7 +39,7 @@ export default function SuccessResult() {
             borderRadius: '8px',
           }}
         >
-          {time}후 홈으로 이동
+          {time}초 후 홈으로 이동
         </button>
       </div>
 	</div>;

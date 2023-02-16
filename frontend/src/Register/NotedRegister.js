@@ -62,14 +62,6 @@ function PostRegister() {
         <div className="submit_btn">
           <button
             type="submit"
-            style={{
-              backgroundColor: '#deb887',
-              border: 'none',
-              width: '20vw',
-              height: '10vw',
-              borderRadius: '8px',
-              color: 'white',
-            }}
           >
             저장
           </button>

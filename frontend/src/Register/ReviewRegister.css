@@ -20,6 +20,7 @@ textarea {
   width: 100%;
   padding: 2px 0px 2px 8px;
   margin: 8px 0px 8px 8px;
+  border: 0px;
   display: flex;
   align-items: center;
   justify-content: left;
@@ -34,11 +35,17 @@ textarea {
   height: 100px;
 }
 
-.review_reg_star {
-  display: flex;
-  align-items: center;
-}
 
 .review_reg_num {
   margin: 0px 0px 0px 8px;
+}
+
+.submit_btn button {
+  background-color: #deb887;
+  border: none;
+  width: 20vw;
+  height: 10vw;
+  border-radius: 8px;
+  color: white;
+  margin: 0px 0px 8px 0px;
 }
