@@ -19,10 +19,11 @@ function LiveInfo() {
       .then(res => {
         setLive(res.data[0]);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser, sellerId]);
+  }, [loginUser, sellerId, navigate]);
 
   useEffect(() => {
     getLive();

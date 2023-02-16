@@ -16,19 +16,20 @@ export default function SubCategory() {
     await axios
       .get(`https://i8b204.p.ssafy.io/be-api/cate/type/detail/${categoryId}`)
       .then(res => {
-        console.log(res.data, 'dd');
+        // console.log(res.data, 'dd');
         setItems(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [categoryId]);
+  }, [categoryId, navigate]);
 
   useEffect(() => {
     getBrand();
   }, [getBrand]);
 
-  console.log('items', items);
+  // console.log('items', items);
 
   return (
     <div>

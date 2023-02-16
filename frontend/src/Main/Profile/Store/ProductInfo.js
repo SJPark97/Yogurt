@@ -9,9 +9,8 @@ import './ProductInfo.css';
 function ProductInfo() {
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
-
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-
   const getPosts = useCallback(async () => {
     await axios
       .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`, {
@@ -20,16 +19,16 @@ function ProductInfo() {
       .then(res => {
         setPosts(res.data[0].posts);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser, sellerId]);
+  }, [loginUser, sellerId, navigate]);
 
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
-  const navigate = useNavigate();
   return (
     <div>
       <div className="totalPost">상품 {posts.length}개</div>

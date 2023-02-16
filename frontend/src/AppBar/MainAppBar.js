@@ -1,11 +1,12 @@
-import { useLocation, useMatch } from 'react-router-dom';
+// import { useLocation, useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 import ButtonAppBar from './ButtonAppBar';
 import SubAppBar from './SubAppBar';
 import ProfileAppBar from './ProfileAppBar';
 
 function MainAppBar() {
-  const pageUrl = useLocation().pathname;
-  console.log('appBar', pageUrl);
+  // const pageUrl = useLocation().pathname;
+  // console.log('appBar', pageUrl);
 
   return (
     <div>

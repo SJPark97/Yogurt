@@ -16,6 +16,8 @@ import './StoreItem.css';
 // const StyledLink = styled(Link)``;
 
 function StoreItem({ store }) {
+  const navigate = useNavigate();
+  const storeId = store.id;
   const loginUser = useSelector(state => state.user.value);
 
   const [isLiked, setIsLiked] = useState(false);
@@ -30,10 +32,11 @@ function StoreItem({ store }) {
           setIsLiked(true);
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser, store]);
+  }, [loginUser, store, navigate]);
 
   useEffect(() => {
     getLikes();
@@ -49,8 +52,6 @@ function StoreItem({ store }) {
   }
 
   // 상점 디테일 이동위해 naviate 사용
-  const navigate = useNavigate();
-  const storeId = store.id;
 
   const handleClick = () => {
     navigate(`/stores/${storeId}?tab=0`);

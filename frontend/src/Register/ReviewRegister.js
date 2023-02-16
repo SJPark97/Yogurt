@@ -38,8 +38,11 @@ function ReviewRegister() {
       .post(`https://i8b204.p.ssafy.io/be-api/review/${postId}`, data, {
         headers: { Authorization: token },
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      // .then(res => console.log(res))
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
+      });
   };
 
   return (

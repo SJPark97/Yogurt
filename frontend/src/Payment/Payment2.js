@@ -4,11 +4,12 @@ import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import './Payment.css';
+import { useNavigate } from 'react-router-dom';
 
 function Payment2() {
   const location = useLocation();
   const { checkItems, totalPrice, post } = location.state;
-
+  const navigate = useNavigate();
   const [address, setAddress] = useState('');
   const [postIdList, setPostIdList] = useState([]);
 
@@ -25,10 +26,13 @@ function Payment2() {
   const handleClick = () => {
     axios
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
-      .then(res => 
-        {console.log(res)
+      .then(res => {
+        // console.log(res)
         window.open(res.data, "_self")})
-      .catch(err => console.log(err.data));
+        .catch(() => {
+          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+          navigate('/');
+        });
   };
   return (
     <div className="payment-wrap">

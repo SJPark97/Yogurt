@@ -1,11 +1,12 @@
-// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Divider from '@mui/material/Divider';
+import axios from 'axios';
+
 import BackToTop from '../AppBar/BackToTop';
 import './NotedRegister.css';
-import axios from 'axios';
+
+import Divider from '@mui/material/Divider';
 
 function PostRegister() {
   const navigate = useNavigate();
@@ -15,23 +16,31 @@ function PostRegister() {
   const [content, setContent] = useState('');
 
   const token = loginUser.token;
-  const sellerId = loginUser.loginUserpk;
+  const sellerId = loginUser.loginUserPk;
 
   const submitHandler = event => {
     event.preventDefault();
-    navigate(`/profile/seller/${sellerId}?tab=2`);
-    const data = {
-      title,
-      content,
-    };
 
-    axios
-      .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
-        headers: { Authorization: token },
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    if (!title || !content) {
+      alert('제목과 공지사항을 입력해주세요')
+    } else {
+      const data = {
+        title,
+        content,
+      };
 
+      axios
+        .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
+          headers: { Authorization: token },
+        })
+        // .then(res => console.log(res))
+        .catch(() => {
+          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+          navigate('/');
+        });
+
+      navigate(`/profile/seller/${sellerId}?tab=2`);
+    }
     return false;
   };
 

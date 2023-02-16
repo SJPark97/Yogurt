@@ -1,5 +1,11 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/user';
+import axios from 'axios';
+
+import BackToTop from '../AppBar/BackToTop';
+
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,12 +16,8 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import BackToTop from '../AppBar/BackToTop';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../redux/user';
 
 const ColorButton = styled(Button)(() => ({
   // color: theme.palette.getContrastText(purple[500]),
@@ -70,8 +72,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogInPage() {
-  const user = useSelector(state => state.user.value);
-  console.log('홈페이지에서 유저 체크', user);
+  // const user = useSelector(state => state.user.value);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -83,7 +84,6 @@ export default function LogInPage() {
       userId: data.get('id'),
       password: data.get('password'),
     };
-    console.log(loginInfo);
     await axios
       .post('https://i8b204.p.ssafy.io/be-api/user/login', loginInfo)
       .then(res => {
@@ -100,7 +100,6 @@ export default function LogInPage() {
             },
           )
           .then(res => {
-            console.log('ddfdfdfddf', res.data);
             dispatch(
               login({
                 token: accesToken,
@@ -114,7 +113,6 @@ export default function LogInPage() {
         handleOpen();
       })
       .catch(err => {
-        console.log('로그인 에러', err);
         alert('아이디 및 비밀번호를 다시 확인해주세요!!');
       });
   };

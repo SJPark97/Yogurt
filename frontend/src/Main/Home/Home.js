@@ -9,11 +9,13 @@ import HomeCarousel from './HomeCarousel';
 
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const [populars, setPopulars] = useState([]);
   const [latests, setLatests] = useState([]);
   const [lives, setLives] = useState([]);
+  const navigate = useNavigate();
 
   const getPopularList = async () => {
     await axios
@@ -21,8 +23,9 @@ function Home() {
       .then(res => {
         setPopulars(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
 
@@ -32,8 +35,9 @@ function Home() {
       .then(res => {
         setLatests(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
 
@@ -43,8 +47,9 @@ function Home() {
       .then(res => {
         setLives(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
 
@@ -52,6 +57,7 @@ function Home() {
     getPopularList();
     getLatestList();
     getLiveList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -62,8 +68,12 @@ function Home() {
       </Box>
       <div className="mainpage">
         <p className="mainpageTitle">실시간 라이브</p>
-        <div className={lives ? 'nolive' : 'Livecarousel'}>
-        {lives ? '진행중인 라이브가 없습니다' : <LiveCarousel lives={lives} />}
+        <div className={lives.length === 0 ? 'nolive' : 'Livecarousel'}>
+          {lives.length === 0 ? (
+            '진행중인 라이브가 없습니다'
+          ) : (
+            <LiveCarousel lives={lives} />
+          )}
         </div>
         <Divider variant="middle" />
         <p className="mainpageTitle">인기상품</p>

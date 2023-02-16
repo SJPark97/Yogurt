@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-
+import { useNavigate } from 'react-router-dom';
 import './Reviews.css';
 
 function Reviews() {
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
-
+  const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
 
   const getReviews = useCallback(async () => {
@@ -21,10 +21,11 @@ function Reviews() {
       .then(res => {
         setReviews(res.data.reviews);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser, sellerId]);
+  }, [loginUser, sellerId, navigate]);
 
   useEffect(() => {
     getReviews();

@@ -43,6 +43,7 @@ const LiveButton = styled(Button)(({ theme }) => ({
 // const StyledLink = styled(Link)``;
 
 export default function SellerInfo({ profile, loginId, token }) {
+  const navigate = useNavigate();
   const { sellerId } = useParams();
   const loginUser = useSelector(state => state.user.value);
   // 상점 좋아요
@@ -69,10 +70,11 @@ export default function SellerInfo({ profile, loginId, token }) {
           );
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [token, profile]);
+  }, [token, profile, navigate]);
 
   const getLiveInfo = useCallback(async () => {
     await axios
@@ -92,10 +94,11 @@ export default function SellerInfo({ profile, loginId, token }) {
           });
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [profile, sellerId]);
+  }, [profile, sellerId, navigate]);
 
   const goLive = () => {
     navigate(`/video/${live.liveRoomId}`, {
@@ -146,12 +149,13 @@ export default function SellerInfo({ profile, loginId, token }) {
         },
       )
       .then(res => {
-        console.log('좋아요 누르기', res.data);
+        // console.log('좋아요 누르기', res.data);
         setLikeCnt(likeCnt + 1);
         setLikeId(res.data.id);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
   const toggleUnLike = async () => {
@@ -161,16 +165,16 @@ export default function SellerInfo({ profile, loginId, token }) {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
-        console.log('좋아요 취소', res.data);
+        // console.log('좋아요 취소', res.data);
 
         setLikeCnt(likeCnt - 1);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
   // navigate
-  const navigate = useNavigate();
   // 상품 라이브 공지사항 리뷰 선택된 것
   return (
     <div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import {
   Button,
@@ -17,10 +18,8 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
-import axios from 'axios';
 
 const ColorButton = styled(Button)(() => ({
-  // color: theme.palette.getContrastText(purple[500]),
   backgroundColor: 'lightgrey',
   '&:hover': {
     backgroundColor: '#deb887',
@@ -28,7 +27,6 @@ const ColorButton = styled(Button)(() => ({
 }));
 
 const SignupButton = styled(Button)(() => ({
-  // color: theme.palette.getContrastText(purple[500]),
   backgroundColor: '#deb887',
   '&:hover': {
     backgroundColor: '#deb887',
@@ -48,7 +46,7 @@ const CssTextField = styled(TextField)({
     },
   },
 });
-// mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
+
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
@@ -113,7 +111,6 @@ function SignUp() {
   const handleChange = e => {
     const handling = e.target.name;
     const { value } = e.target;
-    // console.log('handlechange', handling, value);
     if (handling === 'id') {
       setOnlyOne({ ...onlyOne, id: false });
     } else if (handling === 'nickname') {
@@ -151,12 +148,10 @@ function SignUp() {
   };
 
   const handleFocusName = () => {
-    // nameConfirm
     setForm({ ...form, nameConfirm: '' });
   };
   // name
   const handleBlurName = () => {
-    console.log(form.name);
     if (form.name === '') {
       setError({ ...error, name: '필수항목입니다.' });
     } else if (error.name === '') {
@@ -180,7 +175,6 @@ function SignUp() {
   };
 
   const handleFocusId = () => {
-    // idConfirm
     setForm({ ...form, idConfirm: '' });
   };
 
@@ -199,7 +193,6 @@ function SignUp() {
     setForm({ ...form, nicknameConfirm: '' });
   };
   const handleClickNickname = () => {
-    console.log(onlyOne.nickname);
     // 성공시
     setOnlyOne({ ...onlyOne, nickname: !onlyOne.nickname });
     setError({ ...error, nickname: '' });
@@ -233,7 +226,6 @@ function SignUp() {
 
   // email
   const handleBlurEmail = () => {
-    console.log('이메일');
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     if (form.email === '') {
@@ -283,11 +275,12 @@ function SignUp() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(res => {
-        console.log('dddd', res);
         handleOpen();
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
 
@@ -351,12 +344,7 @@ function SignUp() {
               개인정보를 입력해주세요.
             </Typography>
 
-            <Boxs
-              component="form"
-              noValidate
-              // onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+            <Boxs component="form" noValidate sx={{ mt: 3 }}>
               <FormControl component="fieldset" variant="standard">
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -406,7 +394,6 @@ function SignUp() {
                               form.id.length > 12 ||
                               false
                             }
-                            // 컬러 바꾸기
                             sx={{ fontSize: '10px' }}
                             onClick={handleClickId}
                           >
@@ -449,7 +436,6 @@ function SignUp() {
                               form.nickname.length > 8 ||
                               false
                             }
-                            // 컬러 바꾸기
                             sx={{ fontSize: '10px' }}
                             onClick={handleClickNickname}
                           >
@@ -461,7 +447,6 @@ function SignUp() {
                     <FormHelperTexts>{error.nickname}</FormHelperTexts>
                   </Grid>
 
-                  {/* <FormHelperTexts>{emailError}</FormHelperTexts> */}
                   <Grid item xs={12}>
                     <CssTextField
                       required
@@ -507,7 +492,6 @@ function SignUp() {
                   </Grid>
                 </Grid>
                 <SignupButton
-                  // type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
