@@ -20,6 +20,7 @@ textarea {
   width: 100%;
   padding: 4px 0px 4px 8px;
   margin: 8px 0px 0px 8px;
+  border: 0px;
   display: flex;
   align-items: center;
   justify-content: left;
@@ -38,4 +39,14 @@ textarea {
 
 .submit_btn button:hover {
   color: burlywood;
+}
+
+.submit_btn button {
+  background-color: #deb887;
+  border: none;
+  width: 20vw;
+  height: 10vw;
+  border-radius: 8px;
+  color: white;
+  margin: 0px 0px 8px 0px;
 }

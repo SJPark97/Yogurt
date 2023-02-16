@@ -12,7 +12,7 @@ export default function FailResult() {
       <div style={{ height: '40vw' }}></div>
       <div>
         <img src={Logo} alt="#" style={{ width: '100%'}}></img>
-        <p style={{fontSize: '7vw', fontWeight: '600'}}>결제 실패</p>
+        <p style={{fontSize: '5vw', fontWeight: '600'}}>결제에 실패했습니다</p>
         <button
           onClick={goBack}
           style={{
