@@ -2,27 +2,26 @@ import * as React from 'react';
 import axios from 'axios';
 import './ItemInfo.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 export default function ItemInfo(props) {
   const navigate = useNavigate();
   const { item, num, owner } = props;
   const [itemState, setItemState] = React.useState(item.status);
-
+  const logInUser = useSelector(state => state.user.value)
   const percent = Math.floor(
     ((item.price - item.sale_price) / item.price) * 100,
   );
-  const token =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9CVVlFUiIsInVzZXJJZCI6InllYXIxMjMiLCJleHAiOjE2NzYyNDk4OTV9.s9hdTB7D0ak30LFqbXfszM9DvIrFHsnAQ9Kjn7QQLDw';
 
   const wishPost = () => {
     axios
       .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${item.id}`, {
         headers: {
-          Authorization: token,
+          Authorization: logInUser.token,
         },
       })
-      .then(res => alert('상품이 장바구니에 담겼습니다.'))
-      .catch(err => alert('상품이 이미 장바구니에 있습니다.'));
+      .then(() => alert('상품이 장바구니에 담겼습니다.'))
+      .catch(() => alert('상품이 이미 장바구니에 있습니다.'));
   };
 
   const sellOrNotSell = () => {

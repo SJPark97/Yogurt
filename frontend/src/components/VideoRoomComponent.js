@@ -32,6 +32,7 @@ class VideoRoomComponent extends Component {
       ? this.props.user
       : `${Math.floor(Math.random() * 5)} ++++++`;
     this.liveId = this.props.liveId;
+    this.sellerNickname = this.props.sellerNickname;
     this.owner = this.props.owner;
     this.remotes = [];
     this.localUserAccessAllowed = false;
@@ -145,12 +146,12 @@ class VideoRoomComponent extends Component {
 
   async connectToSession() {
     if (this.props.token !== undefined) {
-      // console.log('token received: ', this.props.token);
+      console.log('token received: ', this.props.token);
       this.connect(this.props.token);
     } else {
       try {
         var token = await this.getToken();
-        // console.log(token);
+        console.log(token);
         this.connect(token);
       } catch (error) {
         console.error(
@@ -187,11 +188,11 @@ class VideoRoomComponent extends Component {
           });
         }
         alert('There was an error connecting to the session:', error.message);
-        // console.log(
-        //   'There was an error connecting to the session:',
-        //   error.code,
-        //   error.message,
-        // );
+        console.log(
+          'There was an error connecting to the session:',
+          error.code,
+          error.message,
+        );
       });
   }
 
@@ -366,7 +367,7 @@ class VideoRoomComponent extends Component {
       remoteUsers.forEach(user => {
         if (user.getConnectionId() === event.from.connectionId) {
           const data = JSON.parse(event.data);
-          // console.log('EVENTO REMOTE: ', event.data);
+          console.log('EVENTO REMOTE: ', event.data);
           if (data.isAudioActive !== undefined) {
             user.setAudioActive(data.isAudioActive);
           }
@@ -524,7 +525,7 @@ class VideoRoomComponent extends Component {
     if (display === 'block') {
       this.setState({ chatDisplay: display, messageReceived: false });
     } else {
-      // console.log('chat', display);
+      console.log('chat', display);
       this.setState({ chatDisplay: display });
     }
     this.updateLayout();
@@ -553,6 +554,7 @@ class VideoRoomComponent extends Component {
 
   render() {
     const mySessionId = this.state.mySessionId;
+    const sellerNickname = this.sellerNickname
     const localUser = this.state.localUser;
     const liveId = this.liveId;
     // var chatDisplay = { display: this.state.chatDisplay };
@@ -601,7 +603,7 @@ class VideoRoomComponent extends Component {
                 </div>
               )
             : this.state.subscribers.map((sub, i) =>
-                sub.getNickname() === mySessionId ? (
+                sub.getNickname() === sellerNickname ? (
                   <div
                     key={i}
                     className="OT_root OT_publisher custom-class"
