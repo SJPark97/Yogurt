@@ -101,7 +101,7 @@ function PostDetail() {
       .post(`https://i8b204.p.ssafy.io/be-api/wishlist/${postId}`, data, {
         headers: { Authorization: token },
       })
-      .then(res => alert('장바구니에 상품이 등록되었습니다.'))
+      .then(res => ('장바구니에 상품이 등록되었습니다.'))
       .catch(err => alert('상품이 이미 장바구니에 존재합니다.'));
   };
 

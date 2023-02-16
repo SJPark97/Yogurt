@@ -13,8 +13,8 @@
   position: absolute;
   right: 6vw;
   bottom: 9vw;
-  background: white;
-  border-radius: 8px;
+  background: rgb(233, 217, 217);
+  border-radius: 16px;
 }
 
 .toolbar {

@@ -5,7 +5,6 @@ import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import './Payment.css';
-import { useNavigate } from 'react-router-dom';
 
 function Payment() {
   const location = useLocation();
@@ -25,7 +24,7 @@ function Payment() {
   const handleClick = () => {
     axios
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
-      .then(res => window.open(res.data))
+      .then(res => window.open(res.data));
   };
 
   useEffect(() => {
@@ -41,7 +40,8 @@ function Payment() {
         setPost(postData);
         const postIdData = postData.map(item => ({ id: item.id }));
         setPostIdList(postIdData);
-      })
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
