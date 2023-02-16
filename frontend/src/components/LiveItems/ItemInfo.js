@@ -28,7 +28,6 @@ export default function ItemInfo(props) {
     axios
       .patch(`https://i8b204.p.ssafy.io/be-api/post/live/${item.id}`)
       .then(res => setItemState(res.data.status))
-      .catch(err => (err.data));
   };
 
   return (

@@ -37,10 +37,13 @@ function LiveRegister() {
   // 라이브 할 상품 선택하기
   useEffect(() => {
     axios
-      .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`, { headers: { Authorization: token } })
-      .then(res => {
-        setPosts(res.data[0].posts)
+      .get(`https://i8b204.p.ssafy.io/be-api/post/user/${sellerId}`, {
+        headers: { Authorization: token },
       })
+      .then(res => {
+        setPosts(res.data[0].posts);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sellerId]);
 
   const allcheck = posts.map(el => el.id);
@@ -90,13 +93,13 @@ function LiveRegister() {
             headers: { Authorization: token },
           })
           .then(res => {
-            axios
-              .post(
-                'https://i8b204.p.ssafy.io/be-api/buyer_alarm', {},
-                { headers: { Authorization: token } },
-              )
+            axios.post(
+              'https://i8b204.p.ssafy.io/be-api/buyer_alarm',
+              {},
+              { headers: { Authorization: token } },
+            );
           });
-      })
+      });
 
     return false;
   };
@@ -131,11 +134,7 @@ function LiveRegister() {
           <div>
             {image && (
               <div>
-                <img
-                  src={image}
-                  alt="메인사진"
-                  style={{ width: '70vw' }}
-                />
+                <img src={image} alt="메인사진" style={{ width: '70vw' }} />
                 <button type="button" onClick={() => handleDeleteIamge()}>
                   X
                 </button>
@@ -166,30 +165,38 @@ function LiveRegister() {
               {postIds.length === posts.length ? '전체 해제' : '전체 선택'}
             </span>
           </div>
-          <div style={{ padding: '8px 0px', backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
-            {posts && posts.map(post => (
-              <div className='live_reg_post'>
-                <input
-                  type="checkbox"
-                  onChange={event =>
-                    SingleCheck(
-                      event.target.checked,
-                      post.id
-                    )
-                  }
-                  checked={postIds.includes(post.id)}
-                />
-                <div style={{ justifyContent: 'center' }}>
-                  <CardList data={post} key={post.id} onClick={(event) => event.stopPropagation()} />
+          <div
+            style={{
+              padding: '8px 0px',
+              backgroundColor: 'whitesmoke',
+              borderRadius: '16px',
+              display: 'grid',
+              gridTemplateColumns: '33% 33% 33%',
+            }}
+          >
+            {posts &&
+              posts.map(post => (
+                <div className="live_reg_post">
+                  <input
+                    type="checkbox"
+                    onChange={event =>
+                      SingleCheck(event.target.checked, post.id)
+                    }
+                    checked={postIds.includes(post.id)}
+                  />
+                  <div style={{ justifyContent: 'center' }}>
+                    <CardList
+                      data={post}
+                      key={post.id}
+                      onClick={event => event.stopPropagation()}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
         <div className="submit_btn">
-          <button type="submit">
-            저장
-          </button>
+          <button type="submit">저장</button>
         </div>
       </form>
     </div>
