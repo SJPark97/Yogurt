@@ -1,5 +1,6 @@
 package com.ssafy.common.api.user.dto.response;
 
+import com.ssafy.common.api.post.domain.PostStatus;
 import com.ssafy.common.api.relation.domain.RelationStatus;
 import com.ssafy.common.api.relation.dto.wishList.WishListUserPostResponse;
 import com.ssafy.common.api.user.domain.User;
@@ -17,7 +18,9 @@ public class UserWishListResponse {
     public UserWishListResponse(User user){
         id = user.getId();
         wishLists = user.getWishlists()
-                .stream().map(wishlist -> new WishListUserPostResponse(wishlist))
+                .stream()
+                .filter(wishlist -> wishlist.getPost().getStatus()== PostStatus.STATUS_SELL)
+                .map(wishlist -> new WishListUserPostResponse(wishlist))
                 .filter(wishListUserPostResponse -> wishListUserPostResponse.getStatus()!= RelationStatus.STATUS_DELETE)
                 .collect(Collectors.toList());
     }
