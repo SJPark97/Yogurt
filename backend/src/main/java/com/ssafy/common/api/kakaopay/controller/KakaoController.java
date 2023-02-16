@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class KakaoController {
     private final PostService postService;
+
+
+
     @Setter(onMethod_ = @Autowired)
     private Kakaopay kakaopay;
 
