@@ -74,7 +74,7 @@ export default function LikeStore() {
               alt="스토어 프로필 사진"
               className="store-img"
             />
-            <div style={{ margin: '0px 0px 0px 8px'}}>
+            <div style={{ margin: '0px 0px 0px 8px', width: '100%'}}>
               <div className="store-text">
                 <p className="store-name">{likeStore.seller.nickName}</p>
                 <div className="store_like">
