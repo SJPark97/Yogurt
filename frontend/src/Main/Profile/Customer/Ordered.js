@@ -34,11 +34,7 @@ export default function Ordered() {
       .then(res => {
         setOrderedPosts(res.data.endPosts);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, navigate]);
+  }, [loginUser]);
 
   useEffect(() => {
     getOrderedPosts();

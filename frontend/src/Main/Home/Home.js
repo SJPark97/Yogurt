@@ -9,13 +9,11 @@ import HomeCarousel from './HomeCarousel';
 
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const [populars, setPopulars] = useState([]);
   const [latests, setLatests] = useState([]);
   const [lives, setLives] = useState([]);
-  const navigate = useNavigate();
 
   const getPopularList = async () => {
     await axios
@@ -23,10 +21,6 @@ function Home() {
       .then(res => {
         setPopulars(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
 
   const getLatestList = async () => {
@@ -35,10 +29,6 @@ function Home() {
       .then(res => {
         setLatests(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
 
   const getLiveList = async () => {
@@ -47,10 +37,6 @@ function Home() {
       .then(res => {
         setLives(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
 
   useEffect(() => {

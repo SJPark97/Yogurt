@@ -19,11 +19,7 @@ function LiveInfo() {
       .then(res => {
         setLive(res.data[0]);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, sellerId, navigate]);
+  }, [loginUser, sellerId]);
 
   useEffect(() => {
     getLive();
@@ -41,7 +37,7 @@ function LiveInfo() {
             <p>라이브 1개</p>
           </div>
           <div className="liveinfo-info">
-            <p style={{color: 'red'}}>{live?.time.slice(5, 7) + "/" + live?.time.slice(8, 10) + " " + live?.time.slice(11, 13) + ":" + live?.time.slice(14, 16) + " 라이브 예정"}</p>
+            <p style={{ color: 'red' }}>{live?.time.slice(5, 7) + "/" + live?.time.slice(8, 10) + " " + live?.time.slice(11, 13) + ":" + live?.time.slice(14, 16) + " 라이브 예정"}</p>
             <img
               src={live?.thumbnail}
               alt="라이브대표이미지"
@@ -72,13 +68,13 @@ function LiveInfo() {
                   <p>{liveItem.postDetailResponse.title}</p>
                   <div className="liveinfo-price">
                     {liveItem.postDetailResponse.price -
-                    liveItem.postDetailResponse.sale_price ? (
+                      liveItem.postDetailResponse.sale_price ? (
                       <div className="liveinfo-sale-percent">
                         {Math.floor(
                           ((liveItem.postDetailResponse.price -
                             liveItem.postDetailResponse.sale_price) /
                             liveItem.postDetailResponse.price) *
-                            100,
+                          100,
                         )}
                         %
                       </div>

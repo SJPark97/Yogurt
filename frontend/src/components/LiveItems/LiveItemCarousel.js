@@ -8,10 +8,8 @@ import LiveItemSeller from './Seller/LiveItemSeller';
 import LiveItemBuyer from './Buyer/LiveItemBuyer';
 import CloseIcon from '@mui/icons-material/Close';
 import LiveButtonIcon from './LiveButtonIcon';
-import { useNavigate } from 'react-router-dom';
 
 export default function ProfileDrawer(props) {
-  const navigate = useNavigate();
   const [state, setState] = React.useState({
     bottom: false,
   });
@@ -28,10 +26,6 @@ export default function ProfileDrawer(props) {
         },
       })
       .then(res => setLiveItems(res.data))
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
 
     if (
       event.type === 'keydown' &&

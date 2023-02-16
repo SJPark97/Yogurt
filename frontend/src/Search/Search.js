@@ -68,11 +68,7 @@ function Search() {
       .then(res => {
         setPosts(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [text, navigate]);
+  }, [text]);
 
   const getBrands = useCallback(async () => {
     await axios
@@ -80,11 +76,7 @@ function Search() {
       .then(res => {
         setBrands(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [text, navigate]);
+  }, [text]);
 
   const getStores = useCallback(async () => {
     await axios
@@ -92,11 +84,7 @@ function Search() {
       .then(res => {
         setStores(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [text, navigate]);
+  }, [text]);
 
   useEffect(() => {
     if (text) {
