@@ -32,7 +32,6 @@ function Notice() {
 
   return (
     <div className="notices">
-      <div className="totalNotice">공지사항 {notices.length}개</div>
       <List
         sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}
       >

@@ -2,12 +2,14 @@ import { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import './LikeStore.css';
+import Logo from '../../../Images/Yogurt_Logo.png';
+
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
-import Logo from '../../../Images/Yogurt_Logo.png';
-import './LikeStore.css';
 
 export default function LikeStore() {
   const loginUser = useSelector(state => state.user.value);
@@ -19,7 +21,6 @@ export default function LikeStore() {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
-        console.log('ffff', res.data);
         setLikeStores(res.data);
       })
       .catch(err => {
@@ -73,7 +74,7 @@ export default function LikeStore() {
               alt="스토어 프로필 사진"
               className="store-img"
             />
-            <div>
+            <div style={{ margin: '0px 0px 0px 8px'}}>
               <div className="store-text">
                 <p className="store-name">{likeStore.seller.nickName}</p>
                 <div className="store_like">

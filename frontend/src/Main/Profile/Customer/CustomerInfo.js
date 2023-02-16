@@ -34,10 +34,7 @@ export default function CustomerInfo() {
   const [searchParams, setserchParams] = useSearchParams();
 
   const tab = Number(searchParams.get('tab'));
-  console.log(tab);
-
-  // value 값에 따라서 상품, 라이브, 공지사항, 리뷰 중에 하나의 값을 선택함을 알 수 있다.
-  // 그러면 이미 받아오려나 아니며누를때 받아오려나?
+ 
   return (
     <>
       <header className="mid-nav">

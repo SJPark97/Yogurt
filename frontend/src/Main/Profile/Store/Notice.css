@@ -9,14 +9,6 @@
   align-items: center;
 }
 
-.totalNotice {
-  margin: 1rem;
-  margin-bottom: 0;
-  text-align: start;
-  font-size: 16px;
-  font-weight: 600;
-}
-
 .notice-content {
   white-space: pre-line;
 }

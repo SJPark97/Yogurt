@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+
+import './CustomerProfile.css';
+import Logo from '../../../Images/Yogurt_Logo.png';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import './CustomerProfile.css';
-import Logo from '../../../Images/Yogurt_Logo.png';
 
 function CustomerProfile({ profile }) {
   const navigate = useNavigate();
