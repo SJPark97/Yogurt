@@ -29,14 +29,14 @@ export default function ItemInfo(props) {
     axios
       .patch(`https://i8b204.p.ssafy.io/be-api/post/live/${item.id}`)
       .then(res => setItemState(res.data.status))
-      .catch(err => console.log(err.data));
+      .catch(err => (err.data));
   };
 
   return (
     <div>
       <h2 id="item-number">상품 {num}</h2>
       <div id="live-item-info">
-        {console.log(item.postImages[0].url)}
+        {/* {console.log(item.postImages[0].url)} */}
         <img id="item-thumbnail" src={item.postImages[0].url} alt="#" />
         <div id="item-infomations">
           <p id="item-title">{item.title}</p>

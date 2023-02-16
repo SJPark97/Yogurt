@@ -16,18 +16,21 @@ function WishList() {
   const token = loginUser.token;
 
   useEffect(() => {
-    axios
-      .get('https://i8b204.p.ssafy.io/be-api/wishlist', {
-        headers: { Authorization: token },
-      })
-      .then(res => {
-        setWishList(res.data.wishLists);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (token) {
+      axios
+        .get('https://i8b204.p.ssafy.io/be-api/wishlist', {
+          headers: { Authorization: token },
+        })
+        .then(res => {
+          setWishList(res.data.wishLists);
+        })
+        .catch(() => {
+          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+          navigate('/');
+        });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+  }, [navigate, setWishList, token]);
 
   const allcheck = wishlist.map(el => el.wishListId);
 
@@ -61,7 +64,7 @@ function WishList() {
   };
 
   return (
-    <div className='wish'>
+    <div className="wish">
       <BackToTop />
       <div className="wish-select-all">
         <input
@@ -78,22 +81,22 @@ function WishList() {
         {wishlist.map(wish => (
           <div key={wish.wishListId}>
             <div className="wish-post">
-                <input
-                  type="checkbox"
-                  onChange={event =>
-                    SingleCheck(
-                      event.target.checked,
-                      wish.wishListId,
-                      wish.post.sale_price,
-                    )
-                  }
-                  checked={checkItems.includes(wish.wishListId)}
-                />
-                <img
-                  className="wish-post-img"
-                  src={wish.post.postImages[0].url}
-                  alt="이미지사진"
-                />
+              <input
+                type="checkbox"
+                onChange={event =>
+                  SingleCheck(
+                    event.target.checked,
+                    wish.wishListId,
+                    wish.post.sale_price,
+                  )
+                }
+                checked={checkItems.includes(wish.wishListId)}
+              />
+              <img
+                className="wish-post-img"
+                src={wish.post.postImages[0].url}
+                alt="이미지사진"
+              />
               <div className="wish-post-info">
                 <div className="wish-post-sellername">
                   {wish.post.sellerName}

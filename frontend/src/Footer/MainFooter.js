@@ -1,10 +1,11 @@
-import { useLocation, useMatch } from 'react-router-dom';
+// import { useLocation, useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Footer from './Footer';
 
 function MainFooter() {
-  const pageUrl = useLocation().pathname;
-  console.log('footer', pageUrl);
+  // const pageUrl = useLocation().pathname;
+  // console.log('footer', pageUrl);
 
   const loginUser = useSelector(state => state.user.value);
   const sellerId = useMatch('/profile/seller/:sellerId')?.params.sellerId;

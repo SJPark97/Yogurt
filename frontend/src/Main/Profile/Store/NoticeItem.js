@@ -6,21 +6,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function NoticeItem({ notice, owner, sellerId }) {
   const [isDelete, setIsDelete] = useState(false);
-
+  const navigate = useNavigate();
   const data = { status: 'STATUS_DELETE' };
 
   const handleClick = async event => {
     setIsDelete(!isDelete);
     await axios
       .patch(`https://i8b204.p.ssafy.io/be-api/notice/${event}`, data)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   };
   return (

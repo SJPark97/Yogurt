@@ -2,12 +2,14 @@ import * as React from 'react';
 import { useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export default function LiveButtonIcon() {
+  const navigate = useNavigate();
   const { liveId } = useParams();
   const [images, setImages] = React.useState(false);
 
-  console.log(Number(liveId), 'chhhhhhhh');
+  // console.log(Number(liveId), 'chhhhhhhh');
   const getLiveInfo = useCallback(async () => {
     await axios
       .get('https://i8b204.p.ssafy.io/be-api/live/item', {
@@ -16,17 +18,20 @@ export default function LiveButtonIcon() {
         },
       })
       .then(res => {
-        console.log(res.data, 'getting data');
+        // console.log(res.data, 'getting data');
         // console.log(res.data.length)
         let imageList = [];
         res.data.forEach(d1 => {
           imageList.push(d1.postDetailResponse.postImages[0].url);
         });
-        console.log(imageList, 'maded list');
+        // console.log(imageList, 'maded list');
         setImages(imageList.slice(0, 2));
+      })
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-    // .catch(err => console.log(err.data, "errrr"));
-  }, [setImages, liveId]);
+  }, [setImages, liveId, navigate]);
 
   useEffect(() => {
     getLiveInfo();
@@ -40,7 +45,7 @@ export default function LiveButtonIcon() {
         left: '-17vw',
       }}
     >
-      {console.log(images, 'sjp')}
+      {/* {console.log(images, 'sjp')} */}
       {images && (
         <img
           style={{

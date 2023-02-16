@@ -45,16 +45,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
-  console.log(setSearchParams);
+  // console.log(setSearchParams);
 
-  const handleKeyUp = e => {
-    console.log('keyup', e.target.value);
-  };
+  // const handleKeyUp = e => {
+  //   console.log('keyup', e.target.value);
+  // };
+
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      console.log('엔터', e.target.value, '검색결과 창으로 이동');
       // 쿼리로 보내기
       navigate(`/search/result?search=${e.target.value}`);
     }
@@ -88,7 +89,7 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
               fullWidth
               autoFocus={!search}
-              onKeyUp={handleKeyUp}
+              // onKeyUp={handleKeyUp}
               onKeyPress={handleKeyPress}
               id="searchText"
               name="searchText"

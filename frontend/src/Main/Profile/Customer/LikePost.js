@@ -8,6 +8,7 @@ import './LikePost.css';
 export default function LikePost() {
   const loginUser = useSelector(state => state.user.value);
   const [likePosts, setLikePosts] = useState([]);
+  const navigate = useNavigate();
 
   const getLikePosts = useCallback(async () => {
     await axios
@@ -17,16 +18,16 @@ export default function LikePost() {
       .then(res => {
         setLikePosts(res.data.zzims);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser]);
+  }, [loginUser, setLikePosts, navigate]);
 
   useEffect(() => {
     getLikePosts();
   }, [getLikePosts]);
 
-  const navigate = useNavigate();
   const discount = likePost =>
     Math.floor(((likePost.price - likePost.sale_price) / likePost.price) * 100);
 

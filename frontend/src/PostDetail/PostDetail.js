@@ -62,15 +62,15 @@ function PostDetail() {
       .then(res => {
         setLikeCnt(res.data.likesCount);
         setPost(res.data);
-        console.log(res.data, "sjp1")
         setSalePercent(
           Math.floor(
             ((res.data.price - res.data.sale_price) / res.data.price) * 100,
           ),
         );
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
@@ -85,18 +85,26 @@ function PostDetail() {
         .then(res => {
           setSeller(res.data);
         })
-        .catch(err => console.log('seller', err));
+        .catch(() => {
+          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+          navigate('/');
+        });
 
       axios
+
         .get(`https://i8b204.p.ssafy.io/be-api/post/user/${post.sellerId}`, {
           headers: { Authorization: token },
         })
         .then(res => {
-          const expectpost = res.data[0].posts.filter(p => p.id !== Number(postId))
+          const expectpost = res.data[0].posts.filter(
+            p => p.id !== Number(postId),
+          );
           setSellerPost(expectpost);
-
         })
-        .catch(err => console.log('seller', err));
+        .catch(() => {
+          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+          navigate('/');
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
@@ -126,8 +134,9 @@ function PostDetail() {
           );
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
   }, [token, postId]);
 
@@ -136,6 +145,9 @@ function PostDetail() {
   }, [getLikes]);
 
   const toggleLike = async () => {
+    if (!loginUser.token) {
+      navigate('/login');
+    } else {
     setIsLiked(!isLiked);
     await axios
       .post(
@@ -149,25 +161,32 @@ function PostDetail() {
         setLikeCnt(likeCnt + 1);
         setLikeId(res.data.id);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
+    }
   };
 
   const toggleUnLike = async () => {
-    setIsLiked(!isLiked);
-    await axios
+    if (!loginUser.token) {
+      navigate('/login');
+    } else {
+      setIsLiked(!isLiked);
+      await axios
       .patch(`https://i8b204.p.ssafy.io/be-api/zzim/delete/${likeId}`, {
         headers: { Authorization: loginUser.token },
       })
       .then(res => {
         setLikeCnt(likeCnt - 1);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
+    }
   };
-
+  
   return (
     <div>
       <BackToTop />
@@ -237,7 +256,9 @@ function PostDetail() {
         <Divider variant="middle" sx={{ margin: '1rem' }} />
         <div className="detail-store-info">
           <p className="detail-store-name">{seller?.nickName}님의 다른 상품</p>
-          {sellerpost && <Carousel list={sellerpost.filter(item => item !== post)} />}
+          {sellerpost && (
+            <Carousel list={sellerpost.filter(item => item !== post)} />
+          )}
         </div>
       </div>
       <footer>
@@ -274,22 +295,32 @@ function PostDetail() {
             <ColorButton
               variant="contained"
               fullWidth
-              onClick={() => wishPost()}
+              onClick={() => {
+                if (loginUser.token) {
+                  wishPost();
+                } else {
+                  navigate('/login');
+                }
+              }}
             >
               <div>장바구니</div>
             </ColorButton>
             <DarkColorButton
               variant="contained"
               fullWidth
-              onClick={() =>
-                navigate('/payment2', {
-                  state: {
-                    post: post,
-                    checkItems: [post?.id],
-                    totalPrice: post?.sale_price,
-                  },
-                })
-              }
+              onClick={() => {
+                if (loginUser.token) {
+                  navigate('/payment2', {
+                    state: {
+                      post: post,
+                      checkItems: [post?.id],
+                      totalPrice: post?.sale_price,
+                    },
+                  });
+                } else {
+                  navigate('/login');
+                }
+              }}
             >
               <div>바로 구매</div>
             </DarkColorButton>
