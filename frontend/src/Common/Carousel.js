@@ -8,6 +8,7 @@ function Carousel({ list }) {
       <div className="Carousel">
         {list.map(data => (
           <div style={{marginRight: '4vw'}}>
+            {console.log(data.id)}
           <CardList data={data} key={data.id} />
           </div>
         ))}

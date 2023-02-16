@@ -10,7 +10,7 @@ export default function LiveItemBuyer(props) {
       {liveItems === undefined ? null : liveItems.map((item, num) => {
         return <ItemInfo
           item={item.postDetailResponse}
-          num={item.id}
+          num={num + 1}
           key={item.id}
           owner={false}
         />
