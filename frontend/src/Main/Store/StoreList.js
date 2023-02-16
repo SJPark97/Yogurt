@@ -5,12 +5,10 @@ import { useSelector } from 'react-redux';
 import StoreItem from './StoreItem';
 import './StoreList.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 function StoreList() {
   const [stores, setStores] = useState([]);
   const loginUser = useSelector(state => state.user.value);
-  const navigate = useNavigate();
   const getStores = useCallback(async () => {
     await axios
       .get('https://i8b204.p.ssafy.io/be-api/user/seller', {
@@ -19,16 +17,12 @@ function StoreList() {
       .then(res => {
         setStores(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, navigate]);
+  }, [loginUser]);
 
   useEffect(() => {
     getStores();
   }, [getStores]);
-  
+
   return (
     <div className="Store">
       <BackToTop />

@@ -20,10 +20,6 @@ function Alarm({ alarm, role, token }) {
       .patch(`https://i8b204.p.ssafy.io/be-api/seller_alarm/${alarm.id}`, {
         headers: { Authorization: token },
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
   // console.log(alarm, '알람');
 

@@ -19,11 +19,7 @@ function ProductInfo() {
       .then(res => {
         setPosts(res.data[0].posts);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, sellerId, navigate]);
+  }, [loginUser, sellerId]);
 
   useEffect(() => {
     getPosts();

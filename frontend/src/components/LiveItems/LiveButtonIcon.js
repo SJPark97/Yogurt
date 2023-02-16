@@ -2,10 +2,8 @@ import * as React from 'react';
 import { useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
 
 export default function LiveButtonIcon() {
-  const navigate = useNavigate();
   const { liveId } = useParams();
   const [images, setImages] = React.useState(false);
 
@@ -27,11 +25,7 @@ export default function LiveButtonIcon() {
         // console.log(imageList, 'maded list');
         setImages(imageList.slice(0, 2));
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [setImages, liveId, navigate]);
+  }, [setImages, liveId]);
 
   useEffect(() => {
     getLiveInfo();
@@ -52,8 +46,8 @@ export default function LiveButtonIcon() {
             zIndex: '3',
             width: '48px',
             height: '48px',
-            // top: '-3vw',
-            // left: '-2vw',
+            top: '1vw',
+            left: '1vw',
             position: 'absolute',
             borderRadius: '8px',
           }}
@@ -65,8 +59,8 @@ export default function LiveButtonIcon() {
         <img
           style={{
             zIndex: '2',
-            top: '-2vw',
-            left: '2vw',
+            top: '-0.5vw',
+            left: '2.5vw',
             width: '48px',
             height: '48px',
             position: 'absolute',
@@ -80,7 +74,7 @@ export default function LiveButtonIcon() {
         <img
           style={{
             zIndex: '1',
-            top: '-4vw',
+            top: '-2vw',
             left: '4vw',
             width: '48px',
             height: '48px',

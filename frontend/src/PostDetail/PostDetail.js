@@ -68,11 +68,6 @@ function PostDetail() {
           ),
         );
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   // post정보에 맞춘 seller Id 및 정보 받아오기
@@ -85,10 +80,6 @@ function PostDetail() {
         .then(res => {
           setSeller(res.data);
         })
-        .catch(() => {
-          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-          navigate('/');
-        });
 
       axios
 
@@ -101,10 +92,6 @@ function PostDetail() {
           );
           setSellerPost(expectpost);
         })
-        .catch(() => {
-          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-          navigate('/');
-        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
@@ -134,11 +121,7 @@ function PostDetail() {
           );
         }
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [token, postId, navigate]);
+  }, [token, postId]);
 
   useEffect(() => {
     getLikes();
@@ -148,23 +131,19 @@ function PostDetail() {
     if (!loginUser.token) {
       navigate('/login');
     } else {
-    setIsLiked(!isLiked);
-    await axios
-      .post(
-        `https://i8b204.p.ssafy.io/be-api/zzim/${postId}`,
-        {},
-        {
-          headers: { Authorization: loginUser.token },
-        },
-      )
-      .then(res => {
-        setLikeCnt(likeCnt + 1);
-        setLikeId(res.data.id);
-      })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
+      setIsLiked(!isLiked);
+      await axios
+        .post(
+          `https://i8b204.p.ssafy.io/be-api/zzim/${postId}`,
+          {},
+          {
+            headers: { Authorization: loginUser.token },
+          },
+        )
+        .then(res => {
+          setLikeCnt(likeCnt + 1);
+          setLikeId(res.data.id);
+        })
     }
   };
 
@@ -174,19 +153,15 @@ function PostDetail() {
     } else {
       setIsLiked(!isLiked);
       await axios
-      .patch(`https://i8b204.p.ssafy.io/be-api/zzim/delete/${likeId}`, {
-        headers: { Authorization: loginUser.token },
-      })
-      .then(res => {
-        setLikeCnt(likeCnt - 1);
-      })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
+        .patch(`https://i8b204.p.ssafy.io/be-api/zzim/delete/${likeId}`, {
+          headers: { Authorization: loginUser.token },
+        })
+        .then(res => {
+          setLikeCnt(likeCnt - 1);
+        })
     }
   };
-  
+
   return (
     <div>
       <BackToTop />

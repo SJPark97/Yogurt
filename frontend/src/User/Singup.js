@@ -277,11 +277,6 @@ function SignUp() {
       .then(res => {
         handleOpen();
       })
-      .catch(err => {
-        // console.log(err);
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
 
   const [open, setOpen] = useState(false);

@@ -41,18 +41,13 @@ function LiveRegister() {
       .then(res => {
         setPosts(res.data[0].posts)
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sellerId]);
 
   const allcheck = posts.map(el => el.id);
 
   useEffect(() => {
     setPostIds(allcheck);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]);
 
   const SingleCheck = (checked, id) => {
@@ -94,26 +89,14 @@ function LiveRegister() {
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
           })
-          .catch(() => {
-            alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-            navigate('/');
-          })
           .then(res => {
             axios
               .post(
                 'https://i8b204.p.ssafy.io/be-api/buyer_alarm', {},
                 { headers: { Authorization: token } },
               )
-              .catch(() => {
-                alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-                navigate('/');
-              });
           });
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
 
     return false;
   };
@@ -183,7 +166,7 @@ function LiveRegister() {
               {postIds.length === posts.length ? '전체 해제' : '전체 선택'}
             </span>
           </div>
-          <div style={{ padding:'8px 0px', backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
+          <div style={{ padding: '8px 0px', backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
             {posts && posts.map(post => (
               <div className='live_reg_post'>
                 <input

@@ -19,11 +19,7 @@ export default function SubCategory() {
         // console.log(res.data, 'dd');
         setItems(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [categoryId, navigate]);
+  }, [categoryId]);
 
   useEffect(() => {
     getBrand();

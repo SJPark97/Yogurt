@@ -70,11 +70,7 @@ export default function ProfileModify() {
       .then(res => {
         setProfile(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, id, navigate]);
+  }, [loginUser, id]);
 
   useEffect(() => {
     getProfile();
@@ -224,10 +220,6 @@ export default function ProfileModify() {
               // console.log('수정 성공!', res.data);
               navigate(`/profile/seller/${id}?tab=0`);
             })
-            .catch(() => {
-              alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-              navigate('/');
-            });
         });
     } else {
       axios
@@ -251,10 +243,6 @@ export default function ProfileModify() {
               // console.log('수정 성공!', res.data);
               navigate(`/profile/buyer/${id}?tab=0`);
             })
-            .catch(() => {
-              alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-              navigate('/');
-            });
         });
     }
   };
@@ -274,7 +262,7 @@ export default function ProfileModify() {
             <Boxs
               component="form"
               noValidate
-              // onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             >
               <FormControl component="fieldset" variant="standard">
                 <div className="modifyText">프로필 이미지 수정</div>

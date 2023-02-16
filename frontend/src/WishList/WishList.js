@@ -24,13 +24,8 @@ function WishList() {
         .then(res => {
           setWishList(res.data.wishLists);
         })
-        .catch(() => {
-          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-          navigate('/');
-        });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }
-  }, [navigate, setWishList, token]);
+  }, [setWishList, token]);
 
   const allcheck = wishlist.map(el => el.wishListId);
 

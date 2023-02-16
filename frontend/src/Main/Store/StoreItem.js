@@ -32,11 +32,7 @@ function StoreItem({ store }) {
           setIsLiked(true);
         }
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, store, navigate]);
+  }, [loginUser, store]);
 
   useEffect(() => {
     getLikes();
