@@ -1,5 +1,8 @@
 package com.ssafy.common.api.kakaopay.service;
 
+import com.ssafy.common.api.alarm.converter.SellerAlarmConverter;
+import com.ssafy.common.api.alarm.domain.SellerAlarm;
+import com.ssafy.common.api.alarm.repository.SellerAlarmRepository;
 import com.ssafy.common.api.endpost.service.EndPostService;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayApprovalVO;
 import com.ssafy.common.api.kakaopay.VO.KakaoPayReadyVO;
@@ -17,6 +20,7 @@ import com.ssafy.common.api.relation.repository.WishListRepository;
 import com.ssafy.common.api.relation.service.WishListService;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.dto.response.UserWishListResponse;
+import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
@@ -29,6 +33,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +52,8 @@ public class Kakaopay {
     private final EndPostService endPostService;
     private final WishListService wishListService;
     private final WishListRepository wishListRepository;
+    private final SellerAlarmConverter sellerAlarmConverter;
+    private  final SellerAlarmRepository sellerAlarmRepository;
 
 
     public String kakaoPayReady(KakaoPayRequest request){
@@ -162,6 +169,10 @@ public class Kakaopay {
         for (KakaoPayPost kakaoPayPost : kakaoPayPostList){
             Post post = postRepository.findById(kakaoPayPost.getPostId()).get();
             endPostService.createEndPost(post, buyer, address);
+            //알람 추가 시작
+            SellerAlarm sellerAlarm = sellerAlarmConverter.ConvertUserPostSellerAlarm(post.getSeller(),post,new Timestamp(System.currentTimeMillis()));
+            sellerAlarmRepository.save(sellerAlarm);
+            //알람 추가 끝
             for (WishListUserPostResponse wishList : userWishLists ){
                 if (post.getId() == wishList.getPost().getId()) {
                     Wishlist wish= wishListRepository.findById(wishList.getWishListId()).get();
