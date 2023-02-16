@@ -82,9 +82,7 @@ textarea {
 #post_reg_size {
   width: 100%;
   padding: 8px 0px 4px 8px;
-  border-radius: 8px;
   border: 0px;
-  /* margin: 16px 0px 0px 0px; */
 }
 
 #post_reg_detail,

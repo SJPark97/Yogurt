@@ -98,7 +98,6 @@ function Payment() {
         <img
           src="https://img.etoday.co.kr/pto_db/2020/10/600/20201023101423_1528745_1200_738.jpg"
           alt="카카오페이로 결제하기"
-          height="100px"
           onClick={() => handleClick()}
         />
       </div>
