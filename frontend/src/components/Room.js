@@ -7,12 +7,14 @@ export default function Room() {
   const { liveId } = useParams();
   const sessionId = String(state.sellerId)
   const userId = state.userNickname
+  const sellerNickname = state.sellerNickname
   const owner = state.sellerNickname === state.userNickname
   
   return (
     <div>
       <VideoRoomComponent
           sessionName={sessionId}
+          sellerNickname={sellerNickname}
           user={userId}
           owner={owner}
           liveId={liveId}
