@@ -24,9 +24,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 export default function Ordered() {
   const loginUser = useSelector(state => state.user.value);
-
   const [orderedPosts, setOrderedPosts] = useState([]);
-
+  const navigate = useNavigate();
   const getOrderedPosts = useCallback(async () => {
     await axios
       .get('https://i8b204.p.ssafy.io/be-api/endPost', {
@@ -35,16 +34,16 @@ export default function Ordered() {
       .then(res => {
         setOrderedPosts(res.data.endPosts);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser]);
+  }, [loginUser, navigate]);
 
   useEffect(() => {
     getOrderedPosts();
   }, [getOrderedPosts]);
 
-  const navigate = useNavigate();
 
   const handleClick = event => {
     navigate(`/review/join`, { state: event });

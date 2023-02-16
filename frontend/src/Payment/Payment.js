@@ -5,6 +5,7 @@ import BackToTop from '../AppBar/BackToTop';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import './Payment.css';
+import { useNavigate } from 'react-router-dom';
 
 function Payment() {
   const location = useLocation();
@@ -13,7 +14,7 @@ function Payment() {
   const [post, setPost] = useState([]);
   const [postIdList, setPostIdList] = useState([]);
   const [address, setAddress] = useState('');
-
+  const navigate = useNavigate();
   const token = loginUser.token;
 
   const data = {
@@ -26,7 +27,10 @@ function Payment() {
     axios
       .post('https://i8b204.p.ssafy.io/be-api/kakaoPay', data)
       .then(res => window.open(res.data))
-      .catch(err => console.log(err));
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
+      });
   };
 
   useEffect(() => {
@@ -43,8 +47,9 @@ function Payment() {
         const postIdData = postData.map(item => ({ id: item.id }));
         setPostIdList(postIdData);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

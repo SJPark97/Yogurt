@@ -41,7 +41,10 @@ function LiveRegister() {
       .then(res => {
         setPosts(res.data[0].posts)
       })
-      .catch(err => console.log(err))
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sellerId]);
 
@@ -70,7 +73,7 @@ function LiveRegister() {
 
   const submitHandler = event => {
     event.preventDefault();
-    navigate(`/profile/seller/${sellerId}`);
+    navigate(`/`);
 
     axios
       .post('https://i8b204.p.ssafy.io/be-api/upload', imageUpload, {
@@ -91,17 +94,26 @@ function LiveRegister() {
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
           })
-          .catch(err => console.log(err))
+          .catch(() => {
+            alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+            navigate('/');
+          })
           .then(res => {
             axios
               .post(
                 'https://i8b204.p.ssafy.io/be-api/buyer_alarm', {},
                 { headers: { Authorization: token } },
               )
-              .catch(err => console.log(err));
+              .catch(() => {
+                alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+                navigate('/');
+              });
           });
       })
-      .catch(err => console.log(err));
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
+      });
 
     return false;
   };

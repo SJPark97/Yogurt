@@ -54,7 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   const [text, setText] = useState();
   const [replace, setReplace] = useState();
   const [posts, setPosts] = useState([]);
@@ -68,10 +68,11 @@ function Search() {
       .then(res => {
         setPosts(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [text]);
+  }, [text, navigate]);
 
   const getBrands = useCallback(async () => {
     await axios
@@ -79,10 +80,11 @@ function Search() {
       .then(res => {
         setBrands(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [text]);
+  }, [text, navigate]);
 
   const getStores = useCallback(async () => {
     await axios
@@ -90,10 +92,11 @@ function Search() {
       .then(res => {
         setStores(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [text]);
+  }, [text, navigate]);
 
   useEffect(() => {
     if (text) {
@@ -111,7 +114,6 @@ function Search() {
     }
   };
 
-  const navigate = useNavigate();
 
   const handleChange = e => {
     setText(e.target.value);

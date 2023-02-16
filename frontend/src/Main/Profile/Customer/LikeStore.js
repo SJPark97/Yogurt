@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 export default function LikeStore() {
   const loginUser = useSelector(state => state.user.value);
   const [likeStores, setLikeStores] = useState([]);
-
+  const navigate = useNavigate();
   const getLikeStores = useCallback(async () => {
     await axios
       .get('https://i8b204.p.ssafy.io/be-api/likes/seller', {
@@ -23,16 +23,16 @@ export default function LikeStore() {
       .then(res => {
         setLikeStores(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser]);
+  }, [loginUser, navigate]);
 
   useEffect(() => {
     getLikeStores();
   }, [getLikeStores]);
 
-  const navigate = useNavigate();
 
   const likeCnt = storeLikes => {
     if (storeLikes >= 10000) {

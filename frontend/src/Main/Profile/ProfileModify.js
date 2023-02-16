@@ -70,15 +70,16 @@ export default function ProfileModify() {
       .then(res => {
         setProfile(res.data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+        navigate('/');
       });
-  }, [loginUser, id]);
+  }, [loginUser, id, navigate]);
 
   useEffect(() => {
     getProfile();
   }, [getProfile]);
-  console.log('유저정보', profile);
+  // console.log('유저정보', profile);
   // role state에서 불러오기
   const [form, setForm] = useState({
     nickname: loginUser.loginUserNickname.trim(),
@@ -132,7 +133,7 @@ export default function ProfileModify() {
     setForm({ ...form, nicknameConfirm: '' });
   };
   const handleClickNickname = () => {
-    console.log(onlyOne.nickname);
+    // console.log(onlyOne.nickname);
     // 성공시
     setOnlyOne({ ...onlyOne, nickname: !onlyOne.nickname });
     setError({ ...error, nickname: '' });
@@ -208,22 +209,25 @@ export default function ProfileModify() {
           },
         })
         .then(res => {
-          console.log('gg', res.data);
+          // console.log('gg', res.data);
           const data = {
             profileImage: res.data[0],
             nickName: form.nicknameConfirm,
             description: form.introduceConfirm,
           };
-          console.log('data', data);
+          // console.log('data', data);
           axios
             .put(`https://i8b204.p.ssafy.io/be-api/user/seller/${id}`, data, {
               headers: { Authorization: loginUser.token },
             })
             .then(res => {
-              console.log('수정 성공!', res.data);
+              // console.log('수정 성공!', res.data);
               navigate(`/profile/seller/${id}?tab=0`);
             })
-            .catch(err => console.log(err));
+            .catch(() => {
+              alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+              navigate('/');
+            });
         });
     } else {
       axios
@@ -234,7 +238,7 @@ export default function ProfileModify() {
           },
         })
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           const data = {
             profileImage: res.data[0],
             nickName: form.nicknameConfirm,
@@ -244,10 +248,13 @@ export default function ProfileModify() {
               headers: { Authorization: loginUser.token },
             })
             .then(res => {
-              console.log('수정 성공!', res.data);
+              // console.log('수정 성공!', res.data);
               navigate(`/profile/buyer/${id}?tab=0`);
             })
-            .catch(err => console.log(err));
+            .catch(() => {
+              alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
+              navigate('/');
+            });
         });
     }
   };
