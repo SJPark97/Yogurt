@@ -64,7 +64,7 @@ public class LiveService {
         liveRoom= liveRoom.builder()
                 .thumbnail(request.getThumbnail())
                 .title(request.getTitle())
-                .time(new Timestamp(request.getTime().getTime()+32400000))
+                .time(new Timestamp(request.getTime().getTime()))
                 .status(STATUS_READY)
                 .created(ts)
                 .seller(getLoginUser())
