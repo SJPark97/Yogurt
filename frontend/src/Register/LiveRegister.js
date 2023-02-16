@@ -87,7 +87,6 @@ function LiveRegister() {
           postIds,
         };
 
-        console.log(data);
         axios
           .post(`https://i8b204.p.ssafy.io/be-api/live`, data, {
             headers: { Authorization: token },
@@ -172,7 +171,7 @@ function LiveRegister() {
               {postIds.length === posts.length ? '전체 해제' : '전체 선택'}
             </span>
           </div>
-          <div style={{ backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
+          <div style={{ padding:'8px 0px', backgroundColor: 'whitesmoke', borderRadius: '16px', display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
             {posts && posts.map(post => (
               <div className='live_reg_post'>
                 <input
