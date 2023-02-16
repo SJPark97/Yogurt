@@ -59,21 +59,13 @@ function PostRegister() {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/cate/brand')
       .then(res => setBrandCate(res.data))
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     axios
       .get('https://i8b204.p.ssafy.io/be-api/cate/type')
       .then(res => setTypeCate(res.data))
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [navigate]);
+  }, []);
 
   const saleStates = [
     {
@@ -122,15 +114,7 @@ function PostRegister() {
             // console.log(res)
             navigate(`/post/${res.data}`);
           })
-          .catch(() => {
-            alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-            navigate('/');
-          });
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
 
     return false;
   };
@@ -192,11 +176,10 @@ function PostRegister() {
                 key={state.type}
                 type="button"
                 onClick={() => setSale(state.type)}
-                className={`${
-                  sale === state.type
+                className={`${sale === state.type
                     ? 'post_reg_sale_btn'
                     : 'post_reg_sale_state_btn'
-                }`}
+                  }`}
               >
                 {state.title}
               </button>

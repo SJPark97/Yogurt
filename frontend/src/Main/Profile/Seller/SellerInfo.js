@@ -70,11 +70,7 @@ export default function SellerInfo({ profile, loginId, token }) {
           );
         }
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [token, profile, navigate]);
+  }, [token, profile]);
 
   const getLiveInfo = useCallback(async () => {
     await axios
@@ -94,11 +90,7 @@ export default function SellerInfo({ profile, loginId, token }) {
           });
         }
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [profile, sellerId, navigate]);
+  }, [profile, sellerId]);
 
   const goLive = () => {
     navigate(`/video/${live.liveRoomId}`, {
@@ -153,10 +145,6 @@ export default function SellerInfo({ profile, loginId, token }) {
         setLikeCnt(likeCnt + 1);
         setLikeId(res.data.id);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
   const toggleUnLike = async () => {
     setIsLiked(!isLiked);
@@ -169,10 +157,6 @@ export default function SellerInfo({ profile, loginId, token }) {
 
         setLikeCnt(likeCnt - 1);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
   };
   // navigate
   // 상품 라이브 공지사항 리뷰 선택된 것
@@ -273,7 +257,7 @@ export default function SellerInfo({ profile, loginId, token }) {
           fullWidth
           variant="contained"
           sx={{ color: '#CC3300', border: 'red', width: '90%' }} // 라이브 대기중
-          // startIcon={<LiveTvIcon />}
+        // startIcon={<LiveTvIcon />}
         >
           {live.liveTime.slice(8, 10) +
             '일 ' +

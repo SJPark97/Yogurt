@@ -23,11 +23,7 @@ export default function LikeStore() {
       .then(res => {
         setLikeStores(res.data);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, navigate]);
+  }, [loginUser]);
 
   useEffect(() => {
     getLikeStores();
@@ -74,7 +70,7 @@ export default function LikeStore() {
               alt="스토어 프로필 사진"
               className="store-img"
             />
-            <div style={{ margin: '0px 0px 0px 8px', width: '100%'}}>
+            <div style={{ margin: '0px 0px 0px 8px', width: '100%' }}>
               <div className="store-text">
                 <p className="store-name">{likeStore.seller.nickName}</p>
                 <div className="store_like">

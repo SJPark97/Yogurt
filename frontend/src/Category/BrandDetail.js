@@ -18,11 +18,7 @@ export default function BrandDetail() {
       .then(res => {
         setItems(res.data.postCateList);
       })
-      .catch(err => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.')
-        navigate('/')
-      });
-  }, [brandId, navigate]);
+  }, [brandId]);
 
   useEffect(() => {
     getBrand();

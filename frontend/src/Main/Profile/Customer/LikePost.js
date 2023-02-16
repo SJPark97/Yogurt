@@ -18,11 +18,7 @@ export default function LikePost() {
       .then(res => {
         setLikePosts(res.data.zzims);
       })
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
-  }, [loginUser, setLikePosts, navigate]);
+  }, [loginUser, setLikePosts]);
 
   useEffect(() => {
     getLikePosts();

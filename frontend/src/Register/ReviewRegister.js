@@ -38,11 +38,7 @@ function ReviewRegister() {
       .post(`https://i8b204.p.ssafy.io/be-api/review/${postId}`, data, {
         headers: { Authorization: token },
       })
-      // .then(res => console.log(res))
-      .catch(() => {
-        alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-        navigate('/');
-      });
+    // .then(res => console.log(res))
   };
 
   return (
@@ -62,7 +58,7 @@ function ReviewRegister() {
         <Divider variant="middle" />
         <div className="review_reg_star">
           <p> 별점</p>
-          <FormControl sx={{ m: 1, minWidth: 150}} size="small">
+          <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
             <InputLabel id="demo-select-small">별점</InputLabel>
             <Select
               name="rate"

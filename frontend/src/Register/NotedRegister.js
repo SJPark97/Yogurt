@@ -33,11 +33,7 @@ function PostRegister() {
         .post(`https://i8b204.p.ssafy.io/be-api/notice`, data, {
           headers: { Authorization: token },
         })
-        // .then(res => console.log(res))
-        .catch(() => {
-          alert('문제가 발생했습니다. \n 잠시후에 다시 시도해주세요.');
-          navigate('/');
-        });
+      // .then(res => console.log(res))
 
       navigate(`/profile/seller/${sellerId}?tab=2`);
     }
