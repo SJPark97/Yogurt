@@ -1,0 +1,95 @@
+.detail-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.pay-btn {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+
+.detail_img {
+  width: 100%;
+  height: 360px;
+}
+
+.detail-basic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-basic-info,
+.detail-size-info,
+.detail-detail-info {
+  margin: 0px 16px 0px 16px;
+}
+.detail-store-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 16px;
+}
+
+.detail-basic-info div,
+.detail-size-info div,
+.detail-detail-info div,
+.detail-store-info p {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.detail-size,
+.detail-detail {
+  font-size: 14px;
+  margin: 8px 0px 0px 0px;
+  white-space: pre-line;
+}
+
+.detail-br-cateId {
+  font-size: 15px;
+  margin: 8px 0px 0px 0px;
+  color: gray;
+}
+
+.detail-post-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 8px 0px 0px 0px;
+}
+
+.detail-price {
+  margin: 8px 0px 0px 0px;
+}
+
+.detail-sale-percent {
+  color: red;
+  font-weight: bold;
+}
+
+.detail-post-sale-price {
+  font-weight: bold;
+  margin: 0px 0px 0px 8px;
+}
+
+.detail-post-price {
+  text-decoration: line-through;
+  color: gray;
+  margin: 0px 0px 0px 8px;
+}
+
+.detail-size-name,
+.detail-detail-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 0px 8px 0px;
+}
+
+.detail-store-post {
+  margin: 8px 0px 50px 0px;
+}
+
+.post-like {
+  margin-right: 1rem;
+}

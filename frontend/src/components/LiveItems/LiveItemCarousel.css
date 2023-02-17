@@ -1,0 +1,26 @@
+#LiveItemBox {
+	position: absolute;
+	right: 6vw;
+	bottom: 40vw;
+}
+
+#LiveItemCarousel {
+	height: 80%;
+}
+
+.drop-up > div {
+	border-radius: 16px 16px 0px 0px;
+	/* left: 1%; */
+	width: 98%;
+	overflow-x: hidden
+}
+
+#box-3 {
+	height: 4vw;
+}
+
+#drop-up-close {
+	position: absolute;
+	top: 2.8vw;
+	right: 4.2vw;
+}

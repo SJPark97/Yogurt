@@ -1,0 +1,79 @@
+.live_reg_title p,
+.live_reg_file p,
+.live_reg_time p {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.live_reg_file label {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.live_reg_file button {
+  font-size: 10px;
+  padding: 1px 2px;
+  background-color: white;
+  border: 1px solid burlywood;
+  color: burlywood;
+}
+
+.live_reg_file button:active {
+  background-color: burlywood;
+  border: 1px solid white;
+  color: white;
+}
+
+textarea {
+  resize: none;
+}
+
+.live_reg_title,
+.live_reg_file,
+.live_reg_time{
+  margin: 8px 16px 0px 8px;
+}
+
+#live_reg_time {
+  display: flex;
+  justify-content: flex-start;
+  border: 0px;
+  margin: 8px 8px 0px 8px;
+}
+
+#live_reg_title {
+  width: 100%;
+  padding: 4px 0px 4px 8px;
+  margin: 8px 0px 0px 8px;
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#live_reg_file {
+  visibility: hidden;
+}
+
+.live-select-all input,
+.live_reg_post input {
+  accent-color: #cc8120;
+}
+
+.live-select-all {
+  margin: 8px 0px;
+}
+
+.submit_btn button {
+  background-color: #deb887;
+  border: none;
+  width: 20vw;
+  height: 10vw;
+  border-radius: 8px;
+  color: white;
+  margin: 0px 0px 8px 0px;
+}

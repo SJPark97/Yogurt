@@ -1,0 +1,20 @@
+.Carousel {
+  display: inline-flex;
+  width: 100vw;
+  overflow: auto;
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+.Carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.Card {
+  /* margin-left: 4px; */
+  margin-right: 16px;
+}
+
+.detail-store-info .Carousel {
+  margin-bottom: 60px;
+}

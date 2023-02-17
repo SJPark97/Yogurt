@@ -1,0 +1,189 @@
+{
+  "words": [
+    {
+      "id": 1,
+      "price": 1000,
+      "love": 340,
+      "eng": "book",
+      "kor": "책",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    },
+    {
+      "id": 3,
+      "price": 150000,
+      "love": 34349520,
+      "eng": "car",
+      "kor": "자동차는 길게길게 말줄임표 가능한가요?",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    },
+    {
+      "id": 12,
+      "price": 30000,
+      "love": 49520,
+      "eng": "apple",
+      "kor": "사과",
+      "isDone": false,
+      "oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "image": "https://www.elandrs.com/upload/prd/img/710/600/2110722710_0000001.jpg"
+    }
+  ],
+
+  "Goods": [
+    {
+      "postId": 1,
+      "userId": 1,
+      "br_cateId": 1,
+      "type_cateID": 1,
+      "post_store": "승토어",
+      "post_title": "집업후드",
+      "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
+      "post_created": "2023-12-31",
+      "post_status": 1,
+      "post_updated": "2024-12-31",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "post_size": "총장:52 하단:42",
+      "image": "https://image.msscdn.net/images/goods_img/20180323/742203/742203_1_500.jpg"
+    },
+    {
+      "postId": 2,
+      "userId": 1,
+      "br_cateId": 1,
+      "type_cateID": 1,
+      "post_store": "승토어",
+      "post_title": "제일 트렌디한 나이키 티셔츠",
+      "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
+      "post_created": "2023-12-31",
+      "post_status": 2,
+      "post_updated": "2024-12-31",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "post_size": "총장:52 하단:42",
+      "image": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg"
+    },
+    {
+      "postId": 3,
+      "userId": 1,
+      "br_cateId": 1,
+      "type_cateID": 1,
+      "post_title": "세련된 선글라스",
+      "post_content": "안녕하세요 어디서도 볼수없는 자켓입니다. 특별함이 가득하고 이쁜 자켓이니 많이들 구경하시고 1벌밖에 없는거 다들 아시죠?ㅋㅋㅋㅋㅋ",
+      "post_created": "2023-12-31",
+      "post_status": 2,
+      "post_updated": "2024-12-31",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "image": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "Popular": [
+    {
+      "postId": 1,
+      "post_title": "집업후드",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20180323/742203/742203_1_500.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "제일 트렌디한 나이키 티셔츠",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "New": [
+    {
+      "postId": 1,
+      "post_title": "스타일리쉬 반바지",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://gi.esmplus.com/zoobaly5/2022/0415/H022.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "세련된 선글라스",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "WishLists": [
+    {
+      "post": {
+        "id": 1,
+        "br_cateName": "nike",
+        "br_cateId": 1,
+        "post_title": "스타일리쉬 반바지",
+        "post_price": 100000,
+        "post_sale_price": 80000,
+        "post_status": 1,
+        "postimage_url": "https://gi.esmplus.com/zoobaly5/2022/0415/H022.jpg",
+        "sellerId": 2,
+        "sellerName": "승토어"
+      },
+      "wishListId": 2
+    },
+    {
+      "post": {
+        "id": 2,
+        "br_cateName": "nike",
+        "br_cateId": 1,
+        "post_title": "세련된 선글라스",
+        "post_price": 177000,
+        "post_sale_price": 120000,
+        "post_status": 2,
+        "postimage_url": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+        "sellerId": 2,
+        "sellerName": "승토어"
+      },
+      "wishListId": 3
+    },
+    {
+      "post": {
+        "id": 4,
+        "br_cateName": "nike",
+        "br_cateId": 1,
+        "post_title": "스타일리쉬해서 어디든 입기 좋은 나이키 티셔츠",
+        "post_price": 24300,
+        "post_sale_price": 34000,
+        "post_status": 1,
+        "postimage_url": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg",
+        "sellerId": 3,
+        "sellerName": "채토어"
+      },
+      "wishListId": 4
+    }
+  ],
+
+  "Live": [
+    {
+      "liveroom_id": 1,
+      "liveroom_title": "시대를 강타한 샤넬 컬렉션",
+      "liveroom_shop_name": "박토어",
+      "liveroom_thumbnail": "https://img.freepik.com/premium-photo/female-autumn-clothes-on-hangers-in-white-room-close-up_176873-13271.jpg?auto=format&h=200",
+      "liveroom_status": 0,
+      "liveroom_time": "2024-12-31"
+    },
+    {
+      "liveroom_id": 2,
+      "liveroom_title": "가을을 맞이하는 우리",
+      "liveroom_shop_name": "송토어",
+      "liveroom_thumbnail": "https://contents.lotteon.com/itemimage/_v134624/LO/16/75/45/94/78/_1/67/54/59/47/9/LO1675459478_1675459479_1.jpg",
+      "liveroom_status": 1,
+      "liveroom_time": "2023-02-04"
+    }
+  ]
+}

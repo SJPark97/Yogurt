@@ -4,7 +4,7 @@ import com.ssafy.common.api.post.service.PostService;
 import com.ssafy.common.api.relation.dto.zzim.ZzimResponse;
 import com.ssafy.common.api.relation.service.ZzimService;
 import com.ssafy.common.api.user.domain.User;
-import com.ssafy.common.api.user.dto.UserZzimResponse;
+import com.ssafy.common.api.user.dto.response.UserZzimResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +37,7 @@ public class ZzimController {
     // 찜 삭제 API
     @PatchMapping("/delete/{zzim_id}")
     public ResponseEntity<ZzimResponse> deleteZzim(@PathVariable("zzim_id") Long zzim_id){
+        // Delete 상태인것들 필터링
         return new ResponseEntity<>(zzimService.deleteZzim(zzim_id), HttpStatus.OK);
     }
 }

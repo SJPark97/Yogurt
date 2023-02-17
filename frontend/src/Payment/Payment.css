@@ -1,0 +1,100 @@
+.payment-wrap {
+  margin: 16px;
+}
+
+.pay-total p,
+.pay-deliver p,
+.pay-kakao p {
+  text-align: left;
+  margin: 0px 0px 16px 0px;
+  font-weight: bold;
+}
+
+.pay-post {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 8px 0px 8px 0px;
+}
+
+.pay-post-img-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0px;
+}
+
+.pay-post-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.pay-post-info {
+  text-align: left;
+  margin: 0px 8px;
+  overflow: hidden;
+}
+
+.pay-post-sellername,
+.pay-post-title,
+.pay-post-price {
+  margin: 4px 0px 0px 0px;
+}
+
+.pay-post-sellername {
+  font-size: 10px;
+}
+
+.pay-post-title {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pay-post-price {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.pay-total-price span {
+  margin: 0px 0px 0px 8px;
+  font-weight: bold;
+}
+
+.pay-deliver {
+  margin: 0px 16px 0px 0px;
+}
+
+#deilver {
+  width: 100%;
+  height: 100px;
+  border: 0px;
+}
+
+textarea {
+  resize: none;
+}
+
+.pay-total-price {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pay-price {
+  color: red;
+}
+
+textarea::placeholder {
+  font-size: 1.2rem;
+  font-style: inherit;
+}
+
+.pay-kakao img {
+  width: 80%; 
+  height: 160px
+}

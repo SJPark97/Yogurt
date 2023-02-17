@@ -1,0 +1,119 @@
+.postregister {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.post_reg_file label {
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+#post_reg_file {
+  visibility: hidden;
+}
+
+.post_reg_prev {
+  display: inline-flex;
+  width: 300px;
+  overflow: auto;
+  margin: 8px 0px 0px 8px;
+}
+
+.post_reg_prev::-webkit-scrollbar {
+  display: none;
+}
+
+.post_reg_prev_img {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  margin: 0px 4px;
+}
+
+.post_reg_prev_img img {
+  width: 40px;
+  height: 54px;
+}
+
+.post_reg_prev_img button {
+  font-size: 10px;
+  padding: 1px 2px;
+  display: flex;
+  background-color: white;
+  border: 1px solid burlywood;
+  color: burlywood;
+  align-items: center;
+}
+
+.post_reg_category {
+  margin: 8px 0px 0px 0px;
+}
+
+.post_reg_sale_state {
+  margin: 8px 0px 8px 0px;
+}
+
+.post_reg_file p,
+.post_reg_title p,
+.post_reg_price p,
+.post_reg_sale_price p,
+.post_reg_category p,
+.post_reg_detail p,
+.post_reg_size p {
+  margin: 8px 0px 9px 0px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+
+textarea {
+  resize: none;
+}
+
+#post_reg_title,
+#post_reg_price,
+#post_reg_sale_price,
+#post_reg_detail,
+#post_reg_size {
+  width: 100%;
+  padding: 8px 0px 4px 8px;
+  border: 0px;
+}
+
+#post_reg_detail,
+#post_reg_size {
+  height: 100px;
+}
+
+.post_reg_sale_state {
+  display: flex;
+  align-items: center;
+}
+
+.post_reg_sale_state_btn {
+  margin: 0px 0px 0px 8px;
+  padding: 2px 6px;
+  background-color: white;
+  border: 1px solid burlywood;
+  color: burlywood;
+}
+
+.post_reg_sale_btn {
+  margin: 0px 0px 0px 8px;
+  padding: 2px 6px;
+  background-color: burlywood;
+  border: 1px solid white;
+  color: white;
+}
+
+.post_reg_category_cloth,
+.post_reg_category_brand {
+  margin: 8px 0px 0px 0px;
+  display: flex;
+  align-items: flex-end;
+}

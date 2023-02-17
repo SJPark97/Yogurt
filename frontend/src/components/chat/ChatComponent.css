@@ -1,0 +1,162 @@
+#chatContainer {
+    position: absolute;
+    /* top: 117vw; */
+    bottom: -25vw;
+    z-index: 0;
+    width: 77%;
+    height: 40%;
+  }
+  
+  #chatToolbar {
+    height: 30px;
+    /* background-color: #3d3d3d; */
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 4px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    /* color: #ffffff; */
+  }
+  
+  #closeButton {
+    position: absolute;
+    right: 0;
+    top: -8px;
+  }
+  
+  #chatComponent {
+    background-color: #b8b8b800;
+    position: absolute;
+    z-index: 99999;
+    top: 0vw;
+    left: 0;
+    right: 0;
+    bottom: 37vw;
+    margin: auto;
+    height: calc(80% - 30px);
+    width: calc(100% - 30px);
+  }
+  
+  .message-wrap {
+    border-radius: 8px;
+    background-color: #d9d0d088;
+    padding: 0 15px;
+    height: calc(100% - 38px);
+    overflow: auto;
+  }
+  
+  .message {
+    position: relative;
+    padding: 7px 0;
+  }
+  
+  .msg-detail {
+    width: calc(100%);
+    display: inline-block;
+    padding: 0px !important;
+  }
+  
+  .msg-detail p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 900;
+    /* color: #deb887; */
+  }
+  
+  .msg-info p {
+    font-size: 0.8em;
+    color: #000000;
+    font-style: italic;
+  }
+  
+  .msg-content {
+    position: relative;
+    margin-top: 5px;
+    max-width: 100%;
+  }
+  
+  span.triangle {
+    border-radius: 2px;
+    height: 8px;
+    width: 8px;
+    top: 12px;
+    display: block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+  }
+  
+  .text {
+    word-break: break-all;
+    color: #000000;
+  }
+  
+  /* Start message from other user */
+  #remoteUsers {
+    text-align: left;
+  }
+  
+  .message > .left .msg-detail .msg-info {
+    text-align: left;
+  }
+  
+  .message.left .msg-detail {
+    padding-left: 65px;
+  }
+  
+  .message.left .msg-detail .msg-content {
+    float: left;
+  }
+  /* End message from other user */
+  
+  
+  #messageInput {
+    position: absolute;
+    bottom: 0px;
+    width: 85%;
+    background-color: #ffffff;
+    text-align: center;
+    /* padding: 10px 0px; */
+    height: 30px;
+    border-radius: 8px;
+    /* border-bottom-right-radius: 6px; */
+  }
+  #messageInput input {
+    width: 90%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    margin-left: -6%;
+    color: #000000;
+  }
+  
+  #sendButton {
+    background-color: #bababafe;
+    position: absolute;
+    right: -11vw;
+    top: -1.0vw;
+    /* bottom: 0px; */
+    margin: auto;
+    /* border: 1px solid #7ae2a9; */
+    width: 15%;
+    height: 15%;
+    box-shadow: none !important;
+    margin-left: 3px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+  }
+  
+  .chatComponentLight ::-webkit-scrollbar-thumb {
+    background-color: #eeeeee !important;
+  }
+  

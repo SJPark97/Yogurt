@@ -1,0 +1,11 @@
+.avatarWrap {
+  width: 100%;
+}
+
+.modifyText {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

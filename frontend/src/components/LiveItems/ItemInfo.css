@@ -1,0 +1,130 @@
+#item-number {
+	font-weight: 700;
+	padding-left: 4vw;
+	margin-top: 2vw;
+}
+
+#live-item-info {
+	display: flex;
+}
+
+#item-thumbnail {
+	margin-left: 4vw;
+	border-radius: 16px;
+	height: 22vw;
+	width: 22vw;
+}
+
+#item-infomations {
+	margin-left: 4vw;
+}
+
+#item-title {
+	font-size: 20px;
+	width: 68vw;
+	margin-top: 3vw;
+	margin-bottom: 0;
+	font-weight: 500;
+	text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+#item-price-info {
+	display: flex;
+	align-items: flex-end;
+	margin-top: 2vw;
+	width: 73vw;
+}
+
+#item-percent {
+	margin : 0;
+	font-size: 24px;
+	font-weight: bold;
+	color: red;
+}
+
+#item-sale-price {
+	margin : 0;
+	margin-left: 3vw;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#item-price {
+	margin : 0;
+	margin-left: 3vw;
+	font-size: 20px;
+	font-weight: 100;
+	text-decoration: line-through;
+}
+
+#button-sell-ing {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: grey;
+	border-radius: 8px;
+	width: 90vw;
+	height: 12vw;
+	border: none;
+}
+
+#button-sell-start {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: rgb(213,137,105);
+	border-radius: 8px;
+	width: 90vw;
+	height: 12vw;
+	border: none;
+}
+
+#button-sell-end {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: rgba(128, 128, 128, 0.406);
+	border-radius: 8px;
+	width: 90vw;
+	height: 12vw;
+	border: none;
+}
+
+#button-sell-waitting {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: rgba(216,177,161);
+	border-radius: 8px;
+	width: 90vw;
+	height: 12vw;
+	border: none;
+}
+
+#button-sell-buy {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: rgba(213,137,105);
+	border-radius: 8px;
+	width: 41vw;
+	height: 12vw;
+	border: none;
+}
+
+#button-sell-basket {
+	margin-left: 4vw;
+	margin-top: 4vw;
+	background-color: rgba(217,217,217);
+	border-radius: 8px;
+	width: 41vw;
+	height: 12vw;
+	border: none;
+}
+
+#live-hr-tag {
+	margin: 0;
+	margin-top: 4vw;
+	margin-left: 4vw;
+	width: 90vw;
+}

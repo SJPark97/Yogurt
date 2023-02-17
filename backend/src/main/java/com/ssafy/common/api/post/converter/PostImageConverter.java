@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PostImageConverter {
-    public Postimage createImageRequestDtoToEntity(Postimage image, Post createPost){
+    public Postimage createImageRequestDtoToEntity(String url, Post createPost){
         return Postimage.builder()
                 .post_id(createPost)
-                .url(image.getUrl())
+                .url(url)
                 .build();
     }
 }

@@ -23,17 +23,46 @@ dependencies {
 	implementation 'org.hibernate:hibernate-validator:7.0.5.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//swagger 관련 의존성 추가
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	//jwt token 관련 의존성 추가
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	//STOMP 관련 프론트 라이브러리
+	implementation('org.webjars.bower:jquery:3.3.1')
+	implementation('org.webjars:sockjs-client:1.1.2')
+	implementation('org.webjars:stomp-websocket:2.3.3-1')
+	implementation('org.webjars:webjars-locator:0.30')
+
+	//WebRTC 클라이언트 의존성 추가
+	implementation('org.webjars.bower:webrtc-adapter:7.4.0')
+
+	//webSocket 의존성 추가
+	implementation("org.springframework.boot:spring-boot-starter-websocket")
+
+	//롬복 의존성 추가
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	//mysql 의존성 추가
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	//redis 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//스프링시큐리티 의존성 추가
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 }
 
 tasks.named('test') {

@@ -1,0 +1,82 @@
+.wish input {
+  /* accent-color: #deb887; */
+  accent-color: white;
+}
+
+.wish-post {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 0px 0px 0px 8px;
+}
+
+.wish-select-all {
+  margin: 8px 0px 0px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.wish-select-all span {
+  margin: 0px 0px 0px 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.wish-select-all input,
+.wish-post input {
+  margin: 0px 0px 0px 8px;
+  background-color: #deb887;
+  color: white;
+}
+
+.wish-post img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 8px;
+}
+
+.wish-post-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.wish-post-info {
+  text-align: left;
+  margin: 0px 8px;
+  overflow: hidden;
+}
+
+.wish-post-sellername,
+.wish-post-title,
+.wish-post-price {
+  margin: 4px 0px 0px 0px;
+}
+
+.wish-post-sellername {
+  font-size: 10px;
+}
+
+.wish-post-title {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wish-post-price {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.wish-total-price {
+  margin: 0px 8px 0px 0px;
+  text-align: end;
+}
+
+.wish-total-price span {
+  margin: 0px 0px 0px 8px;
+  font-weight: bold;
+}

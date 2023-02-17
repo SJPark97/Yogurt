@@ -1,0 +1,269 @@
+{
+  "Popular": [
+    {
+      "postId": 1,
+      "post_title": "집업후드",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20180323/742203/742203_1_500.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "제일 트렌디한 나이키 티셔츠",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://image.msscdn.net/images/goods_img/20210616/1997682/1997682_1_500.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "New": [
+    {
+      "postId": 1,
+      "post_title": "스타일리쉬 반바지",
+      "post_price": 100000,
+      "post_sale_price": 80000,
+      "postimage_url": "https://gi.esmplus.com/zoobaly5/2022/0415/H022.jpg",
+      "br_cateName": "아디다스"
+    },
+    {
+      "postId": 2,
+      "post_title": "세련된 선글라스",
+      "post_price": 177000,
+      "post_sale_price": 120000,
+      "postimage_url": "https://health.chosun.com/site/data/img_dir/2021/08/02/2021080200651_0.jpg",
+      "br_cateName": "샤넬"
+    }
+  ],
+
+  "Live": [
+    {
+      "liveroom_id": 1,
+      "liveroom_title": "시대를 강타한 샤넬 컬렉션",
+      "liveroom_shop_name": "박토어",
+      "liveroom_thumbnail": "https://img.freepik.com/premium-photo/female-autumn-clothes-on-hangers-in-white-room-close-up_176873-13271.jpg?auto=format&h=200"
+    },
+    {
+      "liveroom_id": 2,
+      "liveroom_title": "가을을 맞이하는 우리",
+      "liveroom_shop_name": "송토어",
+      "liveroom_thumbnail": "https://contents.lotteon.com/itemimage/_v134624/LO/16/75/45/94/78/_1/67/54/59/47/9/LO1675459478_1675459479_1.jpg"
+    }
+  ],
+
+  "Alarm": [
+    {
+      "alarm_id": 0,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 1,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 2,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 3,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 4,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 5,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 6,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 7,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 8,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    },
+    {
+      "alarm_id": 9,
+      "alarm_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "alarm_content": "박토어의 라이브 방송이 등록되었습니다."
+    }
+  ],
+
+  "Stores": [
+    {
+      "Store_name": "박토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 4579677,
+      "Store_like": true,
+      "Store_id": 1,
+      "Store_oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "배토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 657543,
+      "Store_like": true,
+      "Store_id": 2,
+      "Store_oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "Store_isLiked": [1, 2, 3]
+    },
+    {
+      "Store_name": "송토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 23345,
+      "Store_like": false,
+      "Store_id": 3,
+      "Store_oneline": "송토어송토어송토어송토어송토어송토어",
+      "Store_isLiked": [1, 2, 3]
+    },
+    {
+      "Store_name": "소토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 1732,
+      "Store_like": false,
+      "Store_id": 4,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "왕토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 123,
+      "Store_like": false,
+      "Store_id": 5,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "최토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 12,
+      "Store_like": false,
+      "Store_id": 6,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [1, 2, 3]
+    },
+    {
+      "Store_name": "박토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 4579677,
+      "Store_like": true,
+      "Store_id": 7,
+      "Store_oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "배토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 657543,
+      "Store_like": true,
+      "Store_id": 8,
+      "Store_oneline": "27년 전통을 자랑하는 무구한 역사를 함께 해온 우리 모두의 빈티지 쇼핑몰",
+      "Store_isLiked": [1, 2, 3]
+    },
+    {
+      "Store_name": "송토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 23345,
+      "Store_like": true,
+      "Store_id": 9,
+      "Store_oneline": "송토어송토어송토어송토어송토어송토어",
+      "Store_isLiked": [1, 2, 3]
+    },
+    {
+      "Store_name": "소토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 1732,
+      "Store_like": false,
+      "Store_id": 10,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "왕토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 123,
+      "Store_like": false,
+      "Store_id": 11,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [0, 2, 3]
+    },
+    {
+      "Store_name": "최토어",
+      "Store_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "Store_likes": 12,
+      "Store_like": false,
+      "Store_id": 12,
+      "Store_oneline": "한줄 소개",
+      "Store_isLiked": [1, 2, 3]
+    }
+  ],
+
+  "liveItems" : [
+    {
+      "post_id": 0,
+      "item_state": 0,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스1 판매 예정"
+    },
+    {
+      "post_id": 1,
+      "item_state": 1,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스2 판매 중"
+    },
+    {
+      "post_id": 2,
+      "item_state": 2,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스3 판매 완"
+    },
+    {
+      "post_id": 3,
+      "item_state": 2,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스4 판매 완"
+    },
+    {
+      "post_id": 4,
+      "item_state": 1,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스5 판매 중"
+    },
+    {
+      "post_id": 5,
+      "item_state": 0,
+      "item_thumbnail": "http://snaptime.edaily.co.kr/wp-content/uploads/2019/12/50717-700x516.jpg",
+      "item_price": 177000,
+      "item_sale_price": 120000,
+      "item_title": "세련된 선글라스6 판매 예정"
+    }
+  ]
+}

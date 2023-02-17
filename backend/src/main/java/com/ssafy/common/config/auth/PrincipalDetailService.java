@@ -3,6 +3,7 @@ package com.ssafy.common.config.auth;
 import com.ssafy.common.api.user.domain.User;
 import com.ssafy.common.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,9 +22,6 @@ public class PrincipalDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         User user = userRepository.findByUserId(userId);
         System.out.println("UserDetial이 잘 받아짐" + user.getUserId());
-        if(user != null){
-            return new PrincipalDetails(user);
-        }
-        return null;
+        return new PrincipalDetails(user);
     }
 }

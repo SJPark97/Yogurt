@@ -1,0 +1,13 @@
+.Carousel {
+  display: inline-flex;
+  width: 360px;
+  overflow: auto;
+}
+
+.Carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.LiveCard {
+  margin-right: 16px;
+}

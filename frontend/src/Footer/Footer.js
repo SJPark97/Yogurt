@@ -7,27 +7,57 @@ import HomeIcon from '@mui/icons-material/Home';
 import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginIcon from '@mui/icons-material/Login';
 import Paper from '@mui/material/Paper';
+import { useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 
 const CustomBottomNavigationAction = styled(BottomNavigationAction)`
   color: #bdbdbd;
+  max-width: 100%;
 
   .MuiBottomNavigationAction-label {
     background: #ffffff;
   }
 
   &.Mui-selected {
-    color: #ff3d00;
+    color: #deb887;
   }
 `;
 
-export default function FixedBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+export default function Footer() {
+  const [value, setValue] = React.useState();
   const ref = React.useRef(null);
   const navigate = useNavigate();
+  const pageUrl = useLocation().pathname;
+
+  const loginUser = useSelector(state => state.user.value);
+  // console.log('푸터에서 찍은 user 정보', loginUser.loginUserPk);
+
+  useEffect(() => {
+    if (pageUrl === '/') {
+      setValue(0);
+    } else if (pageUrl === '/stores') {
+      setValue(1);
+    } else if (pageUrl === '/alarms') {
+      setValue(2);
+    } else if (pageUrl.includes('/profile')) {
+      setValue(3);
+    }
+  }, [pageUrl]);
+
+  // // 유저정보
+  // let userRole;
+  // if (user.role === 'buyer') {
+  //   userRole = 'buyer';
+  // } else {
+  //   userRole = 'seller';
+  // }
+
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
@@ -43,35 +73,55 @@ export default function FixedBottomNavigation() {
           }}
         >
           <CustomBottomNavigationAction
-            component={Link}
-            to="/"
             label="메인"
             icon={<HomeIcon />}
-            // onClick={() => navigate("/")} 바로 이동할때는 Link쓰기
+            onClick={() => {
+              navigate('/');
+            }}
           />
           <CustomBottomNavigationAction
-            component={Link}
-            to="/stores"
             label="상점"
             icon={<StoreIcon />}
+            onClick={() => {
+              if (loginUser.token) {
+                navigate('/stores');
+              } else {
+                navigate('/login');
+              }
+            }}
           />
           <CustomBottomNavigationAction
-            component={Link}
-            to="/alarms"
             label="알림"
             icon={<NotificationsIcon />}
+            onClick={() => {
+              if (loginUser.token) {
+                navigate('/alarms');
+              } else {
+                navigate('/login');
+              }
+            }}
           />
-          <CustomBottomNavigationAction
-            label="프로필"
-            icon={<AccountCircleIcon />}
-            onClick={() => navigate('/profile')} // 이거는 로그인 안됐을 때 로그인 페이지로 가게
-            // sx={[
-            //   {
-            //     color: "#bdbdbd",
-            //     "&.Mui-selected": { color: "#ff3d00", background: "#ffffff" },
-            //   },
-            // ]}
-          />
+          {loginUser.token ? (
+            <CustomBottomNavigationAction
+              label="프로필"
+              icon={<AccountCircleIcon />}
+              onClick={() => {
+                if (loginUser.loginUserRole === 'ROLE_BUYER') {
+                  navigate(`/profile/buyer/${loginUser.loginUserPk}?tab=0`);
+                } else {
+                  navigate(`/profile/seller/${loginUser.loginUserPk}?tab=0`);
+                }
+              }}
+            />
+          ) : (
+            <CustomBottomNavigationAction
+              label="로그인"
+              icon={<LoginIcon />}
+              onClick={() => {
+                navigate('/login');
+              }}
+            />
+          )}
         </BottomNavigation>
       </Paper>
     </Box>

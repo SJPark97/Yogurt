@@ -1,0 +1,30 @@
+.alarm-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 16px;
+  border: 1px solid #dfbf96;
+}
+
+.alarm-post {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.alarm-content {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-weight: 500;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

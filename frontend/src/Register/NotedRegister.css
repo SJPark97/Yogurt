@@ -1,0 +1,52 @@
+.noted_reg_title p,
+.noted_reg_detail p {
+  display: flex;
+  margin: 8px 0px 0px 0px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+.noted_reg_title,
+.noted_reg_detail {
+  margin: 8px 24px 0px 8px;
+}
+
+#noted_reg_title,
+#noted_reg_detail {
+  width: 100%;
+  padding: 4px 0px 4px 8px;
+  margin: 8px 0px 0px 8px;
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#noted_reg_detail {
+  height: 100px;
+}
+
+.submit_btn {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin: 8px 8px 0px 0px;
+}
+
+.submit_btn button:hover {
+  color: burlywood;
+}
+
+.submit_btn button {
+  background-color: #deb887;
+  border: none;
+  width: 20vw;
+  height: 10vw;
+  border-radius: 8px;
+  color: white;
+  margin: 0px 0px 8px 0px;
+}

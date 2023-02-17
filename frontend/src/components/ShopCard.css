@@ -1,0 +1,11 @@
+.shop-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+}
+
+.shop-name {
+  margin: 0;
+  font-size: 13px;
+  margin-bottom: 4px;
+}

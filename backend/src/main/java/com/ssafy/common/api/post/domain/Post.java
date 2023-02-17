@@ -2,13 +2,13 @@ package com.ssafy.common.api.post.domain;
 
 import com.ssafy.common.api.category.brandcategory.Brandcategory;
 import com.ssafy.common.api.category.typecategory.Typecategory;
+import com.ssafy.common.api.endpost.domain.EndPost;
 import com.ssafy.common.api.post.postimage.domain.Postimage;
 import com.ssafy.common.api.relation.domain.Zzim;
 import com.ssafy.common.api.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +37,6 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
-    @Column(name = "post_created")
-    private Timestamp created;
-    @Column(name = "post_updated")
-    private Timestamp updated;
-
     @Column(name = "post_size")
     private String size;
 
@@ -54,6 +49,10 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_cateId")
     private Typecategory typecategory;
+
+    // 종류 상세 카테고리
+    @JoinColumn(name = "type_cateId_detail")
+    private Long detailCategory;
 
     // 유저
     @ManyToOne(fetch = FetchType.LAZY)
@@ -68,6 +67,11 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Zzim> zzims = new ArrayList<>();
 
+    // 거래 완료 post
+    @OneToOne
+    @JoinColumn(name = "id")
+    private EndPost endPost;
+
     public void delete(){
         this.status = PostStatus.STATUS_DELETE;
     }
@@ -78,5 +82,8 @@ public class Post {
         else {
             this.status = PostStatus.STATUS_SELL;
         }
+    }
+    public void deal(){
+        this.status = PostStatus.STATUS_END;
     }
 }

@@ -5,7 +5,6 @@ import com.ssafy.common.api.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Data

@@ -1,0 +1,78 @@
+.totalLive {
+  margin: 1rem;
+  margin-bottom: 0;
+  text-align: start;
+  font-size: 16px;
+  font-weight: 600;
+}
+.liveinfo-info > img {
+  width: 87%;
+}
+
+.liveinfo-info > p {
+  text-align: center;
+  font-size: 18px;
+  margin: 8px 0px 8px 8px;
+  font-weight: bold;
+}
+
+.liveinfo-postinfo > p {
+  text-align: left;
+  margin: 0px 0px 8px 16px;
+  font-weight: bold;
+}
+
+.liveinfo-post {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 8px 0px 8px 8px;
+}
+
+.liveinfo-post-img-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 8px;
+}
+
+.liveinfo-post-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.liveinfo-post-info {
+  text-align: left;
+  margin: 0px 8px;
+  overflow: hidden;
+}
+
+.liveinfo-post-info p {
+  font-size: 14px;
+  margin: 0px 0px 4px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.liveinfo-price {
+  display: flex;
+  margin: 0px 0px 0px 8px;
+}
+
+.liveinfo-sale-percent {
+  color: red;
+  font-weight: bold;
+}
+
+.liveinfo-post-sale-price {
+  font-weight: bold;
+  margin: 0px 0px 0px 8px;
+}
+
+.liveinfo-post-price {
+  text-decoration: line-through;
+  color: gray;
+  margin: 0px 0px 0px 8px;
+}

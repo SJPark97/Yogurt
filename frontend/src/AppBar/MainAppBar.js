@@ -1,52 +1,43 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+// import { useLocation, useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
+import ButtonAppBar from './ButtonAppBar';
+import SubAppBar from './SubAppBar';
+import ProfileAppBar from './ProfileAppBar';
 
-import { Link } from 'react-router-dom';
+function MainAppBar() {
+  // const pageUrl = useLocation().pathname;
+  // console.log('appBar', pageUrl);
 
-import { styled } from '@mui/material/styles';
-
-const CustomAppBar = styled(AppBar)`
-  background: #ff3d00;
-`;
-export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <CustomAppBar position="fixed" elevation={1}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <Link to="/category" style={{ color: '#ffffff' }}>
-              <MenuIcon />
-            </Link>
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            LOGO
-          </Typography>
-          <IconButton size="large" color="inherit" aria-label="cart">
-            <ShoppingBagOutlinedIcon />
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="search"
-          >
-            <SearchOutlinedIcon />
-          </IconButton>
-        </Toolbar>
-      </CustomAppBar>
-    </Box>
+    <div>
+      {useMatch('/') && <ButtonAppBar />}
+      {useMatch('/stores') && <ButtonAppBar />}
+      {useMatch('/stores/:storeId') && <SubAppBar />}
+      {useMatch('/alarms') && <ButtonAppBar />}
+      {useMatch('/profile/seller/:sellerId') && <ProfileAppBar />}
+      {useMatch('/profile/buyer/:buyerId') && <ProfileAppBar />}
+      {useMatch('/category') && <SubAppBar />}
+      {useMatch('/category/:categoryId') && <SubAppBar />}
+      {/** 아니 아래꺼 두개가 겹쳐서 join이라는 :storeId가 설정된다 */}
+      {/* {useMatch('/post/join') && <SubAppBar />} */}
+      {useMatch('/post/:postId') && <SubAppBar />}
+      {/* {appBar.includes('post') && <SubAppBar />} */}
+      {useMatch('/signup') && <SubAppBar />}
+      {useMatch('/login') && <SubAppBar />}
+      {/* {useMatch('/search') && <SearchAppBar />} */}
+      {/* {useMatch('/search/result') && <SearchAppBar />} */}
+      {useMatch('/noted/join') && <SubAppBar />}
+      {useMatch('/review/join') && <SubAppBar />}
+      {useMatch('/wishlist') && <SubAppBar />}
+      {useMatch('/live/join') && <SubAppBar />}
+      {useMatch('/payment') && <SubAppBar />}
+      {useMatch('/payment2') && <SubAppBar />}
+      {useMatch('/payment/result') && <SubAppBar />}
+      {useMatch('/payresult') && <SubAppBar />}
+      {useMatch('/profile/modify/:id') && <SubAppBar />}
+      {useMatch('/brand/:brandId') && <SubAppBar />}
+    </div>
   );
 }
+
+export default MainAppBar;

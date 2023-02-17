@@ -1,0 +1,14 @@
+.css-10hburv-MuiTypography-root {
+  margin-bottom: 8px;
+  font-size: 100px;
+  font-weight: 700;
+}
+.noticeFirst {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notice-content {
+  white-space: pre-line;
+}
